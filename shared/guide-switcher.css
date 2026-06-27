@@ -83,6 +83,13 @@
   color: rgba(0, 0, 0, 0.35);
 }
 
+.guide-switcher-menu-divider {
+  height: 1px;
+  margin: 4px 10px;
+  background: rgba(0, 0, 0, 0.08);
+  list-style: none;
+}
+
 .guide-switcher-menu a {
   display: block;
   padding: 8px 14px;

@@ -28,8 +28,17 @@
     return slug + '/';
   }
 
+  function buildIndexUrl() {
+    return getCurrentSlug() ? '../' : './';
+  }
+
+  function isOnIndex() {
+    return getCurrentSlug() === null;
+  }
+
   function createSwitcher() {
     var current = getCurrentSlug();
+    var onIndex = isOnIndex();
     var root = document.createElement('div');
     root.className = 'guide-switcher';
     root.setAttribute('role', 'navigation');
@@ -58,6 +67,24 @@
     label.textContent = 'Style guides';
     label.setAttribute('role', 'presentation');
     menu.appendChild(label);
+
+    var indexItem = document.createElement('li');
+    indexItem.setAttribute('role', 'none');
+    var indexLink = document.createElement('a');
+    indexLink.href = buildIndexUrl();
+    indexLink.textContent = 'UXi Index';
+    indexLink.setAttribute('role', 'menuitem');
+    if (onIndex) {
+      indexLink.className = 'is-current';
+      indexLink.setAttribute('aria-current', 'page');
+    }
+    indexItem.appendChild(indexLink);
+    menu.appendChild(indexItem);
+
+    var divider = document.createElement('li');
+    divider.className = 'guide-switcher-menu-divider';
+    divider.setAttribute('role', 'separator');
+    menu.appendChild(divider);
 
     GUIDES.forEach(function (guide) {
       var item = document.createElement('li');
