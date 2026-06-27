@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UXi mPowered - Digital Style Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        onyx: '#161314',
+                        shadow: '#231f20',
+                        olive: '#8c8c8c',
+                        dust: '#d8d8d8',
+                        porcelain: '#fefff8',
+                        beige: '#f5f9de',
+                        limecream: '#e9ef95',
+                        lemon: '#d3dd19',
+                        lemondark: '#bbc31d'
+                    },
+                    fontFamily: {
+                        // System UI fonts fallback to ensure Segoe UI loads correctly on Windows, 
+                        // with standard sans-serif fallbacks for Apple/Linux systems.
+                        sans: ['"Segoe UI"', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a polished feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fefff8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d8d8d8;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8c8c8c;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-porcelain text-shadow antialiased flex flex-col md:flex-row min-h-screen">
+
+    <!-- Sidebar Navigation -->
+    <aside
+        class="w-full md:w-64 bg-onyx text-porcelain fixed md:h-screen z-20 flex flex-col border-b md:border-r border-shadow shadow-lg">
+        <div class="p-6 border-b border-shadow flex items-center gap-3">
+            <div class="w-8 h-8 bg-lemon rounded-md flex items-center justify-center font-bold text-onyx shadow-md">U
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-wide">UXi mPowered</h1>
+                <p class="text-xs text-olive uppercase tracking-wider mt-1">Style Guide v1.0</p>
+            </div>
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4 space-y-2">
+            <a href="#introduction"
+                class="block px-4 py-2 rounded-md hover:bg-shadow hover:text-lemon transition-colors focus:outline-none focus:ring-2 focus:ring-lemon">Introduction</a>
+            <a href="#colors"
+                class="block px-4 py-2 rounded-md hover:bg-shadow hover:text-lemon transition-colors focus:outline-none focus:ring-2 focus:ring-lemon">Color
+                Palette</a>
+            <a href="#typography"
+                class="block px-4 py-2 rounded-md hover:bg-shadow hover:text-lemon transition-colors focus:outline-none focus:ring-2 focus:ring-lemon">Typography</a>
+            <a href="#components"
+                class="block px-4 py-2 rounded-md hover:bg-shadow hover:text-lemon transition-colors focus:outline-none focus:ring-2 focus:ring-lemon">UI
+                Components</a>
+            <a href="#accessibility"
+                class="block px-4 py-2 rounded-md hover:bg-shadow hover:text-lemon transition-colors focus:outline-none focus:ring-2 focus:ring-lemon">Accessibility
+                (WCAG)</a>
+            <a href="#ai-generator"
+                class="block px-4 py-2 rounded-full bg-lemon text-onyx font-bold hover:bg-lemondark transition-colors focus:outline-none focus:ring-2 focus:ring-porcelain mt-4 shadow-sm flex items-center justify-between">
+                AI Co-Pilot
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-64 p-8 md:p-12 lg:p-20 max-w-6xl">
+
+        <!-- Introduction -->
+        <section id="introduction" class="mb-20 pt-10 md:pt-0">
+            <span class="text-sm font-bold text-lemondark uppercase tracking-widest">Overview</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-onyx mt-2 mb-6">Digital Identity System</h2>
+            <p class="text-lg text-shadow max-w-3xl leading-relaxed">
+                Welcome to the official UXi mPowered Digital Style Guide. This living document outlines the foundational
+                elements—colors, typography, and UI components—that make up our digital experiences.
+                <br><br>
+                <strong>Our Commitment to Accessibility:</strong> Every element in this guide has been carefully vetted
+                against the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA to ensure our platform is
+                inclusive, usable, and empowering for all users.
+            </p>
+        </section>
+
+        <!-- Colors -->
+        <section id="colors" class="mb-20 scroll-mt-10">
+            <div class="border-b border-dust pb-4 mb-8">
+                <span class="text-sm font-bold text-lemondark uppercase tracking-widest">Brand Assets</span>
+                <h2 class="text-3xl font-bold text-onyx mt-2">Color Palette</h2>
+                <p class="text-olive mt-2">Functional and brand colors with accessibility pairing rules.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Main Brand Color -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-lemon flex items-end p-4">
+                        <span class="text-onyx font-bold text-xl">Lemon Lime</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Main Brand Color</p>
+                        <p class="font-mono text-sm">HEX: #d3dd19</p>
+                        <div class="mt-4 pt-4 border-t border-dust">
+                            <span class="text-xs font-bold text-shadow bg-limecream px-2 py-1 rounded">WCAG Rule</span>
+                            <p class="text-xs text-shadow mt-2 leading-tight">Must use <strong>Onyx</strong> or
+                                <strong>Shadow Grey</strong> text when used as a background. Never use white text.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Lemon Lime -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-lemondark flex items-end p-4">
+                        <span class="text-porcelain font-bold text-xl drop-shadow-md">Dark Lemon Lime</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Interactive / Hover State</p>
+                        <p class="font-mono text-sm">HEX: #bbc31d</p>
+                        <div class="mt-4 pt-4 border-t border-dust">
+                            <span class="text-xs font-bold text-shadow bg-limecream px-2 py-1 rounded">WCAG Rule</span>
+                            <p class="text-xs text-shadow mt-2 leading-tight">Ideal for button hover states. Maintains
+                                contrast ratios similar to the primary Lemon Lime.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onyx -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-onyx flex items-end p-4">
+                        <span class="text-porcelain font-bold text-xl">Onyx</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Primary Text / Dark Backgrounds</p>
+                        <p class="font-mono text-sm">HEX: #161314</p>
+                        <div class="mt-4 pt-4 border-t border-dust">
+                            <span class="text-xs font-bold text-shadow bg-limecream px-2 py-1 rounded">WCAG Rule</span>
+                            <p class="text-xs text-shadow mt-2 leading-tight">Use on Porcelain, Beige, or Lemon Lime
+                                backgrounds for maximum AAA contrast.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shadow Grey -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-shadow flex items-end p-4">
+                        <span class="text-porcelain font-bold text-xl">Shadow Grey</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Secondary Text / UI Elements</p>
+                        <p class="font-mono text-sm">HEX: #231f20</p>
+                        <p class="font-mono text-sm mt-1 invisible">Space</p>
+                    </div>
+                </div>
+
+                <!-- Olive Grey -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-olive flex items-end p-4">
+                        <span class="text-porcelain font-bold text-xl">Olive Grey</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-shadow mb-2">Tertiary Text / Borders</p>
+                        <p class="font-mono text-sm">HEX: #8c8c8c</p>
+                        <div class="mt-4 pt-4 border-t border-dust">
+                            <span class="text-xs font-bold text-porcelain bg-shadow px-2 py-1 rounded">WCAG
+                                Warning</span>
+                            <p class="text-xs text-shadow mt-2 leading-tight">Use only for non-essential text or large
+                                UI borders. Fails contrast for small body copy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dust Grey -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-dust flex items-end p-4">
+                        <span class="text-onyx font-bold text-xl">Dust Grey</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Dividers / Disabled States</p>
+                        <p class="font-mono text-sm">HEX: #d8d8d8</p>
+                        <p class="font-mono text-sm mt-1 invisible">Space</p>
+                    </div>
+                </div>
+
+                <!-- Porcelain -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-porcelain flex items-end p-4 border-b border-dust">
+                        <span class="text-onyx font-bold text-xl">Porcelain</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Primary App Background</p>
+                        <p class="font-mono text-sm">HEX: #fefff8</p>
+                    </div>
+                </div>
+
+                <!-- Beige -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-beige flex items-end p-4">
+                        <span class="text-onyx font-bold text-xl">Beige</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Secondary Background / Cards</p>
+                        <p class="font-mono text-sm">HEX: #f5f9de</p>
+                    </div>
+                </div>
+
+                <!-- Lime Cream -->
+                <div class="rounded-xl overflow-hidden shadow-sm border border-dust">
+                    <div class="h-32 bg-limecream flex items-end p-4">
+                        <span class="text-onyx font-bold text-xl">Lime Cream</span>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-sm text-olive mb-2">Highlight / Alert Background</p>
+                        <p class="font-mono text-sm">HEX: #e9ef95</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section id="typography" class="mb-20 scroll-mt-10">
+            <div class="border-b border-dust pb-4 mb-8">
+                <span class="text-sm font-bold text-lemondark uppercase tracking-widest">Brand Assets</span>
+                <h2 class="text-3xl font-bold text-onyx mt-2">Typography</h2>
+                <p class="text-olive mt-2">Primary Font Family: <strong>Segoe UI</strong></p>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-dust">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- Headings -->
+                    <div class="lg:col-span-3 space-y-8">
+                        <div>
+                            <span class="text-xs text-olive font-mono">H1 / 48px (3rem) / Bold / Onyx</span>
+                            <h1 class="text-5xl font-bold text-onyx mt-1">Empowering the Future</h1>
+                        </div>
+                        <div>
+                            <span class="text-xs text-olive font-mono">H2 / 36px (2.25rem) / Bold / Onyx</span>
+                            <h2 class="text-4xl font-bold text-onyx mt-1">Our Core Vision</h2>
+                        </div>
+                        <div>
+                            <span class="text-xs text-olive font-mono">H3 / 30px (1.875rem) / Semibold / Shadow
+                                Grey</span>
+                            <h3 class="text-3xl font-semibold text-shadow mt-1">Educational Programs</h3>
+                        </div>
+                        <div>
+                            <span class="text-xs text-olive font-mono">H4 / 24px (1.5rem) / Semibold / Shadow
+                                Grey</span>
+                            <h4 class="text-2xl font-semibold text-shadow mt-1">Student Resources</h4>
+                        </div>
+                        <div>
+                            <span class="text-xs text-olive font-mono">Body Paragraph / 16px (1rem) / Regular / Shadow
+                                Grey</span>
+                            <p class="text-base text-shadow mt-2 leading-relaxed max-w-2xl">
+                                This is standard body text used for paragraphs, descriptions, and general content. The
+                                line height is set to 1.625 (relaxed) to ensure optimal readability for long-form
+                                reading, adhering to WCAG cognitive and visual guidelines. Text is set in Shadow Grey to
+                                reduce eye strain compared to pure black, while still easily passing the 4.5:1 contrast
+                                ratio.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-olive font-mono">Inline Link / 16px / Semibold / Underline</span>
+                            <p class="mt-2 text-shadow">
+                                Read more in our <a href="#"
+                                    class="text-lemondark font-semibold underline hover:text-onyx focus:outline-none focus:ring-2 focus:ring-lemon rounded px-1 transition-colors">accessibility
+                                    statement</a> to understand our standards.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Font Specimen -->
+                    <div class="bg-porcelain p-6 rounded-lg border border-dust flex flex-col justify-center">
+                        <div class="text-7xl font-bold text-lemon text-center mb-4 leading-none shadow-sm drop-shadow">
+                            Aa</div>
+                        <p class="text-center font-bold text-onyx text-xl">Segoe UI</p>
+                        <p class="text-center text-sm text-olive mt-2">A clean, highly legible humanist sans-serif.</p>
+                        <div class="mt-6 space-y-2 text-center text-shadow">
+                            <p class="font-light">Light</p>
+                            <p class="font-normal">Regular</p>
+                            <p class="font-semibold">Semibold</p>
+                            <p class="font-bold">Bold</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section id="components" class="mb-20 scroll-mt-10">
+            <div class="border-b border-dust pb-4 mb-8">
+                <span class="text-sm font-bold text-lemondark uppercase tracking-widest">UI System</span>
+                <h2 class="text-3xl font-bold text-onyx mt-2">Components</h2>
+                <p class="text-olive mt-2">Interactive elements designed with explicit focus and hover states for
+                    accessibility.</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mb-12">
+                <h3 class="text-xl font-bold text-shadow mb-6">Buttons</h3>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-dust flex flex-wrap gap-8 items-end">
+
+                    <!-- Primary Button -->
+                    <div class="flex flex-col gap-2">
+                        <span class="text-xs text-olive font-mono">Primary</span>
+                        <button
+                            class="bg-lemon text-onyx font-bold py-3 px-6 rounded-full hover:bg-lemondark transition-colors focus:outline-none focus:ring-4 focus:ring-shadow focus:ring-offset-2 active:scale-95 shadow-sm">
+                            Submit Application
+                        </button>
+                    </div>
+
+                    <!-- Secondary Button -->
+                    <div class="flex flex-col gap-2">
+                        <span class="text-xs text-olive font-mono">Secondary</span>
+                        <button
+                            class="bg-transparent border-2 border-onyx text-onyx font-bold py-3 px-6 rounded-full hover:bg-onyx hover:text-porcelain transition-colors focus:outline-none focus:ring-4 focus:ring-lemon focus:ring-offset-2 active:scale-95">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <!-- Ghost/Tertiary Button -->
+                    <div class="flex flex-col gap-2">
+                        <span class="text-xs text-olive font-mono">Ghost</span>
+                        <button
+                            class="bg-transparent text-shadow font-semibold py-3 px-6 rounded-full hover:bg-dust hover:text-onyx transition-colors focus:outline-none focus:ring-4 focus:ring-lemon focus:ring-offset-2 active:scale-95">
+                            Cancel
+                        </button>
+                    </div>
+
+                    <!-- Disabled Button -->
+                    <div class="flex flex-col gap-2">
+                        <span class="text-xs text-olive font-mono">Disabled</span>
+                        <button disabled
+                            class="bg-dust text-olive font-bold py-3 px-6 rounded-full cursor-not-allowed opacity-70">
+                            Processing...
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Forms -->
+            <div class="mb-12">
+                <h3 class="text-xl font-bold text-shadow mb-6">Form Elements</h3>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-dust max-w-2xl">
+                    <form class="space-y-6">
+                        <!-- Text Input -->
+                        <div>
+                            <label for="email" class="block text-sm font-bold text-onyx mb-2">Email Address <span
+                                    class="text-lemondark">*</span></label>
+                            <input type="email" id="email" placeholder="student@example.com"
+                                class="w-full px-4 py-3 border-2 border-dust rounded-md text-onyx placeholder-olive focus:outline-none focus:border-onyx focus:ring-4 focus:ring-limecream transition-all"
+                                required>
+                            <p class="text-xs text-olive mt-2" id="email-hint">We'll never share your email with anyone
+                                else.</p>
+                        </div>
+
+                        <!-- Error State -->
+                        <div>
+                            <label for="password" class="block text-sm font-bold text-onyx mb-2">Password</label>
+                            <input type="password" id="password" value="123"
+                                class="w-full px-4 py-3 border-2 border-red-500 rounded-md text-onyx focus:outline-none focus:border-red-600 focus:ring-4 focus:ring-red-100 transition-all"
+                                aria-invalid="true" aria-describedby="password-error">
+                            <p class="text-sm text-red-600 font-semibold mt-2 flex items-center gap-1"
+                                id="password-error">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Password must be at least 8 characters.
+                            </p>
+                        </div>
+
+                        <!-- Checkbox -->
+                        <div class="flex items-start gap-3 pt-2">
+                            <div class="flex items-center h-6">
+                                <input id="terms" type="checkbox"
+                                    class="w-5 h-5 border-2 border-olive rounded text-lemondark focus:ring-shadow focus:ring-offset-2 focus:ring-2 cursor-pointer appearance-none checked:bg-lemondark checked:border-lemondark relative">
+                                <!-- Note: Custom CSS needed for pure tick mark, but browser default often suffices for standard setups. Tailwind forms plugin usually handles this. Using standard input here for simplicity. -->
+                            </div>
+                            <label for="terms" class="text-sm text-shadow cursor-pointer pt-0.5">
+                                I agree to the <a href="#"
+                                    class="text-lemondark font-semibold underline hover:text-onyx focus:outline-none focus:ring-2 focus:ring-lemon rounded px-1">Terms
+                                    and Conditions</a>.
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cards -->
+            <div>
+                <h3 class="text-xl font-bold text-shadow mb-6">Cards & Containers</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Standard Card -->
+                    <div class="bg-white rounded-xl border border-dust p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div
+                            class="w-12 h-12 bg-beige rounded-full flex items-center justify-center mb-4 text-lemondark">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-onyx mb-2">Education Hub</h4>
+                        <p class="text-shadow mb-6">Access all learning materials, recorded sessions, and assignments in
+                            one centralized dashboard.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-lemondark font-bold hover:text-onyx transition-colors focus:outline-none focus:ring-2 focus:ring-lemon rounded px-1 -ml-1">
+                            Enter Hub
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Highlight Card -->
+                    <div class="bg-onyx rounded-xl border border-shadow p-6 shadow-md relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-lemon opacity-10 rounded-full -mr-10 -mt-10 blur-2xl">
+                        </div>
+                        <span class="inline-block px-3 py-1 bg-lemon text-onyx text-xs font-bold rounded-full mb-4">New
+                            Feature</span>
+                        <h4 class="text-xl font-bold text-porcelain mb-2">Community Forums</h4>
+                        <p class="text-dust mb-6">Connect with peers, share insights, and collaborate on projects
+                            securely within the UXi platform.</p>
+                        <button
+                            class="bg-lemon text-onyx font-bold py-2 px-5 rounded-full hover:bg-porcelain transition-colors focus:outline-none focus:ring-4 focus:ring-shadow focus:ring-offset-2 focus:ring-offset-onyx w-full">
+                            Join Discussion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Accessibility -->
+        <section id="accessibility" class="mb-20 scroll-mt-10">
+            <div class="border-b border-dust pb-4 mb-8">
+                <span class="text-sm font-bold text-lemondark uppercase tracking-widest">Guidelines</span>
+                <h2 class="text-3xl font-bold text-onyx mt-2">Accessibility (WCAG 2.1 AA)</h2>
+                <p class="text-olive mt-2">Rules of engagement for inclusive design.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-dust">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                    <div>
+                        <h3 class="text-lg font-bold text-onyx flex items-center gap-2 mb-4">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            The "Do's"
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-2 h-2 rounded-full bg-lemon shrink-0"></div>
+                                <p class="text-sm text-shadow"><strong>Ensure Contrast:</strong> Maintain a contrast
+                                    ratio of at least <code
+                                        class="bg-porcelain border border-dust px-1 rounded text-xs">4.5:1</code> for
+                                    normal text. Onyx on Porcelain is a perfect 17.5:1.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-2 h-2 rounded-full bg-lemon shrink-0"></div>
+                                <p class="text-sm text-shadow"><strong>Focus States:</strong> Interactive elements must
+                                    have a visible focus ring. For dark buttons, use a light focus ring with offset, and
+                                    vice-versa.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-2 h-2 rounded-full bg-lemon shrink-0"></div>
+                                <p class="text-sm text-shadow"><strong>Label Forms:</strong> Use persistent, visible
+                                    labels for all inputs. Placeholders are not replacements for labels.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-onyx flex items-center gap-2 mb-4">
+                            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            The "Don'ts"
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-2 h-2 rounded-full bg-red-400 shrink-0"></div>
+                                <p class="text-sm text-shadow"><strong>Never use white text on Lemon Lime.</strong> The
+                                    contrast ratio is only 1.2:1 (Fails). Always use Onyx or Shadow Grey text on Lemon
+                                    Lime.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-2 h-2 rounded-full bg-red-400 shrink-0"></div>
+                                <p class="text-sm text-shadow"><strong>Don't rely solely on color.</strong> Error states
+                                    must include text explanations or icons, not just a red border.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-1 w-2 h-2 rounded-full bg-red-400 shrink-0"></div>
+                                <p class="text-sm text-shadow"><strong>Avoid Olive Grey for body text.</strong> It is
+                                    too light for long reading and only passes on very dark backgrounds. Use Shadow Grey
+                                    instead.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Component Generator -->
+        <section id="ai-generator" class="mb-20 scroll-mt-10">
+            <div class="border-b border-dust pb-4 mb-8">
+                <span class="text-sm font-bold text-lemondark uppercase tracking-widest">Gemini API Powered</span>
+                <h2 class="text-3xl font-bold text-onyx mt-2 flex items-center gap-3">
+                    AI Component Generator
+                    <span
+                        class="px-2 py-1 bg-limecream text-onyx text-xs rounded-full font-bold uppercase tracking-wider">Beta</span>
+                </h2>
+                <p class="text-olive mt-2">Describe a UI element you need. The AI Co-Pilot will generate the HTML
+                    strictly using the UXi mPowered design system and WCAG rules.</p>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-dust">
+                <!-- Prompt Input -->
+                <div class="mb-6">
+                    <label for="ai-prompt" class="block text-sm font-bold text-shadow mb-2">What would you like to
+                        build?</label>
+                    <textarea id="ai-prompt" rows="3"
+                        class="w-full px-4 py-3 border-2 border-dust rounded-md text-onyx placeholder-olive focus:outline-none focus:border-onyx focus:ring-4 focus:ring-limecream transition-all resize-none"
+                        placeholder="E.g., A pricing card for a student subscription, highlighting the main CTA in Lemon Lime."></textarea>
+                </div>
+
+                <!-- Action Bar -->
+                <div class="flex items-center justify-between mb-6">
+                    <button id="generate-btn" onclick="generateComponent()"
+                        class="bg-onyx text-lemon font-bold py-3 px-6 rounded-full hover:bg-shadow transition-colors focus:outline-none focus:ring-4 focus:ring-lemon focus:ring-offset-2 active:scale-95 shadow-sm flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Generate Component
+                    </button>
+                    <div id="ai-error-msg" class="text-red-500 text-sm font-semibold hidden"></div>
+                </div>
+
+                <!-- Output Area (Hidden initially) -->
+                <div id="output-area" class="hidden border border-dust rounded-lg overflow-hidden">
+                    <!-- Tabs -->
+                    <div class="flex bg-porcelain border-b border-dust">
+                        <button id="tab-preview" onclick="switchTab('preview')"
+                            class="flex-1 py-3 text-sm font-bold bg-onyx text-lemon transition-colors">Preview</button>
+                        <button id="tab-code" onclick="switchTab('code')"
+                            class="flex-1 py-3 text-sm font-bold bg-dust text-shadow hover:bg-olive hover:text-porcelain transition-colors">Code</button>
+                    </div>
+
+                    <!-- Preview Container -->
+                    <div id="preview-container" class="p-6 bg-porcelain min-h-[200px] flex items-center justify-center">
+                        <!-- AI rendered HTML goes here -->
+                    </div>
+
+                    <!-- Code Container -->
+                    <div id="code-container" class="hidden relative bg-onyx p-6">
+                        <button onclick="copyCode()"
+                            class="absolute top-4 right-4 bg-shadow text-dust hover:text-lemon text-xs px-3 py-1 rounded border border-olive transition-colors focus:outline-none">Copy</button>
+                        <pre
+                            class="overflow-x-auto text-sm text-porcelain font-mono max-h-96 custom-scrollbar"><code id="code-output"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-20 pt-8 border-t border-dust text-center text-olive text-sm flex flex-col items-center">
+            <div class="w-10 h-10 bg-onyx text-lemon rounded-full flex items-center justify-center font-bold mb-4">U
+            </div>
+            <p>&copy; 2026 UXi mPowered. All rights reserved.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Tab switching logic
+        function switchTab(tab) {
+            const previewTab = document.getElementById('tab-preview');
+            const codeTab = document.getElementById('tab-code');
+            const previewContainer = document.getElementById('preview-container');
+            const codeContainer = document.getElementById('code-container');
+
+            if (tab === 'preview') {
+                previewContainer.classList.remove('hidden');
+                codeContainer.classList.add('hidden');
+
+                previewTab.classList.replace('bg-dust', 'bg-onyx');
+                previewTab.classList.replace('text-shadow', 'text-lemon');
+
+                codeTab.classList.replace('bg-onyx', 'bg-dust');
+                codeTab.classList.replace('text-lemon', 'text-shadow');
+            } else {
+                codeContainer.classList.remove('hidden');
+                previewContainer.classList.add('hidden');
+
+                codeTab.classList.replace('bg-dust', 'bg-onyx');
+                codeTab.classList.replace('text-shadow', 'text-lemon');
+
+                previewTab.classList.replace('bg-onyx', 'bg-dust');
+                previewTab.classList.replace('text-lemon', 'text-shadow');
+            }
+        }
+
+        // Copy to clipboard logic
+        function copyCode() {
+            const codeText = document.getElementById('code-output').textContent;
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = codeText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+
+            try {
+                document.execCommand('copy');
+                const btn = document.querySelector('#code-container button');
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => btn.innerText = originalText, 2000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+            document.body.removeChild(tempTextArea);
+        }
+
+        // Helper for exponential backoff on API calls
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        async function fetchWithRetry(url, options, retries = 3, backoff = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        if (response.status === 429) {
+                            await delay(backoff);
+                            backoff *= 2;
+                            continue;
+                        }
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (err) {
+                    if (i === retries - 1) throw err;
+                }
+            }
+        }
+
+        // Gemini API Call Logic
+        async function generateComponent() {
+            const promptInput = document.getElementById('ai-prompt').value.trim();
+            const errorMsg = document.getElementById('ai-error-msg');
+            const outputArea = document.getElementById('output-area');
+            const generateBtn = document.getElementById('generate-btn');
+
+            errorMsg.classList.add('hidden');
+
+            if (!promptInput) {
+                errorMsg.textContent = "Please describe a component first.";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            // UI Loading State
+            const originalBtnHtml = generateBtn.innerHTML;
+            generateBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-onyx" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating...`;
+            generateBtn.disabled = true;
+            generateBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            // Constructing System Instructions to enforce Design System rules
+            const systemPrompt = `You are an expert UX/UI developer for the UXi mPowered brand. You generate single, self-contained UI components using HTML and Tailwind CSS.
+            CRITICAL RULES:
+            1. ONLY use these specific custom Tailwind color classes: bg-onyx, text-onyx, border-onyx, bg-shadow, text-shadow, border-shadow, bg-olive, text-olive, border-olive, bg-dust, text-dust, border-dust, bg-porcelain, text-porcelain, border-porcelain, bg-beige, text-beige, border-beige, bg-limecream, text-limecream, border-limecream, bg-lemon, text-lemon, border-lemon, bg-lemondark, text-lemondark, border-lemondark.
+            2. NEVER use default Tailwind colors (e.g., no bg-blue-500, text-gray-700, bg-white). Use bg-porcelain instead of white, and bg-onyx instead of black.
+            3. WCAG AA ACCESSIBILITY: If the background is 'lemon', 'lemondark', or 'limecream', the text MUST be 'onyx' or 'shadow'. If the background is 'onyx' or 'shadow', the text MUST be 'porcelain', 'beige', or 'lemon'. Never put white/porcelain text on lemon.
+            4. DESIGN: Ensure fully rounded pill-shaped corners for buttons (rounded-full), rounded corners for cards (rounded-xl), generous padding, and clear hierarchy using text sizing.
+            5. OUTPUT: Return ONLY valid HTML code. Do not include markdown blocks, backticks, or conversational text. Start directly with <div...`;
+
+            const payload = {
+                contents: [{ parts: [{ text: promptInput }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            const apiKey = ""; // Left empty as per Canvas environment instructions
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            try {
+                const result = await fetchWithRetry(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (result && result.candidates && result.candidates[0].content) {
+                    let htmlCode = result.candidates[0].content.parts[0].text;
+
+                    // Sanitize output (remove markdown fences if the model accidentally includes them)
+                    htmlCode = htmlCode.replace(/```html/gi, '').replace(/```/g, '').trim();
+
+                    // Inject to DOM
+                    document.getElementById('preview-container').innerHTML = htmlCode;
+
+                    // Escape HTML for the code block viewing
+                    const escapedHtml = htmlCode.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    document.getElementById('code-output').innerHTML = escapedHtml;
+
+                    // Show Output & Reset to Preview Tab
+                    outputArea.classList.remove('hidden');
+                    switchTab('preview');
+
+                    // Scroll to output smoothly
+                    outputArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    throw new Error("Unexpected API response format");
+                }
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                errorMsg.textContent = "Failed to connect to AI Co-Pilot. Please try again later.";
+                errorMsg.classList.remove('hidden');
+            } finally {
+                // Restore button state
+                generateBtn.innerHTML = originalBtnHtml;
+                generateBtn.disabled = false;
+                generateBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../shared/guide-switcher.css">
+    <script src="../shared/guide-switcher.js" defer></script>
+</body>
+
+</html>

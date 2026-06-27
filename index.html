@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UXi Brand Style Guides</title>
+  <link rel="stylesheet" href="shared/guide-switcher.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f6f6f6;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+
+    .lead {
+      margin: 0 0 40px;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .guide-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .guide-list a {
+      display: block;
+      padding: 18px 20px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .guide-list a:hover,
+    .guide-list a:focus-visible {
+      border-color: rgba(0, 0, 0, 0.16);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      outline: none;
+    }
+
+    .guide-list strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .guide-list span {
+      font-size: 0.875rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>UXi Brand Style Guides</h1>
+    <p class="lead">Internal index for digital style guides. Share the direct link for each brand with stakeholders — not this page.</p>
+    <ul class="guide-list">
+      <li>
+        <a href="OWI-style-guide/">
+          <strong>Open Window Institute</strong>
+          <span>Brand &amp; design system v1.9</span>
+        </a>
+      </li>
+      <li>
+        <a href="IMM-GS-style-guide/">
+          <strong>IMM Graduate School</strong>
+          <span>Brand &amp; design system v1.0</span>
+        </a>
+      </li>
+      <li>
+        <a href="BCi-style-guide/">
+          <strong>Belgium Campus iTversity</strong>
+          <span>Brand &amp; UI style guide v1.0</span>
+        </a>
+      </li>
+      <li>
+        <a href="mPowered-style-guide/">
+          <strong>UXi mPowered</strong>
+          <span>Digital style guide v1.0</span>
+        </a>
+      </li>
+    </ul>
+  </main>
+  <script src="shared/guide-switcher.js" defer></script>
+</body>
+</html>

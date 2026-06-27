@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belgium Campus iTversity — Brand & UI Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --turquoise: #2AD2C9;
+    --black: #000000;
+    --near-black:#141517;
+    --white: #FFFFFF;
+    --yellow: #FFCB2F;
+    --magenta: #C51E62;
+    --red: #EB473E;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-400: #AAAAAA;
+    --gray-600: #666666;
+    --gray-800: #333333;
+
+    --font-heading: 'Bebas Neue', 'Impact', sans-serif;
+    --font-body: 'ITC Avant Garde Gothic', 'Century Gothic', 'Trebuchet MS', 'Inter', sans-serif;
+    --font-ui: 'Inter', sans-serif;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-pill: 100px;
+
+    --max-width: 1200px;
+    --col-gap: 24px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-ui);
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  .sg-nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 240px;
+    height: 100vh;
+    background: var(--near-black);
+    overflow-y: auto;
+    z-index: 100;
+    padding: var(--space-8) 0;
+  }
+
+  .sg-nav-logo {
+    padding: 0 var(--space-6) var(--space-8);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: var(--space-6);
+  }
+
+  .sg-nav-logo-tag {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    color: var(--turquoise);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    display: block;
+  }
+
+  .sg-nav-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    padding: var(--space-6) var(--space-6) var(--space-2);
+    display: block;
+  }
+
+  .sg-nav a {
+    display: block;
+    padding: var(--space-2) var(--space-6);
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .sg-nav a:hover {
+    color: var(--white);
+    background: rgba(255,255,255,0.05);
+    border-left-color: var(--turquoise);
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .sg-main {
+    margin-left: 240px;
+  }
+
+  /* ── COVER ── */
+  .sg-cover {
+    background: var(--black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-20) var(--space-16);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sg-cover-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(42,210,201,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42,210,201,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .sg-cover-accent {
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,210,201,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .sg-cover-accent2 {
+    position: absolute;
+    bottom: -80px; left: 120px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,203,47,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .sg-cover-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  .sg-cover-eyebrow {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .sg-cover-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--turquoise);
+  }
+
+  .sg-cover-title {
+    font-family: var(--font-heading);
+    font-size: clamp(64px, 10vw, 120px);
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-8);
+  }
+
+  .sg-cover-title span {
+    color: var(--turquoise);
+  }
+
+  .sg-cover-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: var(--space-12);
+  }
+
+  .sg-cover-meta {
+    display: flex;
+    gap: var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .sg-cover-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sg-cover-meta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .sg-cover-meta-value {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── SECTIONS ── */
+  .sg-section {
+    padding: var(--space-24) var(--space-16);
+    border-bottom: 1px solid var(--gray-200);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .sg-section-full {
+    padding: var(--space-24) var(--space-16);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .sg-section-dark {
+    background: var(--near-black);
+    padding: var(--space-24) var(--space-16);
+    border-bottom: none;
+  }
+
+  .sg-section-dark .sg-section {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .sg-section-number {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .sg-section-number::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--turquoise);
+  }
+
+  .sg-section-number-dark {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(42,210,201,0.7);
+    margin-bottom: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .sg-section-number-dark::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: rgba(42,210,201,0.5);
+  }
+
+  .sg-h1 {
+    font-family: var(--font-heading);
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    color: var(--black);
+    margin-bottom: var(--space-4);
+  }
+
+  .sg-h1-white {
+    font-family: var(--font-heading);
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: var(--space-4);
+  }
+
+  .sg-section-lead {
+    font-size: 16px;
+    color: var(--gray-600);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: var(--space-12);
+  }
+
+  .sg-section-lead-white {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: var(--space-12);
+  }
+
+  .sg-rule {
+    width: 40px;
+    height: 2px;
+    background: var(--turquoise);
+    margin-bottom: var(--space-6);
+  }
+
+  /* ── COLOR SYSTEM ── */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .color-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+  }
+
+  .color-swatch {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-4);
+    position: relative;
+  }
+
+  .color-swatch-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.25);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 2px;
+    backdrop-filter: blur(4px);
+  }
+
+  .color-meta {
+    padding: var(--space-4) var(--space-4) var(--space-4);
+    background: var(--white);
+  }
+
+  .color-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+
+  .color-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-bottom: var(--space-3);
+  }
+
+  .color-roles {
+    font-size: 12px;
+    color: var(--gray-600);
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+  }
+
+  .wcag-badges {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .wcag-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .wcag-pass { background: #D4EDDA; color: #155724; }
+  .wcag-fail { background: #F8D7DA; color: #721C24; }
+  .wcag-warn { background: #FFF3CD; color: #856404; }
+
+  /* ── CONTRAST TABLE ── */
+  .contrast-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: var(--space-8);
+  }
+
+  .contrast-table th {
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    background: var(--gray-100);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    font-weight: 600;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .contrast-table td {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: middle;
+  }
+
+  .contrast-preview {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 28px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .type-scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+  }
+
+  .type-row {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: var(--space-6);
+    align-items: baseline;
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .type-meta {
+    text-align: right;
+  }
+
+  .type-meta-name {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .type-meta-spec {
+    font-size: 12px;
+    color: var(--gray-600);
+    font-family: 'Courier New', monospace;
+  }
+
+  .type-h1 { font-family: var(--font-heading); font-size: 72px; line-height: 1; letter-spacing: 0.02em; color: var(--black); }
+  .type-h2 { font-family: var(--font-heading); font-size: 52px; line-height: 1.05; letter-spacing: 0.02em; color: var(--black); }
+  .type-h3 { font-family: var(--font-heading); font-size: 36px; line-height: 1.1; letter-spacing: 0.02em; color: var(--black); }
+  .type-h4 { font-family: var(--font-heading); font-size: 24px; line-height: 1.15; letter-spacing: 0.02em; color: var(--black); }
+  .type-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--turquoise); }
+  .type-body-lg { font-family: var(--font-body); font-size: 18px; line-height: 1.7; color: var(--black); }
+  .type-body { font-family: var(--font-body); font-size: 16px; line-height: 1.6; color: var(--black); }
+  .type-body-sm { font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: var(--gray-600); }
+  .type-caption { font-family: var(--font-body); font-size: 12px; line-height: 1.5; color: var(--gray-400); }
+
+  /* ── FONT ANATOMY ── */
+  .font-anatomy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .font-card {
+    padding: var(--space-8);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+  }
+
+  .font-card-dark {
+    padding: var(--space-8);
+    background: var(--black);
+    border-radius: var(--radius-lg);
+  }
+
+  .font-display {
+    font-family: var(--font-heading);
+    font-size: 80px;
+    line-height: 0.9;
+    color: var(--black);
+    margin-bottom: var(--space-4);
+  }
+
+  .font-display-white {
+    font-family: var(--font-heading);
+    font-size: 80px;
+    line-height: 0.9;
+    color: var(--white);
+    margin-bottom: var(--space-4);
+  }
+
+  .font-name { font-size: 12px; font-weight: 600; color: var(--turquoise); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .font-desc { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+  .font-desc-white { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  .font-alpha {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--gray-400);
+    letter-spacing: 0.05em;
+    margin-top: var(--space-4);
+    line-height: 1.8;
+  }
+
+  /* ── SPACING ── */
+  .spacing-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .spacing-label {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--gray-600);
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .spacing-bar-wrap {
+    flex: 1;
+    height: 24px;
+    background: var(--gray-100);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .spacing-bar {
+    height: 100%;
+    background: var(--turquoise);
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+
+  .spacing-px {
+    font-size: 12px;
+    color: var(--gray-400);
+    width: 40px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── GRID DEMO ── */
+  .grid-demo {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  .grid-demo-row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .grid-col {
+    height: 32px;
+    background: rgba(42,210,201,0.15);
+    border: 1px solid rgba(42,210,201,0.3);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--turquoise);
+    font-weight: 600;
+  }
+
+  .grid-col-dark { background: rgba(42,210,201,0.25); }
+  .grid-col-span2 { grid-column: span 2; }
+  .grid-col-span3 { grid-column: span 3; }
+  .grid-col-span4 { grid-column: span 4; }
+  .grid-col-span6 { grid-column: span 6; }
+  .grid-col-span8 { grid-column: span 8; }
+  .grid-col-span12 { grid-column: span 12; }
+
+  /* ── BUTTONS ── */
+  .component-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.15s;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-lg { padding: 14px 32px; font-size: 14px; }
+  .btn-md { padding: 10px 24px; }
+  .btn-sm { padding: 7px 16px; font-size: 11px; }
+
+  .btn-primary { background: var(--turquoise); color: var(--black); border-color: var(--turquoise); }
+  .btn-primary:hover { background: #22B8B0; border-color: #22B8B0; }
+
+  .btn-secondary { background: transparent; color: var(--black); border-color: var(--black); }
+  .btn-secondary:hover { background: var(--black); color: var(--white); }
+
+  .btn-yellow { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+  .btn-yellow:hover { background: #F0BC1A; border-color: #F0BC1A; }
+
+  .btn-ghost { background: transparent; color: var(--turquoise); border-color: var(--turquoise); }
+  .btn-ghost:hover { background: var(--turquoise); color: var(--black); }
+
+  .btn-danger { background: var(--red); color: var(--white); border-color: var(--red); }
+  .btn-danger:hover { background: #D43530; border-color: #D43530; }
+
+  .btn-white { background: var(--white); color: var(--black); border-color: var(--white); }
+  .btn-outline-white { background: transparent; color: var(--white); border-color: var(--white); }
+  .btn-outline-white:hover { background: var(--white); color: var(--black); }
+
+  .btn-disabled { background: var(--gray-200); color: var(--gray-400); border-color: var(--gray-200); cursor: not-allowed; }
+
+  /* ── FORM ELEMENTS ── */
+  .form-group {
+    margin-bottom: var(--space-6);
+  }
+
+  .form-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-800);
+    margin-bottom: var(--space-2);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--black);
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--turquoise);
+    box-shadow: 0 0 0 3px rgba(42,210,201,0.15);
+  }
+
+  .form-input-error {
+    border-color: var(--red);
+  }
+
+  .form-helper {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-top: var(--space-1);
+  }
+
+  .form-error {
+    font-size: 12px;
+    color: var(--red);
+    margin-top: var(--space-1);
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .card {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  .card-image-placeholder {
+    height: 160px;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--gray-400);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .card-body { padding: var(--space-6); }
+
+  .card-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: var(--space-2);
+    display: block;
+  }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: var(--space-3);
+  }
+
+  .card-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+  }
+
+  .card-link {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .card-featured {
+    border-color: var(--turquoise);
+    border-width: 2px;
+  }
+
+  .card-dark {
+    background: var(--near-black);
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .badge-turquoise { background: rgba(42,210,201,0.15); color: #1A9991; }
+  .badge-yellow { background: rgba(255,203,47,0.2); color: #8A6800; }
+  .badge-red { background: rgba(235,71,62,0.12); color: #B82D25; }
+  .badge-dark { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); }
+  .badge-black { background: var(--black); color: var(--white); }
+
+  /* ── ALERTS ── */
+  .alert {
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-md);
+    border-left: 4px solid transparent;
+    margin-bottom: var(--space-4);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .alert-info { background: rgba(42,210,201,0.08); border-color: var(--turquoise); color: var(--black); }
+  .alert-warning { background: rgba(255,203,47,0.12); border-color: var(--yellow); color: #5A4400; }
+  .alert-danger { background: rgba(235,71,62,0.08); border-color: var(--red); color: #8B2922; }
+  .alert-title { font-weight: 700; margin-bottom: 2px; }
+
+  /* ── NAV COMPONENT ── */
+  .nav-demo {
+    background: var(--black);
+    padding: 0 var(--space-8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+  }
+
+  .nav-demo-logo {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+
+  .nav-demo-links {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .nav-demo-link {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .nav-demo-link:hover,
+  .nav-demo-link.active {
+    color: var(--turquoise);
+  }
+
+  /* ── HERO DEMO ── */
+  .hero-demo {
+    background: var(--black);
+    border-radius: var(--radius-lg);
+    padding: var(--space-16) var(--space-10);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-demo-grid-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(42,210,201,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42,210,201,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .hero-demo-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: var(--space-4);
+    position: relative;
+  }
+
+  .hero-demo-title {
+    font-family: var(--font-heading);
+    font-size: 64px;
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-6);
+    position: relative;
+    max-width: 540px;
+  }
+
+  .hero-demo-title span { color: var(--turquoise); }
+
+  .hero-demo-subtitle {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: var(--space-8);
+    position: relative;
+  }
+
+  .hero-demo-ctas {
+    display: flex;
+    gap: var(--space-4);
+    position: relative;
+  }
+
+  /* ── DO / DON'T ── */
+  .do-dont-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .do-card {
+    border: 2px solid #28A745;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .dont-card {
+    border: 2px solid var(--red);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .do-header {
+    background: #28A745;
+    padding: var(--space-2) var(--space-4);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .dont-header {
+    background: var(--red);
+    padding: var(--space-2) var(--space-4);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .do-dont-body {
+    padding: var(--space-6);
+    background: var(--white);
+  }
+
+  .do-dont-body p {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+
+  .do-dont-body p:last-child { margin-bottom: 0; }
+
+  /* ── ACCESSIBILITY TABLE ── */
+  .a11y-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .a11y-card {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .a11y-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: rgba(42,210,201,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: var(--space-4);
+  }
+
+  .a11y-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: var(--space-2);
+  }
+
+  .a11y-desc {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* ── UX RECS ── */
+  .ux-rec-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+
+  .ux-rec {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: var(--space-6);
+    align-items: flex-start;
+    padding: var(--space-6);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+  }
+
+  .ux-rec-number {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    color: var(--turquoise);
+    line-height: 1;
+  }
+
+  .ux-rec-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: var(--space-1);
+  }
+
+  .ux-rec-desc {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  .ux-rec-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: var(--space-2);
+    margin-right: 4px;
+  }
+
+  .tag-nav { background: rgba(42,210,201,0.12); color: #1A9991; }
+  .tag-visual { background: rgba(255,203,47,0.15); color: #8A6800; }
+  .tag-content { background: rgba(20,21,23,0.08); color: var(--gray-600); }
+  .tag-a11y { background: rgba(235,71,62,0.1); color: #B82D25; }
+  .tag-perf { background: rgba(40,167,69,0.1); color: #1A6A30; }
+
+  /* ── IMAGE GUIDELINES ── */
+  .img-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .img-guide-card {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .img-mock {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .img-guide-desc {
+    padding: var(--space-4);
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.5;
+    background: var(--white);
+  }
+
+  /* ── VOICE & TONE ── */
+  .tone-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .tone-card {
+    padding: var(--space-6);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    border-top: 3px solid var(--turquoise);
+  }
+
+  .tone-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: var(--space-3);
+  }
+
+  .tone-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    color: var(--black);
+    margin-bottom: var(--space-3);
+  }
+
+  .tone-desc {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .sg-divider {
+    background: var(--black);
+    padding: var(--space-8) var(--space-16);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sg-divider-text {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+
+  .sg-divider-rule {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 0 var(--space-8);
+  }
+
+  /* ── MOTION ── */
+  .motion-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  .motion-card {
+    padding: var(--space-6);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+
+  .motion-preview {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-md);
+    background: var(--turquoise);
+    margin: 0 auto var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .motion-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .motion-spec {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+  }
+
+  .motion-use {
+    font-size: 12px;
+    color: var(--gray-600);
+  }
+
+  /* ── FOOTER ── */
+  .sg-footer {
+    background: var(--near-black);
+    padding: var(--space-16) var(--space-16);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sg-footer-logo {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    color: var(--turquoise);
+  }
+
+  .sg-footer-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    text-align: right;
+  }
+
+  /* ── TWO-COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--col-gap);
+    margin-bottom: var(--space-12);
+  }
+
+  /* ── ICON GRID ── */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .icon-cell {
+    aspect-ratio: 1;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: background 0.15s;
+  }
+
+  .icon-cell:hover {
+    background: var(--gray-100);
+  }
+
+  /* MISC */
+  .sg-callout {
+    border-left: 3px solid var(--turquoise);
+    padding: var(--space-4) var(--space-6);
+    background: rgba(42,210,201,0.05);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: var(--space-6);
+  }
+
+  .sg-callout p {
+    font-size: 14px;
+    color: var(--gray-800);
+    line-height: 1.6;
+  }
+
+  .sg-callout strong { color: var(--black); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  .pill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+
+  table { border-collapse: collapse; }
+
+  @media print {
+    .sg-nav { display: none; }
+    .sg-main { margin-left: 0; }
+    .sg-section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     SIDEBAR NAV
+═══════════════════════════════════════════ -->
+<nav class="sg-nav" aria-label="Style guide navigation">
+  <div class="sg-nav-logo">
+    <span class="sg-nav-logo-tag">BELGIUM CAMPUS</span>
+    <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);">iTversity Style Guide</span>
+  </div>
+  <span class="sg-nav-label">Foundation</span>
+  <a href="#brand">01 — Brand Identity</a>
+  <a href="#color">02 — Colour System</a>
+  <a href="#typography">03 — Typography</a>
+  <a href="#spacing">04 — Spacing & Grid</a>
+  <a href="#motion">05 — Motion</a>
+  <span class="sg-nav-label">Components</span>
+  <a href="#buttons">06 — Buttons</a>
+  <a href="#forms">07 — Form Elements</a>
+  <a href="#cards">08 — Cards & Layout</a>
+  <a href="#navigation">09 — Navigation</a>
+  <a href="#badges">10 — Badges & Alerts</a>
+  <span class="sg-nav-label">Content</span>
+  <a href="#imagery">11 — Imagery</a>
+  <a href="#iconography">12 — Iconography</a>
+  <a href="#voice">13 — Voice & Tone</a>
+  <span class="sg-nav-label">Guidance</span>
+  <a href="#accessibility">14 — Accessibility</a>
+  <a href="#ux">15 — UX Recommendations</a>
+  <a href="#donts">16 — Do's & Don'ts</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     MAIN
+═══════════════════════════════════════════ -->
+<main class="sg-main">
+
+  <!-- COVER -->
+  <section class="sg-cover">
+    <div class="sg-cover-grid"></div>
+    <div class="sg-cover-accent"></div>
+    <div class="sg-cover-accent2"></div>
+    <div class="sg-cover-content">
+      <p class="sg-cover-eyebrow">Belgium Campus iTversity</p>
+      <h1 class="sg-cover-title">BRAND &<br><span>STYLE</span><br>GUIDE</h1>
+      <p class="sg-cover-desc">A comprehensive reference for design, content, and UI standards — ensuring a consistent, accessible, and purposeful digital experience across all Belgium Campus iTversity touchpoints.</p>
+      <div class="sg-cover-meta">
+        <div class="sg-cover-meta-item">
+          <span class="sg-cover-meta-label">Version</span>
+          <span class="sg-cover-meta-value">1.0</span>
+        </div>
+        <div class="sg-cover-meta-item">
+          <span class="sg-cover-meta-label">Standard</span>
+          <span class="sg-cover-meta-value">WCAG 2.1 AA</span>
+        </div>
+        <div class="sg-cover-meta-item">
+          <span class="sg-cover-meta-label">Platform</span>
+          <span class="sg-cover-meta-value">Web / Digital</span>
+        </div>
+        <div class="sg-cover-meta-item">
+          <span class="sg-cover-meta-label">Year</span>
+          <span class="sg-cover-meta-value">2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 01 BRAND IDENTITY ─── -->
+  <div class="sg-divider" id="brand">
+    <span class="sg-divider-text">01</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Brand Identity</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">01 — Brand Identity</p>
+    <h2 class="sg-h1">WHO WE ARE</h2>
+    <p class="sg-section-lead">Belgium Campus iTversity is a pioneering IT institution dedicated to shaping Africa's future through world-class Information and Communication Technology education. Our visual identity reflects commitment to innovation, professionalism, and technological excellence.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--col-gap);margin-bottom:var(--space-12);">
+      <div style="padding:var(--space-8);border:1px solid var(--gray-200);border-radius:var(--radius-lg);border-top:3px solid var(--turquoise);">
+        <div style="font-family:var(--font-heading);font-size:28px;color:var(--turquoise);margin-bottom:var(--space-3);">PIONEER</div>
+        <p style="font-size:14px;color:var(--gray-600);line-height:1.6;">We lead, we innovate, and we set the standard for IT education on the African continent.</p>
+      </div>
+      <div style="padding:var(--space-8);border:1px solid var(--gray-200);border-radius:var(--radius-lg);border-top:3px solid var(--yellow);">
+        <div style="font-family:var(--font-heading);font-size:28px;color:var(--black);margin-bottom:var(--space-3);">EMPOWER</div>
+        <p style="font-size:14px;color:var(--gray-600);line-height:1.6;">We arm students with practical skills and industry alignment that translate directly into career readiness.</p>
+      </div>
+      <div style="padding:var(--space-8);border:1px solid var(--gray-200);border-radius:var(--radius-lg);border-top:3px solid var(--magenta);">
+        <div style="font-family:var(--font-heading);font-size:28px;color:var(--magenta);margin-bottom:var(--space-3);">TRANSFORM</div>
+        <p style="font-size:14px;color:var(--gray-600);line-height:1.6;">We build the digital talent pipeline that will transform economies and communities across Africa.</p>
+      </div>
+    </div>
+
+    <p class="sg-section-number">Brand Attributes</p>
+    <h2 class="sg-h1">BRAND PERSONALITY</h2>
+    <p class="sg-section-lead">These four attributes guide every design and content decision — from component choice to copy tone.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--col-gap);margin-bottom:var(--space-12);">
+      <div style="padding:var(--space-6);background:var(--black);border-radius:var(--radius-lg);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--turquoise);margin-bottom:var(--space-2);">01</div>
+        <div style="font-family:var(--font-heading);font-size:24px;color:var(--white);margin-bottom:var(--space-3);">INNOVATIVE</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">Forward-thinking. We embrace technology and new approaches without hesitation.</p>
+      </div>
+      <div style="padding:var(--space-6);background:var(--gray-100);border-radius:var(--radius-lg);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--turquoise);margin-bottom:var(--space-2);">02</div>
+        <div style="font-family:var(--font-heading);font-size:24px;color:var(--black);margin-bottom:var(--space-3);">PROFESSIONAL</div>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.6;">Credible and rigorous. Every touchpoint reflects academic excellence and industry trust.</p>
+      </div>
+      <div style="padding:var(--space-6);background:var(--black);border-radius:var(--radius-lg);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:var(--space-2);">03</div>
+        <div style="font-family:var(--font-heading);font-size:24px;color:var(--white);margin-bottom:var(--space-3);">ENERGETIC</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">Bold and dynamic. We drive urgency and aspiration in everything we produce.</p>
+      </div>
+      <div style="padding:var(--space-6);background:var(--gray-100);border-radius:var(--radius-lg);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--turquoise);margin-bottom:var(--space-2);">04</div>
+        <div style="font-family:var(--font-heading);font-size:24px;color:var(--black);margin-bottom:var(--space-3);">INCLUSIVE</div>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.6;">Welcoming to all. Accessibility and equity are built into our design DNA.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 02 COLOUR SYSTEM ─── -->
+  <div class="sg-divider" id="color">
+    <span class="sg-divider-text">02</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Colour System</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">02 — Colour System</p>
+    <h2 class="sg-h1">BRAND COLOURS</h2>
+    <p class="sg-section-lead">Six brand colours define the Belgium Campus iTversity palette. Contrast ratios are evaluated against WCAG 2.1 AA — a minimum 4.5:1 for normal text and 3:1 for large text (18pt+ or 14pt bold). Accessibility guidance is shown for each colour pair.</p>
+
+    <div class="color-grid">
+
+      <!-- Turquoise -->
+      <div class="color-card">
+        <div class="color-swatch" style="background:#2AD2C9;">
+          <span class="color-swatch-label">#2AD2C9</span>
+        </div>
+        <div class="color-meta">
+          <div class="color-name">Turquoise</div>
+          <div class="color-hex">HEX: #2AD2C9 &nbsp;|&nbsp; RGB: 42, 210, 201</div>
+          <div class="color-roles">Primary brand colour. Use for interactive elements, highlights, dividers, icons, and CTAs. <strong>Do not use as body text on white.</strong></div>
+          <div class="wcag-badges">
+            <span class="wcag-badge wcag-pass">✓ On Black 10.8:1 AAA</span>
+            <span class="wcag-badge wcag-pass">✓ On Magenta 10.0:1 AAA</span>
+            <span class="wcag-badge wcag-fail">✗ On White 1.9:1 — Decorative only</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Black -->
+      <div class="color-card">
+        <div class="color-swatch" style="background:#000000;">
+          <span class="color-swatch-label">#000000</span>
+        </div>
+        <div class="color-meta">
+          <div class="color-name">Black</div>
+          <div class="color-hex">HEX: #000000 &nbsp;|&nbsp; RGB: 0, 0, 0</div>
+          <div class="color-roles">Primary background for hero sections and dark UI. Use for body text on white backgrounds. The anchor of the visual identity.</div>
+          <div class="wcag-badges">
+            <span class="wcag-badge wcag-pass">✓ On White 21:1 AAA</span>
+            <span class="wcag-badge wcag-pass">✓ With Yellow 14.0:1 AAA</span>
+            <span class="wcag-badge wcag-pass">✓ With Turquoise 10.8:1 AAA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- White -->
+      <div class="color-card">
+        <div class="color-swatch" style="background:#FFFFFF;border-bottom:1px solid #E8E8E8;">
+          <span class="color-swatch-label" style="background:rgba(0,0,0,0.12);color:var(--black);">#FFFFFF</span>
+        </div>
+        <div class="color-meta">
+          <div class="color-name">White</div>
+          <div class="color-hex">HEX: #FFFFFF &nbsp;|&nbsp; RGB: 255, 255, 255</div>
+          <div class="color-roles">Page background. Use for content containers, cards, text on dark backgrounds. Provides breathing space and legibility.</div>
+          <div class="wcag-badges">
+            <span class="wcag-badge wcag-pass">✓ On Black 21:1 AAA</span>
+            <span class="wcag-badge wcag-pass">✓ On Magenta 19.4:1 AAA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deep Yellow -->
+      <div class="color-card">
+        <div class="color-swatch" style="background:#FFCB2F;">
+          <span class="color-swatch-label" style="background:rgba(0,0,0,0.25);">#FFCB2F</span>
+        </div>
+        <div class="color-meta">
+          <div class="color-name">Deep Yellow</div>
+          <div class="color-hex">HEX: #FFCB2F &nbsp;|&nbsp; RGB: 255, 203, 47</div>
+          <div class="color-roles">Accent and CTA highlight. Use to attract attention on dark backgrounds. Use for warning states. <strong>Never use as text on white.</strong></div>
+          <div class="wcag-badges">
+            <span class="wcag-badge wcag-pass">✓ On Black 14.0:1 AAA</span>
+            <span class="wcag-badge wcag-pass">✓ On Magenta 12.9:1 AAA</span>
+            <span class="wcag-badge wcag-fail">✗ On White 1.5:1 — Decorative only</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Magenta -->
+      <div class="color-card">
+        <div class="color-swatch" style="background:#C51E62;">
+          <span class="color-swatch-label">#C51E62</span>
+        </div>
+        <div class="color-meta">
+          <div class="color-name">Magenta</div>
+          <div class="color-hex">HEX: #C51E62 &nbsp;|&nbsp; RGB: 20, 21, 23</div>
+          <div class="color-roles">Dark UI background — footers, navbars, section alternates. Warmer and more refined than pure black. Safe text colour on white.</div>
+          <div class="wcag-badges">
+            <span class="wcag-badge wcag-pass">✓ On White 19.4:1 AAA</span>
+            <span class="wcag-badge wcag-pass">✓ With Turquoise 10.0:1 AAA</span>
+            <span class="wcag-badge wcag-pass">✓ With Yellow 12.9:1 AAA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blaze Red -->
+      <div class="color-card">
+        <div class="color-swatch" style="background:#EB473E;">
+          <span class="color-swatch-label">#EB473E</span>
+        </div>
+        <div class="color-meta">
+          <div class="color-name">Blaze Red</div>
+          <div class="color-hex">HEX: #EB473E &nbsp;|&nbsp; RGB: 235, 71, 62</div>
+          <div class="color-roles">Error states, alerts, and accent moments. Use sparingly for urgency. Avoid as small body text on white — reserve for large headings or buttons only.</div>
+          <div class="wcag-badges">
+            <span class="wcag-badge wcag-pass">✓ On Black 5.5:1 AA</span>
+            <span class="wcag-badge wcag-warn">△ On White 3.8:1 — Large text only</span>
+            <span class="wcag-badge wcag-fail">✗ White text on Red — body text only with dark bg</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTRAST MATRIX -->
+    <p class="sg-section-number">Contrast Matrix</p>
+    <h3 style="font-family:var(--font-heading);font-size:32px;letter-spacing:0.03em;margin-bottom:var(--space-4);">APPROVED COLOUR PAIRINGS</h3>
+    <p style="font-size:15px;color:var(--gray-600);margin-bottom:var(--space-6);line-height:1.7;">Only use text/background colour combinations that meet WCAG AA thresholds. The following combinations have been tested and approved.</p>
+
+    <table class="contrast-table" style="width:100%;margin-bottom:var(--space-12);">
+      <thead>
+        <tr>
+          <th>Foreground</th>
+          <th>Background</th>
+          <th>Ratio</th>
+          <th>Normal Text</th>
+          <th>Large Text</th>
+          <th>Preview</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Black #000000</td>
+          <td>White #FFFFFF</td>
+          <td><strong>21.0:1</strong></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="contrast-preview" style="background:#FFFFFF;color:#000000;border:1px solid #E8E8E8;">Aa</span></td>
+        </tr>
+        <tr>
+          <td>White #FFFFFF</td>
+          <td>Black #000000</td>
+          <td><strong>21.0:1</strong></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="contrast-preview" style="background:#000000;color:#FFFFFF;">Aa</span></td>
+        </tr>
+        <tr>
+          <td>White #FFFFFF</td>
+          <td>Near Black #141517</td>
+          <td><strong>19.4:1</strong></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="contrast-preview" style="background:#141517;color:#FFFFFF;">Aa</span></td>
+        </tr>
+        <tr>
+          <td>Black #000000</td>
+          <td>Turquoise #2AD2C9</td>
+          <td><strong>10.8:1</strong></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="contrast-preview" style="background:#2AD2C9;color:#000000;">Aa</span></td>
+        </tr>
+        <tr>
+          <td>Black #000000</td>
+          <td>Deep Yellow #FFCB2F</td>
+          <td><strong>14.0:1</strong></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="contrast-preview" style="background:#FFCB2F;color:#000000;">Aa</span></td>
+        </tr>
+        <tr>
+          <td>White #FFFFFF</td>
+          <td>Blaze Red #EB473E</td>
+          <td><strong>3.8:1</strong></td>
+          <td><span class="wcag-badge wcag-fail">✗ Fail</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AA</span></td>
+          <td><span class="contrast-preview" style="background:#EB473E;color:#FFFFFF;">Aa</span></td>
+        </tr>
+        <tr>
+          <td>Turquoise #2AD2C9</td>
+          <td>Black #000000</td>
+          <td><strong>10.8:1</strong></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="contrast-preview" style="background:#000000;color:#2AD2C9;">Aa</span></td>
+        </tr>
+        <tr>
+          <td>Deep Yellow #FFCB2F</td>
+          <td>Near Black #141517</td>
+          <td><strong>12.9:1</strong></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="wcag-badge wcag-pass">✓ AAA</span></td>
+          <td><span class="contrast-preview" style="background:#141517;color:#FFCB2F;">Aa</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sg-callout">
+      <p><strong>Accessibility rule:</strong> Turquoise (#2AD2C9) and Deep Yellow (#FFCB2F) must <em>never</em> appear as text on a white background — they are purely decorative or UI-element colours in light contexts. Always place them on black or Near Black (#141517) backgrounds when text legibility is required.</p>
+    </div>
+  </div>
+
+  <!-- ─── 03 TYPOGRAPHY ─── -->
+  <div class="sg-divider" id="typography">
+    <span class="sg-divider-text">03</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Typography</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">03 — Typography</p>
+    <h2 class="sg-h1">TYPE SYSTEM</h2>
+    <p class="sg-section-lead">Two typefaces define the Belgium Campus iTversity voice: Bebas Neue for commanding, attention-grabbing headings — and ITC Avant Garde Gothic for the legible, geometric body text that carries information clearly.</p>
+
+    <div class="font-anatomy">
+      <div class="font-card">
+        <div class="font-name">Bebas Neue — Display & Headings</div>
+        <div class="font-display">ABCDEF<br>ghijkl</div>
+        <div class="font-alpha">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z<br>0 1 2 3 4 5 6 7 8 9 ! @ # $ % &amp;</div>
+        <p class="font-desc" style="margin-top:var(--space-4);">Bebas Neue is a condensed all-caps sans-serif with bold impact. It communicates ambition, authority, and forward motion — ideal for hero text, section titles, and bold calls to action.</p>
+        <p class="font-desc" style="margin-top:var(--space-2);"><strong>Source:</strong> Google Fonts (free) — <code>font-family: 'Bebas Neue', sans-serif;</code></p>
+      </div>
+      <div class="font-card-dark">
+        <div class="font-name">ITC Avant Garde — Body & UI</div>
+        <div class="font-display-white">ABCDEF<br>ghijkl</div>
+        <div class="font-alpha" style="color:rgba(255,255,255,0.4);">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z<br>0 1 2 3 4 5 6 7 8 9 ! @ # $ % &amp;</div>
+        <p class="font-desc-white" style="margin-top:var(--space-4);">ITC Avant Garde Gothic is a geometric humanist sans with excellent legibility at small sizes. Its circular forms echo a technological precision that aligns perfectly with an IT institution's identity.</p>
+        <p class="font-desc-white" style="margin-top:var(--space-2);">Licensed via Adobe Fonts. Web fallback: <code style="color:rgba(255,255,255,0.6);">'Century Gothic', 'Trebuchet MS', sans-serif</code></p>
+      </div>
+    </div>
+
+    <!-- Type Scale -->
+    <p class="sg-section-number">Type Scale</p>
+    <h3 style="font-family:var(--font-heading);font-size:32px;letter-spacing:0.03em;margin-bottom:var(--space-8);">SCALE & USAGE</h3>
+
+    <div class="type-scale">
+      <div class="type-row">
+        <div><span class="type-h1">Display</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">Display / Hero</span>
+          <span class="type-meta-spec">Bebas Neue · 72–120px · LS 0.02em</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div><span class="type-h2">Heading One</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">H1 Page Title</span>
+          <span class="type-meta-spec">Bebas Neue · 52px · LS 0.02em</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div><span class="type-h3">Heading Two</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">H2 Section</span>
+          <span class="type-meta-spec">Bebas Neue · 36px · LS 0.02em</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div><span class="type-h4">Heading Three</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">H3 Sub-section</span>
+          <span class="type-meta-spec">Bebas Neue · 24px · LS 0.02em</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div><span class="type-label">Section Label / Eyebrow Text</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">Overline / Label</span>
+          <span class="type-meta-spec">Avant Garde · 11px · 700 · LS 0.18em · UPPERCASE</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div><span class="type-body-lg">The world is changing faster than ever. Belgium Campus prepares you to not just keep up — but lead the charge in Africa's digital future.</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">Body Large</span>
+          <span class="type-meta-spec">Avant Garde · 18px · 400 · LH 1.7</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div><span class="type-body">Applications are open for the 2026 academic year. Choose from Bachelor of Computing, Bachelor of IT, and Diploma programmes — all accredited and industry-aligned.</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">Body Default</span>
+          <span class="type-meta-spec">Avant Garde · 16px · 400 · LH 1.6</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div><span class="type-body-sm">Prerequisites: National Senior Certificate with Mathematics. SAQA accredited. Applications close 31 January 2026.</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">Body Small</span>
+          <span class="type-meta-spec">Avant Garde · 14px · 400 · LH 1.6</span>
+        </div>
+      </div>
+      <div class="type-row" style="border-bottom:none;">
+        <div><span class="type-caption">Image: Johannesburg campus courtyard. Photography by BC Creative. © 2025 Belgium Campus iTversity</span></div>
+        <div class="type-meta">
+          <span class="type-meta-name">Caption</span>
+          <span class="type-meta-spec">Avant Garde · 12px · 400 · LH 1.5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sg-callout">
+      <p><strong>Font licensing note:</strong> ITC Avant Garde Gothic is a commercial typeface available via Adobe Fonts (included in Creative Cloud) or Type Network. For web use, embed using the Adobe Fonts CDN with a valid licence. The CSS fallback stack <code>'Century Gothic', 'Trebuchet MS', sans-serif</code> must be specified for environments without font delivery.</p>
+    </div>
+  </div>
+
+  <!-- ─── 04 SPACING & GRID ─── -->
+  <div class="sg-divider" id="spacing">
+    <span class="sg-divider-text">04</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Spacing & Grid</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">04 — Spacing & Grid</p>
+    <h2 class="sg-h1">SPACING SCALE</h2>
+    <p class="sg-section-lead">All spacing uses a base-8 scale. This creates visual harmony across all components while reducing cognitive overhead from inconsistent gaps.</p>
+
+    <div class="spacing-grid" style="margin-bottom:var(--space-12);">
+      <div class="spacing-row"><span class="spacing-label">--space-1</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:2%;"></div></div><span class="spacing-px">4px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-2</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4%;"></div></div><span class="spacing-px">8px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-3</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:6%;"></div></div><span class="spacing-px">12px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-4</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8%;"></div></div><span class="spacing-px">16px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-6</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12%;"></div></div><span class="spacing-px">24px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-8</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16%;"></div></div><span class="spacing-px">32px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-10</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:20%;"></div></div><span class="spacing-px">40px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-12</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24%;"></div></div><span class="spacing-px">48px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-16</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32%;"></div></div><span class="spacing-px">64px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-20</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40%;"></div></div><span class="spacing-px">80px</span></div>
+      <div class="spacing-row"><span class="spacing-label">--space-24</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48%;"></div></div><span class="spacing-px">96px</span></div>
+    </div>
+
+    <p class="sg-section-number">Grid System</p>
+    <h3 style="font-family:var(--font-heading);font-size:32px;letter-spacing:0.03em;margin-bottom:var(--space-4);">12-COLUMN GRID</h3>
+    <p style="font-size:15px;color:var(--gray-600);margin-bottom:var(--space-6);">Max content width: <strong>1200px</strong>. Gutter: <strong>24px</strong>. Margin: <strong>64px</strong> (desktop) / <strong>24px</strong> (mobile).</p>
+
+    <div class="grid-demo">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-4);">12 columns (12×1)</div>
+      <div class="grid-demo-row">
+        <div class="grid-col grid-col-dark">1</div><div class="grid-col grid-col-dark">2</div><div class="grid-col grid-col-dark">3</div><div class="grid-col grid-col-dark">4</div><div class="grid-col grid-col-dark">5</div><div class="grid-col grid-col-dark">6</div><div class="grid-col grid-col-dark">7</div><div class="grid-col grid-col-dark">8</div><div class="grid-col grid-col-dark">9</div><div class="grid-col grid-col-dark">10</div><div class="grid-col grid-col-dark">11</div><div class="grid-col grid-col-dark">12</div>
+      </div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin:var(--space-4) 0;">Two-column (6+6)</div>
+      <div class="grid-demo-row"><div class="grid-col grid-col-span6">6</div><div class="grid-col grid-col-span6">6</div></div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin:var(--space-4) 0;">Three-column (4+4+4)</div>
+      <div class="grid-demo-row"><div class="grid-col grid-col-span4">4</div><div class="grid-col grid-col-span4">4</div><div class="grid-col grid-col-span4">4</div></div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin:var(--space-4) 0;">Asymmetric (8+4 — content + sidebar)</div>
+      <div class="grid-demo-row"><div class="grid-col grid-col-span8">8</div><div class="grid-col grid-col-span4">4</div></div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin:var(--space-4) 0;">Full-width (12)</div>
+      <div class="grid-demo-row"><div class="grid-col grid-col-span12">12</div></div>
+    </div>
+
+    <p style="font-size:14px;color:var(--gray-600);line-height:1.6;margin-bottom:var(--space-4);"><strong>Border radius scale</strong></p>
+    <div style="display:flex;gap:var(--space-6);align-items:flex-end;flex-wrap:wrap;margin-bottom:var(--space-12);">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);">
+        <div style="width:64px;height:64px;background:var(--turquoise);border-radius:2px;opacity:0.8;"></div>
+        <span style="font-size:11px;color:var(--gray-400);">2px — sm</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);">
+        <div style="width:64px;height:64px;background:var(--turquoise);border-radius:4px;opacity:0.8;"></div>
+        <span style="font-size:11px;color:var(--gray-400);">4px — md</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);">
+        <div style="width:64px;height:64px;background:var(--turquoise);border-radius:8px;opacity:0.8;"></div>
+        <span style="font-size:11px;color:var(--gray-400);">8px — lg</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);">
+        <div style="width:64px;height:28px;background:var(--black);border-radius:100px;opacity:0.9;display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:10px;color:var(--white);letter-spacing:0.05em;">pill</span>
+        </div>
+        <span style="font-size:11px;color:var(--gray-400);">100px — pill</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 05 MOTION ─── -->
+  <div class="sg-divider" id="motion">
+    <span class="sg-divider-text">05</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Motion</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">05 — Motion</p>
+    <h2 class="sg-h1">ANIMATION</h2>
+    <p class="sg-section-lead">Motion is purposeful and restrained. It communicates state changes, guides attention, and provides feedback. Never use animation purely for decoration.</p>
+
+    <div class="motion-demo">
+      <div class="motion-card">
+        <div class="motion-preview" style="transition:transform 0.15s cubic-bezier(0.4,0,0.2,1);cursor:pointer;" onmouseover="this.style.transform='scale(0.94)'" onmouseout="this.style.transform='scale(1)'">
+          <span style="color:var(--black);font-size:18px;">▶</span>
+        </div>
+        <div class="motion-name">Micro</div>
+        <div class="motion-spec">150ms · ease-out</div>
+        <div class="motion-use">Button press, focus ring, active states</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-preview" style="transition:opacity 0.25s ease,transform 0.25s ease;cursor:pointer;opacity:0.85;" onmouseover="this.style.opacity='1';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='0.85';this.style.transform='translateY(0)'">
+          <span style="color:var(--black);font-size:18px;">◆</span>
+        </div>
+        <div class="motion-name">Standard</div>
+        <div class="motion-spec">250ms · ease-in-out</div>
+        <div class="motion-use">Hover, colour transitions, tooltips</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-preview" style="background:var(--yellow);transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);cursor:pointer;" onmouseover="this.style.borderRadius='28px'" onmouseout="this.style.borderRadius='4px'">
+          <span style="color:var(--black);font-size:18px;">●</span>
+        </div>
+        <div class="motion-name">Entrance</div>
+        <div class="motion-spec">400ms · cubic-bezier(0.25, 0.46, 0.45, 0.94)</div>
+        <div class="motion-use">Modal open, page transition, card reveal</div>
+      </div>
+    </div>
+
+    <div class="sg-callout">
+      <p><strong>Reduced motion:</strong> Always respect <code>prefers-reduced-motion</code>. Wrap animations in a media query and fall back to instant state changes. This is both an accessibility requirement and good engineering practice.</p>
+    </div>
+  </div>
+
+  <!-- ─── 06 BUTTONS ─── -->
+  <div class="sg-divider" id="buttons">
+    <span class="sg-divider-text">06</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Buttons</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">06 — Buttons</p>
+    <h2 class="sg-h1">BUTTON SYSTEM</h2>
+    <p class="sg-section-lead">Buttons are direct action triggers. Use the Primary button for the single most important action per page. Secondary and Ghost for supporting actions. Never use more than two button variants in the same visual group.</p>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-4);">Variants</p>
+    <div class="component-row" style="margin-bottom:var(--space-8);">
+      <a class="btn btn-primary btn-md" href="#">Apply Now</a>
+      <a class="btn btn-secondary btn-md" href="#">Learn More</a>
+      <a class="btn btn-yellow btn-md" href="#">View Fees</a>
+      <a class="btn btn-ghost btn-md" href="#">Contact Us</a>
+      <a class="btn btn-danger btn-md" href="#">Withdraw</a>
+      <a class="btn btn-disabled btn-md" href="#" aria-disabled="true">Closed</a>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-4);">Sizes</p>
+    <div class="component-row" style="margin-bottom:var(--space-8);align-items:center;">
+      <a class="btn btn-primary btn-lg" href="#">Large — Apply Now</a>
+      <a class="btn btn-primary btn-md" href="#">Medium — Apply Now</a>
+      <a class="btn btn-primary btn-sm" href="#">Small</a>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-4);">On Dark Background</p>
+    <div style="background:var(--black);padding:var(--space-8);border-radius:var(--radius-lg);margin-bottom:var(--space-8);">
+      <div class="component-row">
+        <a class="btn btn-primary btn-md" href="#">Apply Now</a>
+        <a class="btn btn-outline-white btn-md" href="#">Learn More</a>
+        <a class="btn btn-yellow btn-md" href="#">View Fees</a>
+      </div>
+    </div>
+
+    <div class="sg-callout">
+      <p><strong>Usage rules:</strong> Button labels must use action-oriented language (verb + noun). Labels are uppercase, 8–12px letter-spacing for legibility at small sizes. Minimum click target: <strong>44×44px</strong> (WCAG 2.5.5). All buttons must have a visible focus ring for keyboard navigation.</p>
+    </div>
+  </div>
+
+  <!-- ─── 07 FORMS ─── -->
+  <div class="sg-divider" id="forms">
+    <span class="sg-divider-text">07</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Form Elements</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">07 — Form Elements</p>
+    <h2 class="sg-h1">FORMS</h2>
+    <p class="sg-section-lead">Forms are high-friction moments. Every design decision — label placement, spacing, error feedback — must reduce the cognitive load on applicants and reduce drop-off.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="form-group">
+          <label class="form-label" for="ex-name">Full Name</label>
+          <input class="form-input" id="ex-name" type="text" placeholder="e.g. Thabo Nkosi" />
+          <span class="form-helper">As it appears on your ID document.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ex-email">Email Address</label>
+          <input class="form-input" id="ex-email" type="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ex-prog">Programme</label>
+          <select class="form-input" id="ex-prog">
+            <option value="">Select a programme</option>
+            <option>Bachelor of Computing</option>
+            <option>Bachelor of IT</option>
+            <option>Diploma in IT</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ex-error">ID Number <span style="color:var(--red);">*</span></label>
+          <input class="form-input form-input-error" id="ex-error" type="text" value="8804" />
+          <span class="form-error">⚠ Please enter a valid 13-digit South African ID number.</span>
+        </div>
+        <a class="btn btn-primary btn-md" href="#">Submit Application</a>
+      </div>
+      <div>
+        <div class="sg-callout" style="margin-bottom:var(--space-6);">
+          <p><strong>Label position:</strong> Always above the input field (never inside as placeholder). Placeholders are supplementary hints only — never replace labels.</p>
+        </div>
+        <div class="sg-callout" style="margin-bottom:var(--space-6);">
+          <p><strong>Focus state:</strong> All interactive fields must have a visible turquoise focus ring: <code>box-shadow: 0 0 0 3px rgba(42,210,201,0.25)</code>. This is a WCAG 2.4.7 requirement.</p>
+        </div>
+        <div class="sg-callout" style="margin-bottom:var(--space-6);">
+          <p><strong>Error messages:</strong> Display inline below the field in Blaze Red (#EB473E). Errors must be conveyed both visually (border colour) and textually (message). Never use colour alone.</p>
+        </div>
+        <div class="sg-callout">
+          <p><strong>Required fields:</strong> Mark with a red asterisk (*) adjacent to the label. Provide a legend: "Fields marked * are required" at the top of the form.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 08 CARDS ─── -->
+  <div class="sg-divider" id="cards">
+    <span class="sg-divider-text">08</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Cards & Layout</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">08 — Cards & Layout</p>
+    <h2 class="sg-h1">CARDS</h2>
+    <p class="sg-section-lead">Cards are the primary unit for presenting qualifications, news, and events. Three visual weights — Default, Featured, and Dark — adapt to context.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-image-placeholder">Image · 16:9</div>
+        <div class="card-body">
+          <span class="card-tag">Qualification</span>
+          <h3 class="card-title">Bachelor of Computing</h3>
+          <p class="card-text">A three-year degree covering software engineering, data science, and AI — designed for the builders of tomorrow.</p>
+          <a class="card-link" href="#">Explore programme →</a>
+        </div>
+      </div>
+      <div class="card card-featured">
+        <div class="card-image-placeholder" style="background:rgba(42,210,201,0.08);">Featured · 16:9</div>
+        <div class="card-body">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-2);">
+            <span class="card-tag">Qualification</span>
+            <span class="badge badge-turquoise">Most Popular</span>
+          </div>
+          <h3 class="card-title">Bachelor of IT</h3>
+          <p class="card-text">The flagship IT degree — spanning networks, cybersecurity, and software development over three intensive years.</p>
+          <a class="card-link" href="#">Explore programme →</a>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <div class="card-image-placeholder" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.2);">Image · 16:9</div>
+        <div class="card-body">
+          <span class="card-tag" style="color:var(--turquoise);">Online</span>
+          <h3 class="card-title" style="color:var(--white);">Study IT Online</h3>
+          <p class="card-text" style="color:rgba(255,255,255,0.55);">Full-time flexible study from anywhere. Same world-class curriculum, adapted for distance learners.</p>
+          <a class="card-link" href="#">Explore programme →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Component -->
+    <p class="sg-section-number" style="margin-top:var(--space-4);">Hero Section</p>
+    <h3 style="font-family:var(--font-heading);font-size:32px;letter-spacing:0.03em;margin-bottom:var(--space-6);">HERO PATTERN</h3>
+
+    <div class="hero-demo">
+      <div class="hero-demo-grid-bg"></div>
+      <p class="hero-demo-label">Belgium Campus iTversity</p>
+      <h2 class="hero-demo-title">STUDY IT.<br><span>CHANGE</span><br>AFRICA.</h2>
+      <p class="hero-demo-subtitle">Accredited degrees and diplomas in IT, Computing, and Cybersecurity. Shaping Africa's digital future, one graduate at a time.</p>
+      <div class="hero-demo-ctas">
+        <a class="btn btn-primary btn-lg" href="#">Apply for 2026</a>
+        <a class="btn btn-outline-white btn-lg" href="#">Explore Programmes</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 09 NAVIGATION ─── -->
+  <div class="sg-divider" id="navigation">
+    <span class="sg-divider-text">09</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Navigation</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">09 — Navigation</p>
+    <h2 class="sg-h1">NAVIGATION</h2>
+    <p class="sg-section-lead">The primary navigation is sticky, dark-background, and text-light. Active and hover states use Turquoise to signal location. The "Apply Now" action should always be elevated as a distinct CTA button.</p>
+
+    <div class="nav-demo">
+      <span class="nav-demo-logo">BELGIUM CAMPUS</span>
+      <div class="nav-demo-links">
+        <a class="nav-demo-link active" href="#">Home</a>
+        <a class="nav-demo-link" href="#">Qualifications</a>
+        <a class="nav-demo-link" href="#">Study at BC</a>
+        <a class="nav-demo-link" href="#">About Us</a>
+        <a class="nav-demo-link" href="#">News</a>
+        <a class="btn btn-primary btn-sm" href="#">Apply Now</a>
+      </div>
+    </div>
+
+    <div class="sg-callout">
+      <p><strong>Navigation depth:</strong> The current website has very deep dropdown menus with 3+ nesting levels. Recommend reducing to a maximum of 2 levels with a mega-menu pattern for Qualifications and Study at BC. This reduces cognitive load and improves keyboard accessibility significantly.</p>
+    </div>
+  </div>
+
+  <!-- ─── 10 BADGES & ALERTS ─── -->
+  <div class="sg-divider" id="badges">
+    <span class="sg-divider-text">10</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Badges & Alerts</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">10 — Badges & Alerts</p>
+    <h2 class="sg-h1">STATUS INDICATORS</h2>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-3);">Badges</p>
+    <div class="component-row" style="margin-bottom:var(--space-8);">
+      <span class="badge badge-turquoise">Accredited</span>
+      <span class="badge badge-yellow">Applications Open</span>
+      <span class="badge badge-red">Closing Soon</span>
+      <span class="badge badge-black">Online Available</span>
+      <div style="background:var(--black);padding:var(--space-3) var(--space-4);border-radius:var(--radius-md);display:inline-flex;gap:var(--space-2);">
+        <span class="badge badge-dark">Part-Time</span>
+        <span class="badge" style="background:rgba(42,210,201,0.2);color:var(--turquoise);">New</span>
+      </div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-3);">Status Pills</p>
+    <div class="component-row" style="margin-bottom:var(--space-8);">
+      <span class="pill" style="background:rgba(42,210,201,0.1);color:#1A9991;border:1px solid rgba(42,210,201,0.3);">
+        <span class="pill-dot" style="background:var(--turquoise);"></span> Online
+      </span>
+      <span class="pill" style="background:rgba(255,203,47,0.12);color:#8A6800;border:1px solid rgba(255,203,47,0.4);">
+        <span class="pill-dot" style="background:var(--yellow);"></span> Open for 2026
+      </span>
+      <span class="pill" style="background:rgba(235,71,62,0.08);color:#B82D25;border:1px solid rgba(235,71,62,0.3);">
+        <span class="pill-dot" style="background:var(--red);"></span> Deadline Approaching
+      </span>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-3);">Alerts</p>
+    <div class="alert alert-info">
+      <div class="alert-title">Applications for 2026 are now open</div>
+      Submit your application before 31 January 2026 to secure your place. Early applicants receive priority enrolment.
+    </div>
+    <div class="alert alert-warning">
+      <div class="alert-title">Missing documents</div>
+      Your application is incomplete. Please upload your matric certificate and ID before the deadline.
+    </div>
+    <div class="alert alert-danger">
+      <div class="alert-title">Session expired</div>
+      Your session has timed out. Please log in again to continue your application.
+    </div>
+  </div>
+
+  <!-- ─── 11 IMAGERY ─── -->
+  <div class="sg-divider" id="imagery">
+    <span class="sg-divider-text">11</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Imagery</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">11 — Imagery</p>
+    <h2 class="sg-h1">PHOTOGRAPHY</h2>
+    <p class="sg-section-lead">Photography must reflect the diversity, ambition, and real human energy of the Belgium Campus community. Images should feel authentic, not staged — real students, real environments, real work.</p>
+
+    <div class="img-guide-grid">
+      <div class="img-guide-card">
+        <div class="img-mock" style="background:#1A1A2E;color:rgba(42,210,201,0.4);">HERO IMAGE</div>
+        <div class="img-guide-desc"><strong>Hero / Full-bleed:</strong> Wide-angle, high contrast, dramatic lighting. Show students engaged in real lab or project work. Dark overlays (50–70% opacity) must maintain text legibility.</div>
+      </div>
+      <div class="img-guide-card">
+        <div class="img-mock" style="background:#2A2A2A;color:rgba(255,203,47,0.5);">PORTRAIT</div>
+        <div class="img-guide-desc"><strong>Student portraits:</strong> Candid and purposeful. Natural light preferred. Diverse representation is non-negotiable — South Africa's demographics must be reflected in all photography.</div>
+      </div>
+      <div class="img-guide-card">
+        <div class="img-mock" style="background:#1E3A4A;color:rgba(42,210,201,0.4);">CAMPUS / TECH</div>
+        <div class="img-guide-desc"><strong>Environment shots:</strong> Campuses, labs, code on screens. Keep tech props authentic. Prefer wide-aperture shots for depth. Maintain a cool-toned or neutral colour grade.</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);margin-bottom:var(--space-8);">
+      <div>
+        <p style="font-size:13px;font-weight:700;color:var(--black);margin-bottom:var(--space-3);">✓ Use images that are...</p>
+        <ul style="font-size:14px;color:var(--gray-600);line-height:2;padding-left:var(--space-6);">
+          <li>Authentic and documentary in feel</li>
+          <li>Diverse and representative</li>
+          <li>High resolution (min 1920px wide)</li>
+          <li>Focused and purposeful in composition</li>
+          <li>Consistent in colour temperature</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:var(--space-3);">✗ Avoid images that are...</p>
+        <ul style="font-size:14px;color:var(--gray-600);line-height:2;padding-left:var(--space-6);">
+          <li>Generic stock photography</li>
+          <li>Predominantly non-African faces</li>
+          <li>Over-saturated or filtered</li>
+          <li>Cluttered or visually noisy</li>
+          <li>Low resolution or pixelated</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 12 ICONOGRAPHY ─── -->
+  <div class="sg-divider" id="iconography">
+    <span class="sg-divider-text">12</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Iconography</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">12 — Iconography</p>
+    <h2 class="sg-h1">ICONS</h2>
+    <p class="sg-section-lead">Use Material Symbols Outlined (Google) as the standard icon set. Icons are stroke-based, 24×24px at default size, and must always be paired with a visible text label for accessibility except where universally understood (e.g. close ✕).</p>
+
+    <div class="icon-grid" style="margin-bottom:var(--space-4);">
+      <div class="icon-cell" title="Laptop">💻</div>
+      <div class="icon-cell" title="Mortarboard">🎓</div>
+      <div class="icon-cell" title="Globe">🌍</div>
+      <div class="icon-cell" title="Code">⌨️</div>
+      <div class="icon-cell" title="Shield">🛡️</div>
+      <div class="icon-cell" title="Chart">📊</div>
+      <div class="icon-cell" title="Person">👤</div>
+      <div class="icon-cell" title="Calendar">📅</div>
+      <div class="icon-cell" title="Document">📄</div>
+      <div class="icon-cell" title="Check">✓</div>
+      <div class="icon-cell" title="Arrow right">→</div>
+      <div class="icon-cell" title="Search">🔍</div>
+      <div class="icon-cell" title="Mail">✉️</div>
+      <div class="icon-cell" title="Phone">📞</div>
+      <div class="icon-cell" title="Pin">📍</div>
+      <div class="icon-cell" title="Link">🔗</div>
+    </div>
+
+    <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-bottom:var(--space-6);">
+      <div style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);border:1px solid var(--gray-200);border-radius:var(--radius-md);">
+        <span style="font-size:18px;">🎓</span>
+        <span style="font-size:14px;color:var(--black);">Qualifications</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);border:1px solid var(--gray-200);border-radius:var(--radius-md);">
+        <span style="font-size:18px;">📅</span>
+        <span style="font-size:14px;color:var(--black);">Calendar</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);background:var(--black);border-radius:var(--radius-md);">
+        <span style="font-size:18px;">🌍</span>
+        <span style="font-size:14px;color:var(--turquoise);">Our Campuses</span>
+      </div>
+    </div>
+
+    <div class="sg-callout">
+      <p><strong>Accessibility rule:</strong> All informational icons must have an <code>aria-label</code> or be accompanied by visible text. Purely decorative icons must have <code>aria-hidden="true"</code>. Minimum icon size: 24×24px. Minimum touch target: 44×44px.</p>
+    </div>
+  </div>
+
+  <!-- ─── 13 VOICE & TONE ─── -->
+  <div class="sg-divider" id="voice">
+    <span class="sg-divider-text">13</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Voice & Tone</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">13 — Voice & Tone</p>
+    <h2 class="sg-h1">VOICE & TONE</h2>
+    <p class="sg-section-lead">Belgium Campus iTversity speaks with clarity, confidence, and warmth. We never talk down to our audience — we invite them to rise with us. Tone shifts with context: authoritative in academic contexts, encouraging with applicants, energetic in campaign materials.</p>
+
+    <div class="tone-grid">
+      <div class="tone-card">
+        <div class="tone-label">Quality 01</div>
+        <div class="tone-title">BOLD, NOT ARROGANT</div>
+        <div class="tone-desc">We make direct, confident statements. We don't hedge or qualify with unnecessary caveats. We believe in what we offer and we say so clearly.</div>
+      </div>
+      <div class="tone-card" style="border-top-color:var(--yellow);">
+        <div class="tone-label" style="color:var(--black);">Quality 02</div>
+        <div class="tone-title">INSPIRING, NOT PREACHY</div>
+        <div class="tone-desc">We paint a picture of possibility. We motivate through aspiration, not guilt or fear. We celebrate student achievement loudly and authentically.</div>
+      </div>
+      <div class="tone-card" style="border-top-color:var(--magenta);">
+        <div class="tone-label" style="color:var(--magenta);">Quality 03</div>
+        <div class="tone-title">CLEAR, NOT JARGON-HEAVY</div>
+        <div class="tone-desc">We explain IT concepts plainly. Our audience includes first-generation students — accessibility in language is as important as accessibility in design.</div>
+      </div>
+      <div class="tone-card" style="border-top-color:var(--red);">
+        <div class="tone-label" style="color:var(--red);">Quality 04</div>
+        <div class="tone-title">HUMAN, NOT CORPORATE</div>
+        <div class="tone-desc">We use "you" and "we". We speak to people, not applicants. We avoid passive voice and bureaucratic constructions wherever possible.</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:var(--space-8);">
+      <div style="background:var(--gray-100);padding:var(--space-4) var(--space-6);display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-600);">✓ Write this</span>
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);">✗ Not this</span>
+      </div>
+      <div style="padding:var(--space-4) var(--space-6);display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);border-top:1px solid var(--gray-200);">
+        <p style="font-size:14px;color:var(--black);">"Apply for 2026 — secure your place today."</p>
+        <p style="font-size:14px;color:var(--gray-400);">"Prospective students are encouraged to submit applications timeously."</p>
+      </div>
+      <div style="padding:var(--space-4) var(--space-6);display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);border-top:1px solid var(--gray-200);background:var(--gray-100);">
+        <p style="font-size:14px;color:var(--black);">"Study IT. Heal the world."</p>
+        <p style="font-size:14px;color:var(--gray-400);">"Information and Communication Technology qualifications are available."</p>
+      </div>
+      <div style="padding:var(--space-4) var(--space-6);display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);border-top:1px solid var(--gray-200);">
+        <p style="font-size:14px;color:var(--black);">"Your future in tech starts here."</p>
+        <p style="font-size:14px;color:var(--gray-400);">"The institution provides multiple pathways for entry into the IT sector."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 14 ACCESSIBILITY ─── -->
+  <div class="sg-divider" id="accessibility">
+    <span class="sg-divider-text">14</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Accessibility</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">14 — Accessibility</p>
+    <h2 class="sg-h1">WCAG 2.1 AA</h2>
+    <p class="sg-section-lead">Accessibility is not optional — it is legally required under South Africa's Electronic Communications Act and morally essential for an institution that includes deaf students and students with diverse abilities. Belgium Campus iTversity must meet WCAG 2.1 Level AA as a minimum.</p>
+
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <div class="a11y-icon">👁️</div>
+        <div class="a11y-title">Perceivable</div>
+        <div class="a11y-desc">All text must meet 4.5:1 contrast. Images need descriptive alt text. Captions required for all video content. No information conveyed by colour alone.</div>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-icon">⌨️</div>
+        <div class="a11y-title">Operable</div>
+        <div class="a11y-desc">All functionality accessible by keyboard. Focus indicators must be visible. No keyboard traps. Minimum touch target 44×44px. Skip-to-content link required.</div>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-icon">📖</div>
+        <div class="a11y-title">Understandable</div>
+        <div class="a11y-desc">Clear language, consistent navigation, and descriptive error messages. Form labels always visible. Language attribute set on &lt;html&gt; element.</div>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-icon">🤝</div>
+        <div class="a11y-title">Robust</div>
+        <div class="a11y-desc">Valid, semantic HTML. ARIA roles and attributes used correctly. Compatible with major screen readers (NVDA, JAWS, VoiceOver). Regular automated and manual audits.</div>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-icon">🎯</div>
+        <div class="a11y-title">Focus Management</div>
+        <div class="a11y-desc">Turquoise focus ring on all interactive elements: <code>outline: 2px solid #2AD2C9; outline-offset: 2px;</code>. Never suppress outlines with <code>outline: none</code> without a custom replacement.</div>
+      </div>
+      <div class="a11y-card">
+        <div class="a11y-icon">🦻</div>
+        <div class="a11y-title">Deaf Student Support</div>
+        <div class="a11y-desc">As BC has a Diploma for Deaf Students, all video content must include closed captions (auto-generated captions are insufficient). Sign language interpreted videos are recommended.</div>
+      </div>
+    </div>
+
+    <div class="sg-callout">
+      <p><strong>Recommended tools:</strong> Run automated checks with <strong>axe DevTools</strong> and <strong>Lighthouse</strong> on every page deploy. Supplement with manual keyboard testing and screen reader testing (VoiceOver on macOS / NVDA on Windows). Target a Lighthouse Accessibility score of ≥ 95.</p>
+    </div>
+  </div>
+
+  <!-- ─── 15 UX RECOMMENDATIONS ─── -->
+  <div class="sg-divider" id="ux">
+    <span class="sg-divider-text">15</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">UX Recommendations</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">15 — UX Recommendations</p>
+    <h2 class="sg-h1">IMPROVING THE EXPERIENCE</h2>
+    <p class="sg-section-lead">The following are targeted improvements to reduce cognitive load and improve conversion without altering the brand's visual identity. Each recommendation is scoped and actionable.</p>
+
+    <div class="ux-rec-list">
+      <div class="ux-rec">
+        <div class="ux-rec-number">01</div>
+        <div>
+          <div class="ux-rec-title">Simplify the navigation hierarchy</div>
+          <div class="ux-rec-desc">The current multi-level dropdown structure (3+ levels deep) creates significant cognitive overload, especially on mobile. Consolidate into a maximum of two levels with a mega-menu for primary sections. Group related content under "Study at BC" and "Our Programmes" into scannable columns rather than nested lists.</div>
+          <span class="ux-rec-tag tag-nav">Navigation</span>
+          <span class="ux-rec-tag tag-a11y">Accessibility</span>
+        </div>
+      </div>
+      <div class="ux-rec">
+        <div class="ux-rec-number">02</div>
+        <div>
+          <div class="ux-rec-title">Make "Apply Now" persistently visible</div>
+          <div class="ux-rec-desc">The primary conversion goal of the site is student applications. The "Apply Now" CTA should be present in the sticky navigation at all times — styled as a Turquoise primary button — not buried in a sub-menu dropdown. On mobile, this should appear as a full-width sticky bar at the bottom of the viewport.</div>
+          <span class="ux-rec-tag tag-nav">Navigation</span>
+          <span class="ux-rec-tag tag-visual">Visual</span>
+        </div>
+      </div>
+      <div class="ux-rec">
+        <div class="ux-rec-number">03</div>
+        <div>
+          <div class="ux-rec-title">Consolidate the top utility bar</div>
+          <div class="ux-rec-desc">The current site has a pre-header utility bar with links (Student Portal, Alumni, etc.) that duplicates some main navigation items and adds cognitive overhead. Move Student Portal to a persistent icon in the header. Move Alumni and less-critical links to the footer only. This reduces the number of navigation layers from three to one.</div>
+          <span class="ux-rec-tag tag-nav">Navigation</span>
+          <span class="ux-rec-tag tag-content">Content</span>
+        </div>
+      </div>
+      <div class="ux-rec">
+        <div class="ux-rec-number">04</div>
+        <div>
+          <div class="ux-rec-title">Add a programme comparison tool</div>
+          <div class="ux-rec-desc">Prospective students often need to compare qualifications side-by-side. A lightweight "compare" feature on the qualifications pages — letting users select 2–3 programmes and see duration, entry requirements, and career paths in one view — would significantly reduce back-and-forth navigation and aid decision-making.</div>
+          <span class="ux-rec-tag tag-content">Content</span>
+          <span class="ux-rec-tag tag-visual">Visual</span>
+        </div>
+      </div>
+      <div class="ux-rec">
+        <div class="ux-rec-number">05</div>
+        <div>
+          <div class="ux-rec-title">Improve hero slider accessibility and engagement</div>
+          <div class="ux-rec-desc">Auto-playing carousels can disorient users and fail WCAG 2.2.2 (Pause, Stop, Hide). Replace the auto-rotating hero slider with a static hero section featuring a bold headline and a single, contextual CTA. If the carousel is retained, it must have accessible pause controls, keyboard navigation, and respect prefers-reduced-motion.</div>
+          <span class="ux-rec-tag tag-a11y">Accessibility</span>
+          <span class="ux-rec-tag tag-visual">Visual</span>
+        </div>
+      </div>
+      <div class="ux-rec">
+        <div class="ux-rec-number">06</div>
+        <div>
+          <div class="ux-rec-title">Establish consistent section rhythm</div>
+          <div class="ux-rec-desc">Each major page section should follow a consistent pattern: eyebrow label → heading → lead paragraph → content → CTA. This creates predictable scanning behaviour and reduces the mental effort required to parse each page. Currently, sections vary widely in structure, which increases cognitive load.</div>
+          <span class="ux-rec-tag tag-content">Content</span>
+          <span class="ux-rec-tag tag-visual">Visual</span>
+        </div>
+      </div>
+      <div class="ux-rec">
+        <div class="ux-rec-number">07</div>
+        <div>
+          <div class="ux-rec-title">Optimise for mobile-first loading</div>
+          <div class="ux-rec-desc">Given that the majority of South African internet traffic is mobile, images should be served in WebP format with responsive srcset. Implement lazy loading for images below the fold. Hero images should be compressed to under 200KB. These improvements directly impact bounce rate and accessibility for users on lower-bandwidth connections.</div>
+          <span class="ux-rec-tag tag-perf">Performance</span>
+          <span class="ux-rec-tag tag-a11y">Accessibility</span>
+        </div>
+      </div>
+      <div class="ux-rec">
+        <div class="ux-rec-number">08</div>
+        <div>
+          <div class="ux-rec-title">Surface social proof prominently</div>
+          <div class="ux-rec-desc">Testimonials and graduate outcomes (employment rate, top employers) are among the most persuasive elements for prospective students. Currently buried under About Us, these should appear on the homepage and qualification pages. Short, authentic video testimonials (30–60 seconds) are especially effective for this audience.</div>
+          <span class="ux-rec-tag tag-content">Content</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 16 DO'S & DON'TS ─── -->
+  <div class="sg-divider" id="donts">
+    <span class="sg-divider-text">16</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Do's & Don'ts</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">16 — Do's & Don'ts</p>
+    <h2 class="sg-h1">BRAND RULES</h2>
+    <p class="sg-section-lead">These rules protect brand consistency and accessibility. They apply to all digital and print executions produced by internal teams or external partners.</p>
+
+    <div class="do-dont-grid">
+      <div class="do-card">
+        <div class="do-header">✓ Do — Typography</div>
+        <div class="do-dont-body">
+          <p>Use Bebas Neue exclusively for H1–H3 headings and display text.</p>
+          <p>Use Avant Garde for all body copy, labels, navigation, and UI text.</p>
+          <p>Set letter-spacing to 0.02em on Bebas Neue headings for optical comfort.</p>
+          <p>Use sentence case for all Avant Garde text. Uppercase only for labels and overlines.</p>
+        </div>
+      </div>
+      <div class="dont-card">
+        <div class="dont-header">✗ Don't — Typography</div>
+        <div class="do-dont-body">
+          <p>Never use Bebas Neue for body copy or paragraph text — it is illegible at small sizes.</p>
+          <p>Never use Arial, Helvetica, or system fonts as a replacement for Avant Garde.</p>
+          <p>Never mix more than two typefaces in a single layout.</p>
+          <p>Never set Bebas Neue below 20px — it loses definition and becomes unreadable.</p>
+        </div>
+      </div>
+      <div class="do-card">
+        <div class="do-header">✓ Do — Colour</div>
+        <div class="do-dont-body">
+          <p>Use Turquoise (#2AD2C9) on Black or Near Black backgrounds for high-contrast, legible text.</p>
+          <p>Use Deep Yellow (#FFCB2F) on Black as a highlight and accent colour.</p>
+          <p>Use White (#FFFFFF) as the primary page background and as reversed text on dark surfaces.</p>
+          <p>Always verify contrast ratios before applying a new colour combination.</p>
+        </div>
+      </div>
+      <div class="dont-card">
+        <div class="dont-header">✗ Don't — Colour</div>
+        <div class="do-dont-body">
+          <p>Never use Turquoise (#2AD2C9) as body text on white — it fails WCAG AA (1.9:1).</p>
+          <p>Never use Deep Yellow (#FFCB2F) as text on white — it fails WCAG AA (1.5:1).</p>
+          <p>Never use Blaze Red as small body text on white backgrounds — fails WCAG AA.</p>
+          <p>Never introduce new brand colours without reviewing their contrast with all existing palette members.</p>
+        </div>
+      </div>
+      <div class="do-card">
+        <div class="do-header">✓ Do — Layout & Spacing</div>
+        <div class="do-dont-body">
+          <p>Maintain generous white space — sections should breathe at 80–96px vertical padding.</p>
+          <p>Align all content to the 12-column grid with 24px gutters.</p>
+          <p>Keep content width to a max of 1200px, centred on large screens.</p>
+          <p>Use consistent 8px-base spacing units throughout all components.</p>
+        </div>
+      </div>
+      <div class="dont-card">
+        <div class="dont-header">✗ Don't — Layout & Spacing</div>
+        <div class="do-dont-body">
+          <p>Never stack hero sections back-to-back — always break with a content section in between.</p>
+          <p>Never use arbitrary spacing values (e.g. 13px, 22px) — stick to the 8px scale.</p>
+          <p>Never place more than three items in a single row on mobile viewports.</p>
+          <p>Never centre-align body paragraphs longer than 2 lines — left-alignment aids readability.</p>
+        </div>
+      </div>
+      <div class="do-card">
+        <div class="do-header">✓ Do — Buttons & CTAs</div>
+        <div class="do-dont-body">
+          <p>Use Turquoise Primary buttons for the main action on each screen.</p>
+          <p>Ensure every button has a clearly visible focus ring for keyboard navigation.</p>
+          <p>Write button labels in action-verb format: "Apply Now", "View Fees", "Download Brochure".</p>
+        </div>
+      </div>
+      <div class="dont-card">
+        <div class="dont-header">✗ Don't — Buttons & CTAs</div>
+        <div class="do-dont-body">
+          <p>Never use more than two button variants in the same visual group (e.g. Primary + Ghost only).</p>
+          <p>Never label a button with vague text like "Click Here" or "Submit" without context.</p>
+          <p>Never remove focus outlines — this makes the site unusable for keyboard-only users.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="sg-footer">
+    <div>
+      <div class="sg-footer-logo">BELGIUM CAMPUS</div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:4px;font-family:var(--font-ui);">iTversity Brand & UI Style Guide — Version 1.0</p>
+    </div>
+    <div class="sg-footer-meta">
+      <p>Designed to WCAG 2.1 AA standards</p>
+      <p>Shaping Africa's Digital Future</p>
+      <p style="margin-top:4px;color:rgba(255,255,255,0.15);">belgiumcampus.ac.za</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const links = document.querySelectorAll('.sg-nav a');
+  const sections = document.querySelectorAll('[id]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sg-nav a[href="#${entry.target.id}"]`);
+        if (active) {
+          active.classList.add('active');
+          active.style.color = 'var(--turquoise)';
+          active.style.borderLeftColor = 'var(--turquoise)';
+        }
+        links.forEach(l => {
+          if (!l.classList.contains('active')) {
+            l.style.color = '';
+            l.style.borderLeftColor = '';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+<link rel="stylesheet" href="../shared/guide-switcher.css">
+<script src="../shared/guide-switcher.js" defer></script>
+</body>
+</html>

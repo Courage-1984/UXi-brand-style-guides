@@ -1,0 +1,142 @@
+/* UXi Style Guide Switcher — neutral host chrome, not part of any brand system */
+
+.guide-switcher {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.guide-switcher-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  opacity: 0.55;
+}
+
+.guide-switcher:hover .guide-switcher-trigger,
+.guide-switcher:focus-within .guide-switcher-trigger,
+.guide-switcher-trigger:focus-visible {
+  opacity: 1;
+  color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  outline: none;
+}
+
+.guide-switcher-trigger:active {
+  transform: scale(0.96);
+}
+
+.guide-switcher-trigger svg {
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.guide-switcher-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+
+.guide-switcher.is-open .guide-switcher-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.guide-switcher-menu-label {
+  padding: 6px 14px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.guide-switcher-menu a {
+  display: block;
+  padding: 8px 14px;
+  color: rgba(0, 0, 0, 0.72);
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.guide-switcher-menu a:hover,
+.guide-switcher-menu a:focus-visible {
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.9);
+  outline: none;
+}
+
+.guide-switcher-menu a.is-current {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+}
+
+.guide-switcher-menu a.is-current::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-switcher-trigger,
+  .guide-switcher-menu {
+    transition: none;
+  }
+}
+
+@media print {
+  .guide-switcher {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .guide-switcher {
+    bottom: 14px;
+    right: 14px;
+  }
+
+  .guide-switcher-menu {
+    min-width: 180px;
+  }
+}
