@@ -11,6 +11,41 @@
     { slug: 'SAICTA-style-guide', label: 'SAICTA' }
   ];
 
+  var EXTERNAL_ICON =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>' +
+    '<polyline points="15 3 21 3 21 9"/>' +
+    '<line x1="10" y1="14" x2="21" y2="3"/>' +
+    '</svg>';
+
+  var SITE_LINKS = {
+    'OWI-style-guide': [
+      { href: 'https://ow.uxidevelopment.co.za/', label: 'Dev', title: 'Open OWI dev site in new tab' },
+      { href: 'https://www.openwindow.co.za/', label: 'Live', title: 'Open OWI live site in new tab' },
+      { href: 'https://community.openwindow.co.za/', label: 'Community', title: 'Open OWI community site in new tab' },
+      { href: 'https://ow-sup.uxidevelopment.co.za/', label: 'Sup', title: 'Open OWI supplementary dev site in new tab' }
+    ],
+    'IMM-GS-style-guide': [
+      { href: 'https://imm.uxidevelopment.co.za/', label: 'Dev', title: 'Open IMM dev site in new tab' },
+      { href: 'https://imm.ac.za/', label: 'Live', title: 'Open IMM live site in new tab' }
+    ],
+    'BCi-style-guide': [
+      { href: 'https://www.belgiumcampus.ac.za/', label: 'Site', title: 'Open Belgium Campus website in new tab' }
+    ],
+    'mPowered-style-guide': [
+      { href: 'https://uxi-mpowered.co.za/', label: 'Site', title: 'Open UXi mPowered website in new tab' }
+    ],
+    'ASCON-style-guide': [
+      { href: 'https://asconafrica.org/', label: 'Site', title: 'Open ASCON website in new tab' }
+    ],
+    'TICON-Africa-style-guide': [
+      { href: 'https://ticonafrica.org/', label: 'Site', title: 'Open TICON Africa website in new tab' }
+    ],
+    'SAICTA-style-guide': [
+      { href: 'https://www.saicta.org/', label: 'Site', title: 'Open SAICTA website in new tab' }
+    ]
+  };
+
   var BRAND_SLUGS = GUIDES.map(function (g) { return g.slug; });
 
   function getCurrentSlug() {
@@ -135,8 +170,41 @@
     return root;
   }
 
+  function createSiteLinks() {
+    var current = getCurrentSlug();
+    if (!current) {
+      return null;
+    }
+
+    var links = SITE_LINKS[current];
+    if (!links || !links.length) {
+      return null;
+    }
+
+    var host = document.createElement('nav');
+    host.className = 'guide-site-links-host';
+    host.setAttribute('aria-label', 'Brand websites');
+
+    links.forEach(function (item) {
+      var link = document.createElement('a');
+      link.className = 'guide-site-link';
+      link.href = item.href;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.title = item.title;
+      link.innerHTML = EXTERNAL_ICON + item.label;
+      host.appendChild(link);
+    });
+
+    return host;
+  }
+
   function init() {
     document.body.appendChild(createSwitcher());
+    var siteLinks = createSiteLinks();
+    if (siteLinks) {
+      document.body.appendChild(siteLinks);
+    }
   }
 
   if (document.readyState === 'loading') {
