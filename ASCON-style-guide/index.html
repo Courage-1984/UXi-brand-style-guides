@@ -1,0 +1,3559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCON — Brand Style Guide & Design System v1.1</title>
+  <link rel="icon" type="image/png" href="../assets/favicons/ASCON-favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+   ASCON — BRAND & DESIGN SYSTEM
+   African Supply Chain Confederation
+   Version 1.1 · April 2026
+   ============================================================ */
+
+    /* Marseille font — replace with your licensed font file */
+    @font-face {
+      font-family: 'Marseille';
+      src: local('Marseille');
+      font-weight: 300 900;
+    }
+
+    :root {
+      /* ── BRAND COLORS ── */
+      --ascon-navy: #11284A;
+      --ascon-navy-deep: #071628;
+      --ascon-navy-mid: #1A3A6B;
+      --ascon-navy-light: #2C5282;
+      --ascon-navy-pale: #EBF0F8;
+
+      --ascon-gold: #C9911A;
+      --ascon-gold-light: #E8B84B;
+      --ascon-gold-pale: #FDF4E0;
+      --ascon-gold-deep: #9A6E10;
+
+      --ascon-green: #496863;
+      --ascon-green-light: #3F877D;
+      --ascon-green-pale: #EAF5EF;
+
+      /* ── NEUTRALS ── */
+      --ascon-bg: #F7F5F2;
+      --ascon-white: #FFFFFF;
+      --ascon-card: #FFFFFF;
+      --ascon-border: #DFE4EC;
+      --ascon-text: #0D2240;
+      --ascon-muted: #667085;
+      --ascon-subtle: #CDCFD7;
+      --ascon-dark-card: #112038;
+      --ascon-dark-bg: #071628;
+
+      /* ── TYPOGRAPHY ── */
+      --font-heading: 'Marseille', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', Helvetica, Arial, sans-serif;
+
+      /* ── SIZES ── */
+      --size-h1: 48px;
+      --size-h2: 36px;
+      --size-h3: 28px;
+      --size-h4: 21px;
+      --size-h5: 18px;
+      --size-h6: 16px;
+      --size-body: 16px;
+      --size-small: 14px;
+      --size-caption: 13px;
+      --size-label: 11px;
+
+      /* ── WEIGHTS ── */
+      --w-light: 300;
+      --w-regular: 400;
+      --w-medium: 500;
+      --w-semibold: 600;
+      --w-bold: 700;
+
+      /* ── SPACING ── */
+      --sp-xs: 4px;
+      --sp-sm: 8px;
+      --sp-md: 16px;
+      --sp-lg: 24px;
+      --sp-xl: 40px;
+      --sp-2xl: 64px;
+      --sp-3xl: 96px;
+
+      /* ── RADII ── */
+      --r-sm: 4px;
+      --r-md: 8px;
+      --r-lg: 12px;
+      --r-xl: 16px;
+      --r-full: 9999px;
+
+      /* ── SHADOWS ── */
+      --shadow-sm: 0 1px 4px rgba(13, 34, 64, 0.08);
+      --shadow-md: 0 4px 16px rgba(13, 34, 64, 0.12);
+      --shadow-lg: 0 12px 40px rgba(13, 34, 64, 0.18);
+      --shadow-xl: 0 24px 64px rgba(13, 34, 64, 0.22);
+
+      /* ── TRANSITIONS ── */
+      --t-fast: all 0.18s ease;
+      --t-base: all 0.35s ease;
+      --t-slow: all 0.6s ease;
+
+      /* ── Z-INDEX ── */
+      --z-base: 1;
+      --z-dropdown: 100;
+      --z-sticky: 200;
+      --z-modal: 300;
+      --z-toast: 400;
+    }
+
+    /* ── RESET & BASE ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--size-body);
+      color: var(--ascon-text);
+      background: var(--ascon-bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── LAYOUT ── */
+    .ds-wrap {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .ds-sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: var(--ascon-navy-deep);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 0 0 40px 0;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .ds-sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .ds-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(201, 145, 26, 0.3);
+      border-radius: 2px;
+    }
+
+    .sidebar-brand {
+      padding: 28px 24px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 8px;
+    }
+
+    .sidebar-brand-monogram {
+      width: 44px;
+      height: 44px;
+      background: var(--ascon-gold);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ascon-navy-deep);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .sidebar-brand-name {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ascon-gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    .sidebar-brand-sub {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    .sidebar-group-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.28);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 18px 24px 6px;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 24px;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      transition: var(--t-fast);
+      border-left: 2px solid transparent;
+    }
+
+    .sidebar-nav a:hover {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.04);
+      border-left-color: rgba(201, 145, 26, 0.4);
+    }
+
+    .sidebar-nav a .nav-num {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--ascon-gold);
+      opacity: 0.7;
+      letter-spacing: 0.06em;
+      min-width: 20px;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 20px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.2);
+      line-height: 1.6;
+    }
+
+    /* MAIN CONTENT */
+    .ds-main {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* HERO */
+    .ds-hero {
+      background: var(--ascon-navy);
+      background-image:
+        radial-gradient(ellipse at 80% 50%, rgba(201, 145, 26, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(42, 122, 75, 0.08) 0%, transparent 50%);
+      padding: 80px 80px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ds-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255, 255, 255, 0.015) 48px, rgba(255, 255, 255, 0.015) 49px),
+        repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255, 255, 255, 0.015) 48px, rgba(255, 255, 255, 0.015) 49px);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ascon-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--ascon-gold);
+    }
+
+    .ds-hero h1 {
+      font-family: var(--font-heading);
+      font-size: 64px;
+      font-weight: 300;
+      color: var(--ascon-white);
+      line-height: 1.08;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .ds-hero h1 em {
+      font-style: normal;
+      color: var(--ascon-gold);
+    }
+
+    .ds-hero-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 400;
+      margin-top: 16px;
+      max-width: 520px;
+      line-height: 1.65;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .hero-tag {
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-full);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-gold-bar {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--ascon-gold) 0%, var(--ascon-green) 50%, var(--ascon-terra) 100%);
+      margin-top: 0;
+    }
+
+    /* SECTIONS */
+    .ds-section {
+      padding: 72px 80px;
+      border-bottom: 1px solid var(--ascon-border);
+    }
+
+    .ds-section:nth-child(even) {
+      background: var(--ascon-white);
+    }
+
+    .ds-section-dark {
+      background: var(--ascon-navy-deep) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ascon-gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--ascon-gold);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--ascon-navy);
+      line-height: 1.18;
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+
+    .ds-section-dark .section-title {
+      color: var(--ascon-white);
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--ascon-muted);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .ds-section-dark .section-desc {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--ascon-gold);
+      margin-bottom: 40px;
+      border-radius: 2px;
+    }
+
+    /* ── 01 COLOURS ── */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .swatch {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      border: 1px solid var(--ascon-border);
+      cursor: pointer;
+      transition: var(--t-base);
+      position: relative;
+    }
+
+    .swatch:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .swatch-color {
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 8px;
+    }
+
+    .swatch-copy-icon {
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--t-fast);
+      font-size: 11px;
+      color: white;
+    }
+
+    .swatch:hover .swatch-copy-icon {
+      opacity: 1;
+    }
+
+    .swatch-info {
+      padding: 10px 12px;
+      background: var(--ascon-white);
+    }
+
+    .swatch-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ascon-text);
+      margin-bottom: 2px;
+    }
+
+    .swatch-hex {
+      font-size: 11px;
+      color: var(--ascon-muted);
+      font-family: 'Courier New', monospace;
+    }
+
+    .copied-toast {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--ascon-navy);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .swatch.copied .copied-toast {
+      opacity: 1;
+    }
+
+    .opacity-demo {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .opacity-step {
+      text-align: center;
+      font-size: 11px;
+      color: var(--ascon-muted);
+    }
+
+    .opacity-chip {
+      height: 36px;
+      border-radius: var(--r-sm);
+      margin-bottom: 6px;
+    }
+
+    .opacity-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ascon-text);
+      margin-bottom: 2px;
+    }
+
+    .colour-group-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ascon-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      margin-top: 28px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--ascon-border);
+    }
+
+    .colour-group-label:first-child {
+      margin-top: 0;
+    }
+
+    /* ── 02 TYPOGRAPHY ── */
+    .font-card {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      margin-bottom: 12px;
+    }
+
+    .font-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .font-card-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ascon-navy);
+      letter-spacing: 0.02em;
+    }
+
+    .font-card-role {
+      font-size: 12px;
+      color: var(--ascon-muted);
+      margin-top: 2px;
+    }
+
+    .font-card-badge {
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-primary {
+      background: var(--ascon-gold-pale);
+      color: var(--ascon-gold-deep);
+    }
+
+    .badge-body {
+      background: var(--ascon-navy-pale);
+      color: var(--ascon-navy-mid);
+    }
+
+    .font-weights {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .weight-sample {
+      font-size: 13px;
+      color: var(--ascon-text);
+      padding: 4px 0;
+    }
+
+    .weight-label {
+      font-size: 10px;
+      color: var(--ascon-subtle);
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    .type-scale-row {
+      display: flex;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--ascon-border);
+      gap: 24px;
+    }
+
+    .type-scale-row:last-child {
+      border-bottom: none;
+    }
+
+    .type-scale-meta {
+      min-width: 140px;
+      font-size: 12px;
+      color: var(--ascon-muted);
+      line-height: 1.6;
+    }
+
+    .type-scale-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ascon-gold);
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .type-sample {
+      flex: 1;
+    }
+
+    /* Type samples */
+    .t-h1 {
+      font-family: var(--font-heading);
+      font-size: var(--size-h1);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--ascon-navy);
+      letter-spacing: -0.5px;
+    }
+
+    .t-h2 {
+      font-family: var(--font-heading);
+      font-size: var(--size-h2);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ascon-navy);
+    }
+
+    .t-h3 {
+      font-family: var(--font-heading);
+      font-size: var(--size-h3);
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--ascon-navy);
+    }
+
+    .t-h4 {
+      font-family: var(--font-heading);
+      font-size: var(--size-h4);
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ascon-navy);
+    }
+
+    .t-h5 {
+      font-family: var(--font-body);
+      font-size: var(--size-h5);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--ascon-navy);
+    }
+
+    .t-h6 {
+      font-family: var(--font-body);
+      font-size: var(--size-h6);
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--ascon-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .t-body {
+      font-family: var(--font-body);
+      font-size: var(--size-body);
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--ascon-text);
+    }
+
+    .t-caption {
+      font-family: var(--font-body);
+      font-size: var(--size-caption);
+      color: var(--ascon-muted);
+      line-height: 1.5;
+    }
+
+    .t-label {
+      font-family: var(--font-body);
+      font-size: var(--size-label);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ascon-gold);
+    }
+
+    /* ── 03 BUTTONS ── */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .ascon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 11px 24px;
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: var(--t-base);
+      border: 2px solid transparent;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .ascon-btn-primary {
+      background: var(--ascon-navy);
+      color: var(--ascon-white);
+      border-color: var(--ascon-navy);
+    }
+
+    .ascon-btn-primary:hover {
+      background: var(--ascon-navy-mid);
+      border-color: var(--ascon-navy-mid);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .ascon-btn-gold {
+      background: var(--ascon-gold);
+      color: var(--ascon-navy-deep);
+      border-color: var(--ascon-gold);
+    }
+
+    .ascon-btn-gold:hover {
+      background: var(--ascon-gold-light);
+      border-color: var(--ascon-gold-light);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .ascon-btn-outline {
+      background: transparent;
+      color: var(--ascon-navy);
+      border-color: var(--ascon-navy);
+    }
+
+    .ascon-btn-outline:hover {
+      background: var(--ascon-navy);
+      color: var(--ascon-white);
+    }
+
+    .ascon-btn-outline-gold {
+      background: transparent;
+      color: var(--ascon-gold-deep);
+      border-color: var(--ascon-gold);
+    }
+
+    .ascon-btn-outline-gold:hover {
+      background: var(--ascon-gold);
+      color: var(--ascon-navy-deep);
+    }
+
+    .ascon-btn-ghost {
+      background: transparent;
+      color: var(--ascon-muted);
+      border-color: var(--ascon-border);
+    }
+
+    .ascon-btn-ghost:hover {
+      border-color: var(--ascon-navy);
+      color: var(--ascon-navy);
+    }
+
+    .ascon-btn-terra {
+      background: var(--ascon-terra);
+      color: white;
+      border-color: var(--ascon-terra);
+    }
+
+    .ascon-btn-terra:hover {
+      background: var(--ascon-terra-light);
+      border-color: var(--ascon-terra-light);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Sizes */
+    .ascon-btn-sm {
+      padding: 7px 16px;
+      font-size: 12px;
+    }
+
+    .ascon-btn-lg {
+      padding: 15px 32px;
+      font-size: 15px;
+    }
+
+    .ascon-btn-icon {
+      padding: 11px;
+    }
+
+    /* Dark surface */
+    .btn-dark-surface {
+      background: var(--ascon-navy);
+      padding: 28px 32px;
+      border-radius: var(--r-lg);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .ascon-btn-light {
+      background: var(--ascon-white);
+      color: var(--ascon-navy);
+      border-color: var(--ascon-white);
+    }
+
+    .ascon-btn-light:hover {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .ascon-btn-outline-light {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .ascon-btn-outline-light:hover {
+      border-color: white;
+      color: white;
+    }
+
+    .btn-spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 24px;
+    }
+
+    .btn-spec-table th {
+      text-align: left;
+      padding: 8px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ascon-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--ascon-border);
+    }
+
+    .btn-spec-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--ascon-border);
+      color: var(--ascon-text);
+      vertical-align: middle;
+    }
+
+    .btn-spec-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .spec-chip {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: var(--r-full);
+      font-size: 10px;
+      font-weight: 600;
+      font-family: 'Courier New', monospace;
+      background: var(--ascon-navy-pale);
+      color: var(--ascon-navy-mid);
+    }
+
+    /* ── 04 FORMS ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 680px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .ascon-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ascon-navy);
+      letter-spacing: 0.04em;
+    }
+
+    .ascon-label .req {
+      color: var(--ascon-gold);
+      margin-left: 2px;
+    }
+
+    .ascon-label .hint {
+      font-size: 11px;
+      color: var(--ascon-muted);
+      font-weight: 400;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .ascon-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--ascon-white);
+      border: 1.5px solid var(--ascon-border);
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--ascon-text);
+      transition: var(--t-fast);
+      outline: none;
+    }
+
+    .ascon-input::placeholder {
+      color: var(--ascon-subtle);
+    }
+
+    .ascon-input:focus {
+      border-color: var(--ascon-navy);
+      box-shadow: 0 0 0 3px rgba(13, 34, 64, 0.1);
+    }
+
+    .ascon-input.error {
+      border-color: var(--ascon-terra);
+      box-shadow: 0 0 0 3px rgba(181, 69, 27, 0.1);
+    }
+
+    .ascon-input.success {
+      border-color: var(--ascon-green);
+      box-shadow: 0 0 0 3px rgba(42, 122, 75, 0.08);
+    }
+
+    .ascon-input:disabled {
+      background: var(--ascon-bg);
+      color: var(--ascon-subtle);
+      cursor: not-allowed;
+    }
+
+    .ascon-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .ascon-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23667085' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .field-message {
+      font-size: 12px;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .field-message.error-msg {
+      color: var(--ascon-terra);
+    }
+
+    .field-message.success-msg {
+      color: var(--ascon-green);
+    }
+
+    .field-message.hint-msg {
+      color: var(--ascon-muted);
+    }
+
+    /* Checkbox / Radio */
+    .check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ascon-check-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--ascon-text);
+    }
+
+    .ascon-check-label input[type="checkbox"],
+    .ascon-check-label input[type="radio"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--ascon-navy);
+      cursor: pointer;
+    }
+
+    .char-count {
+      font-size: 11px;
+      color: var(--ascon-subtle);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Validation banner */
+    .validation-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--ascon-terra-pale);
+      border: 1px solid rgba(181, 69, 27, 0.2);
+      border-left: 4px solid var(--ascon-terra);
+      border-radius: var(--r-sm);
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--ascon-terra);
+    }
+
+    .validation-banner .icon {
+      font-size: 16px;
+      margin-top: 1px;
+    }
+
+    /* ── 05 CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .ascon-card {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: var(--t-base);
+      cursor: pointer;
+    }
+
+    .ascon-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    /* Pillar cards */
+    .pillar-card {
+      border-top: 4px solid var(--pillar-color, var(--ascon-gold));
+      padding: 24px;
+    }
+
+    .pillar-card .pillar-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: rgba(var(--pillar-rgb, 201, 145, 26), 0.1);
+      border-radius: var(--r-full);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pillar-color);
+      margin-bottom: 12px;
+    }
+
+    .pillar-card .pillar-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--ascon-navy);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .pillar-card .pillar-sub {
+      font-size: 12px;
+      color: var(--ascon-muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .pillar-card .pillar-body {
+      font-size: 13.5px;
+      color: var(--ascon-text);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .pillar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--pillar-color);
+      border: 1px solid rgba(var(--pillar-rgb, 201, 145, 26), 0.3);
+      padding: 7px 14px;
+      border-radius: var(--r-sm);
+      transition: var(--t-fast);
+    }
+
+    .pillar-cta:hover {
+      background: var(--pillar-color);
+      color: white;
+    }
+
+    /* News cards */
+    .news-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .news-card {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: var(--t-base);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .news-card-img {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      position: relative;
+    }
+
+    .news-card-body {
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ascon-gold);
+      margin-bottom: 8px;
+    }
+
+    .news-meta .dot {
+      width: 3px;
+      height: 3px;
+      background: var(--ascon-subtle);
+      border-radius: 50%;
+    }
+
+    .news-meta .date {
+      color: var(--ascon-subtle);
+      font-weight: 400;
+    }
+
+    .news-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--ascon-navy);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .news-excerpt {
+      font-size: 13px;
+      color: var(--ascon-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .news-read-more {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ascon-gold);
+      text-decoration: none;
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--t-fast);
+    }
+
+    .news-read-more:hover {
+      gap: 8px;
+    }
+
+    /* Event card */
+    .event-card-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .event-card {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex;
+      transition: var(--t-base);
+    }
+
+    .event-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .event-date-pillar {
+      background: var(--ascon-navy);
+      width: 72px;
+      min-width: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 8px;
+    }
+
+    .event-day {
+      font-family: var(--font-body);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ascon-white);
+      line-height: 1;
+    }
+
+    .event-month {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ascon-gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .event-body {
+      padding: 16px 18px;
+      flex: 1;
+    }
+
+    .event-category {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--ascon-gold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .event-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ascon-navy);
+      line-height: 1.35;
+      margin-bottom: 5px;
+    }
+
+    .event-time {
+      font-size: 12px;
+      color: var(--ascon-muted);
+    }
+
+    /* Card settings table */
+    .card-settings {
+      background: var(--ascon-navy-pale);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      font-size: 12.5px;
+      line-height: 1.8;
+    }
+
+    .card-settings code {
+      font-family: 'Courier New', monospace;
+      font-size: 11.5px;
+      color: var(--ascon-navy-mid);
+      background: rgba(13, 34, 64, 0.07);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .card-settings strong {
+      color: var(--ascon-navy);
+      font-weight: 600;
+    }
+
+    .card-settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    /* ── 06 VISION MISSION ── */
+    .brand-voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .brand-voice-card {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+    }
+
+    .brand-voice-card h3 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ascon-navy);
+      margin-bottom: 12px;
+    }
+
+    .brand-voice-card p {
+      font-size: 14.5px;
+      color: var(--ascon-muted);
+      line-height: 1.75;
+    }
+
+    .brand-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .brand-kw {
+      padding: 6px 14px;
+      border: 1.5px solid var(--ascon-border);
+      border-radius: var(--r-full);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ascon-navy);
+      transition: var(--t-fast);
+    }
+
+    .brand-kw:hover {
+      border-color: var(--ascon-gold);
+      color: var(--ascon-gold-deep);
+      background: var(--ascon-gold-pale);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .value-card {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-md);
+      padding: 20px;
+      border-top: 3px solid var(--ascon-gold);
+    }
+
+    .value-card .val-name {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--ascon-navy);
+      margin-bottom: 4px;
+    }
+
+    .value-card .val-desc {
+      font-size: 12px;
+      color: var(--ascon-muted);
+      line-height: 1.55;
+    }
+
+    /* ── 07 LOGO USAGE ── */
+    .logo-usage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .logo-frame {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--ascon-border);
+    }
+
+    .logo-display {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      background: var(--ascon-gold);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .logo-name {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .logo-tagline {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-top: 3px;
+    }
+
+    .logo-caption {
+      padding: 12px 16px;
+      background: var(--ascon-bg);
+      font-size: 12px;
+      color: var(--ascon-muted);
+    }
+
+    .logo-caption strong {
+      color: var(--ascon-text);
+      font-weight: 600;
+    }
+
+    .logo-do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .do-list,
+    .dont-list {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-lg);
+      padding: 24px;
+    }
+
+    .do-list {
+      border-top: 3px solid var(--ascon-green);
+    }
+
+    .dont-list {
+      border-top: 3px solid var(--ascon-terra);
+    }
+
+    .do-list h4 {
+      color: var(--ascon-green);
+    }
+
+    .dont-list h4 {
+      color: var(--ascon-terra);
+    }
+
+    .do-list h4,
+    .dont-list h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .do-list ul,
+    .dont-list ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .do-list li,
+    .dont-list li {
+      font-size: 13px;
+      color: var(--ascon-text);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .do-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--ascon-green);
+      font-weight: 600;
+    }
+
+    .dont-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--ascon-terra);
+      font-weight: 600;
+    }
+
+    /* ── 08 ICONS ── */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 8px;
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: var(--t-fast);
+      font-size: 22px;
+    }
+
+    .icon-item:hover {
+      border-color: var(--ascon-gold);
+      background: var(--ascon-gold-pale);
+      transform: translateY(-2px);
+    }
+
+    .icon-item span {
+      font-size: 10px;
+      color: var(--ascon-muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── 09 NAVIGATION ── */
+    .nav-demo {
+      background: var(--ascon-navy-deep);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .nav-top-bar {
+      background: var(--ascon-gold);
+      padding: 7px 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+    }
+
+    .nav-top-bar a {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ascon-navy-deep);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 0;
+      text-decoration: none;
+      margin-right: 40px;
+    }
+
+    .nav-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--ascon-gold);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--ascon-navy-deep);
+    }
+
+    .nav-brand-text {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .nav-brand-sub {
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .nav-links a {
+      padding: 20px 14px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      transition: var(--t-fast);
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+      border-bottom-color: var(--ascon-gold);
+    }
+
+    .nav-cta {
+      padding: 8px 18px;
+      background: var(--ascon-gold);
+      color: var(--ascon-navy-deep) !important;
+      border-radius: var(--r-sm);
+      font-weight: 600 !important;
+      font-size: 12px !important;
+      border-bottom: none !important;
+      margin-left: 8px;
+    }
+
+    .nav-cta:hover {
+      background: var(--ascon-gold-light) !important;
+    }
+
+    /* Sitemap */
+    .sitemap {
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      margin-top: 20px;
+    }
+
+    .sitemap-tree {
+      font-size: 13px;
+      color: var(--ascon-text);
+      list-style: none;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .sitemap-tree>li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--ascon-border);
+      font-weight: 600;
+      color: var(--ascon-navy);
+      letter-spacing: 0.04em;
+    }
+
+    .sitemap-tree>li:last-child {
+      border-bottom: none;
+    }
+
+    .sitemap-tree ul {
+      list-style: none;
+      padding: 0 0 0 20px;
+      margin-top: 8px;
+    }
+
+    .sitemap-tree ul li {
+      padding: 5px 0;
+      font-weight: 400;
+      color: var(--ascon-muted);
+      font-size: 12px;
+    }
+
+    .sitemap-tree ul li::before {
+      content: '↳ ';
+      color: var(--ascon-gold);
+      font-size: 11px;
+    }
+
+    /* Footer demo */
+    .footer-demo {
+      background: var(--ascon-navy-deep);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .footer-rainbow {
+      height: 3px;
+      background: linear-gradient(90deg, var(--ascon-gold) 0%, var(--ascon-green) 40%, var(--ascon-terra) 70%, var(--ascon-navy-light) 100%);
+    }
+
+    .footer-body {
+      padding: 32px 32px 24px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-brand-col .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .footer-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--ascon-gold);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--ascon-navy-deep);
+    }
+
+    .footer-brand-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.35);
+      line-height: 1.65;
+      max-width: 240px;
+    }
+
+    .footer-col-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ascon-gold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      transition: var(--t-fast);
+    }
+
+    .footer-links li a:hover {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .footer-bottom {
+      padding: 16px 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-legal {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social-btn {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      transition: var(--t-fast);
+    }
+
+    .social-btn:hover {
+      background: var(--ascon-gold);
+      color: var(--ascon-navy-deep);
+    }
+
+    /* ── 10 CSS TOKENS ── */
+    .code-block {
+      background: var(--ascon-navy-deep);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .code-filename {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-btn {
+      padding: 5px 14px;
+      background: rgba(201, 145, 26, 0.15);
+      border: 1px solid rgba(201, 145, 26, 0.3);
+      border-radius: var(--r-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ascon-gold);
+      cursor: pointer;
+      transition: var(--t-fast);
+    }
+
+    .copy-btn:hover {
+      background: rgba(201, 145, 26, 0.3);
+    }
+
+    .code-body {
+      padding: 20px 24px;
+      overflow-x: auto;
+    }
+
+    .code-body pre {
+      font-family: 'Courier New', 'Consolas', monospace;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.65;
+      white-space: pre;
+    }
+
+    .code-comment {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .code-var {
+      color: #93C5FD;
+    }
+
+    .code-val {
+      color: #6EE7B7;
+    }
+
+    .code-punct {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Global colors grid for Elementor section */
+    .global-colors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .gc-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-sm);
+      font-size: 12px;
+    }
+
+    .gc-swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .gc-name {
+      font-weight: 600;
+      color: var(--ascon-navy);
+    }
+
+    .gc-hex {
+      color: var(--ascon-muted);
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+    }
+
+    /* Global font chips */
+    .global-fonts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .gf-row {
+      display: flex;
+      align-items: center;
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-md);
+      padding: 16px 20px;
+      gap: 20px;
+    }
+
+    .gf-preview {
+      font-size: 26px;
+      color: var(--ascon-navy);
+      min-width: 80px;
+      line-height: 1;
+    }
+
+    .gf-meta {
+      flex: 1;
+    }
+
+    .gf-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ascon-navy);
+      margin-bottom: 2px;
+    }
+
+    .gf-role {
+      font-size: 12px;
+      color: var(--ascon-muted);
+    }
+
+    .gf-weights {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .gf-w {
+      padding: 2px 8px;
+      background: var(--ascon-navy-pale);
+      border-radius: var(--r-full);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ascon-navy-mid);
+    }
+
+    /* Spacing scale */
+    .spacing-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 16px;
+      background: var(--ascon-white);
+      border: 1px solid var(--ascon-border);
+      border-radius: var(--r-sm);
+    }
+
+    .spacing-token {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: var(--ascon-navy-mid);
+      min-width: 100px;
+    }
+
+    .spacing-bar {
+      background: var(--ascon-gold);
+      height: 16px;
+      border-radius: 2px;
+      opacity: 0.6;
+    }
+
+    .spacing-value {
+      font-size: 12px;
+      color: var(--ascon-muted);
+      min-width: 40px;
+      text-align: right;
+      margin-left: auto;
+    }
+
+    /* ── UTILITIES ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mt-sm {
+      margin-top: 12px;
+    }
+
+    .mt-md {
+      margin-top: 24px;
+    }
+
+    .mt-lg {
+      margin-top: 40px;
+    }
+
+    .label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .subsection-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ascon-navy);
+      margin-bottom: 16px;
+    }
+
+    .ds-section-dark .subsection-title {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .prop-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--ascon-navy-pale);
+      border-radius: var(--r-full);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ascon-navy-mid);
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="ds-wrap">
+
+    <!-- SIDEBAR -->
+    <aside class="ds-sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-monogram">A</div>
+        <div class="sidebar-brand-name">ASCON</div>
+        <div class="sidebar-brand-sub">Brand Style Guide &amp; Design System v1.1</div>
+      </div>
+
+      <div class="sidebar-group-label">Foundation</div>
+      <nav class="sidebar-nav">
+        <a href="#colors"><span class="nav-num">01</span> Colour System</a>
+        <a href="#typography"><span class="nav-num">02</span> Typography Scale</a>
+      </nav>
+
+      <div class="sidebar-group-label">Components</div>
+      <nav class="sidebar-nav">
+        <a href="#buttons"><span class="nav-num">03</span> Buttons</a>
+        <a href="#forms"><span class="nav-num">04</span> Form Elements</a>
+        <a href="#cards"><span class="nav-num">05</span> Cards</a>
+      </nav>
+
+      <div class="sidebar-group-label">Brand</div>
+      <nav class="sidebar-nav">
+        <a href="#voice"><span class="nav-num">06</span> Vision, Mission & Voice</a>
+        <a href="#logo-usage"><span class="nav-num">07</span> Logo Usage Rules</a>
+        <a href="#icons"><span class="nav-num">08</span> Iconography</a>
+        <a href="#navigation"><span class="nav-num">09</span> Navigation</a>
+      </nav>
+
+      <div class="sidebar-group-label">Developer</div>
+      <nav class="sidebar-nav">
+        <a href="#variables"><span class="nav-num">10</span> CSS Custom Properties</a>
+        <a href="#elementor"><span class="nav-num">11</span> Elementor Integration</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        African Supply Chain<br>Confederation · Est. 2025<br>HQ: Johannesburg, RSA
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="ds-main">
+
+      <!-- HERO -->
+      <div class="ds-hero">
+        <div class="hero-eyebrow">Brand Style Guide &amp; Design System</div>
+        <h1>ASCON<br><em>Design</em><br>System v1.1</h1>
+        <p class="ds-hero-sub">A comprehensive design system covering colour tokens, typography, UI components, and
+          developer-ready CSS variables — built on the ASCON brand guidelines.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Pan-African</span>
+          <span class="hero-tag">Supply Chain</span>
+          <span class="hero-tag">Professional Body</span>
+          <span class="hero-tag">Est. 2025 · Accra</span>
+          <span class="hero-tag">7 Member Nations</span>
+        </div>
+      </div>
+      <div class="hero-gold-bar"></div>
+
+      <!-- ══════════════════════════
+         01 — COLOURS
+    ═══════════════════════════ -->
+      <section class="ds-section" id="colors">
+        <div class="section-eyebrow">01 — Foundation</div>
+        <h2 class="section-title">Colour System</h2>
+        <p class="section-desc">The ASCON palette pairs a deep African Navy with a warm Continental Gold, supported by
+          Terracotta and Savannah Green accent tones. Click any swatch to copy its hex code.</p>
+        <div class="section-divider"></div>
+
+        <div class="colour-group-label">Core Brand Colours</div>
+        <div class="swatch-grid">
+          <div class="swatch" onclick="copyHex(this,'#0D2240')">
+            <div class="swatch-color" style="background:#0D2240">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">African Navy</div>
+              <div class="swatch-hex">#0D2240</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#071628')">
+            <div class="swatch-color" style="background:#071628">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Deep Navy</div>
+              <div class="swatch-hex">#071628</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#1A3A6B')">
+            <div class="swatch-color" style="background:#1A3A6B">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Navy Mid</div>
+              <div class="swatch-hex">#1A3A6B</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#C9911A')">
+            <div class="swatch-color" style="background:#C9911A">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Continental Gold</div>
+              <div class="swatch-hex">#C9911A</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#E8B84B')">
+            <div class="swatch-color" style="background:#E8B84B">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Gold Light</div>
+              <div class="swatch-hex">#E8B84B</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#9A6E10')">
+            <div class="swatch-color" style="background:#9A6E10">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Gold Deep</div>
+              <div class="swatch-hex">#9A6E10</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+        </div>
+
+        <div class="colour-group-label">Accent Colours</div>
+        <div class="swatch-grid">
+          <div class="swatch" onclick="copyHex(this,'#B5451B')">
+            <div class="swatch-color" style="background:#B5451B">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Terracotta</div>
+              <div class="swatch-hex">#B5451B</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#D4633A')">
+            <div class="swatch-color" style="background:#D4633A">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Terra Light</div>
+              <div class="swatch-hex">#D4633A</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#2A7A4B')">
+            <div class="swatch-color" style="background:#2A7A4B">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Savannah Green</div>
+              <div class="swatch-hex">#2A7A4B</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#3CA065')">
+            <div class="swatch-color" style="background:#3CA065">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Green Light</div>
+              <div class="swatch-hex">#3CA065</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+        </div>
+
+        <div class="colour-group-label">Neutrals & UI</div>
+        <div class="swatch-grid">
+          <div class="swatch" onclick="copyHex(this,'#F7F5F2')">
+            <div class="swatch-color" style="background:#F7F5F2; border:1px solid #E2E8F0">
+              <div class="swatch-copy-icon" style="color:#0D2240;background:rgba(13,34,64,0.08)">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Warm White</div>
+              <div class="swatch-hex">#F7F5F2</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#FFFFFF')">
+            <div class="swatch-color" style="background:#FFFFFF; border:1px solid #E2E8F0">
+              <div class="swatch-copy-icon" style="color:#0D2240;background:rgba(13,34,64,0.08)">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">White</div>
+              <div class="swatch-hex">#FFFFFF</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#DFE4EC')">
+            <div class="swatch-color" style="background:#DFE4EC">
+              <div class="swatch-copy-icon" style="color:#0D2240;background:rgba(13,34,64,0.1)">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Border</div>
+              <div class="swatch-hex">#DFE4EC</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#667085')">
+            <div class="swatch-color" style="background:#667085">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Muted Text</div>
+              <div class="swatch-hex">#667085</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+          <div class="swatch" onclick="copyHex(this,'#98A2B3')">
+            <div class="swatch-color" style="background:#98A2B3">
+              <div class="swatch-copy-icon">⎘</div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Subtle</div>
+              <div class="swatch-hex">#98A2B3</div>
+            </div>
+            <div class="copied-toast">✓ Copied!</div>
+          </div>
+        </div>
+
+        <!-- Opacity Scale -->
+        <div class="subsection-title mt-lg">Opacity Scale — Gold</div>
+        <p style="font-size:13px;color:var(--ascon-muted);margin-bottom:16px;">Use opacity variants for backgrounds,
+          overlays, and subtle UI states.</p>
+        <div class="opacity-demo">
+          <div class="opacity-step">
+            <div class="opacity-chip" style="background:rgba(201,145,26,1)"></div>
+            <div class="opacity-label">100%</div>
+            <div>Solid</div>
+          </div>
+          <div class="opacity-step">
+            <div class="opacity-chip" style="background:rgba(201,145,26,0.8)"></div>
+            <div class="opacity-label">80%</div>
+            <div>Strong</div>
+          </div>
+          <div class="opacity-step">
+            <div class="opacity-chip" style="background:rgba(201,145,26,0.5)"></div>
+            <div class="opacity-label">50%</div>
+            <div>Medium</div>
+          </div>
+          <div class="opacity-step">
+            <div class="opacity-chip" style="background:rgba(201,145,26,0.25)"></div>
+            <div class="opacity-label">25%</div>
+            <div>Soft</div>
+          </div>
+          <div class="opacity-step">
+            <div class="opacity-chip" style="background:rgba(201,145,26,0.1)"></div>
+            <div class="opacity-label">10%</div>
+            <div>Background</div>
+          </div>
+        </div>
+
+        <!-- Pan-African accent bar -->
+        <div class="subsection-title mt-lg">Pan-African Accent Bar</div>
+        <p style="font-size:13px;color:var(--ascon-muted);margin-bottom:12px;">Used as hero dividers and footer accents.
+          The gradient moves from Gold → Green → Terracotta.</p>
+        <div
+          style="height:4px;border-radius:2px;background:linear-gradient(90deg,#C9911A 0%,#2A7A4B 40%,#B5451B 70%,#1A3A6B 100%);margin-bottom:8px;">
+        </div>
+        <div style="font-size:11px;color:var(--ascon-muted);font-family:'Courier New',monospace;">linear-gradient(90deg,
+          #C9911A 0%, #2A7A4B 40%, #B5451B 70%, #1A3A6B 100%)</div>
+      </section>
+
+      <!-- ══════════════════════════
+         02 — TYPOGRAPHY
+    ═══════════════════════════ -->
+      <section class="ds-section" id="typography">
+        <div class="section-eyebrow">02 — Foundation</div>
+        <h2 class="section-title">Typography Scale</h2>
+        <p class="section-desc">Marseille is the primary brand & heading typeface. Inter is the web workhorse used
+          throughout all body copy, UI labels, and interface elements.</p>
+        <div class="section-divider"></div>
+
+        <!-- Font Family Cards -->
+        <div class="font-card">
+          <div class="font-card-header">
+            <div class="font-card-meta">
+              <div class="font-card-name">Marseille</div>
+              <div class="font-card-role">Primary heading / brand typeface · Display, heroes, section titles</div>
+            </div>
+            <div class="font-card-badge badge-primary">Heading Font</div>
+          </div>
+          <div
+            style="font-family:var(--font-heading);font-size:42px;font-weight:300;color:var(--ascon-navy);line-height:1.1;margin-bottom:16px;letter-spacing:-0.3px;">
+            Africa Rising
+          </div>
+          <div class="font-weights">
+            <div>
+              <div class="weight-sample" style="font-family:var(--font-heading);font-weight:300;">Light 300</div>
+              <div class="weight-label">Light</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:var(--font-heading);font-weight:400;">Regular 400</div>
+              <div class="weight-label">Regular</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:var(--font-heading);font-weight:500;">Medium 500</div>
+              <div class="weight-label">Medium</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:var(--font-heading);font-weight:600;">SemiBold 600</div>
+              <div class="weight-label">SemiBold</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:var(--font-heading);font-weight:700;">Bold 700</div>
+              <div class="weight-label">Bold</div>
+            </div>
+          </div>
+          <div
+            style="background:var(--ascon-gold-pale);border-radius:var(--r-sm);padding:10px 14px;font-size:12px;color:var(--ascon-gold-deep);">
+            ⚠ Marseille is a licensed typeface. Load it via <code
+              style="font-family:monospace;background:rgba(201,145,26,0.12);padding:1px 4px;border-radius:3px;">@font-face</code>
+            with your licensed files or CDN endpoint. Fallback: <code
+              style="font-family:monospace;background:rgba(201,145,26,0.12);padding:1px 4px;border-radius:3px;">Cormorant Garamond, Playfair Display, Georgia, serif</code>
+          </div>
+        </div>
+
+        <div class="font-card">
+          <div class="font-card-header">
+            <div class="font-card-meta">
+              <div class="font-card-name">Inter</div>
+              <div class="font-card-role">Body / UI typeface · Paragraphs, labels, buttons, captions</div>
+            </div>
+            <div class="font-card-badge badge-body">Body Font</div>
+          </div>
+          <div
+            style="font-family:'Inter',sans-serif;font-size:16px;font-weight:400;color:var(--ascon-text);line-height:1.7;margin-bottom:16px;max-width:560px;">
+            The African Supply Chain Confederation unifies professional bodies to build shared standards, foster
+            innovation, and accelerate Africa's role in global value chains.
+          </div>
+          <div class="font-weights">
+            <div>
+              <div class="weight-sample" style="font-family:'Inter',sans-serif;font-weight:300;">Light 300</div>
+              <div class="weight-label">Light</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:'Inter',sans-serif;font-weight:400;">Regular 400</div>
+              <div class="weight-label">Regular</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:'Inter',sans-serif;font-weight:500;">Medium 500</div>
+              <div class="weight-label">Medium</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:'Inter',sans-serif;font-weight:600;">SemiBold 600</div>
+              <div class="weight-label">SemiBold</div>
+            </div>
+            <div>
+              <div class="weight-sample" style="font-family:'Inter',sans-serif;font-weight:700;">Bold 700</div>
+              <div class="weight-label">Bold</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type Scale -->
+        <div class="subsection-title mt-lg">Heading & Body Scale</div>
+        <div
+          style="background:var(--ascon-white);border:1px solid var(--ascon-border);border-radius:var(--r-lg);padding:0 28px;">
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">H1</span>
+              52px / 300 Light<br>Marseille · lh: 1.08
+            </div>
+            <div class="type-sample t-h1">Shaping Africa's Supply Chain Future</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">H2</span>
+              36px / 400 Regular<br>Marseille · lh: 1.2
+            </div>
+            <div class="type-sample t-h2">Our Pan-African Members</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">H3</span>
+              26px / 500 Medium<br>Marseille · lh: 1.3
+            </div>
+            <div class="type-sample t-h3">Professional Standards & Certification</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">H4</span>
+              20px / 600 SemiBold<br>Marseille · lh: 1.35
+            </div>
+            <div class="type-sample t-h4">Knowledge & Best Practice</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">H5</span>
+              17px / 600 SemiBold<br>Inter · lh: 1.4
+            </div>
+            <div class="type-sample t-h5">Cross-Border Collaboration</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">H6</span>
+              15px / 600 SemiBold<br>Inter · Uppercase · ls: 0.06em
+            </div>
+            <div class="type-sample t-h6">Member Nations & Associations</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">Body</span>
+              16px / 400 Regular<br>Inter · lh: 1.7
+            </div>
+            <div class="type-sample t-body" style="max-width:480px;">ASCON connects professional bodies, strengthens
+              institutions, and sets benchmarks that elevate Africa's supply chain ecosystem across all seven founding
+              nations.</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">Caption</span>
+              13px / 400 Regular<br>Inter · Muted colour
+            </div>
+            <div class="type-sample t-caption">2026 ASCON Conference — Livingstone, Zambia · 23–25 September</div>
+          </div>
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-tag">Label / CTA</span>
+              11px / 700 Bold<br>Inter · Uppercase · ls: 0.12em
+            </div>
+            <div class="type-sample t-label">Learn More · Register Now · Contact Us</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         03 — BUTTONS
+    ═══════════════════════════ -->
+      <section class="ds-section" id="buttons">
+        <div class="section-eyebrow">03 — Components</div>
+        <h2 class="section-title">Buttons</h2>
+        <p class="section-desc">All CTAs use Inter with consistent letter-spacing. Border-radius is 4px for a clean,
+          professional feel. Hover states lift with a subtle shadow and colour shift.</p>
+        <div class="section-divider"></div>
+
+        <div class="subsection-title">Core Variants</div>
+        <div class="btn-row">
+          <button class="ascon-btn ascon-btn-primary">Primary — Navy</button>
+          <button class="ascon-btn ascon-btn-gold">Primary — Gold</button>
+          <button class="ascon-btn ascon-btn-terra">Accent — Terracotta</button>
+          <button class="ascon-btn ascon-btn-outline">Outline Navy</button>
+          <button class="ascon-btn ascon-btn-outline-gold">Outline Gold</button>
+          <button class="ascon-btn ascon-btn-ghost">Ghost</button>
+        </div>
+
+        <div class="subsection-title mt-md">Size Variants</div>
+        <div class="btn-row">
+          <button class="ascon-btn ascon-btn-primary ascon-btn-sm">Small</button>
+          <button class="ascon-btn ascon-btn-primary">Default</button>
+          <button class="ascon-btn ascon-btn-primary ascon-btn-lg">Large</button>
+        </div>
+
+        <div class="subsection-title mt-md">On Dark Surface</div>
+        <div class="btn-dark-surface">
+          <button class="ascon-btn ascon-btn-gold">Join ASCON</button>
+          <button class="ascon-btn ascon-btn-light">Learn More</button>
+          <button class="ascon-btn ascon-btn-outline-light">Contact Us</button>
+        </div>
+
+        <table class="btn-spec-table mt-lg">
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>Background</th>
+              <th>Text</th>
+              <th>Border</th>
+              <th>Hover</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Primary Navy</strong></td>
+              <td><span class="spec-chip">#0D2240</span></td>
+              <td><span class="spec-chip">#FFFFFF</span></td>
+              <td><span class="spec-chip">#0D2240</span></td>
+              <td>Navy Mid + shadow</td>
+            </tr>
+            <tr>
+              <td><strong>Primary Gold</strong></td>
+              <td><span class="spec-chip">#C9911A</span></td>
+              <td><span class="spec-chip">#071628</span></td>
+              <td><span class="spec-chip">#C9911A</span></td>
+              <td>Gold Light + shadow</td>
+            </tr>
+            <tr>
+              <td><strong>Terracotta</strong></td>
+              <td><span class="spec-chip">#B5451B</span></td>
+              <td><span class="spec-chip">#FFFFFF</span></td>
+              <td><span class="spec-chip">#B5451B</span></td>
+              <td>Terra Light + shadow</td>
+            </tr>
+            <tr>
+              <td><strong>Outline Navy</strong></td>
+              <td>Transparent</td>
+              <td><span class="spec-chip">#0D2240</span></td>
+              <td><span class="spec-chip">#0D2240</span></td>
+              <td>Fills navy, text white</td>
+            </tr>
+            <tr>
+              <td><strong>Ghost</strong></td>
+              <td>Transparent</td>
+              <td><span class="spec-chip">#667085</span></td>
+              <td><span class="spec-chip">#DFE4EC</span></td>
+              <td>Navy border + text</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ══════════════════════════
+         04 — FORMS
+    ═══════════════════════════ -->
+      <section class="ds-section" id="forms">
+        <div class="section-eyebrow">04 — Components</div>
+        <h2 class="section-title">Form Elements</h2>
+        <p class="section-desc">Form fields use a clean white palette with a 1.5px border. Focus states apply a 3px ring
+          in Navy. Labels are Inter SemiBold at 12px.</p>
+        <div class="section-divider"></div>
+
+        <div class="validation-banner">
+          <span class="icon">⚠</span>
+          <span>Please correct the fields highlighted below. All required fields must be completed before
+            submitting.</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="ascon-label">Full Name <span class="req">*</span></label>
+            <input class="ascon-input" type="text" placeholder="e.g. Ronald Mlalazi">
+          </div>
+          <div class="form-group">
+            <label class="ascon-label">Organisation <span class="req">*</span></label>
+            <input class="ascon-input" type="text" placeholder="Supply Chain Body / Company">
+          </div>
+          <div class="form-group">
+            <label class="ascon-label">
+              Email Address <span class="req">*</span>
+              <span class="hint">We only use this for official ASCON communications.</span>
+            </label>
+            <input class="ascon-input error" type="email" placeholder="name@organisation.org" value="invalid-email">
+            <span class="field-message error-msg">⚠ Enter a valid email in the format name@domain.com</span>
+          </div>
+          <div class="form-group">
+            <label class="ascon-label">Phone Number</label>
+            <input class="ascon-input success" type="tel" placeholder="+27 11 000 0000" value="+27 11 555 1234">
+            <span class="field-message success-msg">✓ Looks good — valid international format.</span>
+          </div>
+          <div class="form-group">
+            <label class="ascon-label">Member Country <span class="req">*</span></label>
+            <select class="ascon-input ascon-select">
+              <option>Select your country...</option>
+              <option>Eswatini</option>
+              <option>Ghana</option>
+              <option>Kenya</option>
+              <option selected>South Africa</option>
+              <option>Uganda</option>
+              <option>Zambia</option>
+              <option>Zimbabwe</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="ascon-label">Association</label>
+            <select class="ascon-input ascon-select">
+              <option>Select association...</option>
+              <option>EPPA – Eswatini</option>
+              <option>GIPS – Ghana</option>
+              <option>KISM – Kenya</option>
+              <option>ISCM – South Africa</option>
+              <option>IPPU – Uganda</option>
+              <option>ZIPS – Zambia</option>
+              <option>ZIPS – Zimbabwe</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="ascon-label">Disabled Field</label>
+            <input class="ascon-input" type="text" placeholder="Not available" disabled>
+            <span class="field-message hint-msg">This option is not available for your account type.</span>
+          </div>
+          <div class="form-group">
+            <label class="ascon-label">Focus State (click me)</label>
+            <input class="ascon-input" type="text" placeholder="Click to see focus ring...">
+          </div>
+          <div class="form-group full">
+            <label class="ascon-label">Message / Enquiry <span class="req">*</span></label>
+            <textarea class="ascon-input ascon-textarea" id="msg-area"
+              placeholder="Share your question, proposal, or interest in ASCON membership..."
+              oninput="updateCount(this)"></textarea>
+            <div class="char-count"><span id="char-count">0</span> / 500</div>
+          </div>
+          <div class="form-group full">
+            <div class="check-group">
+              <label class="ascon-check-label">
+                <input type="checkbox" checked>
+                I am a member of an ASCON-affiliated supply chain association
+              </label>
+              <label class="ascon-check-label">
+                <input type="checkbox">
+                I consent to receive updates from ASCON
+              </label>
+              <label class="ascon-check-label">
+                <input type="checkbox">
+                I accept the ASCON Privacy Policy
+              </label>
+            </div>
+          </div>
+          <div class="form-group full">
+            <button class="ascon-btn ascon-btn-primary" style="width:fit-content;">Submit Enquiry</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         05 — CARDS
+    ═══════════════════════════ -->
+      <section class="ds-section" id="cards">
+        <div class="section-eyebrow">05 — Components</div>
+        <h2 class="section-title">Cards</h2>
+        <p class="section-desc">Cards are the primary content units across ASCON digital properties. Pillar cards use
+          colour-coded top borders; News and Event cards feature metadata headers and structured content areas.</p>
+        <div class="section-divider"></div>
+
+        <div class="subsection-title">Pillar Cards — Core Focus Areas</div>
+        <div class="cards-grid">
+          <div class="ascon-card pillar-card" style="--pillar-color:#C9911A;--pillar-rgb:201,145,26">
+            <span class="pillar-tag">Standards</span>
+            <div class="pillar-title">Harmonised Standards</div>
+            <div class="pillar-sub">Pan-African certification framework</div>
+            <p class="pillar-body">Creating unified professional benchmarks that enable cross-border recognition and
+              mobility for supply chain practitioners.</p>
+            <a class="pillar-cta" href="#">Explore →</a>
+          </div>
+          <div class="ascon-card pillar-card" style="--pillar-color:#2A7A4B;--pillar-rgb:42,122,75">
+            <span class="pillar-tag">Development</span>
+            <div class="pillar-title">Professional Development</div>
+            <div class="pillar-sub">Building capacity & competence</div>
+            <p class="pillar-body">Strengthening institutions and practitioners through continuous learning, research,
+              and knowledge-sharing platforms.</p>
+            <a class="pillar-cta" href="#">Explore →</a>
+          </div>
+          <div class="ascon-card pillar-card" style="--pillar-color:#1A3A6B;--pillar-rgb:26,58,107">
+            <span class="pillar-tag">Collaboration</span>
+            <div class="pillar-title">Cross-Border Collaboration</div>
+            <div class="pillar-sub">Networks for growth & partnerships</div>
+            <p class="pillar-body">Fostering strategic connections between national bodies, institutions, and global
+              partners across the continent.</p>
+            <a class="pillar-cta" href="#">Explore →</a>
+          </div>
+          <div class="ascon-card pillar-card" style="--pillar-color:#B5451B;--pillar-rgb:181,69,27">
+            <span class="pillar-tag">Impact</span>
+            <div class="pillar-title">Continental Impact</div>
+            <div class="pillar-sub">Sustainable, measurable outcomes</div>
+            <p class="pillar-body">Positioning Africa as a strategic player in global value chains through coordinated,
+              long-term investment in supply chain excellence.</p>
+            <a class="pillar-cta" href="#">Explore →</a>
+          </div>
+        </div>
+
+        <!-- Card settings -->
+        <div class="card-settings-grid mt-md">
+          <div class="card-settings">
+            <strong>Layout & Container</strong><br>
+            Border radius: <code>12px</code><br>
+            Padding: <code>24px all sides</code><br>
+            Top stripe: <code>4px solid pillar-color</code><br>
+            Hover: <code>translateY(-4px) + shadow-lg</code>
+          </div>
+          <div class="card-settings">
+            <strong>Tag Element</strong><br>
+            Background: <code>rgba(r,g,b, 0.1)</code><br>
+            Text: <code>pillar-color</code><br>
+            Font: <code>10px / 700 / uppercase</code><br>
+            Letter spacing: <code>0.08em</code>
+          </div>
+          <div class="card-settings">
+            <strong>CTA Link</strong><br>
+            Border: <code>1px solid rgba(r,g,b,0.3)</code><br>
+            Hover fill: <code>pillar-color</code><br>
+            Hover text: <code>#FFFFFF</code><br>
+            Font: <code>12px / 600 / uppercase</code>
+          </div>
+        </div>
+
+        <!-- News Cards -->
+        <div class="subsection-title mt-lg">News / Blog / Events Cards</div>
+        <div class="news-cards">
+          <div class="ascon-card news-card">
+            <div class="news-card-img" style="background:linear-gradient(135deg,#0D2240,#1A3A6B);">🌍</div>
+            <div class="news-card-body">
+              <div class="news-meta">Conference <span class="dot"></span><span class="date">Mar 2026</span></div>
+              <div class="news-title">ASCON 2026 Official Launch & Signing Ceremony</div>
+              <p class="news-excerpt">Pan-African confederation officially launched in Lusaka, Zambia, with member
+                nations signing the founding charter.</p>
+              <a class="news-read-more" href="#">Read More →</a>
+            </div>
+          </div>
+          <div class="ascon-card news-card">
+            <div class="news-card-img" style="background:linear-gradient(135deg,#071628,#C9911A33);">📋</div>
+            <div class="news-card-body">
+              <div class="news-meta">Standards <span class="dot"></span><span class="date">Feb 2026</span></div>
+              <div class="news-title">Pan-African Certification Framework Draft Released</div>
+              <p class="news-excerpt">ASCON publishes draft framework for harmonised supply chain certification, open
+                for member consultation.</p>
+              <a class="news-read-more" href="#">Read More →</a>
+            </div>
+          </div>
+          <div class="ascon-card news-card">
+            <div class="news-card-img" style="background:linear-gradient(135deg,#2A7A4B,#071628);">🤝</div>
+            <div class="news-card-body">
+              <div class="news-meta">Membership <span class="dot"></span><span class="date">Jan 2026</span></div>
+              <div class="news-title">ASCON Expands Advisory Board to Strengthen Governance</div>
+              <p class="news-excerpt">New appointments to the Advisory Board bring additional continental expertise and
+                institutional capacity to the confederation.</p>
+              <a class="news-read-more" href="#">Read More →</a>
+            </div>
+          </div>
+          <div class="ascon-card news-card">
+            <div class="news-card-img" style="background:linear-gradient(135deg,#B5451B,#071628);">🏆</div>
+            <div class="news-card-body">
+              <div class="news-meta">Awards <span class="dot"></span><span class="date">Apr 2026</span></div>
+              <div class="news-title">2026 ASCON Awards — Nominations Now Open</div>
+              <p class="news-excerpt">Recognising excellence in supply chain leadership across Africa. Submit
+                nominations before 31 July 2026.</p>
+              <a class="news-read-more" href="#">Read More →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card -->
+        <div class="subsection-title mt-md">Event Card</div>
+        <div class="event-card-wrap">
+          <div class="ascon-card event-card">
+            <div class="event-date-pillar">
+              <div class="event-day">23</div>
+              <div class="event-month">Sep</div>
+            </div>
+            <div class="event-body">
+              <div class="event-category">Conference · Livingstone</div>
+              <div class="event-title">2026 ASCON Conference — Day 1</div>
+              <div class="event-time">09:00 – 18:00 · Radisson Blu Mosi-Oa-Tunya</div>
+            </div>
+          </div>
+          <div class="ascon-card event-card">
+            <div class="event-date-pillar" style="background:var(--ascon-gold);">
+              <div class="event-day" style="color:var(--ascon-navy-deep);">25</div>
+              <div class="event-month" style="color:var(--ascon-navy-deep);opacity:0.7;">Sep</div>
+            </div>
+            <div class="event-body">
+              <div class="event-category">Awards · Livingstone</div>
+              <div class="event-title">2026 ASCON Awards Ceremony</div>
+              <div class="event-time">18:30 – 22:00 · Gala Dinner Venue</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         06 — VOICE & MISSION
+    ═══════════════════════════ -->
+      <section class="ds-section" id="voice">
+        <div class="section-eyebrow">06 — Brand</div>
+        <h2 class="section-title">Vision, Mission & Voice</h2>
+        <p class="section-desc">Approved messaging and brand language for ASCON digital properties. Use the Vision and
+          Mission wording below consistently — do not paraphrase or abbreviate on official platforms.</p>
+        <div class="section-divider"></div>
+
+        <div class="brand-voice-grid">
+          <div class="brand-voice-card">
+            <h3>Vision</h3>
+            <p>To be the leading Pan-African professional confederation for supply chain excellence — driving
+              harmonisation, professionalism, and collaboration to position Africa's supply chain as a competitive
+              global leader.</p>
+          </div>
+          <div class="brand-voice-card">
+            <h3>Mission</h3>
+            <p>To unify professional African supply chain standards, strengthen institutions, and build a connected,
+              future-ready ecosystem that enables practitioners and organisations to thrive in global value chains.</p>
+          </div>
+        </div>
+
+        <div class="subsection-title mt-md">Core Values</div>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="val-name">Professionalism</div>
+            <div class="val-desc">Integrity, ethics, and accountability in all we do.</div>
+          </div>
+          <div class="value-card" style="border-top-color:var(--ascon-navy-mid);">
+            <div class="val-name">Relevance</div>
+            <div class="val-desc">Equity and inclusivity in practice across all member nations.</div>
+          </div>
+          <div class="value-card" style="border-top-color:var(--ascon-green);">
+            <div class="val-name">Collaborate & Grow</div>
+            <div class="val-desc">Mutually beneficial partnerships that elevate the whole sector.</div>
+          </div>
+          <div class="value-card" style="border-top-color:var(--ascon-terra);">
+            <div class="val-name">Measurable Impact</div>
+            <div class="val-desc">Sustainability, long-term value, and evidence-based outcomes.</div>
+          </div>
+          <div class="value-card" style="border-top-color:var(--ascon-navy-light);">
+            <div class="val-name">Future Readiness</div>
+            <div class="val-desc">Excellence, innovation, agility, and transformation at all levels.</div>
+          </div>
+        </div>
+
+        <div class="subsection-title mt-lg">Brand Language Keywords</div>
+        <div class="brand-keywords mt-sm">
+          <span class="brand-kw">Pan-African</span>
+          <span class="brand-kw">Harmonised</span>
+          <span class="brand-kw">Continental</span>
+          <span class="brand-kw">Professional Excellence</span>
+          <span class="brand-kw">Supply Chain</span>
+          <span class="brand-kw">Collaboration</span>
+          <span class="brand-kw">Standards</span>
+          <span class="brand-kw">Certification</span>
+          <span class="brand-kw">Cross-Border</span>
+          <span class="brand-kw">Future-Ready</span>
+          <span class="brand-kw">Impact</span>
+          <span class="brand-kw">Professionalism</span>
+          <span class="brand-kw">Global Value Chains</span>
+          <span class="brand-kw">Africa Rising</span>
+          <span class="brand-kw">Inclusive</span>
+          <span class="brand-kw">Institutional Strength</span>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         07 — LOGO USAGE
+    ═══════════════════════════ -->
+      <section class="ds-section" id="logo-usage">
+        <div class="section-eyebrow">07 — Brand</div>
+        <h2 class="section-title">Logo Usage Rules</h2>
+        <p class="section-desc">Use the official lockup consistently. Maintain clear space around the logo and avoid
+          stretching, recolouring, or placing on low-contrast backgrounds.</p>
+        <div class="section-divider"></div>
+
+        <div class="logo-usage-grid">
+          <!-- Dark BG -->
+          <div class="logo-frame">
+            <div class="logo-display" style="background:#0D2240;">
+              <div class="logo-lockup">
+                <div class="logo-mark" style="color:#071628;">A</div>
+                <div class="logo-text-block">
+                  <div class="logo-name" style="color:#FFFFFF;">ASCON</div>
+                  <div class="logo-tagline" style="color:#C9911A;">African Supply Chain Confederation</div>
+                </div>
+              </div>
+            </div>
+            <div class="logo-caption">
+              <strong>Correct — Dark Background</strong><br>
+              Use on brand navy (#0D2240 / #071628). Gold mark + white wordmark.
+            </div>
+          </div>
+          <!-- Light BG -->
+          <div class="logo-frame">
+            <div class="logo-display" style="background:#F7F5F2;">
+              <div class="logo-lockup">
+                <div class="logo-mark" style="color:#071628;">A</div>
+                <div class="logo-text-block">
+                  <div class="logo-name" style="color:#0D2240;">ASCON</div>
+                  <div class="logo-tagline" style="color:#9A6E10;">African Supply Chain Confederation</div>
+                </div>
+              </div>
+            </div>
+            <div class="logo-caption">
+              <strong>Correct — Light Background</strong><br>
+              Navy wordmark on light/white surfaces. Gold mark always retained.
+            </div>
+          </div>
+          <!-- Incorrect -->
+          <div class="logo-frame">
+            <div class="logo-display" style="background:linear-gradient(135deg,#667085,#98A2B3);">
+              <div class="logo-lockup" style="opacity:0.6;transform:scaleX(1.2);">
+                <div class="logo-mark" style="background:#DFE4EC;color:#98A2B3;border-radius:0;">A</div>
+                <div class="logo-text-block">
+                  <div class="logo-name" style="color:rgba(255,255,255,0.6);">ASCON</div>
+                  <div class="logo-tagline" style="color:rgba(255,255,255,0.4);">African Supply Chain Confederation
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="logo-caption">
+              <strong>Incorrect — Low Contrast / Distorted</strong><br>
+              No stretching, recolouring, or busy/low-contrast backgrounds.
+            </div>
+          </div>
+        </div>
+
+        <div class="logo-do-dont">
+          <div class="do-list">
+            <h4>✓ Do</h4>
+            <ul>
+              <li>Use the primary lockup (mark + wordmark) for all digital headers</li>
+              <li>Apply the gold mark consistently — never replace it with another colour</li>
+              <li>Use the Navy wordmark on light surfaces; White on dark</li>
+              <li>Maintain minimum clear space equal to the height of the 'A' mark</li>
+              <li>Use the monogram mark alone only for very small applications (favicon, stamps)</li>
+            </ul>
+          </div>
+          <div class="dont-list">
+            <h4>✗ Don't</h4>
+            <ul>
+              <li>Stretch, skew, rotate, or distort any part of the lockup</li>
+              <li>Replace the gold mark with another brand colour or greyscale</li>
+              <li>Place the logo on low-contrast or busy photographic backgrounds</li>
+              <li>Use unapproved typefaces as part of or alongside the logo</li>
+              <li>Recreate the logo in PowerPoint, Word, or any vector editor</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         08 — ICONS
+    ═══════════════════════════ -->
+      <section class="ds-section" id="icons">
+        <div class="section-eyebrow">08 — Brand</div>
+        <h2 class="section-title">Iconography</h2>
+        <p class="section-desc">ASCON uses a consistent monochrome icon treatment for UI applications. Social icons
+          should maintain uniform sizing and sit on dark surfaces for best contrast.</p>
+        <div class="section-divider"></div>
+
+        <div class="subsection-title">UI Icons — Core Set</div>
+        <div class="icon-grid">
+          <div class="icon-item">🌍<span>Africa / Global</span></div>
+          <div class="icon-item">🔗<span>Network / Link</span></div>
+          <div class="icon-item">📋<span>Standards</span></div>
+          <div class="icon-item">🤝<span>Collaboration</span></div>
+          <div class="icon-item">🏆<span>Awards</span></div>
+          <div class="icon-item">📦<span>Supply Chain</span></div>
+          <div class="icon-item">🎓<span>Education</span></div>
+          <div class="icon-item">📊<span>Analytics</span></div>
+          <div class="icon-item">✈️<span>Cross-border</span></div>
+          <div class="icon-item">📰<span>News</span></div>
+          <div class="icon-item">📅<span>Events</span></div>
+          <div class="icon-item">👥<span>Members</span></div>
+        </div>
+
+        <div class="subsection-title mt-md">Social Icons — Current Set</div>
+        <p style="font-size:13px;color:var(--ascon-muted);margin-bottom:16px;">Social icons use a consistent dark
+          surface treatment. Place them on Navy backgrounds for optimal contrast.</p>
+        <div style="display:flex;gap:10px;padding:20px;background:var(--ascon-navy-deep);border-radius:var(--r-lg);">
+          <a class="social-btn" href="#" title="LinkedIn">in</a>
+          <a class="social-btn" href="#" title="X / Twitter">𝕏</a>
+          <a class="social-btn" href="#" title="Facebook">f</a>
+          <a class="social-btn" href="#" title="Instagram">⬡</a>
+          <a class="social-btn" href="#" title="YouTube">▶</a>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         09 — NAVIGATION
+    ═══════════════════════════ -->
+      <section class="ds-section" id="navigation">
+        <div class="section-eyebrow">09 — Brand</div>
+        <h2 class="section-title">Navigation Structure</h2>
+        <p class="section-desc">ASCON navigation uses a utility bar for the primary CTA and a dark navy main nav. On
+          mobile, the full lockup swaps to the monogram mark.</p>
+        <div class="section-divider"></div>
+
+        <div class="subsection-title">Primary Navigation Demo</div>
+        <div class="nav-demo">
+          <div class="nav-top-bar">
+            <a href="#">2026 Conference</a>
+            <a href="#">Contact Us</a>
+          </div>
+          <div class="nav-main">
+            <a class="nav-brand" href="#">
+              <div class="nav-mark">A</div>
+              <div>
+                <div class="nav-brand-text">ASCON</div>
+                <div class="nav-brand-sub">African Supply Chain Confederation</div>
+              </div>
+            </a>
+            <div class="nav-links">
+              <a href="#" class="active">Home</a>
+              <a href="#">About Us</a>
+              <a href="#">Members</a>
+              <a href="#">News</a>
+              <a href="#">Conference</a>
+              <a href="#" class="nav-cta">Join Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitemap">
+          <h4 style="font-size:13px;font-weight:700;color:var(--ascon-navy);margin-bottom:16px;">Primary Navigation
+            Hierarchy</h4>
+          <ul class="sitemap-tree">
+            <li>HOME</li>
+            <li>ABOUT US
+              <ul>
+                <li>Who We Are</li>
+                <li>Leadership</li>
+                <li>Guiding Principles</li>
+              </ul>
+            </li>
+            <li>MEMBERS
+              <ul>
+                <li>EPPA – Eswatini</li>
+                <li>GIPS – Ghana</li>
+                <li>KISM – Kenya</li>
+                <li>ISCM – South Africa</li>
+                <li>IPPU – Uganda</li>
+                <li>ZIPS – Zambia</li>
+                <li>ZIPS – Zimbabwe</li>
+              </ul>
+            </li>
+            <li>NEWS</li>
+            <li>CONFERENCE
+              <ul>
+                <li>2026 Conference</li>
+                <li>Launch Event</li>
+                <li>ASCON Awards</li>
+                <li>Sign Up for Updates</li>
+              </ul>
+            </li>
+            <li>CONTACT US</li>
+          </ul>
+        </div>
+
+        <div class="subsection-title mt-lg">Footer Structure</div>
+        <div class="footer-demo">
+          <div class="footer-rainbow"></div>
+          <div class="footer-body">
+            <div class="footer-brand-col">
+              <div class="footer-logo">
+                <div class="footer-mark">A</div>
+                <div class="footer-brand-name">ASCON</div>
+              </div>
+              <p class="footer-desc">The African Supply Chain Confederation unifies professional supply chain standards
+                and networks across the continent.</p>
+            </div>
+            <div>
+              <div class="footer-col-title">Quick Links</div>
+              <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Conference</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="footer-col-title">Get in Touch</div>
+              <ul class="footer-links">
+                <li><a href="#">2 3rd Avenue, Parktown</a></li>
+                <li><a href="#">Johannesburg, 2193</a></li>
+                <li><a href="#">info@asconafrica.org</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="footer-legal">© 2026 ASCON — African Supply Chain Confederation. All rights reserved.</div>
+            <div class="social-row">
+              <a class="social-btn" href="#">in</a>
+              <a class="social-btn" href="#">𝕏</a>
+              <a class="social-btn" href="#">f</a>
+              <a class="social-btn" href="#">▶</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         10 — CSS TOKENS
+    ═══════════════════════════ -->
+      <section class="ds-section ds-section-dark" id="variables">
+        <div class="section-eyebrow" style="color:var(--ascon-gold);">10 — Developer</div>
+        <h2 class="section-title">CSS Custom Properties</h2>
+        <p class="section-desc">Copy these root variables into your theme's <code
+            style="font-family:monospace;font-size:13px;background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:3px;color:rgba(255,255,255,0.7);">style.css</code>
+          to standardise all brand tokens across every component.</p>
+        <div class="section-divider"></div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">ascon-design-tokens.css</span>
+            <button class="copy-btn" onclick="copyCode('token-block')">COPY</button>
+          </div>
+          <div class="code-body">
+            <pre id="token-block"><span class="code-comment">/* =====================================================
+   ASCON — CSS DESIGN TOKENS
+   African Supply Chain Confederation
+   Version 1.1 · April 2026
+   ===================================================== */</span>
+<span class="code-punct">:root {</span>
+  <span class="code-comment">/* ─── BRAND COLORS ─── */</span>
+  <span class="code-var">--ascon-navy</span><span class="code-punct">:</span>       <span class="code-val">#0D2240</span><span class="code-punct">;</span>  <span class="code-comment">/* Primary background / text */</span>
+  <span class="code-var">--ascon-navy-deep</span><span class="code-punct">:</span>  <span class="code-val">#071628</span><span class="code-punct">;</span>  <span class="code-comment">/* Header / sidebar / footer bg */</span>
+  <span class="code-var">--ascon-navy-mid</span><span class="code-punct">:</span>   <span class="code-val">#1A3A6B</span><span class="code-punct">;</span>  <span class="code-comment">/* Hover state / secondary navy */</span>
+  <span class="code-var">--ascon-navy-light</span><span class="code-punct">:</span> <span class="code-val">#2C5282</span><span class="code-punct">;</span>  <span class="code-comment">/* Active / selected states */</span>
+  <span class="code-var">--ascon-navy-pale</span><span class="code-punct">:</span>  <span class="code-val">#EBF0F8</span><span class="code-punct">;</span>  <span class="code-comment">/* Light navy tint backgrounds */</span>
+
+  <span class="code-var">--ascon-gold</span><span class="code-punct">:</span>       <span class="code-val">#C9911A</span><span class="code-punct">;</span>  <span class="code-comment">/* Primary accent / CTA */</span>
+  <span class="code-var">--ascon-gold-light</span><span class="code-punct">:</span> <span class="code-val">#E8B84B</span><span class="code-punct">;</span>  <span class="code-comment">/* Hover state for gold */</span>
+  <span class="code-var">--ascon-gold-deep</span><span class="code-punct">:</span>  <span class="code-val">#9A6E10</span><span class="code-punct">;</span>  <span class="code-comment">/* Text on gold backgrounds */</span>
+  <span class="code-var">--ascon-gold-pale</span><span class="code-punct">:</span>  <span class="code-val">#FDF4E0</span><span class="code-punct">;</span>  <span class="code-comment">/* Gold tint backgrounds / badges */</span>
+
+  <span class="code-var">--ascon-terra</span><span class="code-punct">:</span>      <span class="code-val">#B5451B</span><span class="code-punct">;</span>  <span class="code-comment">/* Error / alert / terracotta accent */</span>
+  <span class="code-var">--ascon-terra-light</span><span class="code-punct">:</span><span class="code-val">#D4633A</span><span class="code-punct">;</span>  <span class="code-comment">/* Hover for terracotta */</span>
+  <span class="code-var">--ascon-terra-pale</span><span class="code-punct">:</span> <span class="code-val">#FBF0EC</span><span class="code-punct">;</span>  <span class="code-comment">/* Error backgrounds */</span>
+
+  <span class="code-var">--ascon-green</span><span class="code-punct">:</span>      <span class="code-val">#2A7A4B</span><span class="code-punct">;</span>  <span class="code-comment">/* Success / Savannah Green */</span>
+  <span class="code-var">--ascon-green-light</span><span class="code-punct">:</span><span class="code-val">#3CA065</span><span class="code-punct">;</span>  <span class="code-comment">/* Hover for green */</span>
+  <span class="code-var">--ascon-green-pale</span><span class="code-punct">:</span> <span class="code-val">#EAF5EF</span><span class="code-punct">;</span>  <span class="code-comment">/* Success backgrounds */</span>
+
+  <span class="code-comment">/* ─── NEUTRALS ─── */</span>
+  <span class="code-var">--ascon-bg</span><span class="code-punct">:</span>         <span class="code-val">#F7F5F2</span><span class="code-punct">;</span>  <span class="code-comment">/* Page background (warm white) */</span>
+  <span class="code-var">--ascon-white</span><span class="code-punct">:</span>      <span class="code-val">#FFFFFF</span><span class="code-punct">;</span>
+  <span class="code-var">--ascon-border</span><span class="code-punct">:</span>     <span class="code-val">#DFE4EC</span><span class="code-punct">;</span>  <span class="code-comment">/* Dividers & borders */</span>
+  <span class="code-var">--ascon-muted</span><span class="code-punct">:</span>      <span class="code-val">#667085</span><span class="code-punct">;</span>  <span class="code-comment">/* Secondary / body text */</span>
+  <span class="code-var">--ascon-subtle</span><span class="code-punct">:</span>     <span class="code-val">#98A2B3</span><span class="code-punct">;</span>  <span class="code-comment">/* Placeholders / disabled */</span>
+
+  <span class="code-comment">/* ─── TYPOGRAPHY ─── */</span>
+  <span class="code-var">--font-heading</span><span class="code-punct">:</span> <span class="code-val">'Marseille', 'Cormorant Garamond', 'Playfair Display', Georgia, serif</span><span class="code-punct">;</span>
+  <span class="code-var">--font-body</span><span class="code-punct">:</span>    <span class="code-val">'Inter', Helvetica, Arial, sans-serif</span><span class="code-punct">;</span>
+
+  <span class="code-comment">/* Font Sizes */</span>
+  <span class="code-var">--size-h1</span><span class="code-punct">:</span>  <span class="code-val">52px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-h2</span><span class="code-punct">:</span>  <span class="code-val">36px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-h3</span><span class="code-punct">:</span>  <span class="code-val">26px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-h4</span><span class="code-punct">:</span>  <span class="code-val">20px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-h5</span><span class="code-punct">:</span>  <span class="code-val">17px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-h6</span><span class="code-punct">:</span>  <span class="code-val">15px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-body</span><span class="code-punct">:</span>    <span class="code-val">16px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-caption</span><span class="code-punct">:</span> <span class="code-val">13px</span><span class="code-punct">;</span>
+  <span class="code-var">--size-label</span><span class="code-punct">:</span>   <span class="code-val">11px</span><span class="code-punct">;</span>
+
+  <span class="code-comment">/* Font Weights */</span>
+  <span class="code-var">--w-light</span><span class="code-punct">:</span>    <span class="code-val">300</span><span class="code-punct">;</span>
+  <span class="code-var">--w-regular</span><span class="code-punct">:</span>  <span class="code-val">400</span><span class="code-punct">;</span>
+  <span class="code-var">--w-medium</span><span class="code-punct">:</span>   <span class="code-val">500</span><span class="code-punct">;</span>
+  <span class="code-var">--w-semibold</span><span class="code-punct">:</span> <span class="code-val">600</span><span class="code-punct">;</span>
+  <span class="code-var">--w-bold</span><span class="code-punct">:</span>     <span class="code-val">700</span><span class="code-punct">;</span>
+
+  <span class="code-comment">/* ─── SPACING ─── */</span>
+  <span class="code-var">--sp-xs</span><span class="code-punct">:</span>   <span class="code-val">4px</span><span class="code-punct">;</span>
+  <span class="code-var">--sp-sm</span><span class="code-punct">:</span>   <span class="code-val">8px</span><span class="code-punct">;</span>
+  <span class="code-var">--sp-md</span><span class="code-punct">:</span>  <span class="code-val">16px</span><span class="code-punct">;</span>
+  <span class="code-var">--sp-lg</span><span class="code-punct">:</span>  <span class="code-val">24px</span><span class="code-punct">;</span>
+  <span class="code-var">--sp-xl</span><span class="code-punct">:</span>  <span class="code-val">40px</span><span class="code-punct">;</span>
+  <span class="code-var">--sp-2xl</span><span class="code-punct">:</span> <span class="code-val">64px</span><span class="code-punct">;</span>
+  <span class="code-var">--sp-3xl</span><span class="code-punct">:</span> <span class="code-val">96px</span><span class="code-punct">;</span>
+
+  <span class="code-comment">/* ─── BORDER RADIUS ─── */</span>
+  <span class="code-var">--r-sm</span><span class="code-punct">:</span>   <span class="code-val">4px</span><span class="code-punct">;</span>   <span class="code-comment">/* Buttons, inputs, tags */</span>
+  <span class="code-var">--r-md</span><span class="code-punct">:</span>   <span class="code-val">8px</span><span class="code-punct">;</span>   <span class="code-comment">/* Small UI panels */</span>
+  <span class="code-var">--r-lg</span><span class="code-punct">:</span>  <span class="code-val">12px</span><span class="code-punct">;</span>   <span class="code-comment">/* Cards, containers */</span>
+  <span class="code-var">--r-xl</span><span class="code-punct">:</span>  <span class="code-val">16px</span><span class="code-punct">;</span>   <span class="code-comment">/* Modals, large panels */</span>
+  <span class="code-var">--r-full</span><span class="code-punct">:</span><span class="code-val">9999px</span><span class="code-punct">;</span>   <span class="code-comment">/* Pills, badges */</span>
+
+  <span class="code-comment">/* ─── SHADOWS ─── */</span>
+  <span class="code-var">--shadow-sm</span><span class="code-punct">:</span> <span class="code-val">0 1px 4px rgba(13,34,64,0.08)</span><span class="code-punct">;</span>
+  <span class="code-var">--shadow-md</span><span class="code-punct">:</span> <span class="code-val">0 4px 16px rgba(13,34,64,0.12)</span><span class="code-punct">;</span>
+  <span class="code-var">--shadow-lg</span><span class="code-punct">:</span> <span class="code-val">0 12px 40px rgba(13,34,64,0.18)</span><span class="code-punct">;</span>
+  <span class="code-var">--shadow-xl</span><span class="code-punct">:</span> <span class="code-val">0 24px 64px rgba(13,34,64,0.22)</span><span class="code-punct">;</span>
+
+  <span class="code-comment">/* ─── TRANSITIONS ─── */</span>
+  <span class="code-var">--t-fast</span><span class="code-punct">:</span> <span class="code-val">all 0.18s ease</span><span class="code-punct">;</span>
+  <span class="code-var">--t-base</span><span class="code-punct">:</span> <span class="code-val">all 0.25s ease</span><span class="code-punct">;</span>
+  <span class="code-var">--t-slow</span><span class="code-punct">:</span> <span class="code-val">all 0.40s ease</span><span class="code-punct">;</span>
+
+  <span class="code-comment">/* ─── Z-INDEX ─── */</span>
+  <span class="code-var">--z-base</span><span class="code-punct">:</span>     <span class="code-val">1</span><span class="code-punct">;</span>
+  <span class="code-var">--z-dropdown</span><span class="code-punct">:</span> <span class="code-val">100</span><span class="code-punct">;</span>
+  <span class="code-var">--z-sticky</span><span class="code-punct">:</span>   <span class="code-val">200</span><span class="code-punct">;</span>
+  <span class="code-var">--z-modal</span><span class="code-punct">:</span>    <span class="code-val">300</span><span class="code-punct">;</span>
+  <span class="code-var">--z-toast</span><span class="code-punct">:</span>    <span class="code-val">400</span><span class="code-punct">;</span>
+<span class="code-punct">}</span></pre>
+          </div>
+        </div>
+
+        <!-- Spacing Scale -->
+        <div class="subsection-title mt-lg" style="color:rgba(255,255,255,0.85);">Spacing Scale</div>
+        <div class="spacing-scale mt-sm">
+          <div class="spacing-row" style="background:var(--ascon-dark-card);border-color:rgba(255,255,255,0.08)">
+            <span class="spacing-token" style="color:#6EE7B7;">--sp-xs</span>
+            <div class="spacing-bar" style="width:4px;"></div>
+            <span class="spacing-value" style="color:rgba(255,255,255,0.4);">4px</span>
+          </div>
+          <div class="spacing-row" style="background:var(--ascon-dark-card);border-color:rgba(255,255,255,0.08)">
+            <span class="spacing-token" style="color:#6EE7B7;">--sp-sm</span>
+            <div class="spacing-bar" style="width:8px;"></div>
+            <span class="spacing-value" style="color:rgba(255,255,255,0.4);">8px</span>
+          </div>
+          <div class="spacing-row" style="background:var(--ascon-dark-card);border-color:rgba(255,255,255,0.08)">
+            <span class="spacing-token" style="color:#6EE7B7;">--sp-md</span>
+            <div class="spacing-bar" style="width:16px;"></div>
+            <span class="spacing-value" style="color:rgba(255,255,255,0.4);">16px</span>
+          </div>
+          <div class="spacing-row" style="background:var(--ascon-dark-card);border-color:rgba(255,255,255,0.08)">
+            <span class="spacing-token" style="color:#6EE7B7;">--sp-lg</span>
+            <div class="spacing-bar" style="width:24px;"></div>
+            <span class="spacing-value" style="color:rgba(255,255,255,0.4);">24px</span>
+          </div>
+          <div class="spacing-row" style="background:var(--ascon-dark-card);border-color:rgba(255,255,255,0.08)">
+            <span class="spacing-token" style="color:#6EE7B7;">--sp-xl</span>
+            <div class="spacing-bar" style="width:40px;"></div>
+            <span class="spacing-value" style="color:rgba(255,255,255,0.4);">40px</span>
+          </div>
+          <div class="spacing-row" style="background:var(--ascon-dark-card);border-color:rgba(255,255,255,0.08)">
+            <span class="spacing-token" style="color:#6EE7B7;">--sp-2xl</span>
+            <div class="spacing-bar" style="width:64px;"></div>
+            <span class="spacing-value" style="color:rgba(255,255,255,0.4);">64px</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+         11 — ELEMENTOR
+    ═══════════════════════════ -->
+      <section class="ds-section" id="elementor">
+        <div class="section-eyebrow">11 — Developer</div>
+        <h2 class="section-title">Elementor Pro Integration</h2>
+        <p class="section-desc">Map these tokens in Elementor Site Settings → Custom CSS. Register the brand palette in
+          Global Colors and fonts in Global Fonts for a fully system-driven build.</p>
+        <div class="section-divider"></div>
+
+        <div class="subsection-title">Global Colors → Site Settings</div>
+        <div class="global-colors mt-sm">
+          <div class="gc-chip">
+            <div class="gc-swatch" style="background:#0D2240;"></div>
+            <div>
+              <div class="gc-name">Primary</div>
+              <div class="gc-hex">#0D2240 · --ascon-navy</div>
+            </div>
+          </div>
+          <div class="gc-chip">
+            <div class="gc-swatch" style="background:#C9911A;"></div>
+            <div>
+              <div class="gc-name">Accent</div>
+              <div class="gc-hex">#C9911A · --ascon-gold</div>
+            </div>
+          </div>
+          <div class="gc-chip">
+            <div class="gc-swatch" style="background:#2A7A4B;"></div>
+            <div>
+              <div class="gc-name">Success</div>
+              <div class="gc-hex">#2A7A4B · --ascon-green</div>
+            </div>
+          </div>
+          <div class="gc-chip">
+            <div class="gc-swatch" style="background:#B5451B;"></div>
+            <div>
+              <div class="gc-name">Alert</div>
+              <div class="gc-hex">#B5451B · --ascon-terra</div>
+            </div>
+          </div>
+          <div class="gc-chip">
+            <div class="gc-swatch" style="background:#F7F5F2;border:1px solid #ddd;"></div>
+            <div>
+              <div class="gc-name">Background</div>
+              <div class="gc-hex">#F7F5F2 · --ascon-bg</div>
+            </div>
+          </div>
+          <div class="gc-chip">
+            <div class="gc-swatch" style="background:#667085;"></div>
+            <div>
+              <div class="gc-name">Text Muted</div>
+              <div class="gc-hex">#667085 · --ascon-muted</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection-title mt-md">Global Fonts → Site Settings</div>
+        <div class="global-fonts">
+          <div class="gf-row">
+            <div class="gf-preview" style="font-family:var(--font-heading);">Aa</div>
+            <div class="gf-meta">
+              <div class="gf-name">Marseille — Heading Font</div>
+              <div class="gf-role">H1–H4 · Hero typography · Brand applications · Display</div>
+              <div class="gf-weights">
+                <span class="gf-w">300</span><span class="gf-w">400</span><span class="gf-w">500</span><span
+                  class="gf-w">600</span><span class="gf-w">700</span>
+              </div>
+            </div>
+          </div>
+          <div class="gf-row">
+            <div class="gf-preview" style="font-family:'Inter',sans-serif;">Aa</div>
+            <div class="gf-meta">
+              <div class="gf-name">Inter — Body Font</div>
+              <div class="gf-role">H5–H6 · Body text · Buttons · Labels · UI elements</div>
+              <div class="gf-weights">
+                <span class="gf-w">300</span><span class="gf-w">400</span><span class="gf-w">500</span><span
+                  class="gf-w">600</span><span class="gf-w">700</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection-title mt-md">Google Fonts — Add to &lt;head&gt;</div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">google-fonts.html</span>
+            <button class="copy-btn" onclick="copyCode('gf-block')">COPY</button>
+          </div>
+          <div class="code-body">
+            <pre id="gf-block"><span class="code-comment"><!-- ASCON — Google Fonts (Inter body font) --></span>
+<span class="code-punct">&lt;link</span> <span class="code-var">rel</span><span class="code-punct">="preconnect"</span> <span class="code-var">href</span><span class="code-punct">="https://fonts.googleapis.com"&gt;</span>
+<span class="code-punct">&lt;link</span> <span class="code-var">rel</span><span class="code-punct">="preconnect"</span> <span class="code-var">href</span><span class="code-punct">="https://fonts.gstatic.com"</span> <span class="code-var">crossorigin</span><span class="code-punct">&gt;</span>
+<span class="code-punct">&lt;link</span>
+  <span class="code-var">href</span><span class="code-punct">="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"</span>
+  <span class="code-var">rel</span><span class="code-punct">="stylesheet"&gt;</span>
+<span class="code-comment"><!-- Marseille: add your licensed @font-face below --></span>
+<span class="code-punct">&lt;style&gt;</span>
+<span class="code-var">@font-face</span> <span class="code-punct">{</span>
+  <span class="code-var">font-family</span><span class="code-punct">:</span> <span class="code-val">'Marseille'</span><span class="code-punct">;</span>
+  <span class="code-var">src</span><span class="code-punct">:</span> <span class="code-val">url('/fonts/Marseille-Light.woff2') format('woff2')</span> <span class="code-var">font-weight</span><span class="code-punct">:</span> <span class="code-val">300</span><span class="code-punct">;</span>
+  <span class="code-var">src</span><span class="code-punct">:</span> <span class="code-val">url('/fonts/Marseille-Regular.woff2') format('woff2')</span> <span class="code-var">font-weight</span><span class="code-punct">:</span> <span class="code-val">400</span><span class="code-punct">;</span>
+  <span class="code-var">src</span><span class="code-punct">:</span> <span class="code-val">url('/fonts/Marseille-SemiBold.woff2') format('woff2')</span> <span class="code-var">font-weight</span><span class="code-punct">:</span> <span class="code-val">600</span><span class="code-punct">;</span>
+  <span class="code-var">font-display</span><span class="code-punct">:</span> <span class="code-val">swap</span><span class="code-punct">;</span>
+<span class="code-punct">}</span>
+<span class="code-punct">&lt;/style&gt;</span></pre>
+          </div>
+        </div>
+
+        <!-- Mandatory footer -->
+        <div
+          style="margin-top:40px;padding:20px 24px;background:var(--ascon-navy-pale);border:1px solid var(--ascon-border);border-left:4px solid var(--ascon-gold);border-radius:var(--r-md);">
+          <div
+            style="font-size:11px;font-weight:700;color:var(--ascon-gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">
+            ⚠ Mandatory Footer — Required on All Pages</div>
+          <p style="font-size:12.5px;color:var(--ascon-muted);line-height:1.7;">The African Supply Chain Confederation
+            (ASCON) was founded in Accra, Ghana, in August 2025. Founding member nations: Eswatini, Ghana, Kenya, South
+            Africa, Uganda, Zambia, and Zimbabwe. Registered continental professional body dedicated to advancing supply
+            chain excellence across Africa. <a href="https://asconafrica.org"
+              style="color:var(--ascon-navy);font-weight:600;">www.asconafrica.org</a></p>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer style="background:var(--ascon-navy-deep);padding:32px 80px;border-top:1px solid rgba(255,255,255,0.06);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--ascon-gold);margin-bottom:4px;">Brand Style Guide &amp; Design System
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.3);">Version 1.1 · April 2026 · African Supply Chain
+              Confederation</div>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.2);">Est. 2025 · Accra, Ghana · 7 Founding Nations</div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    function copyHex(el, hex) {
+      navigator.clipboard.writeText(hex).catch(() => { });
+      el.classList.add('copied');
+      setTimeout(() => el.classList.remove('copied'), 1800);
+    }
+
+    function copyCode(id) {
+      const el = document.getElementById(id);
+      const text = el.textContent || el.innerText;
+      navigator.clipboard.writeText(text).catch(() => { });
+    }
+
+    function updateCount(el) {
+      const count = el.value.length;
+      document.getElementById('char-count').textContent = count;
+      if (count > 500) el.value = el.value.substring(0, 500);
+    }
+
+    // Highlight active nav on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'rgba(255,255,255,0.95)'
+          : '';
+        a.style.borderLeftColor = a.getAttribute('href') === '#' + current
+          ? 'var(--ascon-gold)'
+          : '';
+        a.style.background = a.getAttribute('href') === '#' + current
+          ? 'rgba(255,255,255,0.05)'
+          : '';
+      });
+    }, { passive: true });
+  </script>
+  <link rel="stylesheet" href="../shared/guide-switcher.css">
+  <script src="../shared/guide-switcher.js" defer></script>
+</body>
+
+</html>

@@ -106,10 +106,12 @@ Use this when judging whether a guide is “complete enough” to share with sta
 
 | Guide | Version | Best for | Main gap |
 |-------|---------|----------|----------|
-| OWI | v1.9 | Elementor developers | No dedicated WCAG section; stale copyright |
-| IMM-GS | v1.0 | Elementor developers | Content/token accuracy (P0) |
-| BCi | v1.0 | Brand & UX governance | Mobile nav; no Elementor export |
-| mPowered | v1.0 | Product dev + AI prototyping | Logo, voice, spacing; AI security |
+| OWI | v2.0 | Elementor developers | No dedicated WCAG section; stale copyright |
+| IMM-GS | v1.1 | Elementor developers | Content/token accuracy (P0) |
+| BCi | v1.1 | Brand & UX governance | Mobile nav; no Elementor export |
+| mPowered | v1.1 | Product dev + AI prototyping | Logo, voice, spacing; AI security |
+| ASCON | v1.1 | Supply chain confederation digital | — |
+| TICON Africa | v1.4 | Association digital properties | — |
 
 ---
 

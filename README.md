@@ -12,6 +12,8 @@ After enabling GitHub Pages (source: **main** branch, root `/`), each brand has 
 | IMM Graduate School | `/IMM-GS-style-guide/` |
 | Belgium Campus iTversity | `/BCi-style-guide/` |
 | UXi mPowered | `/mPowered-style-guide/` |
+| ASCON | `/ASCON-style-guide/` |
+| TICON Africa | `/TICON-Africa-style-guide/` |
 
 Replace `<org>` and `<repo>` with your GitHub org/user and repository name:
 
@@ -19,6 +21,8 @@ Replace `<org>` and `<repo>` with your GitHub org/user and repository name:
 - `https://<org>.github.io/<repo>/IMM-GS-style-guide/`
 - `https://<org>.github.io/<repo>/BCi-style-guide/`
 - `https://<org>.github.io/<repo>/mPowered-style-guide/`
+- `https://<org>.github.io/<repo>/ASCON-style-guide/`
+- `https://<org>.github.io/<repo>/TICON-Africa-style-guide/`
 
 ## Repository structure
 
@@ -31,7 +35,9 @@ Replace `<org>` and `<repo>` with your GitHub org/user and repository name:
 ├── OWI-style-guide/index.html
 ├── IMM-GS-style-guide/index.html
 ├── BCi-style-guide/index.html
-└── mPowered-style-guide/index.html
+├── mPowered-style-guide/index.html
+├── ASCON-style-guide/index.html
+└── TICON-Africa-style-guide/index.html
 ```
 
 ## Cross-guide navigation

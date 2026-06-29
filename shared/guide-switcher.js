@@ -5,7 +5,9 @@
     { slug: 'OWI-style-guide', label: 'Open Window Institute' },
     { slug: 'IMM-GS-style-guide', label: 'IMM Graduate School' },
     { slug: 'BCi-style-guide', label: 'Belgium Campus iTversity' },
-    { slug: 'mPowered-style-guide', label: 'UXi mPowered' }
+    { slug: 'mPowered-style-guide', label: 'UXi mPowered' },
+    { slug: 'ASCON-style-guide', label: 'ASCON' },
+    { slug: 'TICON-Africa-style-guide', label: 'TICON Africa' }
   ];
 
   var BRAND_SLUGS = GUIDES.map(function (g) { return g.slug; });
