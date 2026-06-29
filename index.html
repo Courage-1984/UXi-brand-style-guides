@@ -94,18 +94,16 @@
       margin: 0;
       padding: 0;
       display: grid;
-      gap: 14px;
+      grid-template-columns: 1fr auto;
+      gap: 14px 10px;
     }
 
     .guide-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
       align-items: stretch;
       gap: 10px;
-    }
-
-    .guide-row .guide-card {
-      flex: 1;
-      min-width: 0;
     }
 
     .guide-site-links {
@@ -149,8 +147,12 @@
     }
 
     @media (max-width: 560px) {
+      .guide-list {
+        grid-template-columns: 1fr;
+      }
+
       .guide-row {
-        flex-direction: column;
+        grid-template-columns: 1fr;
       }
 
       .guide-site-links {
@@ -164,6 +166,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
+      width: 100%;
       padding: 18px 22px 18px 22px;
       border-radius: 10px;
       color: inherit;
@@ -686,6 +689,14 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             Live
           </a>
+          <a class="guide-site-link" href="https://community.openwindow.co.za/" target="_blank" rel="noopener noreferrer" title="Open OWI community site in new tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Community
+          </a>
+          <a class="guide-site-link" href="https://ow-sup.uxidevelopment.co.za/" target="_blank" rel="noopener noreferrer" title="Open OWI supplementary dev site in new tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Sup
+          </a>
         </div>
       </li>
       <li class="guide-row">
@@ -815,6 +826,10 @@
             <a class="guide-site-link" href="https://owu.edu.zm/" target="_blank" rel="noopener noreferrer" title="Open OWU website in new tab">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Site
+            </a>
+            <a class="guide-site-link" href="https://shortcourses.owu.edu.zm/" target="_blank" rel="noopener noreferrer" title="Open OWU short courses site in new tab">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Short courses
             </a>
           </div>
         </li>
