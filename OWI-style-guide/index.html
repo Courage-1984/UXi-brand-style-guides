@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open Window Institute — Brand Style Guide & Design System v2.0</title>
+  <title>Open Window Institute — Brand Style Guide & Design System v2.2</title>
   <link rel="icon" type="image/png" href="../assets/favicons/OWI-favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
 
   <style>
     /* ============================================================
-       OPEN WINDOW INSTITUTE — DESIGN SYSTEM v2.0
+       OPEN WINDOW INSTITUTE — DESIGN SYSTEM v2.2
        CSS Custom Properties (Elementor-ready tokens)
     ============================================================ */
     :root {
@@ -174,22 +174,40 @@
       top: 0;
       left: 0;
       height: 100vh;
+      height: 100dvh;
       width: 248px;
       background: var(--ow-color-darker);
       border-right: 1px solid #222;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+      overflow: hidden;
       z-index: var(--ow-z-sticky);
       transition: transform 0.3s ease;
     }
 
-    #sidebar::-webkit-scrollbar {
-      width: 3px;
+    .sidebar-brand {
+      padding: 12px 16px 10px;
+      border-bottom: 1px solid #1A1A1A;
+      flex-shrink: 0;
     }
 
-    #sidebar::-webkit-scrollbar-thumb {
-      background: #2A2A2A;
+    .sidebar-nav {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      padding: 2px 0 4px;
+    }
+
+    .sidebar-footer {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      background: var(--ow-color-darker);
+      border-top: 1px solid #2A2A2A;
+      font-size: 10px;
+      color: var(--ow-color-muted);
+      font-family: var(--ow-font-primary);
+      line-height: 1.5;
+      letter-spacing: 0.04em;
     }
 
     #main-content {
@@ -197,37 +215,49 @@
     }
 
     .nav-category {
-      padding: 20px 20px 6px;
+      padding: clamp(5px, 0.9vh, 9px) 16px 2px;
       font-family: var(--ow-font-primary);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--ow-color-light);
+    }
+
+    .nav-category:first-child {
+      padding-top: clamp(4px, 0.6vh, 7px);
     }
 
     .nav-link {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
+      gap: 8px;
+      padding: clamp(4px, 0.72vh, 7px) 16px;
       font-family: var(--ow-font-primary);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
       color: #B0B0B0;
       text-decoration: none;
       border-left: 2px solid transparent;
       transition: var(--ow-transition);
+      white-space: nowrap;
     }
 
     .nav-index {
       font-family: var(--ow-font-primary);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--ow-color-muted);
+      flex-shrink: 0;
+      min-width: 17px;
+    }
+
+    .nav-link span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .nav-link:hover,
@@ -242,6 +272,96 @@
       height: 6px;
       border-radius: 50%;
       flex-shrink: 0;
+    }
+
+    /* ─── SCROLL PROGRESS ─── */
+    .scroll-progress-track {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 500;
+      background: rgba(255, 255, 255, 0.05);
+      pointer-events: none;
+    }
+
+    .scroll-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #F1B33A 0%, #E75A33 25%, #27A9DD 50%, #AA6CAD 75%, #E5428C 100%);
+      box-shadow: 0 0 12px rgba(231, 90, 51, 0.35);
+      transition: width 0.12s ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-progress-fill {
+        transition: none;
+      }
+    }
+
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: fixed;
+      right: 20px;
+      /* Sit above the shared guide-switcher (36px + 20px offset + 12px gap) */
+      bottom: calc(20px + 36px + 12px);
+      z-index: 400;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--ow-radius-sm);
+      background: var(--ow-color-tech);
+      color: #fff;
+      border: 2px solid rgba(231, 90, 51, 0.5);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ow-font-primary);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: var(--ow-shadow-md);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--ow-color-tech-80);
+      box-shadow: var(--ow-shadow-lg);
+    }
+
+    .back-to-top:focus-visible {
+      outline: 2px solid var(--ow-color-film);
+      outline-offset: 2px;
+    }
+
+    button.sidebar-brand {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+      font: inherit;
+      transition: background 0.2s ease;
+    }
+
+    button.sidebar-brand:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    button.sidebar-brand:focus-visible {
+      outline: 2px solid var(--ow-color-tech);
+      outline-offset: -2px;
     }
 
     /* ─── SECTION ─── */
@@ -320,8 +440,8 @@
     }
 
     .ow-logo-sidebar {
-      width: 154px;
-      height: 40px;
+      width: 140px;
+      height: 34px;
     }
 
     .ow-logo-hero {
@@ -1035,6 +1155,758 @@
       border: 1px solid;
     }
 
+    /* ─── VOICE & TONE ─── */
+    .tone-example {
+      background: var(--ow-color-card);
+      border-radius: var(--ow-radius-md);
+      padding: 18px 20px;
+      border: 1px solid var(--ow-color-border);
+      margin-bottom: 10px;
+    }
+
+    .tone-example-pass { border-left: 3px solid var(--ow-color-film); }
+    .tone-example-fail { border-left: 3px solid #C0392B; opacity: 0.85; }
+
+    .tone-example-label {
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ow-color-muted);
+      margin-bottom: 8px;
+    }
+
+    .tone-example-quote {
+      font-size: 14px;
+      color: var(--ow-color-light);
+      line-height: 1.6;
+    }
+
+    .tone-example-fail .tone-example-quote {
+      text-decoration: line-through;
+      color: var(--ow-color-muted);
+    }
+
+    .voice-attr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .voice-attr-card {
+      background: var(--ow-color-card);
+      border: 1px solid var(--ow-color-border);
+      border-radius: var(--ow-radius-lg);
+      padding: 20px;
+      border-top: 3px solid var(--ow-color-tech);
+    }
+
+    .voice-attr-card h4 {
+      font-family: var(--ow-font-primary);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ow-color-light);
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .voice-attr-card p {
+      font-size: 12px;
+      color: var(--ow-color-muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .voice-attr-card .voice-do {
+      display: block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--ow-color-light);
+      line-height: 1.5;
+    }
+
+    .voice-attr-card .voice-dont {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      color: #888;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    /* ─── SPEC TABLE ─── */
+    .ow-spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+
+    .ow-spec-table th {
+      text-align: left;
+      padding: 11px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ow-color-muted);
+      border-bottom: 1px solid var(--ow-color-border);
+    }
+
+    .ow-spec-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--ow-color-border);
+      color: var(--ow-color-muted);
+      line-height: 1.55;
+      vertical-align: top;
+    }
+
+    .ow-spec-table td strong { color: var(--ow-color-light); }
+
+    .ow-spec-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* ─── ACCESSIBILITY ─── */
+    .a11y-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .a11y-card {
+      background: var(--ow-color-card);
+      border: 1px solid var(--ow-color-border);
+      border-radius: var(--ow-radius-lg);
+      padding: 22px;
+      transition: var(--ow-transition);
+    }
+
+    .a11y-card:hover {
+      border-color: rgba(39, 169, 221, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .a11y-card-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    .a11y-card-title {
+      font-family: var(--ow-font-primary);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ow-color-light);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .a11y-card-desc {
+      font-size: 12px;
+      color: var(--ow-color-muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .a11y-do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .a11y-do-card,
+    .a11y-dont-card {
+      border-radius: var(--ow-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--ow-color-border);
+    }
+
+    .a11y-do-header {
+      padding: 10px 16px;
+      background: rgba(39, 169, 221, 0.12);
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ow-color-film);
+    }
+
+    .a11y-dont-header {
+      padding: 10px 16px;
+      background: rgba(192, 57, 43, 0.12);
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #E74C3C;
+    }
+
+    .a11y-do-body,
+    .a11y-dont-body {
+      padding: 16px 18px;
+      background: var(--ow-color-card);
+    }
+
+    .a11y-do-body ul,
+    .a11y-dont-body ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .a11y-do-body li,
+    .a11y-dont-body li {
+      font-size: 12px;
+      color: var(--ow-color-muted);
+      padding: 5px 0 5px 18px;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .a11y-do-body li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--ow-color-film);
+      font-weight: 700;
+    }
+
+    .a11y-dont-body li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      color: #E74C3C;
+      font-weight: 700;
+    }
+
+    .ow-callout {
+      display: flex;
+      gap: 14px;
+      padding: 18px 20px;
+      background: rgba(39, 169, 221, 0.08);
+      border: 1px solid rgba(39, 169, 221, 0.2);
+      border-radius: var(--ow-radius-lg);
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: var(--ow-color-muted);
+      line-height: 1.65;
+    }
+
+    .ow-callout strong { color: var(--ow-color-light); }
+
+    .ow-callout-icon { flex-shrink: 0; font-size: 18px; }
+
+    .badge-pass,
+    .badge-fail,
+    .badge-warn {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: var(--ow-radius-full);
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .badge-pass { background: rgba(39, 169, 221, 0.15); color: var(--ow-color-film); }
+    .badge-fail { background: rgba(192, 57, 43, 0.15); color: #E74C3C; }
+    .badge-warn { background: rgba(241, 179, 58, 0.15); color: var(--ow-color-visual); }
+
+    /* ─── CONTRAST CHECKER ─── */
+    .contrast-checker {
+      background: var(--ow-color-card);
+      border: 1px solid var(--ow-color-border);
+      border-radius: var(--ow-radius-lg);
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+
+    .contrast-preview {
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .contrast-preview-text {
+      font-family: var(--ow-font-primary);
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .contrast-preview-sub {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+
+    .contrast-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px 22px;
+      border-top: 1px solid var(--ow-color-border);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .contrast-control label {
+      display: block;
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ow-color-muted);
+      margin-bottom: 8px;
+    }
+
+    .contrast-swatch-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .contrast-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--ow-transition);
+    }
+
+    .contrast-swatch:hover { transform: scale(1.08); }
+    .contrast-swatch.active { border-color: var(--ow-color-light); box-shadow: 0 0 0 2px var(--ow-color-tech); }
+
+    .contrast-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      padding: 0 22px 22px;
+    }
+
+    .contrast-result-item {
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--ow-radius-md);
+      border: 1px solid var(--ow-color-border);
+      text-align: center;
+    }
+
+    .contrast-ratio-num {
+      font-family: var(--ow-font-primary);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ow-color-light);
+      margin-bottom: 4px;
+    }
+
+    .contrast-result-label {
+      font-size: 10px;
+      color: var(--ow-color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    /* ─── UX RECOMMENDATIONS ─── */
+    .ux-rec {
+      display: flex;
+      gap: 18px;
+      background: var(--ow-color-card);
+      border: 1px solid var(--ow-color-border);
+      border-radius: var(--ow-radius-lg);
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      transition: var(--ow-transition);
+    }
+
+    .ux-rec:hover {
+      border-color: rgba(231, 90, 51, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .ux-rec-num {
+      font-family: var(--ow-font-primary);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ow-color-tech);
+      opacity: 0.55;
+      min-width: 28px;
+      line-height: 1.2;
+    }
+
+    .ux-rec-content h4 {
+      font-family: var(--ow-font-primary);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ow-color-light);
+      margin: 0 0 8px;
+      line-height: 1.4;
+    }
+
+    .ux-rec-content p {
+      font-size: 13px;
+      color: var(--ow-color-muted);
+      line-height: 1.65;
+      margin: 0 0 10px;
+    }
+
+    .ux-rec-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .ux-priority {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: var(--ow-radius-full);
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .ux-priority-high { background: rgba(231, 90, 51, 0.18); color: var(--ow-color-tech); }
+    .ux-priority-med { background: rgba(241, 179, 58, 0.15); color: var(--ow-color-visual); }
+    .ux-priority-low { background: rgba(154, 154, 154, 0.15); color: var(--ow-color-muted); }
+
+    .ux-tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: var(--ow-radius-full);
+      font-family: var(--ow-font-primary);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--ow-color-muted);
+      border: 1px solid var(--ow-color-border);
+    }
+
+    @media (max-width: 768px) {
+      .a11y-do-dont,
+      .contrast-controls { grid-template-columns: 1fr; }
+    }
+
+    /* ─── ADVANCED CONTRAST / EMAIL LAB ─── */
+    .contrast-advanced {
+      margin-top: 8px;
+    }
+
+    .contrast-advanced-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 16px;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--ow-color-border);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .contrast-advanced-toolbar .ow-toggle-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .contrast-advanced-toolbar .ow-toggle-row input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .ow-toggle-track {
+      width: 40px;
+      height: 22px;
+      border-radius: 999px;
+      background: #3a3a3a;
+      border: 1px solid var(--ow-color-border);
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.2s ease;
+    }
+
+    .ow-toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--ow-color-muted);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .ow-toggle-row input:checked + .ow-toggle-track {
+      background: rgba(231, 90, 51, 0.35);
+      border-color: rgba(231, 90, 51, 0.5);
+    }
+
+    .ow-toggle-row input:checked + .ow-toggle-track::after {
+      transform: translateX(18px);
+      background: var(--ow-color-tech);
+    }
+
+    .ow-toggle-row input:focus-visible + .ow-toggle-track {
+      outline: 2px solid var(--ow-color-film);
+      outline-offset: 2px;
+    }
+
+    .ow-toggle-label-text {
+      font-family: var(--ow-font-primary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ow-color-light);
+    }
+
+    .contrast-email-theme {
+      display: inline-flex;
+      border-radius: var(--ow-radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--ow-color-border);
+    }
+
+    .contrast-email-theme[hidden] {
+      display: none !important;
+    }
+
+    .contrast-theme-btn {
+      padding: 7px 14px;
+      border: none;
+      background: transparent;
+      font-family: var(--ow-font-primary);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ow-color-muted);
+      cursor: pointer;
+      transition: var(--ow-transition);
+    }
+
+    .contrast-theme-btn:hover {
+      color: var(--ow-color-light);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .contrast-theme-btn.is-active {
+      background: var(--ow-color-tech);
+      color: #fff;
+    }
+
+    .contrast-theme-btn:focus-visible {
+      outline: 2px solid var(--ow-color-film);
+      outline-offset: -2px;
+    }
+
+    .contrast-email-frame {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      min-height: 200px;
+    }
+
+    .contrast-email-chrome {
+      padding: 10px 16px;
+      background: rgba(0, 0, 0, 0.35);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contrast-email-chrome-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .contrast-email-chrome-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .contrast-email-chrome-title {
+      font-family: var(--ow-font-primary);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ow-color-muted);
+    }
+
+    .contrast-email-body {
+      flex: 1;
+      padding: 28px 24px 32px;
+      transition: background 0.25s ease;
+    }
+
+    .contrast-email-subject {
+      font-family: var(--ow-font-primary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.65;
+    }
+
+    .contrast-preview-plain {
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      width: 100%;
+    }
+
+    #adv-preview:not(.is-email-mode) .contrast-email-chrome,
+    #adv-preview:not(.is-email-mode) .contrast-email-body {
+      display: none;
+    }
+
+    #adv-preview.is-email-mode .contrast-preview-plain {
+      display: none;
+    }
+
+    .contrast-email-cta {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 22px;
+      border-radius: var(--ow-radius-sm);
+      font-family: var(--ow-font-primary);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      border: none;
+      transition: background 0.2s ease;
+    }
+
+    .contrast-advanced-controls {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .contrast-control-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contrast-slider-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .contrast-slider-val {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--ow-color-tech);
+      font-weight: 600;
+    }
+
+    .contrast-range {
+      width: 100%;
+      height: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--ow-color-border));
+      outline: none;
+      cursor: pointer;
+    }
+
+    .contrast-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--ow-color-tech);
+      border: 2px solid #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+    }
+
+    .contrast-range::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--ow-color-tech);
+      border: 2px solid #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+    }
+
+    .contrast-range:focus-visible {
+      outline: 2px solid var(--ow-color-film);
+      outline-offset: 4px;
+    }
+
+    .contrast-hex-readout {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--ow-color-muted);
+      line-height: 1.5;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--ow-radius-sm);
+      border: 1px solid var(--ow-color-border);
+    }
+
+    .contrast-hex-readout strong {
+      color: var(--ow-color-light);
+      font-weight: 600;
+    }
+
+    .contrast-advanced-warning {
+      margin: 0 22px 16px;
+    }
+
+    .contrast-advanced-warning[hidden] {
+      display: none !important;
+    }
+
+    .contrast-advanced-meta {
+      padding: 0 22px 12px;
+      font-size: 11px;
+      color: var(--ow-color-muted);
+      line-height: 1.55;
+    }
+
+    .contrast-advanced-meta strong {
+      color: var(--ow-color-light);
+    }
+
     /* ─── CODE BLOCK ─── */
     .code-block {
       background: #0A0A0A;
@@ -1163,7 +2035,9 @@
     @media print {
 
       #sidebar,
-      #mobile-header {
+      #mobile-header,
+      .scroll-progress-track,
+      .back-to-top {
         display: none !important;
       }
 
@@ -1251,11 +2125,16 @@
     @media (max-width: 768px) {
       #sidebar {
         transform: translateX(-100%);
+        overflow-y: auto;
       }
 
       #sidebar.open {
         transform: translateX(0);
         box-shadow: var(--ow-shadow-lg);
+      }
+
+      #sidebar.open .sidebar-nav {
+        overflow-y: auto;
       }
 
       #main-content {
@@ -1302,6 +2181,40 @@
       }
     }
 
+    /* Compact sidebar on short viewports */
+    @media (max-height: 820px) {
+      .sidebar-brand {
+        padding: 8px 16px 6px;
+      }
+
+      .ow-logo-sidebar {
+        width: 128px;
+        height: 30px;
+      }
+
+      .nav-category {
+        padding: 4px 16px 1px;
+        font-size: 9px;
+      }
+
+      .nav-link {
+        padding: 3px 16px;
+        font-size: 11px;
+        gap: 7px;
+      }
+
+      .nav-index {
+        font-size: 9px;
+        min-width: 15px;
+      }
+
+      .sidebar-footer {
+        padding: 7px 16px;
+        font-size: 9px;
+        line-height: 1.45;
+      }
+    }
+
     @media (max-width: 480px) {
       body {
         font-size: 14px;
@@ -1335,38 +2248,48 @@
         width: min(220px, 70vw);
         height: 44px;
       }
+
+      .back-to-top {
+        right: 14px;
+        bottom: calc(14px + 36px + 12px);
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <div class="scroll-progress-track" aria-hidden="true">
+    <div class="scroll-progress-fill" id="scroll-progress"></div>
+  </div>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
   <!-- ═══════════════════════════
      SIDEBAR NAVIGATION
 ═══════════════════════════ -->
   <aside id="sidebar">
 
-    <!-- Brand lockup -->
-    <div style="padding: 22px 20px 18px; border-bottom: 1px solid #1A1A1A; flex-shrink: 0;">
+    <!-- Brand lockup — click to return to top -->
+    <button type="button" class="sidebar-brand" id="sidebar-brand-top" aria-label="Back to top">
       <div data-logo-slot class="ow-logo-landscape ow-logo-sidebar"></div>
-      <div data-logo-fallback style="display: flex; align-items: center; gap: 11px; margin-bottom: 2px;">
+      <div data-logo-fallback style="display: flex; align-items: center; gap: 9px;">
         <div
-          style="width: 36px; height: 36px; background: var(--ow-color-tech); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          style="width: 30px; height: 30px; background: var(--ow-color-tech); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
           <span
-            style="font-family: var(--ow-font-primary); font-weight: 800; font-size: 13px; color: #fff; letter-spacing: -0.02em;">OW</span>
+            style="font-family: var(--ow-font-primary); font-weight: 800; font-size: 11px; color: #fff; letter-spacing: -0.02em;">OW</span>
         </div>
         <div>
           <div
-            style="font-family: var(--ow-font-primary); font-weight: 700; font-size: 13px; color: var(--ow-color-light); letter-spacing: 0.01em;">
+            style="font-family: var(--ow-font-primary); font-weight: 700; font-size: 12px; color: var(--ow-color-light); letter-spacing: 0.01em; line-height: 1.2;">
             Open Window</div>
-          <div style="font-size: 11px; color: var(--ow-color-muted); letter-spacing: 0.04em; margin-top: 1px;">Design
-            System v2.0</div>
+          <div style="font-size: 10px; color: var(--ow-color-muted); letter-spacing: 0.03em;">Design System v2.2</div>
         </div>
       </div>
-    </div>
+    </button>
 
     <!-- Nav links -->
-    <nav style="flex: 1; overflow-y: auto; padding-bottom: 80px;">
+    <nav class="sidebar-nav">
       <div class="nav-category">Foundation</div>
       <a href="#colors" class="nav-link">
         <span class="nav-index">01</span>
@@ -1376,7 +2299,7 @@
       <a href="#typography" class="nav-link">
         <span class="nav-index">02</span>
         <span class="nav-dot" style="background:#27A9DD;"></span>
-        <span>Typography Scale</span>
+        <span>Typography</span>
       </a>
 
       <div class="nav-category">Components</div>
@@ -1388,7 +2311,7 @@
       <a href="#forms" class="nav-link">
         <span class="nav-index">04</span>
         <span class="nav-dot" style="background:#AA6CAD;"></span>
-        <span>Form Elements</span>
+        <span>Forms</span>
       </a>
       <a href="#cards" class="nav-link">
         <span class="nav-index">05</span>
@@ -1397,49 +2320,66 @@
       </a>
 
       <div class="nav-category">Brand</div>
-      <a href="#voice" class="nav-link">
+      <a href="#vision-mission" class="nav-link">
         <span class="nav-index">06</span>
         <span class="nav-dot" style="background:#F1B33A;"></span>
-        <span>Vision, Mission &amp; Voice</span>
+        <span title="Vision &amp; Mission">Vision &amp; Mission</span>
+      </a>
+      <a href="#voice-tone" class="nav-link">
+        <span class="nav-index">07</span>
+        <span class="nav-dot" style="background:#E75A33;"></span>
+        <span>Voice &amp; Tone</span>
       </a>
       <a href="#logo-usage" class="nav-link">
-        <span class="nav-index">07</span>
+        <span class="nav-index">08</span>
         <span class="nav-dot" style="background:#27A9DD;"></span>
-        <span>Logo Usage Rules</span>
+        <span title="Logo Usage Rules">Logo Usage</span>
       </a>
       <a href="#icons" class="nav-link">
-        <span class="nav-index">08</span>
-        <span class="nav-dot" style="background:#E75A33;"></span>
+        <span class="nav-index">09</span>
+        <span class="nav-dot" style="background:#AA6CAD;"></span>
         <span>Iconography</span>
       </a>
       <a href="#navigation" class="nav-link">
-        <span class="nav-index">09</span>
-        <span class="nav-dot" style="background:#AA6CAD;"></span>
+        <span class="nav-index">10</span>
+        <span class="nav-dot" style="background:#E5428C;"></span>
         <span>Navigation</span>
+      </a>
+
+      <div class="nav-category">Experience</div>
+      <a href="#layout" class="nav-link">
+        <span class="nav-index">11</span>
+        <span class="nav-dot" style="background:#27A9DD;"></span>
+        <span title="Layout &amp; Spacing">Layout</span>
+      </a>
+      <a href="#accessibility" class="nav-link">
+        <span class="nav-index">12</span>
+        <span class="nav-dot" style="background:#F1B33A;"></span>
+        <span>Accessibility</span>
+      </a>
+      <a href="#ux-recommendations" class="nav-link">
+        <span class="nav-index">13</span>
+        <span class="nav-dot" style="background:#E75A33;"></span>
+        <span title="UX Recommendations">UX Recs</span>
       </a>
 
       <div class="nav-category">Developer</div>
       <a href="#variables" class="nav-link">
-        <span class="nav-index">10</span>
+        <span class="nav-index">14</span>
         <span class="nav-dot" style="background:#27A9DD;"></span>
-        <span>CSS Custom Properties</span>
+        <span title="CSS Custom Properties">CSS Variables</span>
       </a>
       <a href="#elementor" class="nav-link">
-        <span class="nav-index">11</span>
+        <span class="nav-index">15</span>
         <span class="nav-dot" style="background:#E75A33;"></span>
-        <span>Elementor Pro Integration</span>
+        <span title="Elementor Pro Integration">Elementor</span>
       </a>
     </nav>
 
     <!-- Footer info -->
-    <div
-      style="position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 20px; background: var(--ow-color-darker); border-top: 1px solid #2A2A2A;">
-      <div
-        style="font-size: 11px; color: var(--ow-color-muted); font-family: var(--ow-font-primary); line-height: 1.9; letter-spacing: 0.06em;">
-        CHE &amp; SAQA Accredited<br>
-        DHET Reg. 2000/HE07/016<br>
-        Est. 1993 · Centurion · Stellenbosch · Blairgowrie
-      </div>
+    <div class="sidebar-footer">
+      CHE &amp; SAQA · DHET 2000/HE07/016<br>
+      Centurion · Stellenbosch · Blairgowrie
     </div>
   </aside>
 
@@ -1451,9 +2391,9 @@
     <!-- Mobile header -->
     <header id="mobile-header"
       style="display: none; position: sticky; top: 0; z-index: 400; background: var(--ow-color-darker); border-bottom: 1px solid #1E1E1E; padding: 14px 20px; justify-content: space-between; align-items: center;">
-      <span
-        style="font-family: var(--ow-font-primary); font-weight: 700; font-size: 14px; color: var(--ow-color-light);">Open
-        Window Design System</span>
+      <button type="button" id="mobile-header-top" aria-label="Back to top"
+        style="background:none;border:none;padding:0;cursor:pointer;font-family:var(--ow-font-primary);font-weight:700;font-size:14px;color:var(--ow-color-light);text-align:left;">Open
+        Window Design System</button>
       <button onclick="toggleSidebar()"
         style="background: none; border: 1px solid #333; border-radius: 6px; padding: 6px 10px; color: var(--ow-color-light); cursor: pointer; font-size: 16px;">☰</button>
     </header>
@@ -1461,7 +2401,7 @@
     <!-- ══════════════════
        HERO
   ══════════════════ -->
-    <div
+    <div id="top"
       style="position: relative; background: var(--ow-color-darker); padding: 72px 56px 64px; border-bottom: 1px solid #1E1E1E; overflow: hidden;">
       <div class="rainbow-bar" style="position: absolute; top: 0; left: 0; right: 0;"></div>
 
@@ -1483,7 +2423,7 @@
             style="width: 6px; height: 6px; background: var(--ow-color-tech); border-radius: 50%; display: inline-block;"></span>
           <span
             style="font-family: var(--ow-font-primary); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ow-color-tech);">Brand Style Guide
-            &amp; Design System — v2.0</span>
+            &amp; Design System — v2.2</span>
         </div>
 
         <h1
@@ -2589,18 +3529,17 @@
 
 
     <!-- ══════════════════════════════
-       06 — BRAND VOICE
+       06 — VISION & MISSION
   ══════════════════════════════ -->
-    <section id="voice" class="section" style="background: #1F1F1F;">
+    <section id="vision-mission" class="section" style="background: #1F1F1F;">
       <div class="section-eyebrow">06 — Brand</div>
-      <h2 class="section-heading">Vision, Mission &amp; Voice</h2>
+      <h2 class="section-heading">Vision &amp; Mission</h2>
       <p class="section-desc">Aligned to the OW Brand Guidelines (2022): the vision and mission wording below is
-        approved
-        copy that can be used on the website. This section is focused on messaging only; the UI shown here is not an
-        implementation guide for layout or styling.</p>
+        approved copy that can be used on the website and in marketing materials. Use verbatim unless formally updated
+        by the institution.</p>
 
       <!-- Mission & Vision -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 44px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
 
         <div class="card" style="padding: 30px; border-left: 3px solid var(--ow-color-tech);">
           <div
@@ -2630,6 +3569,61 @@
           </ul>
         </div>
 
+      </div>
+
+      <div class="ow-callout" style="margin-bottom:0;">
+        <span class="ow-callout-icon">📋</span>
+        <span><strong>Usage note:</strong> Vision and mission statements are institutional copy — do not paraphrase in
+          headers, footers, or accreditation blocks. For campaign headlines and UI microcopy, refer to the
+          <a href="#voice-tone" style="color:var(--ow-color-tech);">Voice &amp; Tone</a> section.</span>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════
+       07 — VOICE & TONE
+  ══════════════════════════════ -->
+    <section id="voice-tone" class="section">
+      <div class="section-eyebrow">07 — Brand</div>
+      <h2 class="section-heading">Voice &amp; Tone</h2>
+      <p class="section-desc">Open Window speaks as an inspiring creative mentor — confident in industry expertise,
+        approachable to prospective students, and precise when it matters. Voice stays consistent; tone adapts to
+        context.</p>
+
+      <div class="subsection-label">Brand Positioning Statement</div>
+      <p style="font-size:15px;color:var(--ow-color-light);line-height:1.75;max-width:720px;margin:0 0 36px;">
+        Open Window is <strong style="color:var(--ow-color-tech);">bold without being arrogant</strong>,
+        <strong style="color:var(--ow-color-visual);">creative without being vague</strong>, and
+        <strong style="color:var(--ow-color-film);">professional without being corporate</strong>. We speak to future
+        makers — students, parents, industry partners, and alumni — with clarity and energy.
+      </p>
+
+      <div class="subsection-label">Voice Attributes</div>
+      <div class="voice-attr-grid">
+        <div class="voice-attr-card" style="border-top-color:var(--ow-color-tech);">
+          <h4>Inspiring</h4>
+          <p>We paint possibility — careers in film, design, animation, and creative tech.</p>
+          <span class="voice-do">"Build the portfolio that gets you hired."</span>
+          <span class="voice-dont">"Qualifications are available in various disciplines."</span>
+        </div>
+        <div class="voice-attr-card" style="border-top-color:var(--ow-color-visual);">
+          <h4>Direct</h4>
+          <p>We respect the reader's time. Say what matters, then offer the next step.</p>
+          <span class="voice-do">"Apply by 30 November. 12 places left."</span>
+          <span class="voice-dont">"Applications are encouraged ahead of the closing date."</span>
+        </div>
+        <div class="voice-attr-card" style="border-top-color:var(--ow-color-film);">
+          <h4>Industry-Led</h4>
+          <p>We ground claims in real creative industry outcomes and accreditation.</p>
+          <span class="voice-do">"CHE-accredited. Industry briefs from day one."</span>
+          <span class="voice-dont">"We strive to hopefully meet industry standards."</span>
+        </div>
+        <div class="voice-attr-card" style="border-top-color:var(--ow-color-animation);">
+          <h4>Human</h4>
+          <p>We use "you" and "we". We celebrate student work authentically.</p>
+          <span class="voice-do">"Your reel is ready — share it with our community."</span>
+          <span class="voice-dont">"The learner's portfolio submission has been received."</span>
+        </div>
       </div>
 
       <!-- Tone Keywords -->
@@ -2664,14 +3658,123 @@
           of Excellence</span>
       </div>
 
+      <div class="subsection-label">Tone by Context</div>
+      <table class="ow-spec-table">
+        <thead>
+          <tr>
+            <th>Context</th>
+            <th>Tone</th>
+            <th>Guidance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Marketing &amp; campaigns</strong></td>
+            <td>Energetic, aspirational</td>
+            <td>Short headlines. Lead with outcomes. One primary CTA per block.</td>
+          </tr>
+          <tr>
+            <td><strong>Admissions &amp; applications</strong></td>
+            <td>Clear, reassuring</td>
+            <td>State requirements plainly. Reduce anxiety with step-by-step guidance.</td>
+          </tr>
+          <tr>
+            <td><strong>Academic &amp; accreditation</strong></td>
+            <td>Precise, authoritative</td>
+            <td>Use approved regulatory wording. No casual paraphrasing of CHE/SAQA copy.</td>
+          </tr>
+          <tr>
+            <td><strong>Community &amp; portfolio</strong></td>
+            <td>Collegial, encouraging</td>
+            <td>Celebrate work. Use active voice. Invite participation.</td>
+          </tr>
+          <tr>
+            <td><strong>Errors &amp; system feedback</strong></td>
+            <td>Calm, helpful</td>
+            <td>Explain what happened and what to do next. Never blame the user.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="subsection-label">UI Microcopy — Do &amp; Don't</div>
+
+      <div class="tone-example tone-example-pass">
+        <div class="tone-example-label">✓ Application CTA</div>
+        <div class="tone-example-quote">Ready to start? Apply for 2026 — it takes about 15 minutes.</div>
+      </div>
+      <div class="tone-example tone-example-fail">
+        <div class="tone-example-label">✕ Avoid</div>
+        <div class="tone-example-quote">Prospective students are hereby invited to submit an application form.</div>
+      </div>
+
+      <div class="tone-example tone-example-pass">
+        <div class="tone-example-label">✓ Empty state — portfolio</div>
+        <div class="tone-example-quote">No projects yet. Upload your first piece — even a work-in-progress counts.</div>
+      </div>
+      <div class="tone-example tone-example-fail">
+        <div class="tone-example-label">✕ Avoid</div>
+        <div class="tone-example-quote">No results found.</div>
+      </div>
+
+      <div class="tone-example tone-example-pass">
+        <div class="tone-example-label">✓ Error message</div>
+        <div class="tone-example-quote">We couldn't upload your file. Check it's under 50MB and try again — or contact
+          support if it keeps failing.</div>
+      </div>
+      <div class="tone-example tone-example-fail">
+        <div class="tone-example-label">✕ Avoid</div>
+        <div class="tone-example-quote">Error 413. Upload failed. Invalid request.</div>
+      </div>
+
+      <div class="tone-example tone-example-pass">
+        <div class="tone-example-label">✓ Confirmation — event registration</div>
+        <div class="tone-example-quote">You're booked for Open Day, 14 March. We'll send a reminder two days before.</div>
+      </div>
+      <div class="tone-example tone-example-fail">
+        <div class="tone-example-label">✕ Avoid</div>
+        <div class="tone-example-quote">Registration successful. A confirmation email will be dispatched in due course.</div>
+      </div>
+
+      <div class="subsection-label">Writing Standards</div>
+      <table class="ow-spec-table">
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>Standard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Active voice</strong></td>
+            <td>Prefer "Apply now" over "Applications may be submitted".</td>
+          </tr>
+          <tr>
+            <td><strong>Sentence length</strong></td>
+            <td>UI copy: max ~20 words. Body paragraphs: max 3 sentences before a break.</td>
+          </tr>
+          <tr>
+            <td><strong>Terminology</strong></td>
+            <td>Use "qualifications" for official programme names; "degrees" and "higher certificates" where accurate on
+              the NQF.</td>
+          </tr>
+          <tr>
+            <td><strong>Capitalisation</strong></td>
+            <td>Sentence case for body text. ALL CAPS reserved for primary CTAs and nav labels only.</td>
+          </tr>
+          <tr>
+            <td><strong>Numbers &amp; dates</strong></td>
+            <td>Use numerals for dates and deadlines: "30 November 2026", not "the thirtieth of November".</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
 
     <!-- ══════════════════════════════
-       07 — LOGO USAGE RULES
+       08 — LOGO USAGE RULES
   ══════════════════════════════ -->
     <section id="logo-usage" class="section">
-      <div class="section-eyebrow">07 — Brand</div>
+      <div class="section-eyebrow">08 — Brand</div>
       <h2 class="section-heading">Logo Usage Rules</h2>
       <p class="section-desc">
         Use the official landscape logo consistently. Maintain clear space around the logo and avoid stretching,
@@ -2795,7 +3898,7 @@
        08 — ICONOGRAPHY
   ══════════════════════════════ -->
     <section id="icons" class="section">
-      <div class="section-eyebrow">08 — Brand</div>
+      <div class="section-eyebrow">09 — Brand</div>
       <h2 class="section-heading">Iconography</h2>
       <p class="section-desc">
         <strong style="color:var(--ow-color-tech);">Note:</strong>
@@ -2862,7 +3965,7 @@
        09 — NAVIGATION
   ══════════════════════════════ -->
     <section id="navigation" class="section" style="background: #1F1F1F;">
-      <div class="section-eyebrow">09 — Brand</div>
+      <div class="section-eyebrow">10 — Brand</div>
       <h2 class="section-heading">Navigation Structure</h2>
       <p class="section-desc">The Open Window navigation follows a clear hierarchy with a utility bar for primary CTAs.
         On mobile, the landscape logo swaps to the OW icon monogram. The footer is also part of the navigation system
@@ -3073,7 +4176,7 @@
        10 — LAYOUT SYSTEM
   ══════════════════════════════ -->
     <section id="layout" class="section">
-      <div class="section-eyebrow">10 — Layout</div>
+      <div class="section-eyebrow">11 — Experience</div>
       <h2 class="section-heading">Lines, Margins &amp; Spacing</h2>
       <p class="section-desc">These layout rules keep pages consistent across the WordPress build. Use the line
         treatments,
@@ -3214,10 +4317,645 @@
 
 
     <!-- ══════════════════════════════
-       11 — CSS VARIABLES
+       12 — ACCESSIBILITY
+  ══════════════════════════════ -->
+    <section id="accessibility" class="section" style="background: #1F1F1F;">
+      <div class="section-eyebrow">12 — Experience</div>
+      <h2 class="section-heading">Accessibility Standards</h2>
+      <p class="section-desc">Open Window digital properties must meet <strong
+          style="color:var(--ow-color-light);font-weight:600;">WCAG 2.2 Level AA</strong> as a minimum. Accessibility
+        is a design requirement — not a post-launch audit item. These standards apply to openwindow.co.za, the community
+        platform, and all WordPress/Elementor builds.</p>
+
+      <div class="subsection-label">WCAG 2.2 — Four Principles</div>
+      <div class="a11y-grid">
+        <div class="a11y-card">
+          <div class="a11y-card-icon">👁️</div>
+          <div class="a11y-card-title">Perceivable</div>
+          <p class="a11y-card-desc">Text meets contrast minimums. Images have meaningful alt text. Video has captions.
+            Information is never conveyed by colour alone. Content reflows at 200% zoom without horizontal scroll.</p>
+        </div>
+        <div class="a11y-card">
+          <div class="a11y-card-icon">⌨️</div>
+          <div class="a11y-card-title">Operable</div>
+          <p class="a11y-card-desc">All functionality works via keyboard. Focus is always visible and not obscured by
+            sticky UI. No keyboard traps. Touch targets ≥ 44×44px. Users can pause, stop, or hide moving content.</p>
+        </div>
+        <div class="a11y-card">
+          <div class="a11y-card-icon">📖</div>
+          <div class="a11y-card-title">Understandable</div>
+          <p class="a11y-card-desc">Clear labels on every input. Errors identified in plain language with recovery
+            steps. Consistent navigation across pages. <code>lang</code> attribute set on the document element.</p>
+        </div>
+        <div class="a11y-card">
+          <div class="a11y-card-icon">🤝</div>
+          <div class="a11y-card-title">Robust</div>
+          <p class="a11y-card-desc">Semantic HTML first; ARIA only when native elements are insufficient. Valid name,
+            role, and value on all custom components. Compatible with NVDA, JAWS, and VoiceOver.</p>
+        </div>
+      </div>
+
+      <div class="subsection-label">Key WCAG 2.2 AA Criteria</div>
+      <table class="ow-spec-table">
+        <thead>
+          <tr>
+            <th>Principle</th>
+            <th>Criterion</th>
+            <th>Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3"><strong>Perceivable</strong></td>
+            <td>1.1.1 Non-text Content</td>
+            <td>Descriptive <code>alt</code> on images; decorative images use <code>alt=""</code></td>
+          </tr>
+          <tr>
+            <td>1.4.3 Contrast (Minimum)</td>
+            <td>4.5:1 normal text · 3:1 large text (18pt+ or 14pt bold)</td>
+          </tr>
+          <tr>
+            <td>1.4.11 Non-text Contrast</td>
+            <td>UI components and focus indicators: 3:1 against adjacent colours</td>
+          </tr>
+          <tr>
+            <td rowspan="4"><strong>Operable</strong></td>
+            <td>2.1.1 Keyboard</td>
+            <td>All functionality available via keyboard; no traps</td>
+          </tr>
+          <tr>
+            <td>2.4.11 Focus Not Obscured (Min.)</td>
+            <td>Focused element not fully hidden by sticky headers or overlays</td>
+          </tr>
+          <tr>
+            <td>2.5.8 Target Size (Minimum)</td>
+            <td>Interactive targets ≥ 24×24px (OW standard: 44×44px)</td>
+          </tr>
+          <tr>
+            <td>2.2.2 Pause, Stop, Hide</td>
+            <td>Auto-rotating content must be pausable; respect <code>prefers-reduced-motion</code></td>
+          </tr>
+          <tr>
+            <td rowspan="2"><strong>Understandable</strong></td>
+            <td>3.3.1 Error Identification</td>
+            <td>Errors described in text; suggestions provided where possible</td>
+          </tr>
+          <tr>
+            <td>3.3.8 Accessible Authentication</td>
+            <td>No cognitive function tests for login; support paste in password fields</td>
+          </tr>
+          <tr>
+            <td><strong>Robust</strong></td>
+            <td>4.1.2 Name, Role, Value</td>
+            <td>Custom widgets expose correct ARIA; form inputs have accessible names</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="subsection-label">Interactive Contrast Checker</div>
+      <p style="font-size:13px;color:var(--ow-color-muted);line-height:1.65;margin:0 0 16px;max-width:680px;">Select
+        foreground and background colours from the OW palette to preview text and evaluate WCAG compliance in
+        real time.</p>
+
+      <div class="contrast-checker" id="contrast-checker">
+        <div class="contrast-preview" id="contrast-preview">
+          <div class="contrast-preview-text" id="contrast-preview-text">
+            Open Window Institute
+            <span class="contrast-preview-sub">Body text preview at 16px</span>
+          </div>
+        </div>
+        <div class="contrast-controls">
+          <div class="contrast-control">
+            <label>Foreground (text)</label>
+            <div class="contrast-swatch-row" id="contrast-fg-swatches"></div>
+          </div>
+          <div class="contrast-control">
+            <label>Background</label>
+            <div class="contrast-swatch-row" id="contrast-bg-swatches"></div>
+          </div>
+        </div>
+        <div class="contrast-results" id="contrast-results">
+          <div class="contrast-result-item">
+            <div class="contrast-ratio-num" id="contrast-ratio-value">—</div>
+            <div class="contrast-result-label">Contrast ratio</div>
+          </div>
+          <div class="contrast-result-item">
+            <div id="contrast-aa-normal">—</div>
+            <div class="contrast-result-label">AA Normal (4.5:1)</div>
+          </div>
+          <div class="contrast-result-item">
+            <div id="contrast-aa-large">—</div>
+            <div class="contrast-result-label">AA Large (3:1)</div>
+          </div>
+          <div class="contrast-result-item">
+            <div id="contrast-aaa-normal">—</div>
+            <div class="contrast-result-label">AAA Normal (7:1)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection-label" style="margin-top: 8px;">Advanced Brand &amp; Email Contrast Lab</div>
+      <p style="font-size:13px;color:var(--ow-color-muted);line-height:1.65;margin:0 0 16px;max-width:720px;">
+        Test department brand colours with independent foreground and background opacity sliders. Enable
+        <strong style="color:var(--ow-color-light);font-weight:600;">Email client preview</strong> to simulate how
+        mailers may render in light vs dark mode — many clients force dark canvases and shift or mute accent colours.
+      </p>
+
+      <div class="contrast-checker contrast-advanced" id="contrast-advanced">
+        <div class="contrast-advanced-toolbar">
+          <label class="ow-toggle-row">
+            <input type="checkbox" id="adv-email-mode" aria-describedby="adv-email-mode-desc">
+            <span class="ow-toggle-track" aria-hidden="true"></span>
+            <span class="ow-toggle-label-text">Email client preview</span>
+          </label>
+          <div class="contrast-email-theme" id="adv-email-theme" hidden>
+            <button type="button" class="contrast-theme-btn is-active" data-email-theme="light">Light mode</button>
+            <button type="button" class="contrast-theme-btn" data-email-theme="dark">Dark mode</button>
+          </div>
+          <span id="adv-email-mode-desc" style="font-size:11px;color:var(--ow-color-muted);flex:1;min-width:200px;">
+            Off = web/UI preview · On = simulated mailer canvas
+          </span>
+        </div>
+
+        <div class="contrast-preview contrast-email-frame" id="adv-preview">
+          <div class="contrast-email-chrome">
+            <div class="contrast-email-chrome-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span class="contrast-email-chrome-title" id="adv-email-chrome-label">Email · Light mode client</span>
+          </div>
+          <div class="contrast-email-body" id="adv-email-body">
+            <div class="contrast-email-subject" id="adv-email-subject">Open Window — Apply for 2026</div>
+            <div class="contrast-preview-text" id="adv-preview-text" style="font-size:20px;text-align:left;">
+              Your creative future starts here.
+              <span class="contrast-preview-sub" style="text-align:left;">Body copy preview at 16px — department brand colour test.</span>
+            </div>
+            <span class="contrast-email-cta" id="adv-email-cta">Apply Now</span>
+          </div>
+          <div class="contrast-preview-plain" id="adv-preview-plain">
+            <div class="contrast-preview-text" id="adv-preview-text-plain">
+              Open Window Institute
+              <span class="contrast-preview-sub">Foreground on background · opacity composited</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contrast-controls contrast-advanced-controls">
+          <div class="contrast-control-stack">
+            <div class="contrast-control">
+              <label>Foreground colour</label>
+              <div class="contrast-swatch-row" id="adv-fg-swatches"></div>
+            </div>
+            <div class="contrast-slider-group">
+              <label>
+                <span>Foreground opacity</span>
+                <span class="contrast-slider-val" id="adv-fg-opacity-val">100%</span>
+              </label>
+              <input type="range" class="contrast-range" id="adv-fg-opacity" min="0" max="100" value="100"
+                aria-label="Foreground opacity">
+            </div>
+            <div class="contrast-hex-readout" id="adv-fg-readout">Base <strong>#E75A33</strong> → Effective <strong>—</strong></div>
+          </div>
+          <div class="contrast-control-stack">
+            <div class="contrast-control">
+              <label>Background colour</label>
+              <div class="contrast-swatch-row" id="adv-bg-swatches"></div>
+            </div>
+            <div class="contrast-slider-group">
+              <label>
+                <span>Background opacity</span>
+                <span class="contrast-slider-val" id="adv-bg-opacity-val">100%</span>
+              </label>
+              <input type="range" class="contrast-range" id="adv-bg-opacity" min="0" max="100" value="100"
+                aria-label="Background opacity">
+            </div>
+            <div class="contrast-hex-readout" id="adv-bg-readout">Base <strong>#FFFFFF</strong> → Effective <strong>—</strong></div>
+          </div>
+        </div>
+
+        <div class="contrast-advanced-meta" id="adv-meta">
+          Canvas: <strong>Web preview</strong> · Composited colours used for WCAG ratio below.
+        </div>
+
+        <div class="ow-callout contrast-advanced-warning" id="adv-email-warning" hidden>
+          <span class="ow-callout-icon">⚠️</span>
+          <span id="adv-email-warning-text"></span>
+        </div>
+
+        <div class="contrast-results" id="adv-contrast-results">
+          <div class="contrast-result-item">
+            <div class="contrast-ratio-num" id="adv-contrast-ratio-value">—</div>
+            <div class="contrast-result-label">Contrast ratio</div>
+          </div>
+          <div class="contrast-result-item">
+            <div id="adv-contrast-aa-normal">—</div>
+            <div class="contrast-result-label">AA Normal (4.5:1)</div>
+          </div>
+          <div class="contrast-result-item">
+            <div id="adv-contrast-aa-large">—</div>
+            <div class="contrast-result-label">AA Large (3:1)</div>
+          </div>
+          <div class="contrast-result-item">
+            <div id="adv-contrast-aaa-normal">—</div>
+            <div class="contrast-result-label">AAA Normal (7:1)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection-label">Approved Palette Contrast Pairs</div>
+      <table class="ow-spec-table">
+        <thead>
+          <tr>
+            <th>Foreground</th>
+            <th>Background</th>
+            <th>Ratio</th>
+            <th>AA Normal</th>
+            <th>AA Large</th>
+            <th>Use Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#EDEDED;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#EDEDED</td>
+            <td>#232323</td>
+            <td><strong>13.4:1</strong></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Primary body text on dark surfaces</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#FFFFFF;border-radius:2px;vertical-align:middle;margin-right:6px;border:1px solid #444;"></span>#FFFFFF</td>
+            <td>#232323</td>
+            <td><strong>15.7:1</strong></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Headings, high-emphasis text</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#9A9A9A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#9A9A9A</td>
+            <td>#232323</td>
+            <td><strong>5.6:1</strong></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Muted / secondary text — minimum for body copy</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#F1B33A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#F1B33A</td>
+            <td>#232323</td>
+            <td><strong>8.4:1</strong></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Visual Communication accent as text</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#27A9DD;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#27A9DD</td>
+            <td>#232323</td>
+            <td><strong>5.8:1</strong></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Film Arts accent as text on dark</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#E75A33;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#E75A33</td>
+            <td>#232323</td>
+            <td><strong>4.4:1</strong></td>
+            <td><span class="badge-warn">Large only</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Tech orange — use for CTAs/headings, not small body text</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#AA6CAD;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#AA6CAD</td>
+            <td>#232323</td>
+            <td><strong>4.1:1</strong></td>
+            <td><span class="badge-fail">Fail</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Animation purple — decorative/UI only at small sizes</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#E5428C;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#E5428C</td>
+            <td>#232323</td>
+            <td><strong>4.1:1</strong></td>
+            <td><span class="badge-fail">Fail</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Postgrad pink — decorative/UI only at small sizes</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#232323;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#232323</td>
+            <td>#FFFFFF</td>
+            <td><strong>15.7:1</strong></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td><span class="badge-pass">Pass</span></td>
+            <td>Dark text on light surfaces (print, PDF)</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#9A9A9A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#9A9A9A</td>
+            <td>#FFFFFF</td>
+            <td><strong>2.8:1</strong></td>
+            <td><span class="badge-fail">Fail</span></td>
+            <td><span class="badge-fail">Fail</span></td>
+            <td>Never use muted grey on white backgrounds</td>
+          </tr>
+          <tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:#F1B33A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#F1B33A</td>
+            <td>#FFFFFF</td>
+            <td><strong>1.9:1</strong></td>
+            <td><span class="badge-fail">Fail</span></td>
+            <td><span class="badge-fail">Fail</span></td>
+            <td>Department accents — decorative on light backgrounds only</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="ow-callout">
+        <span class="ow-callout-icon">🎨</span>
+        <span><strong>Colour rule:</strong> Department colours (#F1B33A, #E75A33, #27A9DD, #AA6CAD, #E5428C) are
+          accent colours. On dark backgrounds they may be used as text at appropriate sizes. On white or light
+          backgrounds, use them for borders, icons, and decorative elements only — pair with #232323 or #1A1A1A for
+          readable text.</span>
+      </div>
+
+      <div class="subsection-label">Focus &amp; Interaction Standards</div>
+      <div class="card" style="padding:22px 24px;margin-bottom:32px;">
+        <p style="font-size:13px;color:var(--ow-color-muted);line-height:1.7;margin:0 0 14px;">All interactive elements
+          must show a visible focus indicator. Use the brand tech orange ring — never suppress outlines without a custom
+          replacement.</p>
+        <div class="code-block" style="margin:0;">
+          <div class="code-body" style="padding:18px 22px;white-space:pre-wrap;">/* OW focus ring — apply to all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--ow-color-tech);
+  outline-offset: 2px;
+}
+
+/* Honour reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="subsection-label">Implementation Checklist</div>
+      <div class="a11y-do-dont">
+        <div class="a11y-do-card">
+          <div class="a11y-do-header">✓ Always implement</div>
+          <div class="a11y-do-body">
+            <ul>
+              <li>Logical heading hierarchy (H1 → H2 → H3, no skipping levels)</li>
+              <li>Semantic HTML first; ARIA only when native semantics are insufficient</li>
+              <li><code>lang="en"</code> (or appropriate language) on the <code>&lt;html&gt;</code> element</li>
+              <li>Skip-to-content link as the first focusable element</li>
+              <li>Keyboard-navigable dropdown menus, modals, and flyouts</li>
+              <li>Visible, persistent labels on all form inputs</li>
+              <li>Minimum 44×44px touch targets on mobile</li>
+              <li>Text resizable to 200% without loss of content or functionality</li>
+              <li>Captions and transcripts for video content</li>
+              <li><code>prefers-reduced-motion</code> honoured on all animations</li>
+            </ul>
+          </div>
+        </div>
+        <div class="a11y-dont-card">
+          <div class="a11y-dont-header">✕ Never do</div>
+          <div class="a11y-dont-body">
+            <ul>
+              <li>Convey meaning by colour alone (add icon + text for states)</li>
+              <li>Auto-play media with sound without user initiation</li>
+              <li>Content that flashes more than 3 times per second</li>
+              <li>Open links in new tabs without warning (<code>rel</code> + visible indicator)</li>
+              <li>Use <code>tabindex</code> values greater than 0</li>
+              <li>Remove native focus outlines with <code>outline: none</code> and no replacement</li>
+              <li>Placeholder text as the only form label</li>
+              <li>Icon-only buttons without <code>aria-label</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="ow-callout">
+        <span class="ow-callout-icon">🔧</span>
+        <span><strong>Testing protocol:</strong> Run automated checks with <strong>axe DevTools</strong> and
+          <strong>Lighthouse</strong> on every deploy. Target Lighthouse Accessibility ≥ 95. Supplement with manual
+          keyboard-only navigation and screen reader testing (NVDA on Windows, VoiceOver on macOS/iOS). Test at 200%
+          browser zoom and simulate Slow 3G for South African mobile conditions.</span>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════
+       13 — UX RECOMMENDATIONS
+  ══════════════════════════════ -->
+    <section id="ux-recommendations" class="section">
+      <div class="section-eyebrow">13 — Experience</div>
+      <h2 class="section-heading">UX Recommendations</h2>
+      <p class="section-desc">Aspirational best-practice guidance for Open Window digital properties — informed by the
+        design system, education UX standards, and patterns observed across creative-industry institution sites. These
+        recommendations preserve the OW brand identity while reducing cognitive load and improving conversion.</p>
+
+      <div class="ow-callout">
+        <span class="ow-callout-icon">📋</span>
+        <span>Priorities: <span class="ux-priority ux-priority-high">High</span> implement first · <span
+            class="ux-priority ux-priority-med">Medium</span> next sprint · <span
+            class="ux-priority ux-priority-low">Low</span> roadmap. Category tags indicate the primary area of impact.</span>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">01</div>
+        <div class="ux-rec-content">
+          <h4>One primary CTA per page <span class="ux-priority ux-priority-high">High</span></h4>
+          <p>Every page should have a single unmistakable primary action — typically "Apply Now" on prospect-facing
+            pages, or "Upload Portfolio" in the community context. Secondary actions use ghost or outline button styles.
+            Competing orange buttons in the utility bar, hero, and inline content create decision fatigue and dilute
+            conversion.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Conversion</span>
+            <span class="ux-tag">Visual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">02</div>
+        <div class="ux-rec-content">
+          <h4>Simplify navigation to two levels maximum <span class="ux-priority ux-priority-high">High</span></h4>
+          <p>The qualifications menu spans three nesting levels (school → level → programme). Consolidate into a
+            two-level mega-menu with scannable columns: Postgraduate · Degree · Higher Certificate · Short Learning
+            Programme. Deep flyouts increase cognitive load, break keyboard navigation, and fail on mobile. See the
+            <a href="#navigation" style="color:var(--ow-color-tech);">Navigation</a> section for the target structure.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Navigation</span>
+            <span class="ux-tag">Accessibility</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">03</div>
+        <div class="ux-rec-content">
+          <h4>Keep "Apply Now" persistently visible <span class="ux-priority ux-priority-high">High</span></h4>
+          <p>The primary conversion goal is student applications. "Apply Now" should remain visible in the sticky header
+            at all scroll depths — not buried behind dropdown menus. On mobile, consider a persistent bottom bar for the
+            primary CTA. Utility links (Academic Calendar, Community Dashboard) should not compete visually with Apply.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Navigation</span>
+            <span class="ux-tag">Conversion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">04</div>
+        <div class="ux-rec-content">
+          <h4>Replace auto-rotating heroes with static, purposeful heroes <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <p>Carousels that auto-advance fail WCAG 2.2.2 and disorient users scanning for a single message. Use a static
+            hero with one headline, one benefit-led sub-headline, and one CTA. If a carousel is retained, it must have
+            accessible pause controls, keyboard navigation, manual advance only, and respect
+            <code>prefers-reduced-motion</code>.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Accessibility</span>
+            <span class="ux-tag">Visual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">05</div>
+        <div class="ux-rec-content">
+          <h4>Add a qualification comparison tool <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <p>Prospective students frequently compare programmes across schools. A lightweight "compare" feature — select
+            2–3 qualifications and view duration, NQF level, entry requirements, and career outcomes side-by-side —
+            reduces back-and-forth navigation and supports informed decisions without leaving the site.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Content</span>
+            <span class="ux-tag">Conversion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">06</div>
+        <div class="ux-rec-content">
+          <h4>Enforce a single typeface system sitewide <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <p>The design system specifies Montserrat as the primary web typeface with Avenir Next for brand applications.
+            Multiple font families loaded simultaneously (Poppins, Nunito, Open Sans, etc.) increase page weight, create
+            visual inconsistency, and undermine brand recognition. Limit web UI to Montserrat + Quicksand accent only.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Visual</span>
+            <span class="ux-tag">Performance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">07</div>
+        <div class="ux-rec-content">
+          <h4>Standardise card patterns across all content lists <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <p>News, events, qualifications, and portfolio items should share the card component defined in
+            <a href="#cards" style="color:var(--ow-color-tech);">Cards</a>. Consistent structure (image → meta → title →
+            excerpt → CTA) creates visual predictability — users learn once how to scan content across the entire
+            ecosystem including the community platform.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Visual</span>
+            <span class="ux-tag">Content</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">08</div>
+        <div class="ux-rec-content">
+          <h4>Establish consistent section rhythm on every page <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <p>Each major section should follow: eyebrow label → heading → lead paragraph → content → CTA. Apply the
+            spacing scale from <a href="#layout" style="color:var(--ow-color-tech);">Layout</a> — minimum 64px between
+            major sections on desktop, 48px on mobile. Alternate #232323 and #1F1F1F backgrounds to group related content
+            without adding borders.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Content</span>
+            <span class="ux-tag">Visual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">09</div>
+        <div class="ux-rec-content">
+          <h4>Add progress indicators to multi-step flows <span class="ux-priority ux-priority-low">Low</span></h4>
+          <p>Applications, enrolments, and portfolio uploads involve multiple steps. Without a visual stepper, users
+            cannot gauge remaining effort — increasing abandonment. Implement a linear progress indicator using tech
+            orange for the active step, film blue for completed steps, and muted grey for upcoming steps.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Conversion</span>
+            <span class="ux-tag">Content</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ux-rec">
+        <div class="ux-rec-num">10</div>
+        <div class="ux-rec-content">
+          <h4>Optimise for mobile bandwidth and performance <span class="ux-priority ux-priority-low">Low</span></h4>
+          <p>A significant portion of SA traffic is mobile on constrained networks. Serve images in WebP with responsive
+            <code>srcset</code>, lazy-load below-the-fold media, compress hero images under 200KB, and set performance
+            budgets (LCP under 2.5s). Test with Chrome DevTools at Slow 3G. Creative portfolio sites are media-heavy —
+            performance directly impacts bounce rate and accessibility.</p>
+          <div class="ux-rec-tags">
+            <span class="ux-tag">Performance</span>
+            <span class="ux-tag">Accessibility</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection-label">Cognitive Load — Quick Wins</div>
+      <table class="ow-spec-table">
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Issue</th>
+            <th>Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Text contrast</strong></td>
+            <td>Grey text on light areas may fall below 4.5:1</td>
+            <td>Use #EDEDED or #FFFFFF on dark; #232323 on light. See <a href="#accessibility"
+                style="color:var(--ow-color-tech);">Accessibility</a> contrast table.</td>
+          </tr>
+          <tr>
+            <td><strong>Line length</strong></td>
+            <td>Full-width paragraphs on wide screens (100+ characters)</td>
+            <td>Cap content columns at 680px max-width (<a href="#layout"
+                style="color:var(--ow-color-tech);">Layout</a> section)</td>
+          </tr>
+          <tr>
+            <td><strong>Heading hierarchy</strong></td>
+            <td>Visual size ≠ semantic level</td>
+            <td>Align visual and semantic heading order; one H1 per page</td>
+          </tr>
+          <tr>
+            <td><strong>Empty states</strong></td>
+            <td>"No results" with no guidance</td>
+            <td>Action-oriented copy + next-step link (see <a href="#voice-tone"
+                style="color:var(--ow-color-tech);">Voice &amp; Tone</a>)</td>
+          </tr>
+          <tr>
+            <td><strong>Loading states</strong></td>
+            <td>Content reflows without indication</td>
+            <td>Skeleton screens in #2A2A2A for async content areas</td>
+          </tr>
+          <tr>
+            <td><strong>Mobile tap targets</strong></td>
+            <td>Small text links in navigation</td>
+            <td>Minimum 44×44px touch area on all interactive elements</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+
+    <!-- ══════════════════════════════
+       14 — CSS VARIABLES
   ══════════════════════════════ -->
     <section id="variables" class="section">
-      <div class="section-eyebrow">11 — Developer</div>
+      <div class="section-eyebrow">14 — Developer</div>
       <h2 class="section-heading">CSS Custom Properties</h2>
       <p class="section-desc">Copy these root variables into your theme's <code
           style="background:#0A0A0A;padding:2px 7px;border-radius:3px;font-family:'Courier New',monospace;font-size:13px;color:var(--ow-color-tech);border:1px solid #1E1E1E;">style.css</code>
@@ -3237,7 +4975,7 @@
         </div>
         <div class="code-body" id="vars-code">/* =====================================================
           OPEN WINDOW INSTITUTE — CSS DESIGN TOKENS
-          Version 2.0 · March 2026
+          Version 2.2 · March 2026
           ===================================================== */
 
           :root {
@@ -3337,7 +5075,7 @@
        12 — ELEMENTOR GUIDE
   ══════════════════════════════ -->
     <section id="elementor" class="section" style="background: #1F1F1F;">
-      <div class="section-eyebrow">12 — Developer</div>
+      <div class="section-eyebrow">15 — Developer</div>
       <h2 class="section-heading">Elementor Pro Integration</h2>
       <p class="section-desc">Map these tokens in Elementor Site Settings → Custom CSS. Register the brand palette in
         Global Colors and fonts in Global Fonts to create a fully system-driven build.</p>
@@ -3614,7 +5352,7 @@
             style="font-family:var(--ow-font-primary);font-weight:800;font-size:18px;color:var(--ow-color-light);margin-bottom:6px;">
             Open Window Institute</div>
           <div style="font-size:13px;color:var(--ow-color-muted);line-height:1.9;font-family:var(--ow-font-primary);">
-            Brand Style Guide &amp; Design System v2.0 · March 2026<br>
+            Brand Style Guide &amp; Design System v2.2 · March 2026<br>
             Educational Leader in Creative Arts &amp; Technologies
           </div>
         </div>
@@ -3794,12 +5532,448 @@
     setOpacityAccent('creative');
     setHoverAccent('creative');
 
+    /* ─── INTERACTIVE CONTRAST CHECKER ─── */
+    (function initContrastChecker() {
+      const palette = [
+        { hex: '#EDEDED', name: 'Light' },
+        { hex: '#FFFFFF', name: 'White' },
+        { hex: '#9A9A9A', name: 'Muted' },
+        { hex: '#F1B33A', name: 'Visual' },
+        { hex: '#E75A33', name: 'Tech' },
+        { hex: '#27A9DD', name: 'Film' },
+        { hex: '#AA6CAD', name: 'Animation' },
+        { hex: '#E5428C', name: 'Postgrad' },
+        { hex: '#232323', name: 'Dark' },
+        { hex: '#1A1A1A', name: 'Deeper' },
+        { hex: '#2A2A2A', name: 'Card' }
+      ];
+
+      let fg = '#EDEDED';
+      let bg = '#232323';
+
+      const preview = document.getElementById('contrast-preview');
+      const previewText = document.getElementById('contrast-preview-text');
+      const fgRow = document.getElementById('contrast-fg-swatches');
+      const bgRow = document.getElementById('contrast-bg-swatches');
+      if (!preview || !fgRow || !bgRow) return;
+
+      function hexToLum(hex) {
+        const r = parseInt(hex.slice(1, 3), 16) / 255;
+        const g = parseInt(hex.slice(3, 5), 16) / 255;
+        const b = parseInt(hex.slice(5, 7), 16) / 255;
+        const f = c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      }
+
+      function getRatio(a, b) {
+        const l1 = hexToLum(a);
+        const l2 = hexToLum(b);
+        const hi = Math.max(l1, l2);
+        const lo = Math.min(l1, l2);
+        return (hi + 0.05) / (lo + 0.05);
+      }
+
+      function badge(pass, warn) {
+        const cls = pass ? 'badge-pass' : (warn ? 'badge-warn' : 'badge-fail');
+        const label = pass ? 'Pass' : (warn ? 'Large only' : 'Fail');
+        return `<span class="${cls}">${label}</span>`;
+      }
+
+      function update() {
+        preview.style.background = bg;
+        previewText.style.color = fg;
+        const ratio = getRatio(fg, bg);
+        const r = ratio.toFixed(2);
+        document.getElementById('contrast-ratio-value').textContent = r + ':1';
+        document.getElementById('contrast-aa-normal').innerHTML = badge(ratio >= 4.5);
+        document.getElementById('contrast-aa-large').innerHTML = badge(ratio >= 3);
+        document.getElementById('contrast-aaa-normal').innerHTML = badge(ratio >= 7);
+
+        fgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+          s.classList.toggle('active', s.dataset.hex === fg);
+        });
+        bgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+          s.classList.toggle('active', s.dataset.hex === bg);
+        });
+      }
+
+      function buildSwatches(row, type) {
+        palette.forEach(c => {
+          const sw = document.createElement('button');
+          sw.type = 'button';
+          sw.className = 'contrast-swatch';
+          sw.style.background = c.hex;
+          sw.dataset.hex = c.hex;
+          sw.title = c.name + ' ' + c.hex;
+          sw.setAttribute('aria-label', c.name + ' ' + c.hex);
+          if (c.hex === '#FFFFFF' || c.hex === '#EDEDED') {
+            sw.style.border = '1px solid #444';
+          }
+          sw.addEventListener('click', () => {
+            if (type === 'fg') fg = c.hex;
+            else bg = c.hex;
+            update();
+          });
+          row.appendChild(sw);
+        });
+      }
+
+      buildSwatches(fgRow, 'fg');
+      buildSwatches(bgRow, 'bg');
+      update();
+    })();
+
+    /* ─── ADVANCED BRAND & EMAIL CONTRAST LAB ─── */
+    (function initAdvancedContrastLab() {
+      const palette = [
+        { hex: '#EDEDED', name: 'Light' },
+        { hex: '#FFFFFF', name: 'White' },
+        { hex: '#9A9A9A', name: 'Muted' },
+        { hex: '#F1B33A', name: 'Visual' },
+        { hex: '#E75A33', name: 'Tech' },
+        { hex: '#27A9DD', name: 'Film' },
+        { hex: '#AA6CAD', name: 'Animation' },
+        { hex: '#E5428C', name: 'Postgrad' },
+        { hex: '#232323', name: 'Dark' },
+        { hex: '#1A1A1A', name: 'Deeper' },
+        { hex: '#2A2A2A', name: 'Card' }
+      ];
+
+      const BRAND_HEX = new Set(['#F1B33A', '#E75A33', '#27A9DD', '#AA6CAD', '#E5428C']);
+      const EMAIL_CANVAS = { light: '#FFFFFF', dark: '#1A1A1A' };
+      const WEB_CANVAS = '#1A1A1A';
+
+      const root = document.getElementById('contrast-advanced');
+      if (!root) return;
+
+      let fg = '#E75A33';
+      let bg = '#FFFFFF';
+      let fgOpacity = 100;
+      let bgOpacity = 100;
+      let emailMode = false;
+      let emailTheme = 'light';
+
+      const preview = document.getElementById('adv-preview');
+      const emailBody = document.getElementById('adv-email-body');
+      const previewText = document.getElementById('adv-preview-text');
+      const previewTextPlain = document.getElementById('adv-preview-text-plain');
+      const emailSubject = document.getElementById('adv-email-subject');
+      const emailCta = document.getElementById('adv-email-cta');
+      const fgRow = document.getElementById('adv-fg-swatches');
+      const bgRow = document.getElementById('adv-bg-swatches');
+      const fgOpacityInput = document.getElementById('adv-fg-opacity');
+      const bgOpacityInput = document.getElementById('adv-bg-opacity');
+      const emailModeInput = document.getElementById('adv-email-mode');
+      const emailThemeWrap = document.getElementById('adv-email-theme');
+      const emailChromeLabel = document.getElementById('adv-email-chrome-label');
+      const metaEl = document.getElementById('adv-meta');
+      const warningEl = document.getElementById('adv-email-warning');
+      const warningText = document.getElementById('adv-email-warning-text');
+
+      function hexToRgb(hex) {
+        return {
+          r: parseInt(hex.slice(1, 3), 16),
+          g: parseInt(hex.slice(3, 5), 16),
+          b: parseInt(hex.slice(5, 7), 16)
+        };
+      }
+
+      function rgbToHex(r, g, b) {
+        const c = n => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2, '0');
+        return '#' + c(r) + c(g) + c(b);
+      }
+
+      function rgbToHsl(r, g, b) {
+        r /= 255; g /= 255; b /= 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h = 0, s = 0;
+        const l = (max + min) / 2;
+        if (max !== min) {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+            case g: h = ((b - r) / d + 2) / 6; break;
+            case b: h = ((r - g) / d + 4) / 6; break;
+          }
+        }
+        return { h: h * 360, s: s * 100, l: l * 100 };
+      }
+
+      function hslToRgb(h, s, l) {
+        h /= 360; s /= 100; l /= 100;
+        if (s === 0) {
+          const v = l * 255;
+          return { r: v, g: v, b: v };
+        }
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        return {
+          r: hue2rgb(p, q, h + 1 / 3) * 255,
+          g: hue2rgb(p, q, h) * 255,
+          b: hue2rgb(p, q, h - 1 / 3) * 255
+        };
+      }
+
+      function hexToLum(hex) {
+        const { r, g, b } = hexToRgb(hex);
+        const f = c => {
+          c /= 255;
+          return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        };
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      }
+
+      function getRatio(hexA, hexB) {
+        const l1 = hexToLum(hexA);
+        const l2 = hexToLum(hexB);
+        const hi = Math.max(l1, l2);
+        const lo = Math.min(l1, l2);
+        return (hi + 0.05) / (lo + 0.05);
+      }
+
+      function blendHex(fgHex, alpha, bgHex) {
+        const a = alpha / 100;
+        const fg = hexToRgb(fgHex);
+        const bg = hexToRgb(bgHex);
+        return rgbToHex(
+          fg.r * a + bg.r * (1 - a),
+          fg.g * a + bg.g * (1 - a),
+          fg.b * a + bg.b * (1 - a)
+        );
+      }
+
+      function isBrandColor(hex) {
+        return BRAND_HEX.has(hex.toUpperCase());
+      }
+
+      function emailTransformColor(hex, role) {
+        if (emailTheme === 'light') return hex;
+        const lum = hexToLum(hex);
+        const rgb = hexToRgb(hex);
+
+        if (role === 'background') {
+          if (lum > 0.55) return EMAIL_CANVAS.dark;
+          if (lum > 0.22) return '#2D2D2D';
+          return hex;
+        }
+
+        if (lum < 0.18) return '#E8E8E8';
+        if (isBrandColor(hex)) {
+          const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+          hsl.s = Math.max(0, hsl.s * 0.7);
+          hsl.l = Math.min(88, hsl.l + 14);
+          const shifted = hslToRgb(hsl.h, hsl.s, hsl.l);
+          return rgbToHex(shifted.r, shifted.g, shifted.b);
+        }
+        if (lum > 0.85) return '#F0F0F0';
+        return hex;
+      }
+
+      function badge(pass, warn) {
+        const cls = pass ? 'badge-pass' : (warn ? 'badge-warn' : 'badge-fail');
+        const label = pass ? 'Pass' : (warn ? 'Large only' : 'Fail');
+        return `<span class="${cls}">${label}</span>`;
+      }
+
+      function computeEffective() {
+        const canvas = emailMode ? EMAIL_CANVAS[emailTheme] : WEB_CANVAS;
+        let fgBase = fg;
+        let bgBase = bg;
+
+        if (emailMode) {
+          fgBase = emailTransformColor(fg, 'foreground');
+          bgBase = emailTransformColor(bg, 'background');
+        }
+
+        const effectiveBg = blendHex(bgBase, bgOpacity, canvas);
+        const effectiveFg = blendHex(fgBase, fgOpacity, effectiveBg);
+
+        return { canvas, fgBase, bgBase, effectiveBg, effectiveFg };
+      }
+
+      function update() {
+        const { canvas, fgBase, bgBase, effectiveBg, effectiveFg } = computeEffective();
+        const ratio = getRatio(effectiveFg, effectiveBg);
+        const r = ratio.toFixed(2);
+
+        preview.classList.toggle('is-email-mode', emailMode);
+
+        if (emailMode) {
+          emailBody.style.background = effectiveBg;
+          previewText.style.color = effectiveFg;
+          emailSubject.style.color = effectiveFg;
+          const ctaBg = blendHex(fgBase, fgOpacity, effectiveBg);
+          emailCta.style.background = ctaBg;
+          emailCta.style.opacity = '1';
+          emailChromeLabel.textContent = 'Email · ' + (emailTheme === 'dark' ? 'Dark mode' : 'Light mode') + ' client';
+          metaEl.innerHTML = 'Canvas: <strong>' + canvas + '</strong> · Simulated client colours · Ratio uses composited values.';
+        } else {
+          previewTextPlain.style.color = effectiveFg;
+          document.getElementById('adv-preview-plain').style.background = effectiveBg;
+          metaEl.innerHTML = 'Canvas: <strong>Web (#1A1A1A)</strong> · Composited foreground and background opacities.';
+        }
+
+        document.getElementById('adv-fg-opacity-val').textContent = fgOpacity + '%';
+        document.getElementById('adv-bg-opacity-val').textContent = bgOpacity + '%';
+        document.getElementById('adv-fg-readout').innerHTML =
+          'Base <strong>' + fg + '</strong>' + (emailMode && fgBase !== fg ? ' → Client <strong>' + fgBase + '</strong>' : '') +
+          ' → Effective <strong>' + effectiveFg + '</strong>';
+        document.getElementById('adv-bg-readout').innerHTML =
+          'Base <strong>' + bg + '</strong>' + (emailMode && bgBase !== bg ? ' → Client <strong>' + bgBase + '</strong>' : '') +
+          ' → Effective <strong>' + effectiveBg + '</strong>';
+
+        document.getElementById('adv-contrast-ratio-value').textContent = r + ':1';
+        document.getElementById('adv-contrast-aa-normal').innerHTML = badge(ratio >= 4.5);
+        document.getElementById('adv-contrast-aa-large').innerHTML = badge(ratio >= 3);
+        document.getElementById('adv-contrast-aaa-normal').innerHTML = badge(ratio >= 7);
+
+        fgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+          s.classList.toggle('active', s.dataset.hex === fg);
+        });
+        bgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+          s.classList.toggle('active', s.dataset.hex === bg);
+        });
+
+        const warnings = [];
+        if (emailMode && emailTheme === 'dark') {
+          if (ratio < 4.5) {
+            warnings.push('Contrast drops below WCAG AA (4.5:1) in simulated dark-mode email — body text may be hard to read.');
+          }
+          if (isBrandColor(fg) && fgBase !== fg) {
+            warnings.push('Brand accent <strong>' + fg + '</strong> shifts to <strong>' + fgBase + '</strong> in dark-mode clients — oranges and yellows often look muted or off-brand.');
+          }
+          if (bg !== bgBase && lumHint(bg) > 0.5) {
+            warnings.push('Light background <strong>' + bg + '</strong> is typically replaced with <strong>' + bgBase + '</strong> — do not rely on white mailer backgrounds in dark mode.');
+          }
+          if (isBrandColor(fg) && ratio < 3) {
+            warnings.push('CTA buttons using department colours may fail contrast on forced dark canvases — use white text on a solid brand button, or test with a neutral fallback.');
+          }
+        }
+        if (emailMode && emailTheme === 'light' && isBrandColor(fg) && ratio < 4.5) {
+          warnings.push('Brand colour on a light email canvas may not meet AA for body-sized text — reserve accents for buttons and headings.');
+        }
+
+        if (warnings.length) {
+          warningEl.hidden = false;
+          warningText.innerHTML = warnings.join(' ');
+        } else {
+          warningEl.hidden = true;
+        }
+      }
+
+      function lumHint(hex) {
+        return hexToLum(hex);
+      }
+
+      function buildSwatches(row, type) {
+        palette.forEach(c => {
+          const sw = document.createElement('button');
+          sw.type = 'button';
+          sw.className = 'contrast-swatch';
+          sw.style.background = c.hex;
+          sw.dataset.hex = c.hex;
+          sw.title = c.name + ' ' + c.hex;
+          sw.setAttribute('aria-label', c.name + ' ' + c.hex);
+          if (c.hex === '#FFFFFF' || c.hex === '#EDEDED') {
+            sw.style.border = '1px solid #444';
+          }
+          sw.addEventListener('click', () => {
+            if (type === 'fg') fg = c.hex;
+            else bg = c.hex;
+            update();
+          });
+          row.appendChild(sw);
+        });
+      }
+
+      buildSwatches(fgRow, 'fg');
+      buildSwatches(bgRow, 'bg');
+
+      fgOpacityInput.addEventListener('input', () => {
+        fgOpacity = parseInt(fgOpacityInput.value, 10);
+        update();
+      });
+
+      bgOpacityInput.addEventListener('input', () => {
+        bgOpacity = parseInt(bgOpacityInput.value, 10);
+        update();
+      });
+
+      emailModeInput.addEventListener('change', () => {
+        emailMode = emailModeInput.checked;
+        emailThemeWrap.hidden = !emailMode;
+        update();
+      });
+
+      emailThemeWrap.querySelectorAll('.contrast-theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          emailTheme = btn.dataset.emailTheme;
+          emailThemeWrap.querySelectorAll('.contrast-theme-btn').forEach(b => {
+            b.classList.toggle('is-active', b === btn);
+          });
+          update();
+        });
+      });
+
+      update();
+    })();
+
     /* Close sidebar when clicking content on mobile */
     document.getElementById('main-content').addEventListener('click', () => {
       if (window.innerWidth <= 768) {
         document.getElementById('sidebar').classList.remove('open');
       }
     });
+
+    /* ─── SCROLL PROGRESS & BACK TO TOP ─── */
+    const scrollProgress = document.getElementById('scroll-progress');
+    const backToTopBtn = document.getElementById('back-to-top');
+    const sidebarBrandTop = document.getElementById('sidebar-brand-top');
+    const mobileHeaderTop = document.getElementById('mobile-header-top');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+      });
+    }
+
+    function updateScrollUi() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+      if (scrollProgress) {
+        scrollProgress.style.width = progress + '%';
+      }
+      if (backToTopBtn) {
+        backToTopBtn.classList.toggle('visible', scrollTop > 320);
+      }
+    }
+
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', scrollToTop);
+    }
+    if (sidebarBrandTop) {
+      sidebarBrandTop.addEventListener('click', scrollToTop);
+    }
+    if (mobileHeaderTop) {
+      mobileHeaderTop.addEventListener('click', scrollToTop);
+    }
+
+    window.addEventListener('scroll', updateScrollUi, { passive: true });
+    window.addEventListener('resize', updateScrollUi);
+    updateScrollUi();
   </script>
   <link rel="stylesheet" href="../shared/guide-switcher.css">
   <link rel="stylesheet" href="../shared/guide-resources.css">

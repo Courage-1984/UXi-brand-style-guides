@@ -135,6 +135,79 @@
   .guide-switcher {
     display: none !important;
   }
+
+  .guide-site-links-host {
+    display: none !important;
+  }
+}
+
+/* ─── External site links (style guide pages) ─── */
+
+.guide-site-links-host {
+  position: fixed;
+  top: 12px;
+  right: 20px;
+  left: auto;
+  bottom: auto;
+  z-index: 99998;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  max-width: min(calc(100vw - 40px), 520px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.guide-site-links-host .guide-site-link {
+  pointer-events: auto;
+}
+
+.guide-site-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 11px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #444;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  opacity: 0.55;
+}
+
+.guide-site-links-host:hover .guide-site-link,
+.guide-site-link:hover,
+.guide-site-link:focus-visible {
+  opacity: 1;
+  border-color: rgba(0, 0, 0, 0.18);
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  outline: none;
+}
+
+.guide-site-link svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  body:has(#mobile-header) .guide-site-links-host {
+    top: 56px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -145,5 +218,11 @@
 
   .guide-switcher-menu {
     min-width: 180px;
+  }
+
+  .guide-site-links-host {
+    top: 10px;
+    right: 14px;
+    max-width: calc(100vw - 28px);
   }
 }
