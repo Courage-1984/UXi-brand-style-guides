@@ -23,20 +23,37 @@
     return null;
   }
 
-  function buildGuideUrl(slug) {
-    var current = getCurrentSlug();
-    if (current) {
-      return '../' + slug + '/';
+  function getCalendarSlug() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    for (var i = 0; i < parts.length - 1; i++) {
+      if (parts[i] === 'Calendars') {
+        return parts[i + 1];
+      }
     }
-    return slug + '/';
+    return null;
+  }
+
+  function getPathPrefix() {
+    if (getCalendarSlug()) {
+      return '../../';
+    }
+    if (getCurrentSlug()) {
+      return '../';
+    }
+    return '';
+  }
+
+  function buildGuideUrl(slug) {
+    return getPathPrefix() + slug + '/';
   }
 
   function buildIndexUrl() {
-    return getCurrentSlug() ? '../' : './';
+    var prefix = getPathPrefix();
+    return prefix || './';
   }
 
   function isOnIndex() {
-    return getCurrentSlug() === null;
+    return getCurrentSlug() === null && getCalendarSlug() === null;
   }
 
   function createSwitcher() {

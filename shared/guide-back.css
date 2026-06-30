@@ -1,0 +1,21 @@
+/* UXi guide back control — top-left in main content, beside the sidebar */
+
+.guide-back {
+  position: fixed;
+  top: 20px;
+  left: var(--guide-back-left, 20px);
+  z-index: 99998;
+}
+
+@media print {
+  .guide-back {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .guide-back {
+    top: 14px;
+    left: var(--guide-back-left, 14px);
+  }
+}

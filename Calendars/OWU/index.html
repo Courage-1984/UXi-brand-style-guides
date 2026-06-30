@@ -1,0 +1,1782 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OWU 2026 Calendar of Events</title>
+    <!-- Cooper Hewitt (OWU brand font) via jsDelivr/@fontsource -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cooper-hewitt@5.2.5/400.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cooper-hewitt@5.2.5/700.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cooper-hewitt@5.2.5/800.css" />
+    <style>
+        /* ============================================
+           CONFIGURATION: Color Scheme
+           ============================================ */
+        :root {
+            /* Base colors */
+            --bg: #ffffff;
+            --ink: #403f3f;
+            --grid: rgba(205, 202, 48, .35);
+            /* #cdca30 */
+            --head-bg: #002558;
+            --head-ink: #ffffff;
+            --muted: rgba(248, 183, 23, .12);
+            /* #f8b717 */
+
+            /* OWU 2026 Calendar Key colors */
+            --campus: #53bf9d;   /* Campus Life (Events & Wellness) */
+            --holiday: #ee2979;  /* Public Holidays (Campus Closed) */
+            --workshop: #cdca30; /* Workshops */
+            --openday: #ff8949;  /* Open Days */
+            --micro: #002558;    /* Micro Credential Courses */
+            --academic: #f8b717; /* Academic (Intakes & Institutional Dates) */
+        }
+
+        html,
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Cooper Hewitt", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.35;
+            margin: 0
+        }
+
+        .wrap {
+            max-width: 1160px;
+            margin: 26px auto;
+            padding: 0 16px
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px
+        }
+
+        .brandLogo {
+            height: 44px;
+            width: auto;
+            display: none;
+            object-fit: contain;
+        }
+
+        @media screen and (max-width: 599px) {
+            .brandLogo {
+                height: 36px;
+            }
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(22px, 4vw, 30px)
+        }
+
+        header h1#title {
+            justify-self: center;
+            text-align: center;
+            color: var(--head-bg);
+            font-weight: 800;
+            letter-spacing: .2px;
+            line-height: 1.15;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        select,
+        button {
+            font: inherit;
+            padding: 8px 10px;
+            border: 1px solid var(--grid);
+            border-radius: 8px;
+            background: #fff;
+            color: var(--head-bg);
+            -webkit-text-fill-color: var(--head-bg)
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        /* Prevent WordPress theme button/input colors from overriding control text */
+        .calendar-container .controls select,
+        .calendar-container .controls button {
+            color: var(--head-bg) !important;
+            -webkit-text-fill-color: var(--head-bg) !important;
+            background-color: #fff !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 10px 0 18px
+        }
+
+        .legend .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 750;
+            color: var(--head-bg);
+            white-space: nowrap;
+            flex-shrink: 0
+        }
+
+        .legend .sw {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            outline: 1px solid rgba(205, 202, 48, .9);
+            /* #cdca30 */
+            flex-shrink: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact
+        }
+
+        .cal {
+            border: 1px solid var(--grid);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .05)
+        }
+
+        .cal .dow {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: #53bf9d; /* OWU brand landscape accent */
+            color: var(--head-ink);
+            font-weight: 600;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px
+        }
+
+        .cal .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: var(--bg)
+        }
+
+        .day {
+            min-height: 120px;
+            border-top: 1px solid var(--grid);
+            border-right: 1px solid var(--grid);
+            padding: 8px 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--bg)
+        }
+
+        .day:nth-child(7n) {
+            border-right: none
+        }
+
+        .day.blank {
+            background: var(--muted)
+        }
+
+        .date {
+            font-weight: 700;
+            font-size: 13px;
+            opacity: .9;
+            color: var(--head-bg)
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .tag {
+            display: block;
+            font-size: 13px;
+            padding: 6px 7px;
+            border-radius: 6px;
+            background: #f5f5f5;
+            border: 1px solid rgba(0, 37, 88, .22);
+            /* #002558 */
+            color: var(--ink);
+            line-height: 1.25;
+            font-weight: 650;
+        }
+
+        /* Long-text handling: show truncated summary inside the tag,
+           and a small "Details" button that opens a modal. */
+        .moreBtn {
+            display: block;
+            margin-top: 6px;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 37, 88, .28);
+            /* #002558 */
+            background: rgba(248, 183, 23, .22);
+            /* #f8b717 */
+            cursor: pointer;
+        }
+
+        /* OWU 2026 event category styles */
+        .campus {
+            background: var(--campus);
+            color: #002558;
+        }
+
+        .holiday {
+            background: var(--holiday);
+            color: #ffffff;
+            border-color: rgba(0, 37, 88, .35);
+        }
+
+        .workshop {
+            background: var(--workshop);
+            color: #002558;
+        }
+
+        .openday {
+            background: var(--openday);
+            color: #ffffff;
+            border-color: rgba(0, 37, 88, .35);
+        }
+
+        .micro {
+            background: var(--micro);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, .35);
+        }
+
+        .academic {
+            background: var(--academic);
+            color: #002558;
+        }
+
+        .monthTitle {
+            padding: 12px 14px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--grid);
+            background: rgba(83, 191, 157, .10);
+            /* #53bf9d */
+        }
+
+        /* Modal for showing full event text */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 9999;
+        }
+
+        .modal[aria-hidden="false"] {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 860px;
+            background: #fff;
+            border: 1px solid rgba(0, 37, 88, .20);
+            /* #002558 */
+            border-radius: 14px;
+            box-shadow: 0 14px 60px rgba(0, 0, 0, .25);
+            padding: 16px 16px 14px;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .modal-title {
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 1.2;
+        }
+
+        .modal-close {
+            border: 1px solid rgba(238, 41, 121, .35);
+            /* #ee2979 */
+            background: #fff;
+            border-radius: 10px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .modal-body {
+            white-space: pre-wrap;
+            line-height: 1.35;
+        }
+
+        @media print {
+
+            /* Ensure colors print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Hide everything outside calendar container when embedded */
+            body.calendar-printing>*:not(.calendar-container) {
+                display: none !important;
+            }
+
+            .wrap {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Print: keep the calendar readable; modal and Details buttons are not needed */
+            .modal,
+            .moreBtn {
+                display: none !important;
+            }
+
+            .controls {
+                display: none
+            }
+
+            /* Show legend in print */
+            body.calendar-printing .calendar-container .legend {
+                display: flex !important;
+                visibility: visible !important;
+                page-break-inside: avoid !important;
+                margin-bottom: 12px !important;
+                padding: 8px 0 !important;
+                border-bottom: 1px solid var(--grid) !important;
+            }
+
+            body.calendar-printing .calendar-container .legend .pill {
+                font-size: 11px !important;
+                gap: 6px !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
+            }
+
+            body.calendar-printing .calendar-container .legend .sw {
+                width: 12px !important;
+                height: 12px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                flex-shrink: 0 !important;
+            }
+
+            /* Calendar sizing for print - ensure fits on one page */
+            body.calendar-printing [data-print-wrapper] .cal {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+            }
+
+            body.calendar-printing [data-print-wrapper] .monthTitle {
+                padding: 8px 10px;
+                font-size: 16px;
+                margin: 0;
+            }
+
+            body.calendar-printing [data-print-wrapper] .day {
+                min-height: 60px !important;
+                padding: 4px 3px 6px !important;
+                font-size: 11px;
+            }
+
+            body.calendar-printing [data-print-wrapper] .date {
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+
+            body.calendar-printing [data-print-wrapper] .tag {
+                font-size: 9px;
+                padding: 3px 4px;
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+
+            body.calendar-printing [data-print-wrapper] .dow {
+                padding: 6px 0;
+                font-size: 11px;
+            }
+
+            body.calendar-printing [data-print-wrapper] .items {
+                gap: 2px;
+            }
+
+            /* Print all months styles */
+            body.calendar-printing * {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            body.calendar-printing .calendar-container {
+                display: block !important;
+                visibility: visible !important;
+            }
+
+            body.calendar-printing .calendar-container * {
+                visibility: visible !important;
+            }
+
+            body.calendar-printing .calendar-container .wrap {
+                display: block !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] {
+                display: block !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] .cal {
+                display: block !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] .grid {
+                display: grid !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] .dow {
+                display: grid !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] .day {
+                display: flex !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] .items {
+                display: flex !important;
+            }
+
+            /* Show legend in print wrapper */
+            body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] {
+                display: flex !important;
+                visibility: visible !important;
+                page-break-inside: avoid !important;
+                margin-bottom: 12px !important;
+                padding: 8px 0 !important;
+                border-bottom: 1px solid var(--grid) !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] .pill {
+                font-size: 10px !important;
+                gap: 6px !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] .sw {
+                width: 12px !important;
+                height: 12px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                flex-shrink: 0 !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] .monthTitle,
+            body.calendar-printing .calendar-container [data-print-wrapper] .date,
+            body.calendar-printing .calendar-container [data-print-wrapper] .tag,
+            body.calendar-printing .calendar-container [data-print-wrapper] .day.blank {
+                display: block !important;
+            }
+
+            body.calendar-printing .calendar-container header,
+            body.calendar-printing .calendar-container .controls,
+            body.calendar-printing .calendar-container .original-cal-hidden,
+            body.calendar-printing .calendar-container .wrap .cal:not([data-print-month]) {
+                display: none !important;
+            }
+
+            /* Ensure legend colors and event tag colors print correctly */
+            body.calendar-printing .calendar-container .legend .sw,
+            body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] .sw {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body.calendar-printing .calendar-container [data-print-wrapper] .tag {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* ====== RESPONSIVE STYLES ====== */
+
+        /* Large tablets and small desktops (768px - 1024px) */
+        @media screen and (max-width: 1024px) {
+            .wrap {
+                max-width: 100%;
+                padding: 0 12px;
+                margin: 20px auto
+            }
+
+            .day {
+                min-height: 110px;
+                padding: 6px 6px 10px
+            }
+
+            .tag {
+                font-size: 11px;
+                padding: 5px 6px
+            }
+
+            .cal .dow {
+                font-size: 13px;
+                padding: 8px 0
+            }
+        }
+
+        /* Tablets (600px - 767px) */
+        @media screen and (max-width: 767px) {
+            .wrap {
+                padding: 0 10px;
+                margin: 16px auto
+            }
+
+            header {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                gap: 10px
+            }
+
+            h1 {
+                font-size: clamp(20px, 5vw, 26px);
+                width: 100%
+            }
+
+            .controls {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 6px
+            }
+
+            .controls label {
+                font-size: 14px
+            }
+
+            select,
+            button {
+                font-size: 14px;
+                padding: 7px 9px;
+                flex: 1;
+                min-width: 120px
+            }
+
+            .legend {
+                gap: 6px 12px;
+                margin: 8px 0 14px
+            }
+
+            .legend .pill {
+                font-size: 12px;
+                gap: 6px
+            }
+
+            .legend .sw {
+                width: 12px;
+                height: 12px
+            }
+
+            .cal {
+                border-radius: 8px
+            }
+
+            .cal .dow {
+                font-size: 12px;
+                padding: 8px 4px
+            }
+
+            .cal .dow div {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+
+            .day {
+                min-height: 100px;
+                padding: 5px 4px 8px;
+                gap: 4px
+            }
+
+            .date {
+                font-size: 12px
+            }
+
+            .tag {
+                font-size: 11px;
+                padding: 4px 5px;
+                line-height: 1.3
+            }
+
+            .items {
+                gap: 4px
+            }
+
+            .monthTitle {
+                padding: 10px 12px;
+                font-size: 15px
+            }
+        }
+
+        /* Small tablets and large phones (481px - 599px) */
+        @media screen and (max-width: 599px) {
+            .wrap {
+                padding: 0 8px;
+                margin: 12px auto
+            }
+
+            header {
+                margin-bottom: 10px
+            }
+
+            h1 {
+                font-size: clamp(18px, 6vw, 24px)
+            }
+
+            .controls {
+                flex-direction: column;
+                width: 100%
+            }
+
+            select,
+            button {
+                width: 100%;
+                min-width: unset
+            }
+
+            .legend {
+                gap: 5px 10px;
+                margin: 6px 0 12px
+            }
+
+            .legend .pill {
+                font-size: 10px
+            }
+
+            .cal .dow {
+                font-size: 11px;
+                padding: 6px 2px
+            }
+
+            .cal .dow div {
+                padding: 0 2px
+            }
+
+            .day {
+                min-height: 90px;
+                padding: 4px 3px 6px;
+                gap: 3px
+            }
+
+            .date {
+                font-size: 11px
+            }
+
+            .tag {
+                font-size: 9px;
+                padding: 3px 4px;
+                line-height: 1.25;
+                word-break: break-word;
+                overflow-wrap: break-word
+            }
+
+            .items {
+                gap: 3px
+            }
+
+            .monthTitle {
+                padding: 8px 10px;
+                font-size: 14px
+            }
+        }
+
+        /* Small phones (320px - 480px) */
+        @media screen and (max-width: 480px) {
+            .wrap {
+                padding: 0 6px;
+                margin: 10px auto
+            }
+
+            html,
+            body {
+                font-size: 14px
+            }
+
+            header {
+                margin-bottom: 8px;
+                gap: 8px
+            }
+
+            h1 {
+                font-size: clamp(16px, 7vw, 22px);
+                line-height: 1.2
+            }
+
+            .controls {
+                gap: 5px
+            }
+
+            select,
+            button {
+                font-size: 13px;
+                padding: 6px 8px
+            }
+
+            .legend {
+                gap: 4px 8px;
+                margin: 5px 0 10px
+            }
+
+            .legend .pill {
+                font-size: 9px;
+                gap: 4px;
+                flex-wrap: wrap
+            }
+
+            .legend .sw {
+                width: 10px;
+                height: 10px;
+                flex-shrink: 0
+            }
+
+            .cal {
+                border-radius: 6px;
+                border-width: 1px
+            }
+
+            .cal .dow {
+                font-size: 10px;
+                padding: 5px 1px;
+                font-weight: 600
+            }
+
+            .cal .dow div {
+                padding: 0 1px;
+                font-size: 9px
+            }
+
+            .day {
+                min-height: 80px;
+                padding: 3px 2px 5px;
+                gap: 2px;
+                border-top-width: 1px;
+                border-right-width: 1px
+            }
+
+            .date {
+                font-size: 10px;
+                font-weight: 600
+            }
+
+            .tag {
+                font-size: 8px;
+                padding: 2px 3px;
+                line-height: 1.2;
+                border-radius: 4px;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto
+            }
+
+            .items {
+                gap: 2px;
+                overflow: hidden
+            }
+
+            .monthTitle {
+                padding: 6px 8px;
+                font-size: 13px;
+                font-weight: 600
+            }
+        }
+
+        /* Extra small phones (max-width: 320px) */
+        @media screen and (max-width: 320px) {
+            .wrap {
+                padding: 0 4px;
+                margin: 8px auto
+            }
+
+            html,
+            body {
+                font-size: 13px
+            }
+
+            h1 {
+                font-size: clamp(14px, 8vw, 20px)
+            }
+
+            .controls select,
+            .controls button {
+                font-size: 12px;
+                padding: 5px 6px
+            }
+
+            .legend .pill {
+                font-size: 8px
+            }
+
+            .legend .sw {
+                width: 9px;
+                height: 9px
+            }
+
+            .cal .dow {
+                font-size: 9px;
+                padding: 4px 0
+            }
+
+            .cal .dow div {
+                font-size: 8px
+            }
+
+            .day {
+                min-height: 75px;
+                padding: 2px 1px 4px
+            }
+
+            .date {
+                font-size: 9px
+            }
+
+            .tag {
+                font-size: 7px;
+                padding: 2px;
+                line-height: 1.15
+            }
+
+            .monthTitle {
+                padding: 5px 6px;
+                font-size: 12px
+            }
+        }
+
+        /* Landscape orientation adjustments for phones */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .day {
+                min-height: 60px
+            }
+
+            .tag {
+                font-size: 9px;
+                padding: 2px 3px
+            }
+
+            .monthTitle {
+                padding: 6px 10px
+            }
+        }
+
+        /* High DPI displays */
+        @media screen and (-webkit-min-device-pixel-ratio: 2),
+        screen and (min-resolution: 192dpi) {
+            .cal {
+                border-width: 0.5px
+            }
+
+            .day {
+                border-top-width: 0.5px;
+                border-right-width: 0.5px
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+
+            select,
+            button {
+                min-height: 44px;
+                padding: 10px 12px
+            }
+
+            .tag {
+                min-height: 32px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calendar-container">
+        <div class="wrap">
+            <header>
+                <img id="owuLogo" class="brandLogo" alt="OWU logo" />
+                <h1 id="title">2026 Calendar of Events</h1>
+                <div class="controls">
+                    <label for="monthSel">Month:</label>
+                    <select id="monthSel" aria-label="Select month"></select>
+                    <button id="printBtn" title="Print all months">Print All Months</button>
+                </div>
+            </header>
+
+            <!-- ============================================
+                 CONFIGURATION: Legend/Categories
+                 Customize the legend items below to match your event categories
+                 ============================================ -->
+            <div class="legend">
+                <span class="pill"><span class="sw" style="background:var(--campus)"></span>Campus Life</span>
+                <span class="pill"><span class="sw" style="background:var(--holiday)"></span>Public Holidays</span>
+                <span class="pill"><span class="sw" style="background:var(--workshop)"></span>Workshops</span>
+                <span class="pill"><span class="sw" style="background:var(--openday)"></span>Open Days</span>
+                <span class="pill"><span class="sw" style="background:var(--micro)"></span>Micro Credential Courses</span>
+                <span class="pill"><span class="sw" style="background:var(--academic)"></span>Academic</span>
+            </div>
+
+            <div id="calendar" class="cal" role="region" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <!-- Full event text modal (used for long entries) -->
+    <div id="eventModal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+            <div class="modal-header">
+                <div class="modal-title" id="eventModalTitle"></div>
+                <button type="button" class="modal-close" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body" id="eventModalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================
+           CONFIGURATION: OWU Logo
+           ============================================
+           Paste your Base64 string into OWU_LOGO_BASE64 below.
+           - You can paste either:
+             1) Raw base64 (no prefix), OR
+             2) Full data URL (data:image/png;base64,....)
+        */
+        const OWU_LOGO_BASE64 = "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"; // <-- paste base64 here
+
+        /* ============================================
+           CONFIGURATION: Calendar Settings
+           ============================================ */
+
+        // Configure the date range for your calendar
+        // Format: "YYYY-MM" (e.g., "2026-01" for January 2026)
+        const CALENDAR_START = "2026-01";  // First month to display
+        const CALENDAR_END = "2026-12";     // Last month to display
+        const DEFAULT_MONTH = (function () {
+            const [sy, sm] = CALENDAR_START.split("-").map(Number);
+            const [ey, em] = CALENDAR_END.split("-").map(Number);
+            const startNum = sy * 100 + sm;
+            const endNum = ey * 100 + em;
+            const now = new Date();
+            let curNum = now.getFullYear() * 100 + (now.getMonth() + 1);
+            if (curNum < startNum) curNum = startNum;
+            if (curNum > endNum) curNum = endNum;
+            const y = Math.floor(curNum / 100);
+            const m = curNum % 100;
+            return `${y}-${String(m).padStart(2, "0")}`;
+        })();
+
+        // Calendar title (appears in browser tab and header)
+        const CALENDAR_TITLE = "2026 Calendar of Events";
+
+        // Print button text
+        const PRINT_BUTTON_TEXT = "Print All Months";
+
+        // Render logo (if provided)
+        (function initLogo() {
+            const logoEl = document.getElementById('owuLogo');
+            if (!logoEl) return;
+            const raw = (OWU_LOGO_BASE64 || '').trim();
+            if (!raw) return;
+            const src = raw.startsWith('data:') ? raw : `data:image/png;base64,${raw}`;
+            logoEl.src = src;
+            logoEl.style.display = 'block';
+        })();
+
+        /* ============================================
+           CONFIGURATION: Event Categories
+           ============================================
+           Define your event categories here.
+           Each category should match:
+           1. A CSS class (e.g., .holiday, .exam)
+           2. A legend item (in the HTML above)
+           3. The category property in events (below)
+        */
+        const EVENT_CATEGORIES = {
+            campus: "Campus Life (Events & Wellness)",
+            holiday: "Public Holidays (Campus Closed)",
+            workshop: "Workshops (Single-day sessions)",
+            openday: "Open Days (Online & In-person)",
+            micro: "Micro Credential Courses",
+            academic: "Academic (Intakes & Institutional Dates)"
+        };
+
+        /* ============================================
+           DATA MODEL: Events
+           ============================================
+           Add your events below. Each event should have:
+           - title: Event name (string)
+           - start: Start date in "YYYY-MM-DD" format (string)
+           - end: End date in "YYYY-MM-DD" format (string, optional - omit for single-day events)
+           - category: One of the categories defined above (string)
+        */
+
+        // Initialize events object for all months in range
+        function initializeEventsObject(startMonth, endMonth) {
+            const events = {};
+            const [startYear, startMonthNum] = startMonth.split('-').map(Number);
+            const [endYear, endMonthNum] = endMonth.split('-').map(Number);
+
+            let currentYear = startYear;
+            let currentMonth = startMonthNum;
+
+            while (currentYear < endYear || (currentYear === endYear && currentMonth <= endMonthNum)) {
+                const monthKey = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
+                events[monthKey] = [];
+
+                currentMonth++;
+                if (currentMonth > 12) {
+                    currentMonth = 1;
+                    currentYear++;
+                }
+            }
+
+            return events;
+        }
+
+        const eventsByMonth = initializeEventsObject(CALENDAR_START, CALENDAR_END);
+
+        /* ============================================
+           MOCK DATA: Sample Events
+           ============================================
+           Replace these with your actual events
+        */
+
+        // OWU 2026 Calendar data (using only the key categories above)
+        // 2026-01
+        eventsByMonth["2026-01"] = [
+            { title: "New Year's Day", start: "2026-01-01", category: "holiday" },
+            { title: "Institution Opens", start: "2026-01-14", category: "academic" },
+        ];
+
+        // 2026-02
+        eventsByMonth["2026-02"] = [
+            { title: "Open Day 09:00-14:00", start: "2026-02-07", category: "openday" },
+            { title: "First Intake Start: BCOM Marketing & Management Science; Bachelor of Computing", start: "2026-02-09", category: "academic" },
+            { title: "Online Open Day 18:00-19:00", start: "2026-02-12", category: "openday" },
+            { title: "First Intake Late Registration Close: Bachelor of Computing", start: "2026-02-16", category: "academic" },
+            { title: "Orientation 10:00-15:00", start: "2026-02-23", end: "2026-02-27", category: "campus" },
+        ];
+
+        // 2026-03
+        eventsByMonth["2026-03"] = [
+            { title: "First Intake Start: Certificates (Film, Creative Writing); BA (Design Arts, Moving Image, Interaction Design, Experimental Media, Literary Arts); MA Creative Arts; MCOM Marketing", start: "2026-03-02", category: "academic" },
+            { title: "First Intake Late Registration Close: BCOM Marketing & Management Science", start: "2026-03-02", category: "academic" },
+            { title: "International Women's Day", start: "2026-03-08", category: "holiday" },
+            { title: "International Women's Day (Observed Day Off)", start: "2026-03-09", category: "holiday" },
+            { title: "Youth Day", start: "2026-03-12", category: "holiday" },
+            { title: "First Intake Late Registration Close: Certificates & BA programs", start: "2026-03-16", category: "academic" },
+            { title: "2026 Graduation", start: "2026-03-27", category: "campus" },
+        ];
+
+        // 2026-04
+        eventsByMonth["2026-04"] = [
+            { title: "Good Friday", start: "2026-04-03", category: "holiday" },
+            { title: "Holy Saturday", start: "2026-04-04", category: "holiday" },
+            { title: "Easter Sunday", start: "2026-04-05", category: "holiday" },
+            { title: "Easter Monday", start: "2026-04-06", category: "holiday" },
+            { title: "Micro Credential Course - Game Design", start: "2026-04-11", category: "micro" },
+            { title: "Animation Workshop", start: "2026-04-11", category: "workshop" },
+            { title: "Wellness Day", start: "2026-04-24", category: "campus" },
+            { title: "Micro Credential Course - Interactive Media", start: "2026-04-25", category: "micro" },
+            { title: "Kenneth Kaunda Day", start: "2026-04-28", category: "holiday" },
+        ];
+
+        // 2026-05
+        eventsByMonth["2026-05"] = [
+            { title: "Labour Day", start: "2026-05-01", category: "holiday" },
+            { title: "Micro Credential Course - Photography", start: "2026-05-09", category: "micro" },
+            { title: "Art Writing Essentials Workshop", start: "2026-05-16", category: "workshop" },
+            { title: "Fitness Day", start: "2026-05-22", category: "campus" },
+            { title: "Micro Credential Course - Graphic Design", start: "2026-05-23", category: "micro" },
+            { title: "Africa Freedom Day", start: "2026-05-25", category: "holiday" },
+            { title: "Film Workshop", start: "2026-05-30", category: "workshop" },
+        ];
+
+        // 2026-06
+        eventsByMonth["2026-06"] = [
+            { title: "Micro Credential Course - Film", start: "2026-06-06", category: "micro" },
+            { title: "Photography Workshop", start: "2026-06-13", category: "workshop" },
+            { title: "Micro Credential Course - Animation", start: "2026-06-20", category: "micro" },
+            { title: "Poetry Night, 18:00-21:00", start: "2026-06-26", category: "campus" },
+            { title: "Marketing Workshop", start: "2026-06-27", category: "workshop" },
+            { title: "Photography Summer School 09:00-13:00", start: "2026-06-29", category: "academic" },
+            { title: "Photography Summer School 09:00-13:00", start: "2026-06-30", category: "academic" },
+        ];
+
+        // 2026-07
+        eventsByMonth["2026-07"] = [
+            { title: "Second Intake Start: MA Creative Arts; MCOM Marketing", start: "2026-07-01", category: "academic" },
+            { title: "Photography Summer School 09:00-13:00", start: "2026-07-01", category: "academic" },
+            { title: "Photography Summer School 09:00-13:00", start: "2026-07-02", category: "academic" },
+            { title: "Online Info Session 18:00-19:00", start: "2026-07-02", category: "campus" },
+            { title: "Photography Summer School 09:00-13:00", start: "2026-07-03", category: "academic" },
+            { title: "Heroes Day", start: "2026-07-06", category: "holiday" },
+            { title: "Second Intake Start: BCOM Marketing & Management Science", start: "2026-07-06", category: "academic" },
+            { title: "Unity Day", start: "2026-07-07", category: "holiday" },
+            { title: "Creative Writing Workshop", start: "2026-07-11", category: "workshop" },
+            { title: "Micro Credential Course - Photography", start: "2026-07-18", category: "micro" },
+            { title: "Second Intake Start: Certificates (Film, Creative Writing); BA (Design Arts, Moving Image, Interaction Design, Experimental Media, Literary Arts)", start: "2026-07-20", category: "academic" },
+            { title: "Second Intake Late Registration Close: BCOM Marketing & Management Science", start: "2026-07-20", category: "academic" },
+            { title: "Animation Workshop", start: "2026-07-25", category: "workshop" },
+        ];
+
+        // 2026-08
+        eventsByMonth["2026-08"] = [
+            { title: "Farmers Day", start: "2026-08-03", category: "holiday" },
+            { title: "Second Intake Late Registration Close: Certificates & BA programs", start: "2026-08-03", category: "academic" },
+            { title: "Graphic Design Workshop", start: "2026-08-08", category: "workshop" },
+            { title: "Online Open Day 18:00-19:00", start: "2026-08-14", category: "openday" },
+            { title: "Viral Content Workshop", start: "2026-08-22", category: "workshop" },
+            { title: "Micro Credential Course - Game Design", start: "2026-08-29", category: "micro" },
+        ];
+
+        // 2026-09
+        eventsByMonth["2026-09"] = [
+            { title: "Animation Workshop", start: "2026-09-05", category: "workshop" },
+            { title: "Graphic Design Workshop", start: "2026-09-19", category: "workshop" },
+            { title: "Open Day - 09:00-14:00", start: "2026-09-26", category: "openday" },
+        ];
+
+        // 2026-10
+        eventsByMonth["2026-10"] = [
+            { title: "Online Open Day 18:00-19:00", start: "2026-10-01", category: "openday" },
+            { title: "OWU LAN Event", start: "2026-10-02", category: "campus" },
+            { title: "Computer Science Workshop", start: "2026-10-03", category: "workshop" },
+            { title: "National Day of Prayer", start: "2026-10-18", category: "holiday" },
+            { title: "National Day of Prayer Holiday", start: "2026-10-19", category: "holiday" },
+            { title: "Independence Day", start: "2026-10-24", category: "holiday" },
+            { title: "Micro Credential Course - Animation", start: "2026-10-31", category: "micro" },
+        ];
+
+        // 2026-11
+        eventsByMonth["2026-11"] = [
+            { title: "Third Intake Start: MA Creative Arts; MCOM Marketing", start: "2026-11-02", category: "academic" },
+            { title: "Game Design Workshop", start: "2026-11-14", category: "workshop" },
+        ];
+
+        // 2026-12
+        eventsByMonth["2026-12"] = [
+            { title: "Institution Closes", start: "2026-12-11", category: "academic" },
+            { title: "Christmas Day", start: "2026-12-25", category: "holiday" },
+        ];
+        /* ============================================
+   MONTH SELECTOR & LABELS
+   ============================================ */
+        const monthKeys = Object.keys(eventsByMonth).sort();
+
+        // Generate month labels automatically
+        const monthLabels = {};
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+
+        monthKeys.forEach(key => {
+            const [year, month] = key.split('-').map(Number);
+            monthLabels[key] = `${monthNames[month - 1]} ${year}`;
+        });
+
+        /* ============================================
+           UTILITIES
+           ============================================ */
+        const pad = n => String(n).padStart(2, "0");
+        function fmtLocal(d) { return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
+        function eachDay(startStr, endStr) {
+            const [ys, ms, ds] = startStr.split("-").map(Number);
+            const [ye, me, de] = (endStr ?? startStr).split("-").map(Number);
+            const s = new Date(ys, ms - 1, ds);
+            const e = new Date(ye, me - 1, de);
+            const out = [];
+            for (let d = new Date(s); d <= e; d.setDate(d.getDate() + 1)) {
+                out.push(fmtLocal(d));
+            }
+            return out;
+        }
+        function expand(events) {
+            const map = {};
+            for (const ev of events) {
+                const days = eachDay(ev.start, ev.end);
+                for (const day of days) {
+                    (map[day] ||= []).push({ title: ev.title, category: ev.category });
+                }
+            }
+            return map;
+        }
+        function daysInMonth(yyyy, mm) { return new Date(yyyy, mm, 0).getDate(); }
+        function firstDow(yyyy, mm) { return new Date(yyyy, mm - 1, 1).getDay(); }
+
+        /* ============================================
+           RENDERING
+           ============================================ */
+        const monthSel = document.getElementById('monthSel');
+        const calEl = document.getElementById('calendar');
+        const titleEl = document.getElementById('title');
+        const printBtn = document.getElementById('printBtn');
+
+        // Set title
+        titleEl.textContent = CALENDAR_TITLE;
+        printBtn.textContent = PRINT_BUTTON_TEXT;
+
+        // Populate month selector
+        monthKeys.forEach(k => {
+            const opt = document.createElement('option');
+            opt.value = k; opt.textContent = monthLabels[k] || k;
+            monthSel.appendChild(opt);
+        });
+        monthSel.value = DEFAULT_MONTH;
+
+        /* ============================================
+           Event UI helpers (summary + modal)
+           ============================================ */
+        const SUMMARY_MAX = 95;
+        const eventModal = document.getElementById('eventModal');
+        const eventModalTitle = document.getElementById('eventModalTitle');
+        const eventModalBody = document.getElementById('eventModalBody');
+        const modalCloseBtn = document.querySelector('.modal-close');
+
+        function cleanText(s) {
+            return String(s ?? '').replace(/\s+/g, ' ').trim();
+        }
+
+        function makeSummary(fullText) {
+            const cleaned = cleanText(fullText);
+            if (cleaned.length <= SUMMARY_MAX) return cleaned;
+
+            const head = cleaned.slice(0, SUMMARY_MAX);
+            const lastComma = head.lastIndexOf(', ');
+            const lastDash = head.lastIndexOf(' - ');
+            const cutAt = Math.max(lastComma, lastDash);
+            if (cutAt >= 45) {
+                return `${cleaned.slice(0, cutAt + 1).trim()}…`;
+            }
+            return `${head.trim().replace(/[,:;!?-]\\s*$/, '')}…`;
+        }
+
+        function openEventModal(tagEl) {
+            if (!eventModal) return;
+            const fullText = tagEl?.dataset?.fullText ?? '';
+            eventModalTitle.textContent = 'Event details';
+            eventModalBody.textContent = fullText;
+            eventModal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeEventModal() {
+            if (!eventModal) return;
+            eventModal.setAttribute('aria-hidden', 'true');
+        }
+
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeEventModal);
+        if (eventModal) {
+            eventModal.addEventListener('click', (e) => {
+                if (e.target === eventModal) closeEventModal();
+            });
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeEventModal();
+        });
+        document.addEventListener('click', (e) => {
+            const btn = e.target?.closest?.('.moreBtn');
+            if (!btn) return;
+            const tagEl = btn.closest('.tag');
+            if (tagEl) openEventModal(tagEl);
+        });
+
+        function render(monthKey) {
+            const [y, m] = monthKey.split('-').map(Number);
+            titleEl.textContent = CALENDAR_TITLE;
+
+            const events = eventsByMonth[monthKey] || [];
+            const byDate = expand(events);
+
+            const total = daysInMonth(y, m);
+            const startBlank = firstDow(y, m);
+            const totalCells = startBlank + total;
+            const endBlank = (7 - (totalCells % 7)) % 7; // Fill last row to complete 7-day week
+
+            calEl.innerHTML = `
+    <div class="monthTitle">${monthLabels[monthKey] || monthKey}</div>
+    <div class="dow"><div>Sunday</div><div>Monday</div><div>Tuesday</div><div>Wednesday</div><div>Thursday</div><div>Friday</div><div>Saturday</div></div>
+    <div class="grid"></div>
+  `;
+            const grid = calEl.querySelector('.grid');
+
+            // Add blank days at the start
+            for (let i = 0; i < startBlank; i++) {
+                const d = document.createElement('div'); d.className = 'day blank'; grid.appendChild(d);
+            }
+            // Add actual days
+            for (let day = 1; day <= total; day++) {
+                const cell = document.createElement('div'); cell.className = 'day';
+                cell.innerHTML = `<div class="date">${day}</div><div class="items"></div>`;
+                const itemsEl = cell.querySelector('.items');
+                const dateStr = `${y}-${pad(m)}-${pad(day)}`;
+
+                (byDate[dateStr] || []).forEach(item => {
+                    const tag = document.createElement('span');
+                    tag.className = `tag ${item.category || ''}`;
+                    const fullText = String(item.title ?? '');
+                    tag.dataset.fullText = fullText;
+                    tag.textContent = makeSummary(fullText);
+
+                    const shouldShowDetails = cleanText(fullText).length > SUMMARY_MAX;
+                    if (shouldShowDetails) {
+                        const moreBtn = document.createElement('button');
+                        moreBtn.type = 'button';
+                        moreBtn.className = 'moreBtn';
+                        moreBtn.textContent = 'Details';
+                        tag.appendChild(moreBtn);
+                    }
+
+                    itemsEl.appendChild(tag);
+                });
+                grid.appendChild(cell);
+            }
+            // Add blank days at the end to complete the last row
+            for (let i = 0; i < endBlank; i++) {
+                const d = document.createElement('div'); d.className = 'day blank'; grid.appendChild(d);
+            }
+        }
+
+        monthSel.addEventListener('change', e => render(e.target.value));
+
+        /* ============================================
+           PRINT ALL MONTHS FUNCTIONALITY
+           ============================================ */
+        function renderMonthForPrint(monthKey) {
+            const [y, m] = monthKey.split('-').map(Number);
+            const events = eventsByMonth[monthKey] || [];
+            const byDate = expand(events);
+            const total = daysInMonth(y, m);
+            const startBlank = firstDow(y, m);
+            const totalCells = startBlank + total;
+            const endBlank = (7 - (totalCells % 7)) % 7; // Fill last row to complete 7-day week
+
+            const calDiv = document.createElement('div');
+            calDiv.className = 'cal';
+            calDiv.setAttribute('data-print-month', 'true');
+
+            calDiv.innerHTML = `
+                <div class="monthTitle">${monthLabels[monthKey] || monthKey}</div>
+                <div class="dow"><div>Sunday</div><div>Monday</div><div>Tuesday</div><div>Wednesday</div><div>Thursday</div><div>Friday</div><div>Saturday</div></div>
+                <div class="grid"></div>
+            `;
+
+            const grid = calDiv.querySelector('.grid');
+
+            // Add blank days at the start
+            for (let i = 0; i < startBlank; i++) {
+                const d = document.createElement('div');
+                d.className = 'day blank';
+                grid.appendChild(d);
+            }
+
+            // Add actual days
+            for (let day = 1; day <= total; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'day';
+                cell.innerHTML = `<div class="date">${day}</div><div class="items"></div>`;
+                const itemsEl = cell.querySelector('.items');
+                const dateStr = `${y}-${pad(m)}-${pad(day)}`;
+
+                (byDate[dateStr] || []).forEach(item => {
+                    const tag = document.createElement('span');
+                    tag.className = `tag ${item.category || ''}`;
+                    const fullText = String(item.title ?? '');
+                    tag.dataset.fullText = fullText;
+                    tag.textContent = makeSummary(fullText);
+
+                    const shouldShowDetails = cleanText(fullText).length > SUMMARY_MAX;
+                    if (shouldShowDetails) {
+                        const moreBtn = document.createElement('button');
+                        moreBtn.type = 'button';
+                        moreBtn.className = 'moreBtn';
+                        moreBtn.textContent = 'Details';
+                        tag.appendChild(moreBtn);
+                    }
+
+                    itemsEl.appendChild(tag);
+                });
+                grid.appendChild(cell);
+            }
+
+            // Add blank days at the end to complete the last row
+            for (let i = 0; i < endBlank; i++) {
+                const d = document.createElement('div');
+                d.className = 'day blank';
+                grid.appendChild(d);
+            }
+
+            return calDiv;
+        }
+
+        printBtn.addEventListener('click', () => {
+            // Store original state
+            const originalMonth = monthSel.value;
+            const calendarContainer = document.querySelector('.calendar-container');
+            const wrap = document.querySelector('.wrap');
+            const body = document.body;
+
+            // Create print wrapper
+            const printWrapper = document.createElement('div');
+            printWrapper.setAttribute('data-print-wrapper', 'true');
+            printWrapper.className = 'print-wrapper';
+
+            // Clone and add legend to print wrapper (so it appears in print)
+            const legend = document.querySelector('.legend');
+            if (legend) {
+                const legendClone = legend.cloneNode(true);
+                legendClone.setAttribute('data-print-legend', 'true');
+                printWrapper.appendChild(legendClone);
+            }
+
+            // Generate all months
+            monthKeys.forEach(monthKey => {
+                const monthCal = renderMonthForPrint(monthKey);
+                printWrapper.appendChild(monthCal);
+            });
+
+            // Append print wrapper inside calendar container (preferred) or wrap
+            let appendTarget = calendarContainer;
+            if (!appendTarget) {
+                appendTarget = wrap;
+            }
+            if (!appendTarget) {
+                appendTarget = body;
+            }
+            appendTarget.appendChild(printWrapper);
+
+            // Ensure print wrapper is visible
+            printWrapper.style.setProperty('display', 'block', 'important');
+            printWrapper.style.setProperty('visibility', 'visible', 'important');
+
+            // Hide original calendar
+            const originalCal = document.getElementById('calendar');
+            if (originalCal) {
+                originalCal.classList.add('original-cal-hidden');
+                originalCal.style.display = 'none';
+            }
+
+            // Hide controls and original legend (legend is cloned into print wrapper)
+            const controls = document.querySelector('.controls');
+            if (controls) controls.style.display = 'none';
+            if (legend) legend.style.display = 'none';
+
+            // Hide content outside calendar container (for embedded scenarios)
+            const hiddenElements = [];
+            if (calendarContainer) {
+                // Find top-level container
+                let topContainer = calendarContainer;
+                let depth = 0;
+                while (topContainer && topContainer.parentNode !== body && depth < 10) {
+                    topContainer = topContainer.parentNode;
+                    depth++;
+                }
+
+                // Ensure calendar container and all its parents are visible
+                let current = calendarContainer;
+                while (current && current !== body) {
+                    current.style.setProperty('display', 'block', 'important');
+                    current.style.setProperty('visibility', 'visible', 'important');
+                    current = current.parentNode;
+                }
+
+                // Hide all body children except the calendar container tree
+                if (topContainer) {
+                    Array.from(body.children).forEach(el => {
+                        if (el !== topContainer && !topContainer.contains(el) && !el.contains(topContainer)) {
+                            const originalDisplay = window.getComputedStyle(el).display;
+                            el.style.setProperty('display', 'none', 'important');
+                            hiddenElements.push({ el, originalDisplay });
+                        }
+                    });
+                }
+
+                // Also hide common WordPress/CMS elements that might be siblings
+                const cmsSelectors = [
+                    'header:not(.calendar-container header)',
+                    'footer:not(.calendar-container footer)',
+                    'nav:not(.calendar-container nav)',
+                    '.site-header:not(.calendar-container .site-header)',
+                    '.site-footer:not(.calendar-container .site-footer)',
+                    '.main-navigation:not(.calendar-container .main-navigation)',
+                    '.wp-block-group:not(.calendar-container .wp-block-group)',
+                    '.entry-header:not(.calendar-container .entry-header)',
+                    '.entry-footer:not(.calendar-container .entry-footer)'
+                ];
+
+                cmsSelectors.forEach(selector => {
+                    try {
+                        document.querySelectorAll(selector).forEach(el => {
+                            if (!calendarContainer.contains(el) && !el.contains(calendarContainer)) {
+                                const originalDisplay = window.getComputedStyle(el).display;
+                                el.style.setProperty('display', 'none', 'important');
+                                hiddenElements.push({ el, originalDisplay });
+                            }
+                        });
+                    } catch (e) {
+                        // Ignore selector errors
+                    }
+                });
+            }
+
+            // Add printing class to body
+            body.classList.add('calendar-printing');
+
+            // Apply inline styles recursively to ensure visibility
+            const applyStyles = (element) => {
+                element.style.setProperty('visibility', 'visible', 'important');
+
+                // Special handling for grid elements
+                if (element.classList.contains('grid') || element.classList.contains('dow')) {
+                    element.style.setProperty('display', 'grid', 'important');
+                }
+                // Special handling for flex elements
+                else if (element.classList.contains('items') || element.classList.contains('day') || element.classList.contains('legend') || element.getAttribute('data-print-legend')) {
+                    element.style.setProperty('display', 'flex', 'important');
+                }
+                // Default to block
+                else {
+                    element.style.setProperty('display', 'block', 'important');
+                }
+
+                Array.from(element.children).forEach(child => applyStyles(child));
+            };
+
+            applyStyles(printWrapper);
+
+            // Inject dynamic print styles if needed
+            const styleId = 'calendar-print-styles';
+            let printStyle = document.getElementById(styleId);
+            if (!printStyle) {
+                printStyle = document.createElement('style');
+                printStyle.id = styleId;
+                printStyle.textContent = `
+                    @media print {
+                        /* Ensure colors print */
+                        * {
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                        }
+                        /* Hide everything by default when printing */
+                        body.calendar-printing * {
+                            display: none !important;
+                            visibility: hidden !important;
+                        }
+                        /* Show only calendar container and its contents */
+                        body.calendar-printing .calendar-container {
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                        body.calendar-printing .calendar-container * {
+                            visibility: visible !important;
+                        }
+                        body.calendar-printing .calendar-container .wrap {
+                            display: block !important;
+                        }
+                        /* Show legend in print */
+                        body.calendar-printing .calendar-container .legend {
+                            display: flex !important;
+                            visibility: visible !important;
+                            page-break-inside: avoid !important;
+                            margin-bottom: 12px !important;
+                            padding: 8px 0 !important;
+                            border-bottom: 1px solid var(--grid) !important;
+                        }
+                        body.calendar-printing .calendar-container .legend .pill {
+                            font-size: 10px !important;
+                            gap: 6px !important;
+                            white-space: nowrap !important;
+                            flex-shrink: 0 !important;
+                        }
+                        body.calendar-printing .calendar-container .legend .sw {
+                            width: 12px !important;
+                            height: 12px !important;
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                            flex-shrink: 0 !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] {
+                            display: block !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] .cal {
+                            display: block !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] .grid {
+                            display: grid !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] .dow {
+                            display: grid !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] .day {
+                            display: flex !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] .items {
+                            display: flex !important;
+                        }
+                        /* Show legend in print wrapper */
+                        body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] {
+                            display: flex !important;
+                            visibility: visible !important;
+                            page-break-inside: avoid !important;
+                            margin-bottom: 12px !important;
+                            padding: 8px 0 !important;
+                            border-bottom: 1px solid var(--grid) !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] .pill {
+                            font-size: 10px !important;
+                            gap: 6px !important;
+                            white-space: nowrap !important;
+                            flex-shrink: 0 !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] .sw {
+                            width: 12px !important;
+                            height: 12px !important;
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                            flex-shrink: 0 !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] .monthTitle,
+                        body.calendar-printing .calendar-container [data-print-wrapper] .date,
+                        body.calendar-printing .calendar-container [data-print-wrapper] .tag,
+                        body.calendar-printing .calendar-container [data-print-wrapper] .day.blank {
+                            display: block !important;
+                        }
+                        /* Hide specific elements inside calendar container */
+                        body.calendar-printing .calendar-container header,
+                        body.calendar-printing .calendar-container .controls,
+                        body.calendar-printing .calendar-container .original-cal-hidden,
+                        body.calendar-printing .calendar-container .wrap .cal:not([data-print-month]) {
+                            display: none !important;
+                        }
+                        /* Ensure legend colors and event tag colors print correctly */
+                        body.calendar-printing .calendar-container .legend .sw,
+                        body.calendar-printing .calendar-container [data-print-wrapper] [data-print-legend] .sw {
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                        }
+                        body.calendar-printing .calendar-container [data-print-wrapper] .tag {
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                        }
+                        body.calendar-printing .calendar-container .wrap {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .cal {
+                            page-break-after: always !important;
+                            page-break-inside: avoid !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .cal:last-child {
+                            page-break-after: auto !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .monthTitle {
+                            padding: 8px 10px !important;
+                            font-size: 16px !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .day {
+                            min-height: 60px !important;
+                            padding: 4px 3px 6px !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .date {
+                            font-size: 11px !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .tag {
+                            font-size: 9px !important;
+                            padding: 3px 4px !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .dow {
+                            padding: 6px 0 !important;
+                            font-size: 11px !important;
+                        }
+                        body.calendar-printing [data-print-wrapper] .items {
+                            gap: 2px !important;
+                        }
+                    }
+                `;
+                document.head.appendChild(printStyle);
+            }
+
+            // Cleanup function
+            const cleanup = () => {
+                // Remove print wrapper
+                if (printWrapper.parentNode) {
+                    printWrapper.parentNode.removeChild(printWrapper);
+                }
+
+                // Remove print styles
+                if (printStyle && printStyle.parentNode) {
+                    printStyle.parentNode.removeChild(printStyle);
+                }
+
+                // Restore hidden elements (for embedded scenarios)
+                hiddenElements.forEach(({ el, originalDisplay }) => {
+                    el.style.display = originalDisplay;
+                });
+
+                // Restore original calendar
+                if (originalCal) {
+                    originalCal.classList.remove('original-cal-hidden');
+                    originalCal.style.display = '';
+                }
+
+                // Restore controls and legend
+                if (controls) controls.style.display = '';
+                if (legend) legend.style.display = '';
+
+                // Remove printing class
+                body.classList.remove('calendar-printing');
+
+                // Re-render original month
+                render(originalMonth);
+            };
+
+            // Handle afterprint event
+            window.addEventListener('afterprint', cleanup, { once: true });
+
+            // Fallback timeout (in case afterprint doesn't fire)
+            setTimeout(() => {
+                if (body.classList.contains('calendar-printing')) {
+                    cleanup();
+                }
+            }, 1000);
+
+            // Small delay to ensure DOM is updated before printing
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        });
+
+        // Initial render
+        render(monthSel.value);
+    </script>
+    <link rel="stylesheet" href="../../shared/guide-switcher.css">
+    <link rel="stylesheet" href="../../shared/guide-resources.css">
+    <link rel="stylesheet" href="../../shared/guide-back.css">
+    <script src="../../shared/guide-switcher.js" defer></script>
+    <script src="../../shared/guide-resources.js" defer></script>
+    <script src="../../shared/guide-back.js" defer></script>
+</body>
+
+</html>

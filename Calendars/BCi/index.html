@@ -1,0 +1,1806 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Belgium Campus iTversity Calendar — Multi-Month (Jan 2026 → Jan 2027)</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --ink: #1f1f1f;
+            --grid: #dcdcdc;
+            --head-bg: #1d2576;
+            --head-ink: #ffffff;
+            --muted: #f7f7fb;
+            --holiday: #ffe8a3;
+            --campus: #ffd166;
+            --exam: #ffd1dd;
+            --student: #efe6ff;
+            --course: #e6f0ff;
+            --admin: #dff3f0;
+            --research: #e8f7e7;
+            --event: #ffe6cc;
+            --staff: #ffb3b3;
+        }
+
+        html,
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.35;
+            margin: 0
+        }
+
+        .wrap {
+            max-width: 1160px;
+            margin: 26px auto;
+            padding: 0 16px
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(22px, 4vw, 30px)
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        select,
+        button {
+            font: inherit;
+            padding: 8px 10px;
+            border: 1px solid var(--grid);
+            border-radius: 8px;
+            background: #fff
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 10px 0 18px
+        }
+
+        .legend .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px
+        }
+
+        .legend .sw {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            outline: 1px solid #bbb
+        }
+
+        .cal {
+            border: 1px solid var(--grid);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .05)
+        }
+
+        .cal .dow {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: var(--head-bg);
+            color: var(--head-ink);
+            font-weight: 600;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px
+        }
+
+        .cal .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: var(--bg)
+        }
+
+        .day {
+            min-height: 120px;
+            border-top: 1px solid var(--grid);
+            border-right: 1px solid var(--grid);
+            padding: 8px 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--bg)
+        }
+
+        .day:nth-child(7n) {
+            border-right: none
+        }
+
+        .day.blank {
+            background: var(--muted)
+        }
+
+        .date {
+            font-weight: 700;
+            font-size: 13px;
+            opacity: .75
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .tag {
+            display: block;
+            font-size: 12px;
+            padding: 6px 7px;
+            border-radius: 6px;
+            background: #f5f5f5;
+            border: 1px solid rgba(0, 0, 0, .06)
+        }
+
+        .tagRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+        }
+
+        .tagText {
+            flex: 1;
+        }
+
+        .detailsBtn {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, .25);
+            background: #fff;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .modalBackdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 16px;
+        }
+
+        .modalBackdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            background: #fff;
+            width: min(780px, 100%);
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, .2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modalHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--grid);
+        }
+
+        .modalTitle {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .modalClose {
+            border: 1px solid var(--grid);
+            background: #fff;
+            padding: 4px 9px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .modalBody {
+            padding: 14px;
+            overflow: auto;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .holiday {
+            background: var(--holiday)
+        }
+
+        .campus {
+            background: var(--campus)
+        }
+
+        .exam {
+            background: var(--exam)
+        }
+
+        .student {
+            background: var(--student)
+        }
+
+        .course {
+            background: var(--course)
+        }
+
+        .admin {
+            background: var(--admin)
+        }
+
+        .research {
+            background: var(--research)
+        }
+
+        .event {
+            background: var(--event)
+        }
+
+        .staff {
+            background: var(--staff);
+            border-color: rgba(0, 0, 0, .08)
+        }
+
+        .monthTitle {
+            padding: 12px 14px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--grid);
+            background: #fafafe
+        }
+
+        @media print {
+
+            /* Hide everything outside calendar container when embedded */
+            body.bc-printing>*:not(.bc-calendar-container) {
+                display: none !important;
+            }
+
+            .wrap {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .controls,
+            .legend {
+                display: none
+            }
+
+            /* Calendar sizing for print - ensure fits on one page */
+            body.bc-printing [data-print-wrapper] .cal {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+            }
+
+            body.bc-printing [data-print-wrapper] .monthTitle {
+                padding: 8px 10px;
+                font-size: 16px;
+                margin: 0;
+            }
+
+            body.bc-printing [data-print-wrapper] .day {
+                min-height: 60px !important;
+                padding: 4px 3px 6px !important;
+                font-size: 11px;
+            }
+
+            body.bc-printing [data-print-wrapper] .date {
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+
+            body.bc-printing [data-print-wrapper] .tag {
+                font-size: 9px;
+                padding: 3px 4px;
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+
+            body.bc-printing [data-print-wrapper] .dow {
+                padding: 6px 0;
+                font-size: 11px;
+            }
+
+            body.bc-printing [data-print-wrapper] .items {
+                gap: 2px;
+            }
+
+            /* Print all months styles */
+            /* Hide everything by default when printing */
+            body.bc-printing * {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            /* Show only calendar container and its contents */
+            body.bc-printing .bc-calendar-container {
+                display: block !important;
+                visibility: visible !important;
+            }
+
+            body.bc-printing .bc-calendar-container * {
+                visibility: visible !important;
+            }
+
+            body.bc-printing .bc-calendar-container .wrap {
+                display: block !important;
+            }
+
+            body.bc-printing .bc-calendar-container [data-print-wrapper] {
+                display: block !important;
+            }
+
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .cal {
+                display: block !important;
+            }
+
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .grid {
+                display: grid !important;
+            }
+
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .dow {
+                display: grid !important;
+            }
+
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .day {
+                display: flex !important;
+            }
+
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .items {
+                display: flex !important;
+            }
+
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .monthTitle,
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .date,
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .tag,
+            body.bc-printing .bc-calendar-container [data-print-wrapper] .day.blank {
+                display: block !important;
+            }
+
+            /* Hide specific elements inside calendar container */
+            body.bc-printing .bc-calendar-container header,
+            body.bc-printing .bc-calendar-container .controls,
+            body.bc-printing .bc-calendar-container .legend,
+            body.bc-printing .bc-calendar-container .original-cal-hidden,
+            body.bc-printing .bc-calendar-container .wrap .cal:not([data-print-month]) {
+                display: none !important;
+            }
+
+            body.bc-printing [data-print-wrapper] .cal {
+                display: block !important;
+                visibility: visible !important;
+                margin-bottom: 0 !important;
+            }
+
+            body.bc-printing [data-print-wrapper] .cal:last-child {
+                page-break-after: auto !important;
+            }
+
+            body.bc-printing [data-print-wrapper] .grid {
+                display: grid !important;
+            }
+
+            body.bc-printing [data-print-wrapper] .dow {
+                display: grid !important;
+            }
+
+            body.bc-printing [data-print-wrapper] .items {
+                display: flex !important;
+            }
+
+            body.bc-printing [data-print-wrapper] .day {
+                display: flex !important;
+            }
+        }
+
+        /* ====== RESPONSIVE STYLES ====== */
+
+        /* Large tablets and small desktops (768px - 1024px) */
+        @media screen and (max-width: 1024px) {
+            .wrap {
+                max-width: 100%;
+                padding: 0 12px;
+                margin: 20px auto
+            }
+
+            .day {
+                min-height: 110px;
+                padding: 6px 6px 10px
+            }
+
+            .tag {
+                font-size: 11px;
+                padding: 5px 6px
+            }
+
+            .cal .dow {
+                font-size: 13px;
+                padding: 8px 0
+            }
+        }
+
+        /* Tablets (600px - 767px) */
+        @media screen and (max-width: 767px) {
+            .wrap {
+                padding: 0 10px;
+                margin: 16px auto
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px
+            }
+
+            h1 {
+                font-size: clamp(20px, 5vw, 26px);
+                width: 100%
+            }
+
+            .controls {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 6px
+            }
+
+            .controls label {
+                font-size: 14px
+            }
+
+            select,
+            button {
+                font-size: 14px;
+                padding: 7px 9px;
+                flex: 1;
+                min-width: 120px
+            }
+
+            .legend {
+                gap: 6px 12px;
+                margin: 8px 0 14px
+            }
+
+            .legend .pill {
+                font-size: 11px;
+                gap: 6px
+            }
+
+            .legend .sw {
+                width: 12px;
+                height: 12px
+            }
+
+            .cal {
+                border-radius: 8px
+            }
+
+            .cal .dow {
+                font-size: 12px;
+                padding: 8px 4px
+            }
+
+            .cal .dow div {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+
+            .day {
+                min-height: 100px;
+                padding: 5px 4px 8px;
+                gap: 4px
+            }
+
+            .date {
+                font-size: 12px
+            }
+
+            .tag {
+                font-size: 10px;
+                padding: 4px 5px;
+                line-height: 1.3
+            }
+
+            .items {
+                gap: 4px
+            }
+
+            .monthTitle {
+                padding: 10px 12px;
+                font-size: 15px
+            }
+        }
+
+        /* Small tablets and large phones (481px - 599px) */
+        @media screen and (max-width: 599px) {
+            .wrap {
+                padding: 0 8px;
+                margin: 12px auto
+            }
+
+            header {
+                margin-bottom: 10px
+            }
+
+            h1 {
+                font-size: clamp(18px, 6vw, 24px)
+            }
+
+            .controls {
+                flex-direction: column;
+                width: 100%
+            }
+
+            select,
+            button {
+                width: 100%;
+                min-width: unset
+            }
+
+            .legend {
+                gap: 5px 10px;
+                margin: 6px 0 12px
+            }
+
+            .legend .pill {
+                font-size: 10px
+            }
+
+            .cal .dow {
+                font-size: 11px;
+                padding: 6px 2px
+            }
+
+            .cal .dow div {
+                padding: 0 2px
+            }
+
+            .day {
+                min-height: 90px;
+                padding: 4px 3px 6px;
+                gap: 3px
+            }
+
+            .date {
+                font-size: 11px
+            }
+
+            .tag {
+                font-size: 9px;
+                padding: 3px 4px;
+                line-height: 1.25;
+                word-break: break-word;
+                overflow-wrap: break-word
+            }
+
+            .items {
+                gap: 3px
+            }
+
+            .monthTitle {
+                padding: 8px 10px;
+                font-size: 14px
+            }
+        }
+
+        /* Small phones (320px - 480px) */
+        @media screen and (max-width: 480px) {
+            .wrap {
+                padding: 0 6px;
+                margin: 10px auto
+            }
+
+            html,
+            body {
+                font-size: 14px
+            }
+
+            header {
+                margin-bottom: 8px;
+                gap: 8px
+            }
+
+            h1 {
+                font-size: clamp(16px, 7vw, 22px);
+                line-height: 1.2
+            }
+
+            .controls {
+                gap: 5px
+            }
+
+            select,
+            button {
+                font-size: 13px;
+                padding: 6px 8px
+            }
+
+            .legend {
+                gap: 4px 8px;
+                margin: 5px 0 10px
+            }
+
+            .legend .pill {
+                font-size: 9px;
+                gap: 4px;
+                flex-wrap: wrap
+            }
+
+            .legend .sw {
+                width: 10px;
+                height: 10px;
+                flex-shrink: 0
+            }
+
+            .cal {
+                border-radius: 6px;
+                border-width: 1px
+            }
+
+            .cal .dow {
+                font-size: 10px;
+                padding: 5px 1px;
+                font-weight: 600
+            }
+
+            .cal .dow div {
+                padding: 0 1px;
+                font-size: 9px
+            }
+
+            .day {
+                min-height: 80px;
+                padding: 3px 2px 5px;
+                gap: 2px;
+                border-top-width: 1px;
+                border-right-width: 1px
+            }
+
+            .date {
+                font-size: 10px;
+                font-weight: 600
+            }
+
+            .tag {
+                font-size: 8px;
+                padding: 2px 3px;
+                line-height: 1.2;
+                border-radius: 4px;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto
+            }
+
+            .items {
+                gap: 2px;
+                overflow: hidden
+            }
+
+            .monthTitle {
+                padding: 6px 8px;
+                font-size: 13px;
+                font-weight: 600
+            }
+        }
+
+        /* Extra small phones (max-width: 320px) */
+        @media screen and (max-width: 320px) {
+            .wrap {
+                padding: 0 4px;
+                margin: 8px auto
+            }
+
+            html,
+            body {
+                font-size: 13px
+            }
+
+            h1 {
+                font-size: clamp(14px, 8vw, 20px)
+            }
+
+            .controls select,
+            .controls button {
+                font-size: 12px;
+                padding: 5px 6px
+            }
+
+            .legend .pill {
+                font-size: 8px
+            }
+
+            .legend .sw {
+                width: 9px;
+                height: 9px
+            }
+
+            .cal .dow {
+                font-size: 9px;
+                padding: 4px 0
+            }
+
+            .cal .dow div {
+                font-size: 8px
+            }
+
+            .day {
+                min-height: 75px;
+                padding: 2px 1px 4px
+            }
+
+            .date {
+                font-size: 9px
+            }
+
+            .tag {
+                font-size: 7px;
+                padding: 2px;
+                line-height: 1.15
+            }
+
+            .monthTitle {
+                padding: 5px 6px;
+                font-size: 12px
+            }
+        }
+
+        /* Landscape orientation adjustments for phones */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .day {
+                min-height: 60px
+            }
+
+            .tag {
+                font-size: 9px;
+                padding: 2px 3px
+            }
+
+            .monthTitle {
+                padding: 6px 10px
+            }
+        }
+
+        /* High DPI displays */
+        @media screen and (-webkit-min-device-pixel-ratio: 2),
+        screen and (min-resolution: 192dpi) {
+            .cal {
+                border-width: 0.5px
+            }
+
+            .day {
+                border-top-width: 0.5px;
+                border-right-width: 0.5px
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+
+            select,
+            button {
+                min-height: 44px;
+                padding: 10px 12px
+            }
+
+            .tag {
+                min-height: 32px;
+                display: flex;
+                align-items: center
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bc-calendar-container">
+        <div class="wrap">
+            <header>
+                <h1 id="title">Belgium Campus iTversity Calendar</h1>
+                <div class="controls">
+                    <label for="monthSel">Month:</label>
+                    <select id="monthSel" aria-label="Select month"></select>
+                    <button id="printBtn" title="Print all months">Print All Months</button>
+                </div>
+            </header>
+
+            <div class="legend">
+                <span class="pill"><span class="sw" style="background:var(--holiday)"></span>Public/Student
+                    holidays</span>
+                <span class="pill"><span class="sw" style="background:var(--campus)"></span>Campus closed</span>
+                <span class="pill"><span class="sw" style="background:var(--exam)"></span>(Re)Exams & Perusals</span>
+                <span class="pill"><span class="sw" style="background:var(--course)"></span>Maths bridging course</span>
+                <span class="pill"><span class="sw" style="background:var(--admin)"></span>Admin / schedules</span>
+                <span class="pill"><span class="sw" style="background:var(--research)"></span>Dissertation
+                    (final)</span>
+                <span class="pill"><span class="sw" style="background:var(--event)"></span>Events</span>
+                <span class="pill"><span class="sw" style="background:var(--staff)"></span>Staff-only tasks (new)</span>
+            </div>
+
+            <div id="calendar" class="cal" role="region" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <script>
+        /** =========================
+         *  DATA MODEL
+         *  ========================= */
+        const eventsByMonth = {
+            "2026-01": [], "2026-02": [], "2026-03": [], "2026-04": [], "2026-05": [], "2026-06": [],
+            "2026-07": [], "2026-08": [], "2026-09": [], "2026-10": [], "2026-11": [],
+            "2026-12": [], "2027-01": []
+        };
+
+        eventsByMonth["2026-01"] = [
+            { title: "New Year's Day", start: "2026-01-01", category: "holiday" },
+            { title: "Campus closed", start: "2026-01-01", category: "campus" },
+            { title: "Student holidays", start: "2026-01-02", category: "student" },
+            { title: "Campus closed", start: "2026-01-02", category: "campus" },
+
+            { title: "Student holidays", start: "2026-01-05", end: "2026-01-09", category: "student" },
+            { title: "Semester exam perusal schedule published (Nov 2025)", start: "2026-01-05", category: "admin" },
+            { title: "Semester exam re-write of passed modules close", start: "2026-01-05", category: "admin" },
+            { title: "Semester exam special permission applications close", start: "2026-01-05", category: "admin" },
+
+
+
+            { title: "Mathematics bridging course", start: "2026-01-06", end: "2026-01-09", category: "course" },
+
+
+
+            { title: "Semester exam perusal schedule published (Nov 2025)", start: "2026-01-07", category: "admin" },
+
+
+            { title: "Semester examination registers uploaded (Jan 2026)", start: "2026-01-09", category: "admin" },
+            { title: "Semester examination perusals (Nov 2025)", start: "2026-01-09", category: "exam" },
+
+
+            { title: "(Re)Examinations", start: "2026-01-12", end: "2026-01-16", category: "exam" },
+            { title: "Mathematics bridging course", start: "2026-01-12", end: "2026-01-16", category: "course" },
+            { title: "Semester exam re-marking applications close (Nov 2025)", start: "2026-01-16", category: "admin" },
+            { title: "Student holidays", start: "2026-01-19", end: "2026-01-23", category: "student" },
+            { title: "Engineering across cultures project (Penn State) — commence", start: "2026-01-19", category: "event" },
+
+            { title: "Mathematics bridging course", start: "2026-01-19", end: "2026-01-23", category: "course" },
+            { title: "Dissertation — final presentations", start: "2026-01-19", end: "2026-01-23", category: "research" },
+            { title: "Student holidays", start: "2026-01-26", end: "2026-01-30", category: "student" },
+            { title: "Dissertation — final presentations", start: "2026-01-26", end: "2026-01-30", category: "research" },
+
+
+
+            { title: "Open Day", start: "2026-01-24", category: "event" },
+
+
+
+            { title: "Mathematics bridging course results released", start: "2026-01-27", category: "admin" },
+
+        ];
+
+        eventsByMonth["2026-02"] = [
+            { title: "Student orientation (new enrolments only)", start: "2026-02-02", category: "event" },
+            { title: "Examination results released (January 2026)", start: "2026-02-02", category: "admin" },
+            { title: "Student orientation (new enrolments only)", start: "2026-02-03", category: "event" },
+            { title: "Student orientation (new enrolments only)", start: "2026-02-04", category: "event" },
+            { title: "Fun Day (new enrolments only)", start: "2026-02-05", category: "event" },
+            { title: "Student orientation (returning enrolments)", start: "2026-02-05", category: "event" },
+            { title: "Student orientation (returning enrolments)", start: "2026-02-06", category: "event" },
+            { title: "Student orientation (part-time enrolments)", start: "2026-02-07", category: "event" },
+
+
+            { title: "Week 1 classes", start: "2026-02-09", end: "2026-02-13", category: "course" },
+            { title: "Commencement of classes (full-time students)", start: "2026-02-09", category: "event" },
+            { title: "Applications for semester examination perusal close (January 2026)", start: "2026-02-09", category: "admin" },
+            { title: "Master classes", start: "2026-02-10", category: "course" },
+
+            { title: "Semester examination perusal schedule published (January 2026)", start: "2026-02-11", category: "admin" },
+
+            { title: "Academic Opening - Stellenbosch", start: "2026-02-12", category: "event" },
+            { title: "Semester examination perusals (January 2026)", start: "2026-02-13", category: "exam" },
+            { title: "Stellenbosch campus - class test postponed to 16 February 2026", start: "2026-02-13", category: "admin" },
+
+            { title: "Commencement of classes (part-time students)", start: "2026-02-14", category: "event" },
+
+            { title: "Week 2 classes", start: "2026-02-16", end: "2026-02-20", category: "course" },
+            { title: "Mega-projects to commence", start: "2026-02-17", category: "event" },
+            { title: "Academic Opening - Gauteng", start: "2026-02-19", category: "event" },
+            { title: "Semester examination re-marking applications close (January 2026)", start: "2026-02-20", category: "admin" },
+            { title: "Gauteng campuses - class test postponed to 23rd February 2026", start: "2026-02-20", category: "admin" },
+
+            { title: "Week 3 classes", start: "2026-02-23", end: "2026-02-27", category: "course" },
+
+        ];
+
+        eventsByMonth["2026-03"] = [
+            { title: "Week 4 classes", start: "2026-03-02", end: "2026-03-06", category: "course" },
+            { title: "Semester examination schedule published (June 2026)", start: "2026-03-02", category: "admin" },
+            { title: "Global Minor registrations commence", start: "2026-03-05", category: "event" },
+            { title: "Open Day", start: "2026-03-07", category: "event" },
+
+            { title: "Week 5 classes", start: "2026-03-09", end: "2026-03-13", category: "course" },
+            { title: "Master classes", start: "2026-03-10", category: "course" },
+
+            { title: "Week 6 classes", start: "2026-03-16", end: "2026-03-20", category: "course" },
+            { title: "Applied Information Technology – final presentations", start: "2026-03-16", end: "2026-03-20", category: "research" },
+            { title: "Human Rights Day", start: "2026-03-21", category: "holiday" },
+            { title: "No part-time classes", start: "2026-03-21", category: "holiday" },
+
+            { title: "Week 7 classes", start: "2026-03-23", end: "2026-03-27", category: "course" },
+            { title: "Global Minor registrations continue", start: "2026-03-26", category: "event" },
+
+            { title: "Week 8 classes", start: "2026-03-30", end: "2026-03-31", category: "course" },
+
+        ];
+
+        eventsByMonth["2026-04"] = [
+            { title: "Week 8 classes", start: "2026-04-01", end: "2026-04-02", category: "course" },
+
+
+            { title: "Good Friday", start: "2026-04-03", category: "holiday" },
+            { title: "Campus closed", start: "2026-04-03", category: "campus" },
+            { title: "No part time classes", start: "2026-04-04", category: "holiday" },
+
+            { title: "Family Day", start: "2026-04-06", category: "holiday" },
+            { title: "Campus closed", start: "2026-04-06", category: "campus" },
+
+            { title: "Week 9 classes", start: "2026-04-07", end: "2026-04-10", category: "course" },
+            { title: "Master classes", start: "2026-04-07", category: "course" },
+
+
+            { title: "Week 10 classes", start: "2026-04-13", end: "2026-04-17", category: "course" },
+
+            { title: "Industry Connect Day", start: "2026-04-15", category: "event" },
+
+            { title: "Week 11 classes", start: "2026-04-20", end: "2026-04-24", category: "course" },
+            { title: "Businet Week", start: "2026-04-20", end: "2026-04-24", category: "event" },
+
+            { title: "Student orientation (May 2026 intake)", start: "2026-04-24", category: "event" },
+            { title: "No part time classes", start: "2026-04-25", category: "holiday" },
+
+            { title: "Freedom Day", start: "2026-04-27", category: "holiday" },
+            { title: "Campus closed", start: "2026-04-27", category: "campus" },
+            { title: "Student holidays", start: "2026-04-28", end: "2026-04-30", category: "student" },
+
+
+        ];
+
+        eventsByMonth["2026-05"] = [
+            { title: "Worker's Day", start: "2026-05-01", category: "holiday" },
+            { title: "Campus closed", start: "2026-05-01", category: "campus" },
+            { title: "No part time classes", start: "2026-05-02", category: "holiday" },
+
+            { title: "Week 12 classes", start: "2026-05-04", end: "2026-05-08", category: "course" },
+            {
+                title: "Hack the Waste international hackathon",
+                start: "2026-05-08",
+                end: "2026-05-09",
+                category: "event",
+                details: `The 24 hour hackathon will take place from 8 - 9 May 2026. This will be from 13h00 until 13h00 (Central African Time).
+
+The main theme of the hackathon is waste management. Real life problems are provided by companies from the waste management industry.
+
+The students are grouped to have representatives from each institution participating in each group. The institutions include:
+- Belgium Campus iTversity (South Africa)
+- University College Leuven Limburg (Belgium)
+- Banku Augstskola (Latvia)
+- Han University of Applied Sciences (Netherlands)
+- Atlas Universitesi (Turkey)
+- Technische Hochschule Ulm (Germany)
+
+Students from some of the other institutions are not studying IT and are from other disciplines. So, it is international, inter-cultural and inter-disciplinary.
+
+Students can register at www.hackthewaste.com
+
+The event is free and will be totally online, thus students from all our campuses can participate.`
+            },
+            { title: "Commencement of classes (May 2026 intake)", start: "2026-05-04", category: "event" },
+            { title: "Master classes", start: "2026-05-05", category: "course" },
+
+            { title: "Week 13 classes", start: "2026-05-11", end: "2026-05-14", category: "course" },
+
+            { title: "Graduation", start: "2026-05-15", category: "event" },
+            { title: "BC student holiday", start: "2026-05-15", category: "holiday" },
+            { title: "All campuses - class test postponed to 18th May 2026", start: "2026-05-15", category: "admin" },
+
+            { title: "Week 14 classes", start: "2026-05-18", end: "2026-05-22", category: "course" },
+
+            { title: "Applications for semester sick tests close", start: "2026-05-22", category: "admin" },
+
+            { title: "Week 15 classes", start: "2026-05-25", end: "2026-05-29", category: "course" },
+
+            { title: "Semester sick test(s) registers released", start: "2026-05-27", category: "admin" },
+
+            { title: "Semester sick test(s)", start: "2026-05-29", category: "exam" },
+            { title: "Applications for semester (last week) sick tests close", start: "2026-05-29", category: "admin" },
+
+
+            { title: "Open Day", start: "2026-05-23", category: "event" }
+        ];
+
+        eventsByMonth["2026-06"] = [
+            { title: "Study leave", start: "2026-06-01", end: "2026-06-05", category: "student" },
+            { title: "Semester (last week) sick test(s) registers released", start: "2026-06-01", category: "admin" },
+            { title: "Semester (last week) sick test(s)", start: "2026-06-03", category: "exam" },
+            { title: "Sick test(s) results released", start: "2026-06-05", category: "admin" },
+            { title: "No part time classes", start: "2026-06-06", category: "holiday" },
+
+            { title: "Study leave", start: "2026-06-08", end: "2026-06-12", category: "student" },
+            { title: "Semester examination special permission applications close", start: "2026-06-08", category: "admin" },
+            { title: "Semester examination postponement applications close", start: "2026-06-08", category: "admin" },
+            { title: "Semester examination registers completed", start: "2026-06-10", category: "admin" },
+            { title: "Semester examination registers uploaded (June 2026)", start: "2026-06-12", category: "admin" },
+            { title: "No part time classes", start: "2026-06-13", category: "holiday" },
+
+            { title: "Campus closed", start: "2026-06-15", category: "campus" },
+            { title: "Examinations", start: "2026-06-17", end: "2026-06-19", category: "exam" },
+            { title: "Examinations", start: "2026-06-22", end: "2026-06-26", category: "exam" },
+            { title: "Youth Day", start: "2026-06-16", category: "holiday" },
+            { title: "Campus closed", start: "2026-06-16", category: "campus" },
+            { title: "No part time classes", start: "2026-06-20", category: "holiday" },
+
+            { title: "Student holidays", start: "2026-06-29", end: "2026-06-30", category: "student" },
+
+        ];
+
+        eventsByMonth["2026-07"] = [
+            // Student holidays
+            { title: "Student holidays", start: "2026-07-01", end: "2026-07-03", category: "student" },
+            { title: "Student orientation (July 2026 intake)", start: "2026-07-03", category: "event" },
+
+
+            // Week 16
+            { title: "Week 16 classes", start: "2026-07-06", end: "2026-07-10", category: "course" },
+            { title: "Commencement of classes (July 2026 intake)", start: "2026-07-06", category: "event" },
+            { title: "Master classes", start: "2026-07-07", category: "course" },
+
+
+            // Week 17
+            { title: "Week 17 classes", start: "2026-07-13", end: "2026-07-17", category: "course" },
+
+            { title: "Examination results released (June 2026)", start: "2026-07-17", category: "admin" },
+
+            // Week 18
+            { title: "Week 18 classes", start: "2026-07-20", end: "2026-07-24", category: "course" },
+
+            { title: "Applications for semester examination perusal close (June 2026)", start: "2026-07-24", category: "admin" },
+
+            // Week 19
+            { title: "Week 19 classes", start: "2026-07-27", end: "2026-07-31", category: "course" },
+            { title: "Semester examination schedule published (November 2026 and January 2027)", start: "2026-07-27", category: "admin" },
+            { title: "Semester examination perusal schedule published (June 2026)", start: "2026-07-29", category: "admin" },
+            { title: "Industry Connect Day", start: "2026-07-29", category: "event" },
+            { title: "Semester examination perusals (June 2026)", start: "2026-07-31", category: "exam" },
+
+        ];
+
+        eventsByMonth["2026-08"] = [
+            // Week 20
+            { title: "Week 20 classes", start: "2026-08-03", end: "2026-08-07", category: "course" },
+            { title: "Master classes", start: "2026-08-04", category: "course" },
+            { title: "Semester examination perusals (June 2026)", start: "2026-08-07", category: "exam" },
+            { title: "No part time classes", start: "2026-08-08", category: "holiday" },
+
+            // Holidays
+            { title: "Nat'l. Women's Day", start: "2026-08-09", category: "holiday" },
+            { title: "Nat'l. Women's Day (Observed)", start: "2026-08-10", category: "holiday" },
+            { title: "Campus closed", start: "2026-08-10", category: "campus" },
+
+            // Week 21
+            { title: "Week 21 classes", start: "2026-08-11", end: "2026-08-14", category: "course" },
+            { title: "Semester examination re-marking applications close (June 2026)", start: "2026-08-14", category: "admin" },
+
+            // Week 22
+            { title: "Week 22 classes", start: "2026-08-17", end: "2026-08-21", category: "course" },
+
+            // Week 23
+            { title: "Week 23 classes", start: "2026-08-24", end: "2026-08-28", category: "course" },
+
+            { title: "Open Day", start: "2026-08-29", category: "event" },
+
+            // Week 24
+            { title: "Week 24 classes", start: "2026-08-31", category: "course" },
+
+        ];
+        eventsByMonth["2026-09"] = [
+            // Week 24
+            { title: "Week 24 classes", start: "2026-09-01", end: "2026-09-04", category: "course" },
+            { title: "Global Minor project commence", start: "2026-09-01", category: "event" },
+
+            // Week 25
+            { title: "Week 25 classes", start: "2026-09-07", end: "2026-09-11", category: "course" },
+            { title: "International UCLL projects to commence", start: "2026-09-07", category: "event" },
+            { title: "Master classes", start: "2026-09-08", category: "course" },
+
+            // Week 26
+            { title: "Week 26 classes", start: "2026-09-14", end: "2026-09-18", category: "course" },
+
+            { title: "Student orientation (September 2026 intake)", start: "2026-09-18", category: "event" },
+
+            // Student holidays + Heritage Day
+            { title: "Student holidays", start: "2026-09-21", end: "2026-09-23", category: "student" },
+
+            { title: "Heritage Day", start: "2026-09-24", category: "holiday" },
+            { title: "Campus closed", start: "2026-09-24", category: "campus" },
+            { title: "Student holidays", start: "2026-09-25", category: "student" },
+            { title: "Campus closed", start: "2026-09-25", category: "campus" },
+
+            // Week 27
+            { title: "Week 27 classes", start: "2026-09-28", end: "2026-09-30", category: "course" },
+            { title: "Commencement of classes (September 2026 intake)", start: "2026-09-28", category: "event" },
+
+        ];
+        eventsByMonth["2026-10"] = [
+            // Week 27
+            { title: "Week 27 classes", start: "2026-10-01", end: "2026-10-02", category: "course" },
+
+            // Week 28
+            { title: "Week 28 classes", start: "2026-10-05", end: "2026-10-09", category: "course" },
+            { title: "Master classes", start: "2026-10-06", category: "course" },
+            { title: "Industry Connect Day", start: "2026-10-07", category: "event" },
+
+
+            // Week 29
+            { title: "Week 29 classes", start: "2026-10-12", end: "2026-10-16", category: "course" },
+
+            { title: "Applications for semester sick tests close", start: "2026-10-16", category: "admin" },
+
+            // Week 30
+            { title: "Week 30 classes", start: "2026-10-19", end: "2026-10-23", category: "course" },
+
+            { title: "Semester sick test(s) registers released", start: "2026-10-21", category: "admin" },
+
+            { title: "Semester sick test(s)", start: "2026-10-23", category: "exam" },
+            { title: "Applications for semester (last week) sick tests close", start: "2026-10-23", category: "admin" },
+
+
+            // Study leave + finals
+            { title: "Study leave", start: "2026-10-26", end: "2026-10-30", category: "student" },
+            { title: "Semester (last week) sick test(s) registers released", start: "2026-10-26", category: "admin" },
+            { title: "Semester (last week) sick test(s)", start: "2026-10-28", category: "exam" },
+
+            { title: "Sick test(s) results released", start: "2026-10-30", category: "admin" },
+            { title: "No part time classes", start: "2026-10-31", category: "holiday" }
+        ];
+
+        eventsByMonth["2026-11"] = [
+            // Study leave + Final Project presentations (Mon–Fri)
+            { title: "Study leave", start: "2026-11-02", end: "2026-11-06", category: "student" },
+            { title: "Final Project presentations", start: "2026-11-02", end: "2026-11-03", category: "research" },
+            { title: "Final Project presentations", start: "2026-11-05", end: "2026-11-06", category: "research" },
+            { title: "Campus closed (Public Holiday – Local Government Elections)", start: "2026-11-04", category: "campus" },
+
+            // Admin / schedules (week 1)
+            { title: "Semester examination special permission applications close", start: "2026-11-02", category: "admin" },
+            { title: "Semester examination postponement applications close", start: "2026-11-02", category: "admin" },
+            { title: "Semester examination re-write of passed modules close", start: "2026-11-02", category: "admin" },
+
+            { title: "Semester examination registers uploaded", start: "2026-11-06", category: "admin" },
+
+            // Examinations (two weeks)
+            { title: "Examinations", start: "2026-11-09", end: "2026-11-13", category: "exam" },
+            { title: "Examinations", start: "2026-11-16", end: "2026-11-20", category: "exam" },
+
+            // Open day
+            { title: "Open Day", start: "2026-11-21", category: "event" },
+
+            // Student holidays + end-of-month admin
+            { title: "Student holidays", start: "2026-11-23", end: "2026-11-27", category: "student" },
+
+            // Month end
+            { title: "Student holidays", start: "2026-11-30", category: "student" }
+        ];
+        eventsByMonth["2026-12"] = [
+            // Student holidays (early month)
+            { title: "Student holidays", start: "2026-12-01", end: "2026-12-04", category: "student" },
+
+            // Admin / moderation (first Friday)
+
+
+            // Second week
+            { title: "Student holidays", start: "2026-12-07", end: "2026-12-11", category: "student" },
+
+            { title: "Examination results released (November 2026 and Final Project)", start: "2026-12-11", category: "admin" },
+
+
+            // Mid-month
+            { title: "Student holidays", start: "2026-12-14", end: "2026-12-15", category: "student" },
+            { title: "Day of Reconciliation", start: "2026-12-16", category: "holiday" },
+            { title: "Student holidays", start: "2026-12-17", end: "2026-12-18", category: "student" },
+
+            // Week before Christmas
+            { title: "Student holidays", start: "2026-12-21", end: "2026-12-24", category: "student" },
+            { title: "Applications for semester examination perusal close (November 2026)", start: "2026-12-21", category: "admin" },
+            { title: "Christmas", start: "2026-12-25", category: "holiday" },
+            { title: "Day of Goodwill", start: "2026-12-26", category: "holiday" },
+
+            // Year end
+            { title: "Student holidays", start: "2026-12-27", end: "2026-12-31", category: "student" }
+        ];
+
+        eventsByMonth["2027-01"] = [
+            // New Year
+            { title: "New Year's Day", start: "2027-01-01", category: "holiday" },
+            { title: "Campus closed", start: "2027-01-01", category: "campus" },
+
+            // Week 1: student holidays + setup
+            { title: "Student holidays", start: "2027-01-04", end: "2027-01-08", category: "student" },
+
+            { title: "Semester examination perusal schedule published", start: "2027-01-04", category: "admin" },
+            { title: "Semester examination re-write of passed modules close", start: "2027-01-04", category: "admin" },
+            { title: "Semester examination special permission applications close", start: "2027-01-04", category: "admin" },
+
+
+            { title: "Mathematics bridging course", start: "2027-01-07", end: "2027-01-08", category: "course" },
+
+
+            { title: "Semester examination perusal schedule published (November 2026)", start: "2027-01-06", category: "admin" },
+
+            { title: "Semester examination registers uploaded (January 2027)", start: "2027-01-08", category: "admin" },
+            { title: "Semester examination perusals (November 2026)", start: "2027-01-08", category: "exam" },
+
+
+            // Week 2: (Re)Exams + bridging
+            { title: "(Re)Examinations", start: "2027-01-11", end: "2027-01-15", category: "exam" },
+            { title: "Mathematics bridging course", start: "2027-01-11", end: "2027-01-15", category: "course" },
+            { title: "Semester examination re-marking applications close (November 2026)", start: "2027-01-15", category: "admin" },
+
+            // Week 3: student holidays + bridging + dissertations
+            { title: "Student holidays", start: "2027-01-18", end: "2027-01-22", category: "student" },
+            { title: "Mathematics bridging course", start: "2027-01-18", end: "2027-01-22", category: "course" },
+            { title: "Dissertation - final presentations", start: "2027-01-18", end: "2027-01-22", category: "research" },
+
+
+            // Week 4: student holidays + wrap-up
+            { title: "Student holidays", start: "2027-01-25", end: "2027-01-29", category: "student" },
+            { title: "Dissertation - final presentations", start: "2027-01-25", end: "2027-01-29", category: "research" },
+
+
+            { title: "Mathematics bridging course results released", start: "2027-01-26", category: "admin" },
+
+
+
+
+        ];
+
+
+
+
+
+        /* ====== MONTH SELECTOR ====== */
+        const monthKeys = Object.keys(eventsByMonth);
+        const monthLabels = {
+            "2026-01": "January 2026", "2026-02": "February 2026", "2026-03": "March 2026", "2026-04": "April 2026",
+            "2026-05": "May 2026", "2026-06": "June 2026", "2026-07": "July 2026", "2026-08": "August 2026",
+            "2026-09": "September 2026", "2026-10": "October 2026", "2026-11": "November 2026", "2026-12": "December 2026",
+            "2027-01": "January 2027"
+        };
+
+        /* ====== UTILITIES (LOCAL TIME — NO UTC) ====== */
+        const pad = n => String(n).padStart(2, "0");
+        function fmtLocal(d) { return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
+        function eachDay(startStr, endStr) {
+            const [ys, ms, ds] = startStr.split("-").map(Number);
+            const [ye, me, de] = (endStr ?? startStr).split("-").map(Number);
+            const s = new Date(ys, ms - 1, ds);  // local midnight
+            const e = new Date(ye, me - 1, de);
+            const out = [];
+            for (let d = new Date(s); d <= e; d.setDate(d.getDate() + 1)) {
+                out.push(fmtLocal(d));
+            }
+            return out;
+        }
+        function expand(events) {
+            const map = {};
+            for (const ev of events) {
+                const days = eachDay(ev.start, ev.end);
+                for (const day of days) {
+                    (map[day] ||= []).push({ title: ev.title, category: ev.category, details: ev.details });
+                }
+            }
+            return map;
+        }
+        function daysInMonth(yyyy, mm) { return new Date(yyyy, mm, 0).getDate(); }
+        function firstDow(yyyy, mm) { return new Date(yyyy, mm - 1, 1).getDay(); }
+
+        /* ====== RENDERING ====== */
+        const monthSel = document.getElementById('monthSel');
+        const calEl = document.getElementById('calendar');
+        const titleEl = document.getElementById('title');
+        const printBtn = document.getElementById('printBtn');
+        const modalBackdrop = document.createElement('div');
+        modalBackdrop.className = 'modalBackdrop';
+        modalBackdrop.innerHTML = `
+            <div class="modal" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+                <div class="modalHeader">
+                    <h2 class="modalTitle" id="eventModalTitle"></h2>
+                    <button type="button" class="modalClose" aria-label="Close details modal">Close</button>
+                </div>
+                <div class="modalBody" id="eventModalBody"></div>
+            </div>
+        `;
+        document.body.appendChild(modalBackdrop);
+        const eventModalTitle = modalBackdrop.querySelector('#eventModalTitle');
+        const eventModalBody = modalBackdrop.querySelector('#eventModalBody');
+        const modalCloseBtn = modalBackdrop.querySelector('.modalClose');
+
+        function openDetailsModal(title, details) {
+            eventModalTitle.textContent = title;
+            eventModalBody.innerHTML = formatDetails(details || '');
+            modalBackdrop.classList.add('open');
+        }
+
+        function formatDetails(detailsText) {
+            const escapeHtml = (text) => text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+
+            const escaped = escapeHtml(detailsText);
+            const withLinks = escaped.replace(/(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, (match) => {
+                const href = match.startsWith('www.') ? `https://${match}` : match;
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer">${match}</a>`;
+            });
+            return withLinks.replace(/\n/g, '<br>');
+        }
+
+        function closeDetailsModal() {
+            modalBackdrop.classList.remove('open');
+        }
+
+        modalCloseBtn.addEventListener('click', closeDetailsModal);
+        modalBackdrop.addEventListener('click', (event) => {
+            if (event.target === modalBackdrop) {
+                closeDetailsModal();
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modalBackdrop.classList.contains('open')) {
+                closeDetailsModal();
+            }
+        });
+
+        monthKeys.forEach(k => {
+            const opt = document.createElement('option');
+            opt.value = k; opt.textContent = monthLabels[k] || k;
+            monthSel.appendChild(opt);
+        });
+        const today = new Date();
+        const currentMonthKey = `${today.getFullYear()}-${pad(today.getMonth() + 1)}`;
+        monthSel.value = monthKeys.includes(currentMonthKey) ? currentMonthKey : monthKeys[0];
+
+        function render(monthKey) {
+            const [y, m] = monthKey.split('-').map(Number);
+            titleEl.textContent = `Belgium Campus iTversity Calendar — ${monthLabels[monthKey] || monthKey}`;
+
+            const events = eventsByMonth[monthKey] || [];
+            const byDate = expand(events);
+
+            const total = daysInMonth(y, m);
+            const startBlank = firstDow(y, m);
+
+            calEl.innerHTML = `
+    <div class="monthTitle">${monthLabels[monthKey] || monthKey}</div>
+    <div class="dow"><div>Sunday</div><div>Monday</div><div>Tuesday</div><div>Wednesday</div><div>Thursday</div><div>Friday</div><div>Saturday</div></div>
+    <div class="grid"></div>
+  `;
+            const grid = calEl.querySelector('.grid');
+
+            for (let i = 0; i < startBlank; i++) {
+                const d = document.createElement('div'); d.className = 'day blank'; grid.appendChild(d);
+            }
+            for (let day = 1; day <= total; day++) {
+                const cell = document.createElement('div'); cell.className = 'day';
+                cell.innerHTML = `<div class="date">${day}</div><div class="items"></div>`;
+                const itemsEl = cell.querySelector('.items');
+                const dateStr = `${y}-${pad(m)}-${pad(day)}`;
+
+                (byDate[dateStr] || []).forEach(item => {
+                    const tag = document.createElement('div');
+                    tag.className = `tag ${item.category || ''}`;
+                    if (item.details) {
+                        const row = document.createElement('div');
+                        row.className = 'tagRow';
+
+                        const text = document.createElement('span');
+                        text.className = 'tagText';
+                        text.textContent = item.title;
+
+                        const detailsBtn = document.createElement('button');
+                        detailsBtn.type = 'button';
+                        detailsBtn.className = 'detailsBtn';
+                        detailsBtn.textContent = 'Details';
+                        detailsBtn.addEventListener('click', () => openDetailsModal(item.title, item.details));
+
+                        row.appendChild(text);
+                        row.appendChild(detailsBtn);
+                        tag.appendChild(row);
+                    } else {
+                        tag.textContent = item.title;
+                    }
+                    itemsEl.appendChild(tag);
+                });
+                grid.appendChild(cell);
+            }
+        }
+
+        monthSel.addEventListener('change', e => render(e.target.value));
+
+        /* ====== PRINT ALL MONTHS FUNCTIONALITY ====== */
+        function renderMonthForPrint(monthKey) {
+            const [y, m] = monthKey.split('-').map(Number);
+            const events = eventsByMonth[monthKey] || [];
+            const byDate = expand(events);
+            const total = daysInMonth(y, m);
+            const startBlank = firstDow(y, m);
+
+            const calDiv = document.createElement('div');
+            calDiv.className = 'cal';
+            calDiv.setAttribute('data-print-month', 'true');
+
+            calDiv.innerHTML = `
+                <div class="monthTitle">${monthLabels[monthKey] || monthKey}</div>
+                <div class="dow"><div>Sunday</div><div>Monday</div><div>Tuesday</div><div>Wednesday</div><div>Thursday</div><div>Friday</div><div>Saturday</div></div>
+                <div class="grid"></div>
+            `;
+
+            const grid = calDiv.querySelector('.grid');
+
+            for (let i = 0; i < startBlank; i++) {
+                const d = document.createElement('div');
+                d.className = 'day blank';
+                grid.appendChild(d);
+            }
+
+            for (let day = 1; day <= total; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'day';
+                cell.innerHTML = `<div class="date">${day}</div><div class="items"></div>`;
+                const itemsEl = cell.querySelector('.items');
+                const dateStr = `${y}-${pad(m)}-${pad(day)}`;
+
+                (byDate[dateStr] || []).forEach(item => {
+                    const tag = document.createElement('span');
+                    tag.className = `tag ${item.category || ''}`;
+                    tag.textContent = item.title;
+                    itemsEl.appendChild(tag);
+                });
+                grid.appendChild(cell);
+            }
+
+            return calDiv;
+        }
+
+        printBtn.addEventListener('click', () => {
+            // Store original state
+            const originalMonth = monthSel.value;
+            const calendarContainer = document.querySelector('.bc-calendar-container');
+            const wrap = document.querySelector('.wrap');
+            const body = document.body;
+
+            // Create print wrapper
+            const printWrapper = document.createElement('div');
+            printWrapper.setAttribute('data-print-wrapper', 'true');
+            printWrapper.className = 'print-wrapper';
+
+            // Generate all months
+            monthKeys.forEach(monthKey => {
+                const monthCal = renderMonthForPrint(monthKey);
+                printWrapper.appendChild(monthCal);
+            });
+
+            // Append print wrapper inside calendar container (preferred) or wrap
+            // Always try to put it inside calendar container first
+            let appendTarget = calendarContainer;
+            if (!appendTarget) {
+                appendTarget = wrap;
+            }
+            if (!appendTarget) {
+                appendTarget = body;
+            }
+            appendTarget.appendChild(printWrapper);
+
+            // Ensure print wrapper is visible
+            printWrapper.style.setProperty('display', 'block', 'important');
+            printWrapper.style.setProperty('visibility', 'visible', 'important');
+
+            // Hide original calendar
+            const originalCal = document.getElementById('calendar');
+            if (originalCal) {
+                originalCal.classList.add('original-cal-hidden');
+                originalCal.style.display = 'none';
+            }
+
+            // Hide controls and legend
+            const controls = document.querySelector('.controls');
+            const legend = document.querySelector('.legend');
+            if (controls) controls.style.display = 'none';
+            if (legend) legend.style.display = 'none';
+
+            // Hide content outside calendar container (for embedded scenarios)
+            const hiddenElements = [];
+            if (calendarContainer) {
+                // Find top-level container
+                let topContainer = calendarContainer;
+                let depth = 0;
+                while (topContainer && topContainer.parentNode !== body && depth < 10) {
+                    topContainer = topContainer.parentNode;
+                    depth++;
+                }
+
+                // Ensure calendar container and all its parents are visible
+                let current = calendarContainer;
+                while (current && current !== body) {
+                    current.style.setProperty('display', 'block', 'important');
+                    current.style.setProperty('visibility', 'visible', 'important');
+                    current = current.parentNode;
+                }
+
+                // Hide all body children except the calendar container tree
+                if (topContainer) {
+                    Array.from(body.children).forEach(el => {
+                        if (el !== topContainer && !topContainer.contains(el) && !el.contains(topContainer)) {
+                            const originalDisplay = window.getComputedStyle(el).display;
+                            el.style.setProperty('display', 'none', 'important');
+                            hiddenElements.push({ el, originalDisplay });
+                        }
+                    });
+                }
+
+                // Also hide common WordPress elements that might be siblings
+                const wpSelectors = [
+                    'header:not(.bc-calendar-container header)',
+                    'footer:not(.bc-calendar-container footer)',
+                    'nav:not(.bc-calendar-container nav)',
+                    '.site-header:not(.bc-calendar-container .site-header)',
+                    '.site-footer:not(.bc-calendar-container .site-footer)',
+                    '.main-navigation:not(.bc-calendar-container .main-navigation)',
+                    '.wp-block-group:not(.bc-calendar-container .wp-block-group)',
+                    '.entry-header:not(.bc-calendar-container .entry-header)',
+                    '.entry-footer:not(.bc-calendar-container .entry-footer)'
+                ];
+
+                wpSelectors.forEach(selector => {
+                    try {
+                        document.querySelectorAll(selector).forEach(el => {
+                            if (!calendarContainer.contains(el) && !el.contains(calendarContainer)) {
+                                const originalDisplay = window.getComputedStyle(el).display;
+                                el.style.setProperty('display', 'none', 'important');
+                                hiddenElements.push({ el, originalDisplay });
+                            }
+                        });
+                    } catch (e) {
+                        // Ignore selector errors
+                    }
+                });
+            }
+
+            // Add printing class to body
+            body.classList.add('bc-printing');
+
+            // Apply inline styles recursively to ensure visibility
+            const applyStyles = (element) => {
+                element.style.setProperty('visibility', 'visible', 'important');
+
+                // Special handling for grid elements
+                if (element.classList.contains('grid') || element.classList.contains('dow')) {
+                    element.style.setProperty('display', 'grid', 'important');
+                }
+                // Special handling for flex elements
+                else if (element.classList.contains('items') || element.classList.contains('day')) {
+                    element.style.setProperty('display', 'flex', 'important');
+                }
+                // Default to block
+                else {
+                    element.style.setProperty('display', 'block', 'important');
+                }
+
+                Array.from(element.children).forEach(child => applyStyles(child));
+            };
+
+            applyStyles(printWrapper);
+
+            // Inject dynamic print styles if needed
+            const styleId = 'bc-print-styles';
+            let printStyle = document.getElementById(styleId);
+            if (!printStyle) {
+                printStyle = document.createElement('style');
+                printStyle.id = styleId;
+                printStyle.textContent = `
+                    @media print {
+                        /* Hide everything by default when printing */
+                        body.bc-printing * {
+                            display: none !important;
+                            visibility: hidden !important;
+                        }
+                        /* Show only calendar container and its contents */
+                        body.bc-printing .bc-calendar-container {
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                        body.bc-printing .bc-calendar-container * {
+                            visibility: visible !important;
+                        }
+                        body.bc-printing .bc-calendar-container .wrap {
+                            display: block !important;
+                        }
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] {
+                            display: block !important;
+                        }
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .cal {
+                            display: block !important;
+                        }
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .grid {
+                            display: grid !important;
+                        }
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .dow {
+                            display: grid !important;
+                        }
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .day {
+                            display: flex !important;
+                        }
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .items {
+                            display: flex !important;
+                        }
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .monthTitle,
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .date,
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .tag,
+                        body.bc-printing .bc-calendar-container [data-print-wrapper] .day.blank {
+                            display: block !important;
+                        }
+                        /* Hide specific elements inside calendar container */
+                        body.bc-printing .bc-calendar-container header,
+                        body.bc-printing .bc-calendar-container .controls,
+                        body.bc-printing .bc-calendar-container .legend,
+                        body.bc-printing .bc-calendar-container .original-cal-hidden,
+                        body.bc-printing .bc-calendar-container .wrap .cal:not([data-print-month]) {
+                            display: none !important;
+                        }
+                        body.bc-printing .bc-calendar-container .wrap {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .cal {
+                            display: block !important;
+                            visibility: visible !important;
+                            width: 100% !important;
+                            max-width: 100% !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            page-break-after: always !important;
+                            page-break-inside: avoid !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .cal:last-child {
+                            page-break-after: auto !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .monthTitle {
+                            padding: 8px 10px !important;
+                            font-size: 16px !important;
+                            margin: 0 !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .day {
+                            display: flex !important;
+                            min-height: 60px !important;
+                            padding: 4px 3px 6px !important;
+                            font-size: 11px !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .date {
+                            font-size: 11px !important;
+                            margin-bottom: 2px !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .tag {
+                            font-size: 9px !important;
+                            padding: 3px 4px !important;
+                            line-height: 1.2 !important;
+                            margin-bottom: 2px !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .dow {
+                            display: grid !important;
+                            padding: 6px 0 !important;
+                            font-size: 11px !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .grid {
+                            display: grid !important;
+                        }
+                        body.bc-printing [data-print-wrapper] .items {
+                            display: flex !important;
+                            gap: 2px !important;
+                        }
+                    }
+                `;
+                document.head.appendChild(printStyle);
+            }
+
+            // Cleanup function
+            const cleanup = () => {
+                // Remove print wrapper
+                if (printWrapper.parentNode) {
+                    printWrapper.parentNode.removeChild(printWrapper);
+                }
+
+                // Remove print styles
+                if (printStyle && printStyle.parentNode) {
+                    printStyle.parentNode.removeChild(printStyle);
+                }
+
+                // Restore hidden elements (for embedded scenarios)
+                hiddenElements.forEach(({ el, originalDisplay }) => {
+                    el.style.display = originalDisplay;
+                });
+
+                // Restore original calendar
+                if (originalCal) {
+                    originalCal.classList.remove('original-cal-hidden');
+                    originalCal.style.display = '';
+                }
+
+                // Restore controls and legend
+                if (controls) controls.style.display = '';
+                if (legend) legend.style.display = '';
+
+                // Remove printing class
+                body.classList.remove('bc-printing');
+
+                // Re-render original month
+                render(originalMonth);
+            };
+
+            // Handle afterprint event
+            window.addEventListener('afterprint', cleanup, { once: true });
+
+            // Fallback timeout (in case afterprint doesn't fire)
+            setTimeout(() => {
+                if (body.classList.contains('bc-printing')) {
+                    cleanup();
+                }
+            }, 1000);
+
+            // Small delay to ensure DOM is updated before printing
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        });
+
+        render(monthSel.value);
+    </script>
+    <link rel="stylesheet" href="../../shared/guide-switcher.css">
+    <link rel="stylesheet" href="../../shared/guide-resources.css">
+    <link rel="stylesheet" href="../../shared/guide-back.css">
+    <script src="../../shared/guide-switcher.js" defer></script>
+    <script src="../../shared/guide-resources.js" defer></script>
+    <script src="../../shared/guide-back.js" defer></script>
+</body>
+
+</html>
