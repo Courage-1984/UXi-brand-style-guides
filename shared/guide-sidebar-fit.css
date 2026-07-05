@@ -1,0 +1,192 @@
+/* UXi — keep left nav sidebars within the viewport (no vertical scrollbar) */
+
+#sidebar,
+.ds-sidebar,
+.sg-nav,
+.sidebar,
+aside.fixed.md\:h-screen {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#sidebar::-webkit-scrollbar,
+.ds-sidebar::-webkit-scrollbar,
+.sg-nav::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* ─── OWI / blueprint / IMM ─── */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar .sidebar-nav,
+#sidebar > nav {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden !important;
+  padding-bottom: 0 !important;
+}
+
+#sidebar .sidebar-footer {
+  flex-shrink: 0;
+  position: static !important;
+}
+
+#sidebar .sidebar-brand,
+#sidebar > div:first-child {
+  flex-shrink: 0;
+}
+
+#sidebar .nav-category {
+  padding: clamp(3px, 0.75vh, 9px) 16px clamp(1px, 0.2vh, 4px) !important;
+}
+
+#sidebar .nav-category:first-child {
+  padding-top: clamp(2px, 0.45vh, 7px) !important;
+}
+
+#sidebar .nav-link {
+  padding: clamp(2px, 0.55vh, 7px) 16px !important;
+  font-size: clamp(10px, 1.1vh, 12px) !important;
+  line-height: 1.25 !important;
+}
+
+#sidebar .nav-index {
+  font-size: clamp(8px, 0.95vh, 10px) !important;
+}
+
+/* ─── BCi ─── */
+.sg-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+}
+
+.sg-nav-logo {
+  flex-shrink: 0;
+  padding: clamp(10px, 1.4vh, 32px) var(--space-6) clamp(8px, 1vh, 32px) !important;
+  margin-bottom: clamp(4px, 0.6vh, 24px) !important;
+}
+
+.sg-nav-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: clamp(6px, 1vh, 16px);
+}
+
+.sg-nav-label {
+  padding: clamp(3px, 0.65vh, 24px) var(--space-6) clamp(1px, 0.2vh, 8px) !important;
+  font-size: clamp(8px, 0.9vh, 10px) !important;
+  line-height: 1.2 !important;
+}
+
+.sg-nav a {
+  padding: clamp(2px, 0.48vh, 8px) var(--space-6) !important;
+  font-size: clamp(10px, 1.05vh, 13px) !important;
+  line-height: 1.25 !important;
+}
+
+/* ─── ASCON ─── */
+.ds-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0 !important;
+}
+
+.ds-sidebar .sidebar-brand {
+  flex-shrink: 0;
+  padding: clamp(12px, 1.5vh, 28px) 24px clamp(10px, 1.2vh, 24px) !important;
+  margin-bottom: clamp(2px, 0.4vh, 8px) !important;
+}
+
+.ds-sidebar-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ds-sidebar .sidebar-group-label {
+  padding: clamp(3px, 0.65vh, 18px) 24px clamp(1px, 0.2vh, 6px) !important;
+  font-size: clamp(8px, 0.9vh, 9.5px) !important;
+  line-height: 1.2 !important;
+}
+
+.ds-sidebar .sidebar-nav a {
+  padding: clamp(2px, 0.48vh, 9px) 24px !important;
+  font-size: clamp(10px, 1.05vh, 12px) !important;
+  line-height: 1.25 !important;
+}
+
+.ds-sidebar .sidebar-footer {
+  flex-shrink: 0;
+}
+
+/* ─── TICON ─── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0 !important;
+}
+
+.sidebar-logo {
+  flex-shrink: 0;
+  padding: clamp(12px, 1.6vh, 32px) 1.5rem clamp(10px, 1.2vh, 24px) !important;
+}
+
+.sidebar-nav {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden !important;
+  padding: clamp(6px, 0.9vh, 20px) 0 !important;
+}
+
+.sidebar-nav .nav-section-label {
+  padding: clamp(2px, 0.5vh, 8px) 1.5rem clamp(1px, 0.15vh, 5px) !important;
+  font-size: clamp(7px, 0.85vh, 10px) !important;
+  line-height: 1.2 !important;
+}
+
+.sidebar-nav a {
+  padding: clamp(2px, 0.45vh, 9px) 1.5rem !important;
+  font-size: clamp(10px, 1vh, 13px) !important;
+  line-height: 1.25 !important;
+  gap: clamp(4px, 0.5vh, 10px) !important;
+}
+
+/* ─── mPowered (Tailwind sidebar) ─── */
+aside.fixed.md\:h-screen > nav {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden !important;
+  padding: clamp(8px, 1vh, 16px) !important;
+}
+
+aside.fixed.md\:h-screen > nav a {
+  padding-top: clamp(4px, 0.55vh, 8px) !important;
+  padding-bottom: clamp(4px, 0.55vh, 8px) !important;
+  font-size: clamp(11px, 1.1vh, 14px) !important;
+  line-height: 1.25 !important;
+}
+
+aside.fixed.md\:h-screen > nav .mt-4 {
+  margin-top: clamp(6px, 0.8vh, 16px) !important;
+}
+
+@media (max-width: 768px) {
+  #sidebar.open,
+  #sidebar.open .sidebar-nav,
+  #sidebar.open > nav {
+    overflow-y: auto !important;
+  }
+}

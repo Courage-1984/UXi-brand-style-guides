@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASCON — Brand Style Guide & Design System v1.1</title>
+  <title>ASCON — Brand Style Guide & Design System v1.3</title>
   <link rel="icon" type="image/png" href="../assets/favicons/ASCON-favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
     /* ============================================================
    ASCON — BRAND & DESIGN SYSTEM
    African Supply Chain Confederation
-   Version 1.1 · April 2026
+   Version 1.3 · July 2026
    ============================================================ */
 
     /* Marseille font — replace with your licensed font file */
@@ -145,20 +145,18 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      overflow-y: auto;
-      padding: 0 0 40px 0;
+      height: 100dvh;
+      overflow: hidden;
+      padding: 0;
       display: flex;
       flex-direction: column;
       border-right: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .ds-sidebar::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .ds-sidebar::-webkit-scrollbar-thumb {
-      background: rgba(201, 145, 26, 0.3);
-      border-radius: 2px;
+    .ds-sidebar-body {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
     }
 
     .sidebar-brand {
@@ -2159,37 +2157,39 @@
     <!-- SIDEBAR -->
     <aside class="ds-sidebar">
       <div class="sidebar-brand">
-        <div class="sidebar-brand-monogram">A</div>
-        <div class="sidebar-brand-name">ASCON</div>
-        <div class="sidebar-brand-sub">Brand Style Guide &amp; Design System v1.1</div>
+        <img src="ASCON_Logo.png" alt="ASCON — African Supply Chain Confederation"
+          style="width:100%;max-width:190px;height:auto;display:block;margin-bottom:10px;">
+        <div class="sidebar-brand-sub">Brand Style Guide &amp; Design System v1.3</div>
       </div>
 
-      <div class="sidebar-group-label">Foundation</div>
-      <nav class="sidebar-nav">
-        <a href="#colors"><span class="nav-num">01</span> Colour System</a>
-        <a href="#typography"><span class="nav-num">02</span> Typography Scale</a>
-      </nav>
+      <div class="ds-sidebar-body">
+        <div class="sidebar-group-label">Foundation</div>
+        <nav class="sidebar-nav">
+          <a href="#colors"><span class="nav-num">01</span> Colour System</a>
+          <a href="#typography"><span class="nav-num">02</span> Typography Scale</a>
+        </nav>
 
-      <div class="sidebar-group-label">Components</div>
-      <nav class="sidebar-nav">
-        <a href="#buttons"><span class="nav-num">03</span> Buttons</a>
-        <a href="#forms"><span class="nav-num">04</span> Form Elements</a>
-        <a href="#cards"><span class="nav-num">05</span> Cards</a>
-      </nav>
+        <div class="sidebar-group-label">Components</div>
+        <nav class="sidebar-nav">
+          <a href="#buttons"><span class="nav-num">03</span> Buttons</a>
+          <a href="#forms"><span class="nav-num">04</span> Form Elements</a>
+          <a href="#cards"><span class="nav-num">05</span> Cards</a>
+        </nav>
 
-      <div class="sidebar-group-label">Brand</div>
-      <nav class="sidebar-nav">
-        <a href="#voice"><span class="nav-num">06</span> Vision, Mission & Voice</a>
-        <a href="#logo-usage"><span class="nav-num">07</span> Logo Usage Rules</a>
-        <a href="#icons"><span class="nav-num">08</span> Iconography</a>
-        <a href="#navigation"><span class="nav-num">09</span> Navigation</a>
-      </nav>
+        <div class="sidebar-group-label">Brand</div>
+        <nav class="sidebar-nav">
+          <a href="#voice"><span class="nav-num">06</span> Vision, Mission & Voice</a>
+          <a href="#logo-usage"><span class="nav-num">07</span> Logo Usage Rules</a>
+          <a href="#icons"><span class="nav-num">08</span> Iconography</a>
+          <a href="#navigation"><span class="nav-num">09</span> Navigation</a>
+        </nav>
 
-      <div class="sidebar-group-label">Developer</div>
-      <nav class="sidebar-nav">
-        <a href="#variables"><span class="nav-num">10</span> CSS Custom Properties</a>
-        <a href="#elementor"><span class="nav-num">11</span> Elementor Integration</a>
-      </nav>
+        <div class="sidebar-group-label">Developer</div>
+        <nav class="sidebar-nav">
+          <a href="#variables"><span class="nav-num">10</span> CSS Custom Properties</a>
+          <a href="#elementor"><span class="nav-num">11</span> Elementor Integration</a>
+        </nav>
+      </div>
 
       <div class="sidebar-footer">
         African Supply Chain<br>Confederation · Est. 2025<br>HQ: Johannesburg, RSA
@@ -2201,8 +2201,10 @@
 
       <!-- HERO -->
       <div class="ds-hero">
+        <img src="ASCON_Logo.png" alt="ASCON — African Supply Chain Confederation"
+          style="width:340px;max-width:70%;height:auto;display:block;margin-bottom:28px;position:relative;z-index:1;">
         <div class="hero-eyebrow">Brand Style Guide &amp; Design System</div>
-        <h1>ASCON<br><em>Design</em><br>System v1.1</h1>
+        <h1>ASCON<br><em>Design</em><br>System v1.3</h1>
         <p class="ds-hero-sub">A comprehensive design system covering colour tokens, typography, UI components, and
           developer-ready CSS variables — built on the ASCON brand guidelines.</p>
         <div class="hero-tags">
@@ -3006,46 +3008,31 @@
           <!-- Dark BG -->
           <div class="logo-frame">
             <div class="logo-display" style="background:#0D2240;">
-              <div class="logo-lockup">
-                <div class="logo-mark" style="color:#071628;">A</div>
-                <div class="logo-text-block">
-                  <div class="logo-name" style="color:#FFFFFF;">ASCON</div>
-                  <div class="logo-tagline" style="color:#C9911A;">African Supply Chain Confederation</div>
-                </div>
-              </div>
+              <img src="ASCON_Logo.png" alt="ASCON logo on dark navy background"
+                style="width:78%;max-width:280px;height:auto;">
             </div>
             <div class="logo-caption">
               <strong>Correct — Dark Background</strong><br>
-              Use on brand navy (#0D2240 / #071628). Gold mark + white wordmark.
+              Use the reversed lockup on brand navy (#0D2240 / #071628). White wordmark + gold arc mark.
             </div>
           </div>
           <!-- Light BG -->
           <div class="logo-frame">
             <div class="logo-display" style="background:#F7F5F2;">
-              <div class="logo-lockup">
-                <div class="logo-mark" style="color:#071628;">A</div>
-                <div class="logo-text-block">
-                  <div class="logo-name" style="color:#0D2240;">ASCON</div>
-                  <div class="logo-tagline" style="color:#9A6E10;">African Supply Chain Confederation</div>
-                </div>
-              </div>
+              <img src="cropped-ASCON-logo.png" alt="ASCON logo on light background"
+                style="width:78%;max-width:280px;height:auto;">
             </div>
             <div class="logo-caption">
               <strong>Correct — Light Background</strong><br>
-              Navy wordmark on light/white surfaces. Gold mark always retained.
+              Navy wordmark with the Africa mark and gold arc on light/white surfaces.
             </div>
           </div>
           <!-- Incorrect -->
           <div class="logo-frame">
             <div class="logo-display" style="background:linear-gradient(135deg,#667085,#98A2B3);">
-              <div class="logo-lockup" style="opacity:0.6;transform:scaleX(1.2);">
-                <div class="logo-mark" style="background:#DFE4EC;color:#98A2B3;border-radius:0;">A</div>
-                <div class="logo-text-block">
-                  <div class="logo-name" style="color:rgba(255,255,255,0.6);">ASCON</div>
-                  <div class="logo-tagline" style="color:rgba(255,255,255,0.4);">African Supply Chain Confederation
-                  </div>
-                </div>
-              </div>
+              <img src="cropped-ASCON-logo.png"
+                alt="ASCON logo shown incorrectly, distorted on a busy low-contrast background"
+                style="width:78%;max-width:280px;height:auto;opacity:0.55;transform:scaleX(1.25);filter:grayscale(1);">
             </div>
             <div class="logo-caption">
               <strong>Incorrect — Low Contrast / Distorted</strong><br>
@@ -3249,7 +3236,7 @@
             <pre id="token-block"><span class="code-comment">/* =====================================================
    ASCON — CSS DESIGN TOKENS
    African Supply Chain Confederation
-   Version 1.1 · April 2026
+   Version 1.3 · July 2026
    ===================================================== */</span>
 <span class="code-punct">:root {</span>
   <span class="code-comment">/* ─── BRAND COLORS ─── */</span>
@@ -3500,9 +3487,10 @@
       <footer style="background:var(--ascon-navy-deep);padding:32px 80px;border-top:1px solid rgba(255,255,255,0.06);">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--ascon-gold);margin-bottom:4px;">Brand Style Guide &amp; Design System
+            <div style="font-size:13px;font-weight:600;color:var(--ascon-gold);margin-bottom:4px;">Brand Style Guide
+              &amp; Design System
             </div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.3);">Version 1.1 · April 2026 · African Supply Chain
+            <div style="font-size:12px;color:rgba(255,255,255,0.3);">Version 1.3 · July 2026 · African Supply Chain
               Confederation</div>
           </div>
           <div style="font-size:11px;color:rgba(255,255,255,0.2);">Est. 2025 · Accra, Ghana · 7 Founding Nations</div>
@@ -3553,6 +3541,7 @@
     }, { passive: true });
   </script>
   <link rel="stylesheet" href="../shared/guide-switcher.css">
+  <link rel="stylesheet" href="../shared/guide-sidebar-fit.css">
   <link rel="stylesheet" href="../shared/guide-resources.css">
   <link rel="stylesheet" href="../shared/guide-back.css">
   <script src="../shared/guide-switcher.js" defer></script>

@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAICTA — Brand Style Guide & Design System v1.0</title>
+    <title>SAICTA — Brand Style Guide & Design System v1.2</title>
     <link rel="icon" type="image/png" href="../assets/favicons/SAICTA-favicoon.png">
     <!-- Tailwind CSS for Modern Responsive Grid Layouts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Montserrat for the main geometric branding, plus JetBrains Mono for code blocks -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
         body {
             font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -21,10 +24,10 @@
         }
 
         /* Keyboard Focus Indicator Guardrail - WCAG 2.4.7 AA Compliant */
-        button:focus-visible, 
-        a:focus-visible, 
-        input:focus-visible, 
-        select:focus-visible, 
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
         textarea:focus-visible,
         [tabindex="0"]:focus-visible {
             outline: 3px solid #4066E0 !important;
@@ -62,13 +65,16 @@
             width: 8px;
             height: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #E5E5E5;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #4C68B1;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #4066E0;
         }
@@ -86,7 +92,7 @@
                             white: '#FFFFFF',        /* Standard White background */
                             lightBlue: '#B9BFFF',    /* Lilac Blue Pastel */
                             gray: '#E5E5E5',         /* Premium Gray */
-                            
+
                             /* Semantic safety limits for errors/passes only */
                             errRed: '#B91C1C',
                             errRedBg: '#FEF2F2',
@@ -99,22 +105,30 @@
         }
     </script>
 </head>
+
 <body class="bg-[#E5E5E5]/20 text-[#051126] min-h-screen flex flex-col antialiased">
 
     <!-- ACCESSIBILITY UTILITY HEADER BAR -->
-    <div class="bg-[#051126] text-white text-xs py-2.5 px-4 flex flex-wrap justify-between items-center gap-3 border-b border-[#4C68B1]/30 z-50">
+    <div
+        class="bg-[#051126] text-white text-xs py-2.5 px-4 flex flex-wrap justify-between items-center gap-3 border-b border-[#4C68B1]/30 z-50">
         <div class="flex items-center gap-2">
-            <span class="inline-flex items-center justify-center bg-[#4066E0]/20 text-[10px] font-extrabold px-2 py-0.5 rounded text-[#B9BFFF] uppercase tracking-wider">WCAG 2.1 AA Compliant</span>
+            <span
+                class="inline-flex items-center justify-center bg-[#4066E0]/20 text-[10px] font-extrabold px-2 py-0.5 rounded text-[#B9BFFF] uppercase tracking-wider">WCAG
+                2.1 AA Compliant</span>
             <span class="text-slate-300">Accessibility & Design System Sandbox</span>
         </div>
         <div class="flex flex-wrap items-center gap-4">
             <!-- Accessibility Toggling Controls -->
             <div class="flex items-center gap-2">
                 <span class="text-slate-400">Simulate:</span>
-                <button onclick="toggleGrayscale()" id="btn-grayscale" class="bg-[#051126] hover:bg-[#4C68B1]/30 text-white px-2.5 py-1 rounded border border-[#4C68B1] transition flex items-center gap-1.5" aria-pressed="false">
+                <button onclick="toggleGrayscale()" id="btn-grayscale"
+                    class="bg-[#051126] hover:bg-[#4C68B1]/30 text-white px-2.5 py-1 rounded border border-[#4C68B1] transition flex items-center gap-1.5"
+                    aria-pressed="false">
                     <i data-lucide="eye-off" class="w-3.5 h-3.5"></i> Grayscale
                 </button>
-                <button onclick="toggleDyslexia()" id="btn-dyslexia" class="bg-[#051126] hover:bg-[#4C68B1]/30 text-white px-2.5 py-1 rounded border border-[#4C68B1] transition flex items-center gap-1.5" aria-pressed="false">
+                <button onclick="toggleDyslexia()" id="btn-dyslexia"
+                    class="bg-[#051126] hover:bg-[#4C68B1]/30 text-white px-2.5 py-1 rounded border border-[#4C68B1] transition flex items-center gap-1.5"
+                    aria-pressed="false">
                     <i data-lucide="type" class="w-3.5 h-3.5"></i> Legible Font
                 </button>
             </div>
@@ -122,9 +136,14 @@
             <!-- Fluid Scale Zoom Controls -->
             <div class="flex items-center gap-2">
                 <span class="text-slate-400">Text Scaling:</span>
-                <button onclick="changeFontSize(-1)" class="bg-[#4C68B1] hover:bg-[#4066E0] px-2 py-0.5 rounded font-extrabold" aria-label="Decrease font scale zoom">-A</button>
-                <span id="text-zoom-val" class="font-mono bg-[#051126] px-1.5 py-0.5 rounded text-[#B9BFFF] font-bold">100%</span>
-                <button onclick="changeFontSize(1)" class="bg-[#4C68B1] hover:bg-[#4066E0] px-2 py-0.5 rounded font-extrabold" aria-label="Increase font scale zoom">+A</button>
+                <button onclick="changeFontSize(-1)"
+                    class="bg-[#4C68B1] hover:bg-[#4066E0] px-2 py-0.5 rounded font-extrabold"
+                    aria-label="Decrease font scale zoom">-A</button>
+                <span id="text-zoom-val"
+                    class="font-mono bg-[#051126] px-1.5 py-0.5 rounded text-[#B9BFFF] font-bold">100%</span>
+                <button onclick="changeFontSize(1)"
+                    class="bg-[#4C68B1] hover:bg-[#4066E0] px-2 py-0.5 rounded font-extrabold"
+                    aria-label="Increase font scale zoom">+A</button>
             </div>
         </div>
     </div>
@@ -133,24 +152,25 @@
     <header class="bg-white border-b border-[#E5E5E5] py-5 px-6 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div class="flex items-center gap-3">
-                <!-- Premium High Contrast Logo Representation using Specified Palette -->
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#4066E0] via-[#663399] to-[#4C68B1] p-1 flex items-center justify-center shadow-md">
-                    <div class="bg-[#051126] w-full h-full rounded flex items-center justify-center">
-                        <span class="font-black text-[10px] tracking-widest text-white">SA</span>
-                    </div>
-                </div>
+                <!-- Official SAICTA icon mark -->
+                <img src="logo-01.png" alt="SAICTA" class="w-12 h-12 object-contain">
                 <div>
                     <h1 class="text-lg font-black text-[#051126] tracking-tight flex items-center gap-2">
-                        SAICTA <span class="text-[10px] font-bold bg-[#B9BFFF]/30 text-[#663399] px-2 py-0.5 rounded">Montserrat Style Guide</span>
+                        SAICTA <span
+                            class="text-[10px] font-bold bg-[#B9BFFF]/30 text-[#663399] px-2 py-0.5 rounded">Montserrat
+                            Style Guide</span>
                     </h1>
-                    <p class="text-xs text-[#4C68B1] font-medium">South African ICT Association — Inclusive Brand Typography & Visual Standards</p>
+                    <p class="text-xs text-[#4C68B1] font-medium">South African ICT Association — Inclusive Brand
+                        Typography & Visual Standards</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <a href="#concept-redesign" class="bg-[#4066E0] text-white hover:bg-[#051126] text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center gap-2 shadow-sm">
+                <a href="#concept-redesign"
+                    class="bg-[#4066E0] text-white hover:bg-[#051126] text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center gap-2 shadow-sm">
                     <i data-lucide="sparkles" class="w-4 h-4"></i> Conceptual Redesign
                 </a>
-                <button onclick="scrollToContrast()" class="bg-[#E5E5E5] hover:bg-[#4C68B1]/20 text-[#051126] text-xs font-bold px-4 py-2.5 rounded-lg transition">
+                <button onclick="scrollToContrast()"
+                    class="bg-[#E5E5E5] hover:bg-[#4C68B1]/20 text-[#051126] text-xs font-bold px-4 py-2.5 rounded-lg transition">
                     Contrast Calculator
                 </button>
             </div>
@@ -159,25 +179,33 @@
 
     <!-- CONTENT PORTALS -->
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         <!-- SIDEBAR DIRECT NAVIGATION -->
         <nav class="lg:col-span-3 space-y-6 lg:sticky lg:top-28 self-start">
             <div class="bg-white rounded-xl border border-[#E5E5E5] p-4 shadow-sm">
                 <p class="text-[10px] font-black text-[#4C68B1] uppercase tracking-widest mb-3">System Portals</p>
                 <div class="space-y-1" role="tablist" aria-label="Style Guide Portal Tabs">
-                    <button onclick="switchTab('audit')" id="tab-audit" class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 bg-[#4066E0] text-white" role="tab" aria-selected="true" aria-controls="panel-audit">
+                    <button onclick="switchTab('audit')" id="tab-audit"
+                        class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 bg-[#4066E0] text-white"
+                        role="tab" aria-selected="true" aria-controls="panel-audit">
                         <i data-lucide="clipboard-check" class="w-4 h-4"></i>
                         UX & Compliance Audit
                     </button>
-                    <button onclick="switchTab('colors')" id="tab-colors" class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 text-[#4C68B1] hover:bg-[#E5E5E5]/50 hover:text-[#051126]" role="tab" aria-selected="false" aria-controls="panel-colors">
+                    <button onclick="switchTab('colors')" id="tab-colors"
+                        class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 text-[#4C68B1] hover:bg-[#E5E5E5]/50 hover:text-[#051126]"
+                        role="tab" aria-selected="false" aria-controls="panel-colors">
                         <i data-lucide="palette" class="w-4 h-4"></i>
                         Contrast System Matrix
                     </button>
-                    <button onclick="switchTab('typography')" id="tab-typography" class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 text-[#4C68B1] hover:bg-[#E5E5E5]/50 hover:text-[#051126]" role="tab" aria-selected="false" aria-controls="panel-typography">
+                    <button onclick="switchTab('typography')" id="tab-typography"
+                        class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 text-[#4C68B1] hover:bg-[#E5E5E5]/50 hover:text-[#051126]"
+                        role="tab" aria-selected="false" aria-controls="panel-typography">
                         <i data-lucide="type" class="w-4 h-4"></i>
                         Montserrat Typography
                     </button>
-                    <button onclick="switchTab('components')" id="tab-components" class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 text-[#4C68B1] hover:bg-[#E5E5E5]/50 hover:text-[#051126]" role="tab" aria-selected="false" aria-controls="panel-components">
+                    <button onclick="switchTab('components')" id="tab-components"
+                        class="tab-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2.5 text-[#4C68B1] hover:bg-[#E5E5E5]/50 hover:text-[#051126]"
+                        role="tab" aria-selected="false" aria-controls="panel-components">
                         <i data-lucide="layers" class="w-4 h-4"></i>
                         Accessible Components
                     </button>
@@ -190,7 +218,9 @@
                     <i data-lucide="type" class="text-[#663399] w-4.5 h-4.5"></i> Why Montserrat?
                 </h3>
                 <p class="text-[11px] leading-relaxed text-[#4C68B1]">
-                    Montserrat delivers excellent geometric legibility across screen sizes. Its open counters and distinct characters make it a perfect match for public service portals, helping to satisfy <strong>WCAG 1.4.12 Text Spacing</strong> and prevent reading strain.
+                    Montserrat delivers excellent geometric legibility across screen sizes. Its open counters and
+                    distinct characters make it a perfect match for public service portals, helping to satisfy
+                    <strong>WCAG 1.4.12 Text Spacing</strong> and prevent reading strain.
                 </p>
                 <div class="text-[10px] bg-[#E5E5E5] p-2 rounded text-[#051126] font-mono">
                     <span class="block font-bold">Base settings:</span>
@@ -201,17 +231,47 @@
 
         <!-- CORE PANEL AREA -->
         <div class="lg:col-span-9 space-y-8">
-            
+
             <!-- PORTAL 1: HEURISTIC AUDIT -->
             <section id="panel-audit" class="tab-panel space-y-6" role="tabpanel" aria-labelledby="tab-audit">
+                <div class="bg-white rounded-xl border border-[#E5E5E5] p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-2.5 pb-4 border-b border-[#E5E5E5]">
+                        <div class="p-2 rounded-lg bg-[#B9BFFF]/30 text-[#663399]">
+                            <i data-lucide="image" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-base font-extrabold text-[#051126]">Logo &amp; Brand Mark</h2>
+                            <p class="text-xs text-[#4C68B1]">Primary lockup usage across light and dark surfaces.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div
+                            class="rounded-xl border border-[#E5E5E5] bg-white p-8 flex flex-col items-center justify-center gap-3 min-h-[170px]">
+                            <img src="logo-01.png" alt="SAICTA icon mark on a light background"
+                                class="max-h-20 w-auto object-contain">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#4C68B1]">Icon mark — on
+                                light</span>
+                        </div>
+                        <div
+                            class="rounded-xl border border-[#051126] bg-[#051126] p-8 flex flex-col items-center justify-center gap-3 min-h-[170px]">
+                            <img src="Saicta-logo-white-3.png" alt="SAICTA full logo reversed on a dark background"
+                                class="max-h-20 w-auto object-contain">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#B9BFFF]">Full lockup —
+                                on dark</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="bg-white rounded-xl border border-[#E5E5E5] p-6 shadow-sm space-y-6">
                     <div class="flex items-center gap-2.5 pb-4 border-b border-[#E5E5E5]">
                         <div class="p-2 rounded-lg bg-[#B9BFFF]/30 text-[#663399]">
                             <i data-lucide="clipboard-list" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <h2 class="text-base font-extrabold text-[#051126]">Heuristic Audit & Critical WCAG Gaps</h2>
-                            <p class="text-xs text-[#4C68B1]">Audited review of target web properties against cognitive accessibility models.</p>
+                            <h2 class="text-base font-extrabold text-[#051126]">Heuristic Audit & Critical WCAG Gaps
+                            </h2>
+                            <p class="text-xs text-[#4C68B1]">Audited review of target web properties against cognitive
+                                accessibility models.</p>
                         </div>
                     </div>
 
@@ -220,30 +280,40 @@
                         <!-- Card 1 -->
                         <div class="border border-[#E5E5E5] rounded-xl p-4 bg-white space-y-3 shadow-sm">
                             <div class="flex justify-between items-start gap-2">
-                                <span class="text-[10px] font-black uppercase tracking-wider text-saicta-errRed bg-red-50 px-2 py-0.5 rounded">High Severity</span>
+                                <span
+                                    class="text-[10px] font-black uppercase tracking-wider text-saicta-errRed bg-red-50 px-2 py-0.5 rounded">High
+                                    Severity</span>
                                 <span class="text-[10px] text-[#4C68B1] font-mono">WCAG 1.4.3</span>
                             </div>
                             <h3 class="font-bold text-sm text-[#051126]">Contrast Gaps in Original Color Selection</h3>
                             <p class="text-xs text-[#4C68B1] leading-relaxed">
-                                The original brand colors like standard flag yellow fail contrast minimums when displayed as flat textual items on light backgrounds.
+                                The original brand colors like standard flag yellow fail contrast minimums when
+                                displayed as flat textual items on light backgrounds.
                             </p>
-                            <div class="p-2.5 bg-[#E5E5E5]/40 rounded text-xs text-[#051126] border-l-4 border-[#663399]">
-                                <strong>System Fix:</strong> We strictly mapped the brand palette to high-contrast blue (`#002395` / `#4066E0`) text, reserving yellow (`#F4B41A`) solely for dark backgrounds.
+                            <div
+                                class="p-2.5 bg-[#E5E5E5]/40 rounded text-xs text-[#051126] border-l-4 border-[#663399]">
+                                <strong>System Fix:</strong> We strictly mapped the brand palette to high-contrast blue
+                                (`#002395` / `#4066E0`) text, reserving yellow (`#F4B41A`) solely for dark backgrounds.
                             </div>
                         </div>
 
                         <!-- Card 2 -->
                         <div class="border border-[#E5E5E5] rounded-xl p-4 bg-white space-y-3 shadow-sm">
                             <div class="flex justify-between items-start gap-2">
-                                <span class="text-[10px] font-black uppercase tracking-wider text-saicta-errRed bg-red-50 px-2 py-0.5 rounded">Moderate Severity</span>
+                                <span
+                                    class="text-[10px] font-black uppercase tracking-wider text-saicta-errRed bg-red-50 px-2 py-0.5 rounded">Moderate
+                                    Severity</span>
                                 <span class="text-[10px] text-[#4C68B1] font-mono">WCAG 2.4.7</span>
                             </div>
                             <h3 class="font-bold text-sm text-[#051126]">Missing Focus Indicator States</h3>
                             <p class="text-xs text-[#4C68B1] leading-relaxed">
-                                Sequential keyboard navigators cannot see visual highlight indicators on many primary interactives.
+                                Sequential keyboard navigators cannot see visual highlight indicators on many primary
+                                interactives.
                             </p>
-                            <div class="p-2.5 bg-[#E5E5E5]/40 rounded text-xs text-[#051126] border-l-4 border-[#663399]">
-                                <strong>System Fix:</strong> Enforced prominent high-visibility `:focus-visible` outline styles with customized offsets in custom components.
+                            <div
+                                class="p-2.5 bg-[#E5E5E5]/40 rounded text-xs text-[#051126] border-l-4 border-[#663399]">
+                                <strong>System Fix:</strong> Enforced prominent high-visibility `:focus-visible` outline
+                                styles with customized offsets in custom components.
                             </div>
                         </div>
                     </div>
@@ -259,39 +329,49 @@
                         </div>
                         <div>
                             <h2 class="text-base font-extrabold text-[#051126]">WCAG Contrast Evaluation Matrix</h2>
-                            <p class="text-xs text-[#4C68B1]">Interactive tools testing real-time ratios against the specified color configurations.</p>
+                            <p class="text-xs text-[#4C68B1]">Interactive tools testing real-time ratios against the
+                                specified color configurations.</p>
                         </div>
                     </div>
 
                     <!-- Colors Blocks Showcases -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <!-- Charcoal Navy -->
-                        <div class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
-                            <div class="h-16 bg-[#051126] flex items-end p-2 text-white font-mono text-[9px] font-bold">#051126</div>
+                        <div
+                            class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
+                            <div class="h-16 bg-[#051126] flex items-end p-2 text-white font-mono text-[9px] font-bold">
+                                #051126</div>
                             <div class="p-2.5 flex-grow">
                                 <h4 class="text-xs font-bold text-[#051126]">Charcoal Navy</h4>
                                 <span class="text-[9px] font-medium text-[#4C68B1]">Primary Typography</span>
                             </div>
                         </div>
                         <!-- Vibrant Blue -->
-                        <div class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
-                            <div class="h-16 bg-[#4066E0] flex items-end p-2 text-white font-mono text-[9px] font-bold">#4066E0</div>
+                        <div
+                            class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
+                            <div class="h-16 bg-[#4066E0] flex items-end p-2 text-white font-mono text-[9px] font-bold">
+                                #4066E0</div>
                             <div class="p-2.5 flex-grow">
                                 <h4 class="text-xs font-bold text-[#051126]">Vibrant Blue</h4>
                                 <span class="text-[9px] font-medium text-[#4C68B1]">Primary CTAs</span>
                             </div>
                         </div>
                         <!-- Brand Purple -->
-                        <div class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
-                            <div class="h-16 bg-[#663399] flex items-end p-2 text-white font-mono text-[9px] font-bold">#663399</div>
+                        <div
+                            class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
+                            <div class="h-16 bg-[#663399] flex items-end p-2 text-white font-mono text-[9px] font-bold">
+                                #663399</div>
                             <div class="p-2.5 flex-grow">
                                 <h4 class="text-xs font-bold text-[#051126]">Brand Purple</h4>
                                 <span class="text-[9px] font-medium text-[#4C68B1]">Accent Indicator</span>
                             </div>
                         </div>
                         <!-- Lilac Blue -->
-                        <div class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
-                            <div class="h-16 bg-[#B9BFFF] flex items-end p-2 text-[#051126] font-mono text-[9px] font-bold">#B9BFFF</div>
+                        <div
+                            class="border border-[#E5E5E5] rounded-xl overflow-hidden bg-white shadow-sm flex flex-col">
+                            <div
+                                class="h-16 bg-[#B9BFFF] flex items-end p-2 text-[#051126] font-mono text-[9px] font-bold">
+                                #B9BFFF</div>
                             <div class="p-2.5 flex-grow">
                                 <h4 class="text-xs font-bold text-[#051126]">Lilac Blue</h4>
                                 <span class="text-[9px] font-medium text-[#4C68B1]">Decorative Accent</span>
@@ -300,50 +380,74 @@
                     </div>
 
                     <!-- REAL TIME CALCULATION BOX -->
-                    <div id="live-contrast-tool" class="bg-[#E5E5E5]/30 rounded-xl p-5 border border-[#E5E5E5] space-y-4">
+                    <div id="live-contrast-tool"
+                        class="bg-[#E5E5E5]/30 rounded-xl p-5 border border-[#E5E5E5] space-y-4">
                         <div class="flex items-center gap-2">
                             <i data-lucide="calculator" class="w-4 h-4 text-[#4066E0]"></i>
-                            <h3 class="text-xs font-extrabold text-[#051126] uppercase tracking-wider">Luminance Ratio Calculator</h3>
+                            <h3 class="text-xs font-extrabold text-[#051126] uppercase tracking-wider">Luminance Ratio
+                                Calculator</h3>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <!-- Inputs -->
                             <div class="space-y-4 bg-white p-4 rounded-lg border border-[#E5E5E5]">
                                 <div>
-                                    <label for="color-fg" class="block text-[10px] font-bold uppercase tracking-wider text-[#4C68B1] mb-1">Text Color</label>
+                                    <label for="color-fg"
+                                        class="block text-[10px] font-bold uppercase tracking-wider text-[#4C68B1] mb-1">Text
+                                        Color</label>
                                     <div class="flex gap-2">
-                                        <input type="color" id="color-fg" value="#051126" oninput="runContrastCheck()" class="w-8 h-8 rounded cursor-pointer border border-[#E5E5E5]">
-                                        <input type="text" id="color-fg-text" value="#051126" oninput="updateColorFromText('fg', this.value)" class="flex-grow font-mono text-xs border border-[#E5E5E5] rounded px-2.5">
+                                        <input type="color" id="color-fg" value="#051126" oninput="runContrastCheck()"
+                                            class="w-8 h-8 rounded cursor-pointer border border-[#E5E5E5]">
+                                        <input type="text" id="color-fg-text" value="#051126"
+                                            oninput="updateColorFromText('fg', this.value)"
+                                            class="flex-grow font-mono text-xs border border-[#E5E5E5] rounded px-2.5">
                                     </div>
                                 </div>
                                 <div>
-                                    <label for="color-bg" class="block text-[10px] font-bold uppercase tracking-wider text-[#4C68B1] mb-1">Background Color</label>
+                                    <label for="color-bg"
+                                        class="block text-[10px] font-bold uppercase tracking-wider text-[#4C68B1] mb-1">Background
+                                        Color</label>
                                     <div class="flex gap-2">
-                                        <input type="color" id="color-bg" value="#FFFFFF" oninput="runContrastCheck()" class="w-8 h-8 rounded cursor-pointer border border-[#E5E5E5]">
-                                        <input type="text" id="color-bg-text" value="#FFFFFF" oninput="updateColorFromText('bg', this.value)" class="flex-grow font-mono text-xs border border-[#E5E5E5] rounded px-2.5">
+                                        <input type="color" id="color-bg" value="#FFFFFF" oninput="runContrastCheck()"
+                                            class="w-8 h-8 rounded cursor-pointer border border-[#E5E5E5]">
+                                        <input type="text" id="color-bg-text" value="#FFFFFF"
+                                            oninput="updateColorFromText('bg', this.value)"
+                                            class="flex-grow font-mono text-xs border border-[#E5E5E5] rounded px-2.5">
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Calculations preview rendering -->
-                            <div class="md:col-span-2 flex flex-col justify-between bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-4">
-                                <div id="contrast-preview-box" class="p-6 rounded-lg border flex flex-col items-center justify-center text-center transition" style="background-color: #FFFFFF; color: #051126;">
+                            <div
+                                class="md:col-span-2 flex flex-col justify-between bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-4">
+                                <div id="contrast-preview-box"
+                                    class="p-6 rounded-lg border flex flex-col items-center justify-center text-center transition"
+                                    style="background-color: #FFFFFF; color: #051126;">
                                     <p class="text-sm font-semibold mb-1">Standard Body Text (14px/16px)</p>
                                     <h3 class="text-xl font-black">Montserrat Headings (24px+)</h3>
                                 </div>
-                                
+
                                 <div class="grid grid-cols-3 gap-2 text-center text-xs">
-                                    <div class="bg-[#E5E5E5]/40 p-2.5 rounded border border-[#E5E5E5] flex flex-col justify-center">
-                                        <span class="block text-[9px] text-[#4C68B1] font-bold uppercase">Contrast Ratio</span>
-                                        <span id="contrast-ratio-value" class="text-base font-extrabold text-[#051126] font-mono">19.3:1</span>
+                                    <div
+                                        class="bg-[#E5E5E5]/40 p-2.5 rounded border border-[#E5E5E5] flex flex-col justify-center">
+                                        <span class="block text-[9px] text-[#4C68B1] font-bold uppercase">Contrast
+                                            Ratio</span>
+                                        <span id="contrast-ratio-value"
+                                            class="text-base font-extrabold text-[#051126] font-mono">19.3:1</span>
                                     </div>
-                                    <div class="bg-[#E5E5E5]/40 p-2.5 rounded border border-[#E5E5E5] flex flex-col justify-center">
-                                        <span class="block text-[9px] text-[#4C68B1] font-bold uppercase">Normal Text</span>
-                                        <span id="status-normal" class="text-xs font-bold text-[#15803D]">PASS (AAA)</span>
+                                    <div
+                                        class="bg-[#E5E5E5]/40 p-2.5 rounded border border-[#E5E5E5] flex flex-col justify-center">
+                                        <span class="block text-[9px] text-[#4C68B1] font-bold uppercase">Normal
+                                            Text</span>
+                                        <span id="status-normal" class="text-xs font-bold text-[#15803D]">PASS
+                                            (AAA)</span>
                                     </div>
-                                    <div class="bg-[#E5E5E5]/40 p-2.5 rounded border border-[#E5E5E5] flex flex-col justify-center">
-                                        <span class="block text-[9px] text-[#4C68B1] font-bold uppercase">Large Text</span>
-                                        <span id="status-large" class="text-xs font-bold text-[#15803D]">PASS (AAA)</span>
+                                    <div
+                                        class="bg-[#E5E5E5]/40 p-2.5 rounded border border-[#E5E5E5] flex flex-col justify-center">
+                                        <span class="block text-[9px] text-[#4C68B1] font-bold uppercase">Large
+                                            Text</span>
+                                        <span id="status-large" class="text-xs font-bold text-[#15803D]">PASS
+                                            (AAA)</span>
                                     </div>
                                 </div>
                             </div>
@@ -353,7 +457,8 @@
             </section>
 
             <!-- PORTAL 3: TYPOGRAPHY SYSTEM (MONTSERRAT FOCUS) -->
-            <section id="panel-typography" class="tab-panel space-y-6 hidden" role="tabpanel" aria-labelledby="tab-typography">
+            <section id="panel-typography" class="tab-panel space-y-6 hidden" role="tabpanel"
+                aria-labelledby="tab-typography">
                 <div class="bg-white rounded-xl border border-[#E5E5E5] p-6 shadow-sm space-y-6">
                     <div class="flex items-center gap-2.5 pb-4 border-b border-[#E5E5E5]">
                         <div class="p-2 rounded-lg bg-[#B9BFFF]/30 text-[#663399]">
@@ -361,32 +466,41 @@
                         </div>
                         <div>
                             <h2 class="text-base font-extrabold text-[#051126]">Montserrat Brand Typographic Scale</h2>
-                            <p class="text-xs text-[#4C68B1]">Hierarchical layout rules configured for readability and accessibility.</p>
+                            <p class="text-xs text-[#4C68B1]">Hierarchical layout rules configured for readability and
+                                accessibility.</p>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Live Showcase -->
                         <div class="space-y-6">
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">Montserrat Scale Showcase</h3>
-                            
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">Montserrat Scale
+                                Showcase</h3>
+
                             <div class="space-y-4">
                                 <div class="border-l-4 border-[#4066E0] pl-4">
-                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Heading 1 — ExtraBold (30px)</span>
-                                    <h1 class="text-2xl font-extrabold text-[#051126] tracking-tight">Main Portal Page Title</h1>
+                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Heading 1 — ExtraBold
+                                        (30px)</span>
+                                    <h1 class="text-2xl font-extrabold text-[#051126] tracking-tight">Main Portal Page
+                                        Title</h1>
                                 </div>
                                 <div class="border-l-4 border-[#663399] pl-4">
-                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Heading 2 — Bold (24px)</span>
-                                    <h2 class="text-xl font-bold text-[#051126] tracking-tight">Section Category Heading</h2>
+                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Heading 2 — Bold
+                                        (24px)</span>
+                                    <h2 class="text-xl font-bold text-[#051126] tracking-tight">Section Category Heading
+                                    </h2>
                                 </div>
                                 <div class="border-l-4 border-[#4C68B1] pl-4">
-                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Heading 3 — SemiBold (18px)</span>
+                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Heading 3 — SemiBold
+                                        (18px)</span>
                                     <h3 class="text-base font-semibold text-[#051126]">Sub-section Component Title</h3>
                                 </div>
                                 <div class="border-l-4 border-[#E5E5E5] pl-4">
-                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Body Text — Regular (14px/16px)</span>
+                                    <span class="text-[10px] text-[#4C68B1] font-mono block mb-1">Body Text — Regular
+                                        (14px/16px)</span>
                                     <p class="text-sm text-[#051126] leading-relaxed">
-                                        Montserrat features distinct geometric glyph terminals, facilitating effortless visual text tracking for cognitive access groups.
+                                        Montserrat features distinct geometric glyph terminals, facilitating effortless
+                                        visual text tracking for cognitive access groups.
                                     </p>
                                 </div>
                             </div>
@@ -394,11 +508,13 @@
 
                         <!-- Technical Guidelines -->
                         <div class="bg-[#E5E5E5]/30 p-5 rounded-xl border border-[#E5E5E5] space-y-4 text-xs">
-                            <h4 class="font-extrabold text-[#051126] uppercase tracking-wider flex items-center gap-1.5">
+                            <h4
+                                class="font-extrabold text-[#051126] uppercase tracking-wider flex items-center gap-1.5">
                                 <i data-lucide="info" class="w-4 h-4 text-[#4066E0]"></i> Typography Rules
                             </h4>
                             <p class="text-[#4C68B1] leading-relaxed">
-                                Under WCAG 1.4.12, text spacing values are critical. The style guide mandates standard support for customized spacing tweaks:
+                                Under WCAG 1.4.12, text spacing values are critical. The style guide mandates standard
+                                support for customized spacing tweaks:
                             </p>
                             <ul class="space-y-2 text-[#051126] font-medium">
                                 <li class="flex items-start gap-2">
@@ -407,11 +523,13 @@
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
-                                    <span>Paragraph gap: Enforced minimum margin-bottom of 1.5 times the font size.</span>
+                                    <span>Paragraph gap: Enforced minimum margin-bottom of 1.5 times the font
+                                        size.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
-                                    <span>Dyslexia spacing utility adjusts letter and word spacing parameters instantly.</span>
+                                    <span>Dyslexia spacing utility adjusts letter and word spacing parameters
+                                        instantly.</span>
                                 </li>
                             </ul>
                         </div>
@@ -420,7 +538,8 @@
             </section>
 
             <!-- PORTAL 4: ACCESSIBLE COMPONENTS -->
-            <section id="panel-components" class="tab-panel space-y-6 hidden" role="tabpanel" aria-labelledby="tab-components">
+            <section id="panel-components" class="tab-panel space-y-6 hidden" role="tabpanel"
+                aria-labelledby="tab-components">
                 <div class="bg-white rounded-xl border border-[#E5E5E5] p-6 shadow-sm space-y-8">
                     <div class="flex items-center gap-2.5 pb-4 border-b border-[#E5E5E5]">
                         <div class="p-2 rounded-lg bg-[#B9BFFF]/30 text-[#663399]">
@@ -428,29 +547,38 @@
                         </div>
                         <div>
                             <h2 class="text-base font-extrabold text-[#051126]">Compliant Web Components</h2>
-                            <p class="text-xs text-[#4C68B1]">Interactive library using semantic elements, valid ARIA tags, and accessible color assignments.</p>
+                            <p class="text-xs text-[#4C68B1]">Interactive library using semantic elements, valid ARIA
+                                tags, and accessible color assignments.</p>
                         </div>
                     </div>
 
                     <!-- Component: Buttons -->
                     <div class="space-y-3">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">1. Interactive Action Buttons</h3>
-                        <div class="p-4 border border-[#E5E5E5] rounded-xl bg-[#E5E5E5]/20 flex flex-wrap gap-4 items-center">
-                            
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">1. Interactive Action
+                            Buttons</h3>
+                        <div
+                            class="p-4 border border-[#E5E5E5] rounded-xl bg-[#E5E5E5]/20 flex flex-wrap gap-4 items-center">
+
                             <!-- Primary Button -->
-                            <button class="bg-[#4066E0] hover:bg-[#051126] text-white font-bold text-xs px-5 py-2.5 rounded-lg transition-all focus-visible:outline focus-visible:outline-3 active:scale-95 flex items-center gap-1.5" aria-label="Query ICT database directories">
+                            <button
+                                class="bg-[#4066E0] hover:bg-[#051126] text-white font-bold text-xs px-5 py-2.5 rounded-lg transition-all focus-visible:outline focus-visible:outline-3 active:scale-95 flex items-center gap-1.5"
+                                aria-label="Query ICT database directories">
                                 <i data-lucide="search" class="w-4 h-4"></i>
                                 <span>Directory Query</span>
                             </button>
 
                             <!-- Secondary Button -->
-                            <button class="border-2 border-[#4C68B1] hover:border-[#4066E0] text-[#051126] font-bold text-xs px-5 py-2.5 rounded-lg transition focus-visible:outline active:scale-95 flex items-center gap-1.5" aria-label="Verify provider certification status">
+                            <button
+                                class="border-2 border-[#4C68B1] hover:border-[#4066E0] text-[#051126] font-bold text-xs px-5 py-2.5 rounded-lg transition focus-visible:outline active:scale-95 flex items-center gap-1.5"
+                                aria-label="Verify provider certification status">
                                 <i data-lucide="shield-check" class="w-4 h-4 text-[#663399]"></i>
                                 <span>Verify Member Status</span>
                             </button>
 
                             <!-- Specialized Accent Button -->
-                            <button class="bg-[#663399] hover:bg-[#051126] text-white font-bold text-xs px-5 py-2.5 rounded-lg transition focus-visible:outline active:scale-95 flex items-center gap-1.5" aria-label="Register for regional SMME workshops">
+                            <button
+                                class="bg-[#663399] hover:bg-[#051126] text-white font-bold text-xs px-5 py-2.5 rounded-lg transition focus-visible:outline active:scale-95 flex items-center gap-1.5"
+                                aria-label="Register for regional SMME workshops">
                                 <i data-lucide="sparkles" class="w-4 h-4"></i>
                                 <span>SMME Support Hub</span>
                             </button>
@@ -459,28 +587,41 @@
 
                     <!-- Component: Accordions -->
                     <div class="space-y-3">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">2. ARIA Accordion Blocks</h3>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">2. ARIA Accordion Blocks
+                        </h3>
                         <div class="border border-[#E5E5E5] rounded-xl overflow-hidden shadow-sm">
-                            
+
                             <!-- Item 1 -->
                             <div class="border-b border-[#E5E5E5]">
-                                <button onclick="toggleAccordion('acc-item-1')" id="acc-trigger-1" class="w-full flex justify-between items-center p-4 text-left font-bold text-xs text-[#051126] hover:bg-[#E5E5E5]/20 transition" aria-expanded="false" aria-controls="acc-content-1">
+                                <button onclick="toggleAccordion('acc-item-1')" id="acc-trigger-1"
+                                    class="w-full flex justify-between items-center p-4 text-left font-bold text-xs text-[#051126] hover:bg-[#E5E5E5]/20 transition"
+                                    aria-expanded="false" aria-controls="acc-content-1">
                                     <span>Who handles the professional ICT accreditation directories?</span>
-                                    <i data-lucide="chevron-down" id="acc-icon-1" class="w-4 h-4 text-[#4C68B1] transition-transform"></i>
+                                    <i data-lucide="chevron-down" id="acc-icon-1"
+                                        class="w-4 h-4 text-[#4C68B1] transition-transform"></i>
                                 </button>
-                                <div id="acc-content-1" class="hidden p-4 bg-[#E5E5E5]/10 text-xs text-[#4C68B1] leading-relaxed border-t border-[#E5E5E5]" role="region" aria-labelledby="acc-trigger-1">
-                                     accreditations are directly cross-referenced with CIPC and authorized national database directories to protect public and enterprise clients from fraud.
+                                <div id="acc-content-1"
+                                    class="hidden p-4 bg-[#E5E5E5]/10 text-xs text-[#4C68B1] leading-relaxed border-t border-[#E5E5E5]"
+                                    role="region" aria-labelledby="acc-trigger-1">
+                                    accreditations are directly cross-referenced with CIPC and authorized national
+                                    database directories to protect public and enterprise clients from fraud.
                                 </div>
                             </div>
 
                             <!-- Item 2 -->
                             <div>
-                                <button onclick="toggleAccordion('acc-item-2')" id="acc-trigger-2" class="w-full flex justify-between items-center p-4 text-left font-bold text-xs text-[#051126] hover:bg-[#E5E5E5]/20 transition" aria-expanded="false" aria-controls="acc-content-2">
+                                <button onclick="toggleAccordion('acc-item-2')" id="acc-trigger-2"
+                                    class="w-full flex justify-between items-center p-4 text-left font-bold text-xs text-[#051126] hover:bg-[#E5E5E5]/20 transition"
+                                    aria-expanded="false" aria-controls="acc-content-2">
                                     <span>Is the Montserrat design system optimized for mobile viewports?</span>
-                                    <i data-lucide="chevron-down" id="acc-icon-2" class="w-4 h-4 text-[#4C68B1] transition-transform"></i>
+                                    <i data-lucide="chevron-down" id="acc-icon-2"
+                                        class="w-4 h-4 text-[#4C68B1] transition-transform"></i>
                                 </button>
-                                <div id="acc-content-2" class="hidden p-4 bg-[#E5E5E5]/10 text-xs text-[#4C68B1] leading-relaxed border-t border-[#E5E5E5]" role="region" aria-labelledby="acc-trigger-2">
-                                    Absolutely. Every component scales using relative (em) guidelines to reflow seamlessly without horizontal scrollbars under narrow viewports.
+                                <div id="acc-content-2"
+                                    class="hidden p-4 bg-[#E5E5E5]/10 text-xs text-[#4C68B1] leading-relaxed border-t border-[#E5E5E5]"
+                                    role="region" aria-labelledby="acc-trigger-2">
+                                    Absolutely. Every component scales using relative (em) guidelines to reflow
+                                    seamlessly without horizontal scrollbars under narrow viewports.
                                 </div>
                             </div>
 
@@ -489,22 +630,33 @@
 
                     <!-- Component: Form Fields -->
                     <div class="space-y-3">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">3. Form Inputs & Validations</h3>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#4C68B1]">3. Form Inputs &
+                            Validations</h3>
                         <div class="p-5 border border-[#E5E5E5] rounded-xl bg-[#E5E5E5]/10 max-w-md space-y-4">
-                            
+
                             <!-- Normal Input -->
                             <div>
-                                <label for="sa-id" class="block text-xs font-bold text-[#051126] mb-1">SA ID Number / Registration Code <span class="text-red-600">*</span></label>
-                                <input type="text" id="sa-id" class="w-full bg-white border border-[#4C68B1] rounded-lg px-3 py-2 text-xs text-[#051126] focus:outline-none focus:border-[#4066E0] shadow-sm" placeholder="e.g. 9501015000083">
-                                <span class="block text-[10px] text-[#4C68B1] mt-1">Provide your ID for verification parameters.</span>
+                                <label for="sa-id" class="block text-xs font-bold text-[#051126] mb-1">SA ID Number /
+                                    Registration Code <span class="text-red-600">*</span></label>
+                                <input type="text" id="sa-id"
+                                    class="w-full bg-white border border-[#4C68B1] rounded-lg px-3 py-2 text-xs text-[#051126] focus:outline-none focus:border-[#4066E0] shadow-sm"
+                                    placeholder="e.g. 9501015000083">
+                                <span class="block text-[10px] text-[#4C68B1] mt-1">Provide your ID for verification
+                                    parameters.</span>
                             </div>
 
                             <!-- Failure State -->
                             <div>
-                                <label for="comp-email" class="block text-xs font-bold text-[#051126] mb-1">Company Contact Email <span class="text-red-600">*</span></label>
-                                <input type="email" id="comp-email" aria-invalid="true" aria-describedby="email-err-msg" class="w-full bg-white border-2 border-red-600 rounded-lg px-3 py-2 text-xs text-[#051126] focus:outline-none shadow-sm" value="invalid-email-address">
-                                <span id="email-err-msg" class="block text-xs text-red-700 font-bold mt-1 flex items-center gap-1" role="alert">
-                                    <i data-lucide="x-circle" class="w-3.5 h-3.5 flex-shrink-0"></i> Must be a valid email (e.g. name@domain.co.za)
+                                <label for="comp-email" class="block text-xs font-bold text-[#051126] mb-1">Company
+                                    Contact Email <span class="text-red-600">*</span></label>
+                                <input type="email" id="comp-email" aria-invalid="true" aria-describedby="email-err-msg"
+                                    class="w-full bg-white border-2 border-red-600 rounded-lg px-3 py-2 text-xs text-[#051126] focus:outline-none shadow-sm"
+                                    value="invalid-email-address">
+                                <span id="email-err-msg"
+                                    class="block text-xs text-red-700 font-bold mt-1 flex items-center gap-1"
+                                    role="alert">
+                                    <i data-lucide="x-circle" class="w-3.5 h-3.5 flex-shrink-0"></i> Must be a valid
+                                    email (e.g. name@domain.co.za)
                                 </span>
                             </div>
 
@@ -520,22 +672,28 @@
     <!-- SECTION 5: ACCESSIBLE PORTAL LANDING REDESIGN -->
     <section id="concept-redesign" class="bg-[#051126] text-white py-16 px-6 border-t-8 border-[#663399]">
         <div class="max-w-7xl mx-auto space-y-12">
-            
+
             <div class="text-center space-y-3">
-                <span class="bg-[#663399]/40 border border-[#B9BFFF]/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-[#B9BFFF]">Implementation Sample</span>
+                <span
+                    class="bg-[#663399]/40 border border-[#B9BFFF]/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-[#B9BFFF]">Implementation
+                    Sample</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Conceptual Landing Redesign</h2>
                 <p class="text-[#4C68B1] max-w-xl mx-auto text-xs leading-relaxed">
-                    Designed to demonstrate how the Montserrat font scales, contrasts, and navigates gracefully under the constraints of the brand color rules.
+                    Designed to demonstrate how the Montserrat font scales, contrasts, and navigates gracefully under
+                    the constraints of the brand color rules.
                 </p>
             </div>
 
             <!-- Conceptual Showcase Header + Hero -->
             <div class="bg-black/40 rounded-2xl border border-[#4C68B1]/20 overflow-hidden shadow-2xl">
-                
+
                 <!-- REDESIGNED HEADER BAR -->
-                <nav class="bg-black/20 border-b border-[#4C68B1]/10 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <nav
+                    class="bg-black/20 border-b border-[#4C68B1]/10 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="flex items-center gap-2">
-                        <div class="w-10 h-10 bg-[#4066E0] rounded flex items-center justify-center font-black text-xs text-white">SA</div>
+                        <div
+                            class="w-10 h-10 bg-[#4066E0] rounded flex items-center justify-center font-black text-xs text-white">
+                            SA</div>
                         <span class="text-xs font-black uppercase tracking-wider text-white">SAICTA Hub</span>
                     </div>
 
@@ -546,18 +704,21 @@
                         <a href="#concept-redesign" class="hover:text-white transition">Contact</a>
                     </div>
 
-                    <button class="bg-[#4066E0] hover:bg-[#663399] text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow">
+                    <button
+                        class="bg-[#4066E0] hover:bg-[#663399] text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow">
                         Sign In Portal
                     </button>
                 </nav>
 
                 <!-- HERO INTRO -->
                 <div class="p-8 md:p-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    
+
                     <div class="space-y-6">
-                        <div class="inline-flex items-center gap-1.5 bg-[#4066E0]/20 rounded-full px-3 py-1 border border-[#B9BFFF]/20">
+                        <div
+                            class="inline-flex items-center gap-1.5 bg-[#4066E0]/20 rounded-full px-3 py-1 border border-[#B9BFFF]/20">
                             <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
-                            <span class="text-[9px] uppercase font-mono tracking-widest text-slate-300">South African ICT Council</span>
+                            <span class="text-[9px] uppercase font-mono tracking-widest text-slate-300">South African
+                                ICT Council</span>
                         </div>
 
                         <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
@@ -565,15 +726,20 @@
                         </h1>
 
                         <p class="text-xs md:text-sm text-slate-400 leading-relaxed max-w-md">
-                            Integrating accredited ICT organizations, offering dynamic directories, and driving national tech guidelines for sustainable economic development.
+                            Integrating accredited ICT organizations, offering dynamic directories, and driving national
+                            tech guidelines for sustainable economic development.
                         </p>
 
                         <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                            <button class="bg-[#4066E0] hover:bg-white hover:text-[#051126] text-white font-bold text-xs px-6 py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow" aria-label="Apply for ICT registration">
+                            <button
+                                class="bg-[#4066E0] hover:bg-white hover:text-[#051126] text-white font-bold text-xs px-6 py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow"
+                                aria-label="Apply for ICT registration">
                                 <span>Apply for Registration</span>
                                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
                             </button>
-                            <button class="border border-[#4C68B1] hover:border-white text-white hover:bg-white/5 font-bold text-xs px-6 py-3 rounded-lg transition flex items-center justify-center gap-2" aria-label="Browse compliance databases">
+                            <button
+                                class="border border-[#4C68B1] hover:border-white text-white hover:bg-white/5 font-bold text-xs px-6 py-3 rounded-lg transition flex items-center justify-center gap-2"
+                                aria-label="Browse compliance databases">
                                 <i data-lucide="search" class="w-4 h-4 text-[#B9BFFF]"></i>
                                 <span>Explore Directory</span>
                             </button>
@@ -584,26 +750,35 @@
                     <div class="bg-[#051126] border border-[#4C68B1]/20 rounded-xl p-6 space-y-4">
                         <div class="flex justify-between items-center pb-2 border-b border-[#4C68B1]/10">
                             <span class="text-[10px] font-bold text-[#4C68B1]">National Provider Verification</span>
-                            <span class="bg-emerald-500/20 text-emerald-400 text-[9px] font-bold px-2 py-0.5 rounded">Secure Node</span>
+                            <span
+                                class="bg-emerald-500/20 text-emerald-400 text-[9px] font-bold px-2 py-0.5 rounded">Secure
+                                Node</span>
                         </div>
 
                         <div class="bg-black/20 p-4 rounded-lg border border-[#4C68B1]/10 space-y-3">
                             <div>
-                                <label for="hero-search" class="block text-[9px] font-bold text-slate-400 mb-1">Company Directory Search</label>
-                                <input type="text" id="hero-search" class="w-full bg-[#051126] border border-[#4C68B1] rounded p-2 text-xs text-white focus:outline-none focus:border-[#4066E0]" placeholder="e.g. Johannesburg Tech Enterprise">
+                                <label for="hero-search" class="block text-[9px] font-bold text-slate-400 mb-1">Company
+                                    Directory Search</label>
+                                <input type="text" id="hero-search"
+                                    class="w-full bg-[#051126] border border-[#4C68B1] rounded p-2 text-xs text-white focus:outline-none focus:border-[#4066E0]"
+                                    placeholder="e.g. Johannesburg Tech Enterprise">
                             </div>
-                            <button class="w-full bg-[#4066E0] hover:bg-[#663399] text-white text-xs font-bold py-2 rounded transition flex items-center justify-center gap-1.5" aria-label="Execute search query">
+                            <button
+                                class="w-full bg-[#4066E0] hover:bg-[#663399] text-white text-xs font-bold py-2 rounded transition flex items-center justify-center gap-1.5"
+                                aria-label="Execute search query">
                                 <i data-lucide="search" class="w-4 h-4"></i> Find Verified SMMEs
                             </button>
                         </div>
 
                         <!-- Card preview -->
-                        <div class="bg-black/30 border-l-4 border-emerald-500 p-3 rounded-r-lg flex justify-between items-center">
+                        <div
+                            class="bg-black/30 border-l-4 border-emerald-500 p-3 rounded-r-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-xs font-bold text-white">Cape Town Networking Solutions</h4>
                                 <span class="text-[9px] text-[#4C68B1]">Accreditation Number: SA-2026-ICT-998</span>
                             </div>
-                            <span class="text-[9px] text-emerald-400 font-bold bg-emerald-950 px-2 py-0.5 rounded flex items-center gap-1">
+                            <span
+                                class="text-[9px] text-emerald-400 font-bold bg-emerald-950 px-2 py-0.5 rounded flex items-center gap-1">
                                 <i data-lucide="check" class="w-3 h-3"></i> Validated
                             </span>
                         </div>
@@ -622,17 +797,20 @@
             <div class="space-y-3">
                 <div class="flex items-center gap-2">
                     <span class="font-extrabold text-sm text-white">SAICTA Design Standards</span>
-                    <span class="bg-[#4066E0]/20 text-[#B9BFFF] text-[9px] font-bold px-2 py-0.5 rounded">Montserrat Core</span>
+                    <span class="bg-[#4066E0]/20 text-[#B9BFFF] text-[9px] font-bold px-2 py-0.5 rounded">Montserrat
+                        Core</span>
                 </div>
                 <p class="leading-relaxed">
-                    Designed to ensure WCAG 2.1 level AA accessibility conformity across municipal and regional directories, SMME portals, and administrative hubs.
+                    Designed to ensure WCAG 2.1 level AA accessibility conformity across municipal and regional
+                    directories, SMME portals, and administrative hubs.
                 </p>
             </div>
 
             <div class="space-y-2">
                 <h4 class="text-xs font-bold text-white uppercase tracking-wider">Montserrat Font Settings</h4>
                 <p class="leading-relaxed">
-                    Montserrat represents geometric accuracy. For high legibility, always pair weights with relative rem dimensions and sufficient margin spacing hooks.
+                    Montserrat represents geometric accuracy. For high legibility, always pair weights with relative rem
+                    dimensions and sufficient margin spacing hooks.
                 </p>
             </div>
 
@@ -647,8 +825,8 @@
 
     <!-- INTERACTIVE SCRIPTS -->
     <script>
-        
-        window.onload = function() {
+
+        window.onload = function () {
             lucide.createIcons();
             runContrastCheck(); // Compute starting contrast check values on page load
         }
@@ -824,7 +1002,7 @@
             textarea.style.position = 'fixed';
             document.body.appendChild(textarea);
             textarea.select();
-            
+
             try {
                 document.execCommand('copy');
                 const originalText = btn.innerHTML;
@@ -835,15 +1013,17 @@
             } catch (err) {
                 console.error('Failed to execute standard copy protocol: ', err);
             }
-            
+
             document.body.removeChild(textarea);
         }
     </script>
     <link rel="stylesheet" href="../shared/guide-switcher.css">
+    <link rel="stylesheet" href="../shared/guide-sidebar-fit.css">
     <link rel="stylesheet" href="../shared/guide-resources.css">
     <link rel="stylesheet" href="../shared/guide-back.css">
     <script src="../shared/guide-switcher.js" defer></script>
     <script src="../shared/guide-resources.js" defer></script>
     <script src="../shared/guide-back.js" defer></script>
 </body>
+
 </html>

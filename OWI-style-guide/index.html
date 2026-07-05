@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open Window Institute — Brand Style Guide & Design System v2.2</title>
+  <title>Open Window Institute — Brand Style Guide & Design System v2.3</title>
   <link rel="icon" type="image/png" href="../assets/favicons/OWI-favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
 
   <style>
     /* ============================================================
-       OPEN WINDOW INSTITUTE — DESIGN SYSTEM v2.2
+       OPEN WINDOW INSTITUTE — DESIGN SYSTEM v2.3
        CSS Custom Properties (Elementor-ready tokens)
     ============================================================ */
     :root {
@@ -1164,8 +1164,14 @@
       margin-bottom: 10px;
     }
 
-    .tone-example-pass { border-left: 3px solid var(--ow-color-film); }
-    .tone-example-fail { border-left: 3px solid #C0392B; opacity: 0.85; }
+    .tone-example-pass {
+      border-left: 3px solid var(--ow-color-film);
+    }
+
+    .tone-example-fail {
+      border-left: 3px solid #C0392B;
+      opacity: 0.85;
+    }
 
     .tone-example-label {
       font-family: var(--ow-font-primary);
@@ -1265,9 +1271,13 @@
       vertical-align: top;
     }
 
-    .ow-spec-table td strong { color: var(--ow-color-light); }
+    .ow-spec-table td strong {
+      color: var(--ow-color-light);
+    }
 
-    .ow-spec-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+    .ow-spec-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
 
     /* ─── ACCESSIBILITY ─── */
     .a11y-grid {
@@ -1400,9 +1410,14 @@
       line-height: 1.65;
     }
 
-    .ow-callout strong { color: var(--ow-color-light); }
+    .ow-callout strong {
+      color: var(--ow-color-light);
+    }
 
-    .ow-callout-icon { flex-shrink: 0; font-size: 18px; }
+    .ow-callout-icon {
+      flex-shrink: 0;
+      font-size: 18px;
+    }
 
     .badge-pass,
     .badge-fail,
@@ -1417,9 +1432,20 @@
       text-transform: uppercase;
     }
 
-    .badge-pass { background: rgba(39, 169, 221, 0.15); color: var(--ow-color-film); }
-    .badge-fail { background: rgba(192, 57, 43, 0.15); color: #E74C3C; }
-    .badge-warn { background: rgba(241, 179, 58, 0.15); color: var(--ow-color-visual); }
+    .badge-pass {
+      background: rgba(39, 169, 221, 0.15);
+      color: var(--ow-color-film);
+    }
+
+    .badge-fail {
+      background: rgba(192, 57, 43, 0.15);
+      color: #E74C3C;
+    }
+
+    .badge-warn {
+      background: rgba(241, 179, 58, 0.15);
+      color: var(--ow-color-visual);
+    }
 
     /* ─── CONTRAST CHECKER ─── */
     .contrast-checker {
@@ -1490,8 +1516,14 @@
       transition: var(--ow-transition);
     }
 
-    .contrast-swatch:hover { transform: scale(1.08); }
-    .contrast-swatch.active { border-color: var(--ow-color-light); box-shadow: 0 0 0 2px var(--ow-color-tech); }
+    .contrast-swatch:hover {
+      transform: scale(1.08);
+    }
+
+    .contrast-swatch.active {
+      border-color: var(--ow-color-light);
+      box-shadow: 0 0 0 2px var(--ow-color-tech);
+    }
 
     .contrast-results {
       display: grid;
@@ -1585,9 +1617,20 @@
       text-transform: uppercase;
     }
 
-    .ux-priority-high { background: rgba(231, 90, 51, 0.18); color: var(--ow-color-tech); }
-    .ux-priority-med { background: rgba(241, 179, 58, 0.15); color: var(--ow-color-visual); }
-    .ux-priority-low { background: rgba(154, 154, 154, 0.15); color: var(--ow-color-muted); }
+    .ux-priority-high {
+      background: rgba(231, 90, 51, 0.18);
+      color: var(--ow-color-tech);
+    }
+
+    .ux-priority-med {
+      background: rgba(241, 179, 58, 0.15);
+      color: var(--ow-color-visual);
+    }
+
+    .ux-priority-low {
+      background: rgba(154, 154, 154, 0.15);
+      color: var(--ow-color-muted);
+    }
 
     .ux-tag {
       display: inline-block;
@@ -1604,8 +1647,11 @@
     }
 
     @media (max-width: 768px) {
+
       .a11y-do-dont,
-      .contrast-controls { grid-template-columns: 1fr; }
+      .contrast-controls {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ─── ADVANCED CONTRAST / EMAIL LAB ─── */
@@ -1661,17 +1707,17 @@
       transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    .ow-toggle-row input:checked + .ow-toggle-track {
+    .ow-toggle-row input:checked+.ow-toggle-track {
       background: rgba(231, 90, 51, 0.35);
       border-color: rgba(231, 90, 51, 0.5);
     }
 
-    .ow-toggle-row input:checked + .ow-toggle-track::after {
+    .ow-toggle-row input:checked+.ow-toggle-track::after {
       transform: translateX(18px);
       background: var(--ow-color-tech);
     }
 
-    .ow-toggle-row input:focus-visible + .ow-toggle-track {
+    .ow-toggle-row input:focus-visible+.ow-toggle-track {
       outline: 2px solid var(--ow-color-film);
       outline-offset: 2px;
     }
@@ -2283,7 +2329,7 @@
           <div
             style="font-family: var(--ow-font-primary); font-weight: 700; font-size: 12px; color: var(--ow-color-light); letter-spacing: 0.01em; line-height: 1.2;">
             Open Window</div>
-          <div style="font-size: 10px; color: var(--ow-color-muted); letter-spacing: 0.03em;">Design System v2.2</div>
+          <div style="font-size: 10px; color: var(--ow-color-muted); letter-spacing: 0.03em;">Design System v2.3</div>
         </div>
       </div>
     </button>
@@ -2422,8 +2468,9 @@
           <span
             style="width: 6px; height: 6px; background: var(--ow-color-tech); border-radius: 50%; display: inline-block;"></span>
           <span
-            style="font-family: var(--ow-font-primary); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ow-color-tech);">Brand Style Guide
-            &amp; Design System — v2.2</span>
+            style="font-family: var(--ow-font-primary); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ow-color-tech);">Brand
+            Style Guide
+            &amp; Design System — v2.3</span>
         </div>
 
         <h1
@@ -3728,11 +3775,13 @@
 
       <div class="tone-example tone-example-pass">
         <div class="tone-example-label">✓ Confirmation — event registration</div>
-        <div class="tone-example-quote">You're booked for Open Day, 14 March. We'll send a reminder two days before.</div>
+        <div class="tone-example-quote">You're booked for Open Day, 14 March. We'll send a reminder two days before.
+        </div>
       </div>
       <div class="tone-example tone-example-fail">
         <div class="tone-example-label">✕ Avoid</div>
-        <div class="tone-example-quote">Registration successful. A confirmation email will be dispatched in due course.</div>
+        <div class="tone-example-quote">Registration successful. A confirmation email will be dispatched in due course.
+        </div>
       </div>
 
       <div class="subsection-label">Writing Standards</div>
@@ -4486,7 +4535,8 @@
             <div class="contrast-email-subject" id="adv-email-subject">Open Window — Apply for 2026</div>
             <div class="contrast-preview-text" id="adv-preview-text" style="font-size:20px;text-align:left;">
               Your creative future starts here.
-              <span class="contrast-preview-sub" style="text-align:left;">Body copy preview at 16px — department brand colour test.</span>
+              <span class="contrast-preview-sub" style="text-align:left;">Body copy preview at 16px — department brand
+                colour test.</span>
             </div>
             <span class="contrast-email-cta" id="adv-email-cta">Apply Now</span>
           </div>
@@ -4512,7 +4562,8 @@
               <input type="range" class="contrast-range" id="adv-fg-opacity" min="0" max="100" value="100"
                 aria-label="Foreground opacity">
             </div>
-            <div class="contrast-hex-readout" id="adv-fg-readout">Base <strong>#E75A33</strong> → Effective <strong>—</strong></div>
+            <div class="contrast-hex-readout" id="adv-fg-readout">Base <strong>#E75A33</strong> → Effective
+              <strong>—</strong></div>
           </div>
           <div class="contrast-control-stack">
             <div class="contrast-control">
@@ -4527,7 +4578,8 @@
               <input type="range" class="contrast-range" id="adv-bg-opacity" min="0" max="100" value="100"
                 aria-label="Background opacity">
             </div>
-            <div class="contrast-hex-readout" id="adv-bg-readout">Base <strong>#FFFFFF</strong> → Effective <strong>—</strong></div>
+            <div class="contrast-hex-readout" id="adv-bg-readout">Base <strong>#FFFFFF</strong> → Effective
+              <strong>—</strong></div>
           </div>
         </div>
 
@@ -4574,7 +4626,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#EDEDED;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#EDEDED</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#EDEDED;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#EDEDED
+            </td>
             <td>#232323</td>
             <td><strong>13.4:1</strong></td>
             <td><span class="badge-pass">Pass</span></td>
@@ -4582,7 +4636,9 @@
             <td>Primary body text on dark surfaces</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#FFFFFF;border-radius:2px;vertical-align:middle;margin-right:6px;border:1px solid #444;"></span>#FFFFFF</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#FFFFFF;border-radius:2px;vertical-align:middle;margin-right:6px;border:1px solid #444;"></span>#FFFFFF
+            </td>
             <td>#232323</td>
             <td><strong>15.7:1</strong></td>
             <td><span class="badge-pass">Pass</span></td>
@@ -4590,7 +4646,9 @@
             <td>Headings, high-emphasis text</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#9A9A9A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#9A9A9A</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#9A9A9A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#9A9A9A
+            </td>
             <td>#232323</td>
             <td><strong>5.6:1</strong></td>
             <td><span class="badge-pass">Pass</span></td>
@@ -4598,7 +4656,9 @@
             <td>Muted / secondary text — minimum for body copy</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#F1B33A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#F1B33A</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#F1B33A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#F1B33A
+            </td>
             <td>#232323</td>
             <td><strong>8.4:1</strong></td>
             <td><span class="badge-pass">Pass</span></td>
@@ -4606,7 +4666,9 @@
             <td>Visual Communication accent as text</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#27A9DD;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#27A9DD</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#27A9DD;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#27A9DD
+            </td>
             <td>#232323</td>
             <td><strong>5.8:1</strong></td>
             <td><span class="badge-pass">Pass</span></td>
@@ -4614,7 +4676,9 @@
             <td>Film Arts accent as text on dark</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#E75A33;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#E75A33</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#E75A33;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#E75A33
+            </td>
             <td>#232323</td>
             <td><strong>4.4:1</strong></td>
             <td><span class="badge-warn">Large only</span></td>
@@ -4622,7 +4686,9 @@
             <td>Tech orange — use for CTAs/headings, not small body text</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#AA6CAD;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#AA6CAD</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#AA6CAD;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#AA6CAD
+            </td>
             <td>#232323</td>
             <td><strong>4.1:1</strong></td>
             <td><span class="badge-fail">Fail</span></td>
@@ -4630,7 +4696,9 @@
             <td>Animation purple — decorative/UI only at small sizes</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#E5428C;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#E5428C</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#E5428C;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#E5428C
+            </td>
             <td>#232323</td>
             <td><strong>4.1:1</strong></td>
             <td><span class="badge-fail">Fail</span></td>
@@ -4638,7 +4706,9 @@
             <td>Postgrad pink — decorative/UI only at small sizes</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#232323;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#232323</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#232323;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#232323
+            </td>
             <td>#FFFFFF</td>
             <td><strong>15.7:1</strong></td>
             <td><span class="badge-pass">Pass</span></td>
@@ -4646,7 +4716,9 @@
             <td>Dark text on light surfaces (print, PDF)</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#9A9A9A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#9A9A9A</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#9A9A9A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#9A9A9A
+            </td>
             <td>#FFFFFF</td>
             <td><strong>2.8:1</strong></td>
             <td><span class="badge-fail">Fail</span></td>
@@ -4654,7 +4726,9 @@
             <td>Never use muted grey on white backgrounds</td>
           </tr>
           <tr>
-            <td><span style="display:inline-block;width:12px;height:12px;background:#F1B33A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#F1B33A</td>
+            <td><span
+                style="display:inline-block;width:12px;height:12px;background:#F1B33A;border-radius:2px;vertical-align:middle;margin-right:6px;"></span>#F1B33A
+            </td>
             <td>#FFFFFF</td>
             <td><strong>1.9:1</strong></td>
             <td><span class="badge-fail">Fail</span></td>
@@ -4678,19 +4752,20 @@
           must show a visible focus indicator. Use the brand tech orange ring — never suppress outlines without a custom
           replacement.</p>
         <div class="code-block" style="margin:0;">
-          <div class="code-body" style="padding:18px 22px;white-space:pre-wrap;">/* OW focus ring — apply to all interactive elements */
-:focus-visible {
-  outline: 2px solid var(--ow-color-tech);
-  outline-offset: 2px;
-}
+          <div class="code-body" style="padding:18px 22px;white-space:pre-wrap;">/* OW focus ring — apply to all
+            interactive elements */
+            :focus-visible {
+            outline: 2px solid var(--ow-color-tech);
+            outline-offset: 2px;
+            }
 
-/* Honour reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}</div>
+            /* Honour reduced motion */
+            @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+            }
+            }</div>
         </div>
       </div>
 
@@ -4754,7 +4829,8 @@
         <span class="ow-callout-icon">📋</span>
         <span>Priorities: <span class="ux-priority ux-priority-high">High</span> implement first · <span
             class="ux-priority ux-priority-med">Medium</span> next sprint · <span
-            class="ux-priority ux-priority-low">Low</span> roadmap. Category tags indicate the primary area of impact.</span>
+            class="ux-priority ux-priority-low">Low</span> roadmap. Category tags indicate the primary area of
+          impact.</span>
       </div>
 
       <div class="ux-rec">
@@ -4779,7 +4855,8 @@
           <p>The qualifications menu spans three nesting levels (school → level → programme). Consolidate into a
             two-level mega-menu with scannable columns: Postgraduate · Degree · Higher Certificate · Short Learning
             Programme. Deep flyouts increase cognitive load, break keyboard navigation, and fail on mobile. See the
-            <a href="#navigation" style="color:var(--ow-color-tech);">Navigation</a> section for the target structure.</p>
+            <a href="#navigation" style="color:var(--ow-color-tech);">Navigation</a> section for the target structure.
+          </p>
           <div class="ux-rec-tags">
             <span class="ux-tag">Navigation</span>
             <span class="ux-tag">Accessibility</span>
@@ -4793,7 +4870,8 @@
           <h4>Keep "Apply Now" persistently visible <span class="ux-priority ux-priority-high">High</span></h4>
           <p>The primary conversion goal is student applications. "Apply Now" should remain visible in the sticky header
             at all scroll depths — not buried behind dropdown menus. On mobile, consider a persistent bottom bar for the
-            primary CTA. Utility links (Academic Calendar, Community Dashboard) should not compete visually with Apply.</p>
+            primary CTA. Utility links (Academic Calendar, Community Dashboard) should not compete visually with Apply.
+          </p>
           <div class="ux-rec-tags">
             <span class="ux-tag">Navigation</span>
             <span class="ux-tag">Conversion</span>
@@ -4804,11 +4882,13 @@
       <div class="ux-rec">
         <div class="ux-rec-num">04</div>
         <div class="ux-rec-content">
-          <h4>Replace auto-rotating heroes with static, purposeful heroes <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <h4>Replace auto-rotating heroes with static, purposeful heroes <span
+              class="ux-priority ux-priority-med">Medium</span></h4>
           <p>Carousels that auto-advance fail WCAG 2.2.2 and disorient users scanning for a single message. Use a static
             hero with one headline, one benefit-led sub-headline, and one CTA. If a carousel is retained, it must have
             accessible pause controls, keyboard navigation, manual advance only, and respect
-            <code>prefers-reduced-motion</code>.</p>
+            <code>prefers-reduced-motion</code>.
+          </p>
           <div class="ux-rec-tags">
             <span class="ux-tag">Accessibility</span>
             <span class="ux-tag">Visual</span>
@@ -4836,7 +4916,8 @@
           <h4>Enforce a single typeface system sitewide <span class="ux-priority ux-priority-med">Medium</span></h4>
           <p>The design system specifies Montserrat as the primary web typeface with Avenir Next for brand applications.
             Multiple font families loaded simultaneously (Poppins, Nunito, Open Sans, etc.) increase page weight, create
-            visual inconsistency, and undermine brand recognition. Limit web UI to Montserrat + Quicksand accent only.</p>
+            visual inconsistency, and undermine brand recognition. Limit web UI to Montserrat + Quicksand accent only.
+          </p>
           <div class="ux-rec-tags">
             <span class="ux-tag">Visual</span>
             <span class="ux-tag">Performance</span>
@@ -4847,11 +4928,13 @@
       <div class="ux-rec">
         <div class="ux-rec-num">07</div>
         <div class="ux-rec-content">
-          <h4>Standardise card patterns across all content lists <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <h4>Standardise card patterns across all content lists <span class="ux-priority ux-priority-med">Medium</span>
+          </h4>
           <p>News, events, qualifications, and portfolio items should share the card component defined in
             <a href="#cards" style="color:var(--ow-color-tech);">Cards</a>. Consistent structure (image → meta → title →
             excerpt → CTA) creates visual predictability — users learn once how to scan content across the entire
-            ecosystem including the community platform.</p>
+            ecosystem including the community platform.
+          </p>
           <div class="ux-rec-tags">
             <span class="ux-tag">Visual</span>
             <span class="ux-tag">Content</span>
@@ -4862,10 +4945,12 @@
       <div class="ux-rec">
         <div class="ux-rec-num">08</div>
         <div class="ux-rec-content">
-          <h4>Establish consistent section rhythm on every page <span class="ux-priority ux-priority-med">Medium</span></h4>
+          <h4>Establish consistent section rhythm on every page <span class="ux-priority ux-priority-med">Medium</span>
+          </h4>
           <p>Each major section should follow: eyebrow label → heading → lead paragraph → content → CTA. Apply the
             spacing scale from <a href="#layout" style="color:var(--ow-color-tech);">Layout</a> — minimum 64px between
-            major sections on desktop, 48px on mobile. Alternate #232323 and #1F1F1F backgrounds to group related content
+            major sections on desktop, 48px on mobile. Alternate #232323 and #1F1F1F backgrounds to group related
+            content
             without adding borders.</p>
           <div class="ux-rec-tags">
             <span class="ux-tag">Content</span>
@@ -4895,7 +4980,8 @@
           <p>A significant portion of SA traffic is mobile on constrained networks. Serve images in WebP with responsive
             <code>srcset</code>, lazy-load below-the-fold media, compress hero images under 200KB, and set performance
             budgets (LCP under 2.5s). Test with Chrome DevTools at Slow 3G. Creative portfolio sites are media-heavy —
-            performance directly impacts bounce rate and accessibility.</p>
+            performance directly impacts bounce rate and accessibility.
+          </p>
           <div class="ux-rec-tags">
             <span class="ux-tag">Performance</span>
             <span class="ux-tag">Accessibility</span>
@@ -4922,8 +5008,8 @@
           <tr>
             <td><strong>Line length</strong></td>
             <td>Full-width paragraphs on wide screens (100+ characters)</td>
-            <td>Cap content columns at 680px max-width (<a href="#layout"
-                style="color:var(--ow-color-tech);">Layout</a> section)</td>
+            <td>Cap content columns at 680px max-width (<a href="#layout" style="color:var(--ow-color-tech);">Layout</a>
+              section)</td>
           </tr>
           <tr>
             <td><strong>Heading hierarchy</strong></td>
@@ -4975,7 +5061,7 @@
         </div>
         <div class="code-body" id="vars-code">/* =====================================================
           OPEN WINDOW INSTITUTE — CSS DESIGN TOKENS
-          Version 2.2 · March 2026
+          Version 2.3 · July 2026
           ===================================================== */
 
           :root {
@@ -5352,7 +5438,7 @@
             style="font-family:var(--ow-font-primary);font-weight:800;font-size:18px;color:var(--ow-color-light);margin-bottom:6px;">
             Open Window Institute</div>
           <div style="font-size:13px;color:var(--ow-color-muted);line-height:1.9;font-family:var(--ow-font-primary);">
-            Brand Style Guide &amp; Design System v2.2 · March 2026<br>
+            Brand Style Guide &amp; Design System v2.3 · July 2026<br>
             Educational Leader in Creative Arts &amp; Technologies
           </div>
         </div>
@@ -5976,6 +6062,7 @@
     updateScrollUi();
   </script>
   <link rel="stylesheet" href="../shared/guide-switcher.css">
+  <link rel="stylesheet" href="../shared/guide-sidebar-fit.css">
   <link rel="stylesheet" href="../shared/guide-resources.css">
   <link rel="stylesheet" href="../shared/guide-back.css">
   <script src="../shared/guide-switcher.js" defer></script>

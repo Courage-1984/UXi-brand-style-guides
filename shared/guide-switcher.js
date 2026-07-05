@@ -2,6 +2,7 @@
   'use strict';
 
   var GUIDES = [
+    { slug: 'blueprint-style-guide', label: 'Style Guide Blueprint' },
     { slug: 'OWI-style-guide', label: 'Open Window Institute' },
     { slug: 'IMM-GS-style-guide', label: 'IMM Graduate School' },
     { slug: 'BCi-style-guide', label: 'Belgium Campus iTversity' },
@@ -187,41 +188,46 @@
     return root;
   }
 
+  function getOrCreateTopChrome() {
+    var chrome = document.querySelector('.guide-top-chrome');
+    if (!chrome) {
+      chrome = document.createElement('div');
+      chrome.className = 'guide-top-chrome';
+      chrome.setAttribute('role', 'region');
+      chrome.setAttribute('aria-label', 'Quick links');
+      document.body.appendChild(chrome);
+    }
+    return chrome;
+  }
+
   function createSiteLinks() {
     var current = getCurrentSlug();
     if (!current) {
-      return null;
+      return;
     }
 
     var links = SITE_LINKS[current];
     if (!links || !links.length) {
-      return null;
+      return;
     }
 
-    var host = document.createElement('nav');
-    host.className = 'guide-site-links-host';
-    host.setAttribute('aria-label', 'Brand websites');
+    var chrome = getOrCreateTopChrome();
 
     links.forEach(function (item) {
       var link = document.createElement('a');
-      link.className = 'guide-site-link';
+      link.className = 'guide-chrome-link';
       link.href = item.href;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       link.title = item.title;
       link.innerHTML = EXTERNAL_ICON + item.label;
-      host.appendChild(link);
+      chrome.appendChild(link);
     });
-
-    return host;
   }
 
   function init() {
     document.body.appendChild(createSwitcher());
-    var siteLinks = createSiteLinks();
-    if (siteLinks) {
-      document.body.appendChild(siteLinks);
-    }
+    createSiteLinks();
   }
 
   if (document.readyState === 'loading') {

@@ -26,9 +26,23 @@ Replace `<org>` and `<repo>` with your GitHub org/user and repository name:
 - `https://<org>.github.io/<repo>/TICON-Africa-style-guide/`
 - `https://<org>.github.io/<repo>/SAICTA-style-guide/`
 
+## Master blueprint
+
+The **Style Guide Blueprint** is a **brand-agnostic forkable template** — neutral palette, Inter typeface, and placeholder copy. It is **not** tied to any live brand. Use [`MASTER_BLUEPRINT.md`](MASTER_BLUEPRINT.md) plus the template HTML to generate a new guide (manually or with an LLM).
+
+| Resource | Path |
+|----------|------|
+| Forkable HTML template | `/blueprint-style-guide/` |
+| Spec & LLM generation brief | [`MASTER_BLUEPRINT.md`](MASTER_BLUEPRINT.md) |
+| Reference implementations | `/OWI-style-guide/`, `/IMM-GS-style-guide/`, `/BCi-style-guide/` |
+
+To create a new brand guide: duplicate `blueprint-style-guide/`, fill the manifest in `MASTER_BLUEPRINT.md`, replace placeholder copy and `BRAND_CONFIG`, then register in `shared/guide-switcher.js` and the root portal.
+
 ## Repository structure
 
 ```
+├── MASTER_BLUEPRINT.md     # Spec, token taxonomy, migration checklist
+├── blueprint-style-guide/index.html  # Forkable neutral template (not a live brand)
 ├── index.html              # Internal index (optional entry point)
 ├── .nojekyll               # Disables Jekyll processing on GitHub Pages
 ├── shared/

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Belgium Campus iTversity — Brand Style Guide & Design System v1.1</title>
+<title>Belgium Campus iTversity — Brand Style Guide & Design System v1.3</title>
 <link rel="icon" type="image/png" href="../assets/favicons/BCi-favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,16 +66,26 @@
     top: 0; left: 0;
     width: 240px;
     height: 100vh;
+    height: 100dvh;
     background: var(--near-black);
-    overflow-y: auto;
+    overflow: hidden;
     z-index: 100;
-    padding: var(--space-8) 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
   }
 
   .sg-nav-logo {
-    padding: 0 var(--space-6) var(--space-8);
+    flex-shrink: 0;
+    padding: clamp(10px, 1.4vh, 32px) var(--space-6) clamp(8px, 1vh, 32px);
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: var(--space-6);
+    margin-bottom: clamp(4px, 0.6vh, 24px);
+  }
+
+  .sg-nav-body {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .sg-nav-logo-tag {
@@ -106,10 +116,15 @@
     border-left: 2px solid transparent;
   }
 
-  .sg-nav a:hover {
+  .sg-nav a:hover,
+  .sg-nav a.active {
     color: var(--white);
     background: rgba(255,255,255,0.05);
     border-left-color: var(--turquoise);
+  }
+
+  .sg-nav a.active {
+    color: var(--turquoise);
   }
 
   /* ── MAIN LAYOUT ── */
@@ -344,6 +359,21 @@
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--gray-200);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  .color-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .color-card.copied {
+    box-shadow: 0 0 0 2px var(--turquoise);
+  }
+
+  .color-card.copied .color-swatch-label::after {
+    content: ' · Copied';
   }
 
   .color-swatch {
@@ -1313,43 +1343,563 @@
 
   table { border-collapse: collapse; }
 
+  /* ── SCROLL PROGRESS & BACK TO TOP ── */
+  .scroll-progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+  }
+
+  .scroll-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--turquoise) 0%, var(--yellow) 50%, var(--magenta) 100%);
+    box-shadow: 0 0 12px rgba(42, 210, 201, 0.35);
+    transition: width 0.12s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-progress-fill { transition: none; }
+  }
+
+  .back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: calc(20px + 36px + 12px);
+    z-index: 400;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--turquoise);
+    color: var(--black);
+    border: 2px solid rgba(42, 210, 201, 0.5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover { background: #24bdb5; }
+  .back-to-top:focus-visible {
+    outline: 2px solid var(--magenta);
+    outline-offset: 2px;
+  }
+
+  /* ── SPEC TABLE & BADGES ── */
+  .bci-spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: var(--space-8);
+  }
+
+  .bci-spec-table th {
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    background: var(--gray-100);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    font-weight: 600;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .bci-spec-table td {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .badge-pass { background: rgba(42, 210, 201, 0.15); color: #0d6e68; padding: 2px 8px; border-radius: 2px; font-size: 11px; font-weight: 600; }
+  .badge-fail { background: rgba(235, 71, 62, 0.12); color: #c0392b; padding: 2px 8px; border-radius: 2px; font-size: 11px; font-weight: 600; }
+  .badge-warn { background: rgba(255, 203, 47, 0.2); color: #856404; padding: 2px 8px; border-radius: 2px; font-size: 11px; font-weight: 600; }
+
+  /* ── CONTRAST CHECKER ── */
+  .contrast-checker {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--space-8);
+  }
+
+  .contrast-checker .contrast-preview {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    width: auto;
+    height: auto;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .contrast-preview-text {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.35;
+    letter-spacing: 0.03em;
+  }
+
+  .contrast-preview-sub {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 8px;
+    opacity: 0.9;
+  }
+
+  .contrast-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 20px 22px;
+    border-top: 1px solid var(--gray-200);
+    background: var(--gray-100);
+  }
+
+  .contrast-control label {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    margin-bottom: 8px;
+  }
+
+  .contrast-swatch-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .contrast-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    padding: 0;
+  }
+
+  .contrast-swatch:hover { transform: scale(1.08); }
+  .contrast-swatch.active { border-color: var(--black); box-shadow: 0 0 0 2px var(--turquoise); }
+
+  .contrast-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    padding: 0 22px 22px;
+  }
+
+  .contrast-result-item {
+    padding: 12px 14px;
+    background: var(--gray-100);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-200);
+    text-align: center;
+  }
+
+  .contrast-ratio-num {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  .contrast-result-label {
+    font-size: 10px;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  .contrast-advanced { margin-top: 8px; }
+
+  .contrast-advanced-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--gray-200);
+    background: var(--gray-100);
+  }
+
+  .bci-toggle-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .bci-toggle-row input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .bci-toggle-track {
+    width: 40px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--gray-200);
+    border: 1px solid var(--gray-400);
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+  }
+
+  .bci-toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gray-600);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .bci-toggle-row input:checked + .bci-toggle-track {
+    background: rgba(42, 210, 201, 0.35);
+    border-color: rgba(42, 210, 201, 0.6);
+  }
+
+  .bci-toggle-row input:checked + .bci-toggle-track::after {
+    transform: translateX(18px);
+    background: var(--turquoise);
+  }
+
+  .bci-toggle-label-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .contrast-email-theme {
+    display: inline-flex;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+  }
+
+  .contrast-email-theme[hidden] { display: none !important; }
+
+  .contrast-theme-btn {
+    padding: 7px 14px;
+    border: none;
+    background: transparent;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .contrast-theme-btn.is-active {
+    background: var(--turquoise);
+    color: var(--black);
+  }
+
+  .contrast-email-frame {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 200px;
+  }
+
+  .contrast-email-chrome {
+    padding: 10px 16px;
+    background: var(--near-black);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contrast-email-chrome-dots { display: flex; gap: 5px; }
+  .contrast-email-chrome-dots span {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .contrast-email-chrome-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .contrast-email-body { flex: 1; padding: 28px 24px 32px; transition: background 0.25s ease; }
+
+  .contrast-email-subject {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.65;
+  }
+
+  .contrast-preview-plain {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    width: 100%;
+  }
+
+  #adv-preview:not(.is-email-mode) .contrast-email-chrome,
+  #adv-preview:not(.is-email-mode) .contrast-email-body { display: none; }
+  #adv-preview.is-email-mode .contrast-preview-plain { display: none; }
+
+  .contrast-email-cta {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 22px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    border: none;
+    transition: background 0.2s ease;
+  }
+
+  .contrast-advanced-controls { grid-template-columns: 1fr 1fr; }
+  .contrast-control-stack { display: flex; flex-direction: column; gap: 12px; }
+
+  .contrast-slider-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+  }
+
+  .contrast-slider-val {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--turquoise);
+    font-weight: 600;
+  }
+
+  .contrast-range {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 999px;
+    background: var(--gray-200);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .contrast-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--turquoise);
+    border: 2px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  .contrast-hex-readout {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--gray-600);
+    line-height: 1.5;
+    padding: 8px 10px;
+    background: var(--gray-100);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--gray-200);
+  }
+
+  .contrast-hex-readout strong { color: var(--black); font-weight: 600; }
+
+  .contrast-advanced-warning { margin: 0 22px 16px; }
+  .contrast-advanced-warning[hidden] { display: none !important; }
+
+  .contrast-advanced-meta {
+    padding: 0 22px 12px;
+    font-size: 11px;
+    color: var(--gray-600);
+    line-height: 1.55;
+  }
+
+  .contrast-advanced-meta strong { color: var(--black); }
+
+  @media (max-width: 768px) {
+    .contrast-controls,
+    .contrast-advanced-controls { grid-template-columns: 1fr; }
+  }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: var(--near-black);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--space-8);
+  }
+
+  .code-header {
+    background: #0d0e10;
+    padding: 11px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .code-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .code-dots { display: flex; gap: 5px; }
+  .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .code-body {
+    padding: 28px;
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: #a8b4c0;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .copy-btn {
+    background: rgba(42, 210, 201, 0.12);
+    color: var(--turquoise);
+    border: 1px solid rgba(42, 210, 201, 0.3);
+    padding: 5px 13px;
+    border-radius: var(--radius-sm);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .copy-btn:hover { background: rgba(42, 210, 201, 0.22); }
+  .copy-btn.success {
+    background: rgba(255, 203, 47, 0.15);
+    color: var(--yellow);
+    border-color: rgba(255, 203, 47, 0.35);
+  }
+
+  .sg-extension-note {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-bottom: var(--space-6);
+    padding: var(--space-3) var(--space-4);
+    border: 1px dashed var(--gray-200);
+    border-radius: var(--radius-md);
+    line-height: 1.6;
+  }
+
   @media print {
     .sg-nav { display: none; }
     .sg-main { margin-left: 0; }
     .sg-section { page-break-inside: avoid; }
+    .scroll-progress-track,
+    .back-to-top { display: none !important; }
   }
 </style>
 </head>
 <body>
+
+<div class="scroll-progress-track" aria-hidden="true">
+  <div class="scroll-progress-fill" id="scroll-progress"></div>
+</div>
+<button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
 <!-- ═══════════════════════════════════════════
      SIDEBAR NAV
 ═══════════════════════════════════════════ -->
 <nav class="sg-nav" aria-label="Style guide navigation">
   <div class="sg-nav-logo">
-    <span class="sg-nav-logo-tag">BELGIUM CAMPUS</span>
+    <img src="BC-logo-white-350w.webp" alt="Belgium Campus iTversity" style="width:100%;max-width:160px;height:auto;display:block;margin-bottom:10px;">
     <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);">Brand Style Guide &amp; Design System</span>
   </div>
+  <div class="sg-nav-body">
   <span class="sg-nav-label">Foundation</span>
   <a href="#brand">01 — Brand Identity</a>
-  <a href="#color">02 — Colour System</a>
-  <a href="#typography">03 — Typography</a>
-  <a href="#spacing">04 — Spacing & Grid</a>
-  <a href="#motion">05 — Motion</a>
+  <a href="#vision-mission">02 — Vision &amp; Mission</a>
+  <a href="#colors">03 — Colour System</a>
+  <a href="#typography">04 — Typography</a>
+  <a href="#layout">05 — Layout &amp; Spacing</a>
   <span class="sg-nav-label">Components</span>
   <a href="#buttons">06 — Buttons</a>
   <a href="#forms">07 — Form Elements</a>
-  <a href="#cards">08 — Cards & Layout</a>
+  <a href="#cards">08 — Cards &amp; Layout</a>
   <a href="#navigation">09 — Navigation</a>
-  <a href="#badges">10 — Badges & Alerts</a>
-  <span class="sg-nav-label">Content</span>
+  <a href="#badges">10 — Badges &amp; Alerts</a>
+  <span class="sg-nav-label">Brand</span>
   <a href="#imagery">11 — Imagery</a>
-  <a href="#iconography">12 — Iconography</a>
-  <a href="#voice">13 — Voice & Tone</a>
-  <span class="sg-nav-label">Guidance</span>
+  <a href="#icons">12 — Icons</a>
+  <a href="#voice-tone">13 — Voice &amp; Tone</a>
+  <span class="sg-nav-label">Experience</span>
   <a href="#accessibility">14 — Accessibility</a>
-  <a href="#ux">15 — UX Recommendations</a>
-  <a href="#donts">16 — Do's & Don'ts</a>
+  <a href="#ux-recommendations">15 — UX Recommendations</a>
+  <a href="#donts">16 — Do's &amp; Don'ts</a>
+  <span class="sg-nav-label">Developer</span>
+  <a href="#variables">17 — CSS Variables</a>
+  <a href="#elementor">18 — Elementor</a>
+  </div>
 </nav>
 
 <!-- ═══════════════════════════════════════════
@@ -1363,17 +1913,18 @@
     <div class="sg-cover-accent"></div>
     <div class="sg-cover-accent2"></div>
     <div class="sg-cover-content">
+      <img src="BC-logo-white-350w.webp" alt="Belgium Campus iTversity" style="width:280px;max-width:70%;height:auto;display:block;margin-bottom:var(--space-8);">
       <p class="sg-cover-eyebrow">Belgium Campus iTversity</p>
       <h1 class="sg-cover-title">BRAND &<br><span>STYLE</span><br>GUIDE</h1>
       <p class="sg-cover-desc">A comprehensive reference for design, content, and UI standards — ensuring a consistent, accessible, and purposeful digital experience across all Belgium Campus iTversity touchpoints.</p>
       <div class="sg-cover-meta">
         <div class="sg-cover-meta-item">
           <span class="sg-cover-meta-label">Version</span>
-          <span class="sg-cover-meta-value">1.1</span>
+          <span class="sg-cover-meta-value">1.2</span>
         </div>
         <div class="sg-cover-meta-item">
           <span class="sg-cover-meta-label">Standard</span>
-          <span class="sg-cover-meta-value">WCAG 2.1 AA</span>
+          <span class="sg-cover-meta-value">WCAG 2.2 AA</span>
         </div>
         <div class="sg-cover-meta-item">
           <span class="sg-cover-meta-label">Platform</span>
@@ -1398,6 +1949,21 @@
     <p class="sg-section-number">01 — Brand Identity</p>
     <h2 class="sg-h1">WHO WE ARE</h2>
     <p class="sg-section-lead">Belgium Campus iTversity is a pioneering IT institution dedicated to shaping Africa's future through world-class Information and Communication Technology education. Our visual identity reflects commitment to innovation, professionalism, and technological excellence.</p>
+
+    <p class="sg-section-number">Logo</p>
+    <h2 class="sg-h1">THE LOCKUP</h2>
+    <p class="sg-section-lead">The primary lockup pairs the double-arc monogram with the Belgium Campus iTversity wordmark. Use the full-colour/dark lockup on light surfaces and the reversed white lockup on dark or photographic backgrounds. Never recolour the Belgian-flag accent stripes.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);margin-bottom:var(--space-12);">
+      <div style="padding:var(--space-10);background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-4);min-height:180px;">
+        <img src="BC-logo-header-dark-svg-1.svg" alt="Belgium Campus iTversity logo on a light background" style="width:280px;max-width:80%;height:auto;">
+        <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-600);">On light surfaces</span>
+      </div>
+      <div style="padding:var(--space-10);background:var(--black);border:1px solid var(--black);border-radius:var(--radius-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-4);min-height:180px;">
+        <img src="BC-logo-white-350w.webp" alt="Belgium Campus iTversity reversed logo on a dark background" style="width:240px;max-width:80%;height:auto;">
+        <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);">On dark surfaces</span>
+      </div>
+    </div>
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--col-gap);margin-bottom:var(--space-12);">
       <div style="padding:var(--space-8);border:1px solid var(--gray-200);border-radius:var(--radius-lg);border-top:3px solid var(--turquoise);">
@@ -1442,22 +2008,51 @@
     </div>
   </div>
 
-  <!-- ─── 02 COLOUR SYSTEM ─── -->
-  <div class="sg-divider" id="color">
+  <!-- ─── 02 VISION & MISSION ─── -->
+  <div class="sg-divider" id="vision-mission">
     <span class="sg-divider-text">02</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Vision &amp; Mission</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">02 — Vision &amp; Mission</p>
+    <h2 class="sg-h1">OUR PURPOSE</h2>
+    <p class="sg-section-lead">Approved institutional copy for website headers, accreditation blocks, and marketing materials. Use verbatim unless formally updated by Belgium Campus iTversity.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);margin-bottom:var(--space-8);">
+      <div style="padding:var(--space-8);border:1px solid var(--gray-200);border-radius:var(--radius-lg);border-left:3px solid var(--turquoise);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--turquoise);margin-bottom:var(--space-4);">Vision</div>
+        <p style="font-size:15px;color:var(--gray-800);line-height:1.75;margin:0;">To pioneer world-class Information and Communication Technology education that shapes Africa's digital future — setting the standard for innovation, academic rigour, and industry alignment across the continent.</p>
+      </div>
+      <div style="padding:var(--space-8);border:1px solid var(--gray-200);border-radius:var(--radius-lg);border-left:3px solid var(--magenta);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--magenta);margin-bottom:var(--space-4);">Mission</div>
+        <p style="font-size:15px;color:var(--gray-800);line-height:1.7;margin:0 0 var(--space-3);font-weight:500;">Belgium Campus iTversity empowers students with practical ICT skills and professional capability through cutting-edge curricula, industry partnerships, and inclusive learning environments.</p>
+        <p style="font-size:14px;color:var(--gray-600);line-height:1.7;margin:0;">We build the digital talent pipeline that transforms economies and communities across Africa — delivering graduates who are innovative, professional, and ready to lead.</p>
+      </div>
+    </div>
+
+    <div class="sg-callout">
+      <p><strong>Usage note:</strong> Vision and mission statements are institutional copy — do not paraphrase in headers, footers, or accreditation blocks. For campaign headlines and UI microcopy, refer to <a href="#voice-tone" style="color:var(--turquoise);font-weight:600;">Voice &amp; Tone</a>.</p>
+    </div>
+  </div>
+
+  <!-- ─── 03 COLOUR SYSTEM ─── -->
+  <div class="sg-divider" id="colors">
+    <span class="sg-divider-text">03</span>
     <div class="sg-divider-rule"></div>
     <span class="sg-divider-text">Colour System</span>
   </div>
 
   <div class="sg-section">
-    <p class="sg-section-number">02 — Colour System</p>
+    <p class="sg-section-number">03 — Colour System</p>
     <h2 class="sg-h1">BRAND COLOURS</h2>
-    <p class="sg-section-lead">Six brand colours define the Belgium Campus iTversity palette. Contrast ratios are evaluated against WCAG 2.1 AA — a minimum 4.5:1 for normal text and 3:1 for large text (18pt+ or 14pt bold). Accessibility guidance is shown for each colour pair.</p>
+    <p class="sg-section-lead">Six brand colours define the Belgium Campus iTversity palette. Contrast ratios are evaluated against WCAG 2.2 AA — a minimum 4.5:1 for normal text and 3:1 for large text (18pt+ or 14pt bold). Click any swatch to copy its hex value.</p>
 
     <div class="color-grid">
 
       <!-- Turquoise -->
-      <div class="color-card">
+      <div class="color-card" onclick="copyColor(this,'#2AD2C9')" title="Click to copy #2AD2C9">
         <div class="color-swatch" style="background:#2AD2C9;">
           <span class="color-swatch-label">#2AD2C9</span>
         </div>
@@ -1474,7 +2069,7 @@
       </div>
 
       <!-- Black -->
-      <div class="color-card">
+      <div class="color-card" onclick="copyColor(this,'#000000')" title="Click to copy #000000">
         <div class="color-swatch" style="background:#000000;">
           <span class="color-swatch-label">#000000</span>
         </div>
@@ -1491,7 +2086,7 @@
       </div>
 
       <!-- White -->
-      <div class="color-card">
+      <div class="color-card" onclick="copyColor(this,'#FFFFFF')" title="Click to copy #FFFFFF">
         <div class="color-swatch" style="background:#FFFFFF;border-bottom:1px solid #E8E8E8;">
           <span class="color-swatch-label" style="background:rgba(0,0,0,0.12);color:var(--black);">#FFFFFF</span>
         </div>
@@ -1507,7 +2102,7 @@
       </div>
 
       <!-- Deep Yellow -->
-      <div class="color-card">
+      <div class="color-card" onclick="copyColor(this,'#FFCB2F')" title="Click to copy #FFCB2F">
         <div class="color-swatch" style="background:#FFCB2F;">
           <span class="color-swatch-label" style="background:rgba(0,0,0,0.25);">#FFCB2F</span>
         </div>
@@ -1524,7 +2119,7 @@
       </div>
 
       <!-- Magenta -->
-      <div class="color-card">
+      <div class="color-card" onclick="copyColor(this,'#C51E62')" title="Click to copy #C51E62">
         <div class="color-swatch" style="background:#C51E62;">
           <span class="color-swatch-label">#C51E62</span>
         </div>
@@ -1541,7 +2136,7 @@
       </div>
 
       <!-- Blaze Red -->
-      <div class="color-card">
+      <div class="color-card" onclick="copyColor(this,'#EB473E')" title="Click to copy #EB473E">
         <div class="color-swatch" style="background:#EB473E;">
           <span class="color-swatch-label">#EB473E</span>
         </div>
@@ -1648,15 +2243,15 @@
     </div>
   </div>
 
-  <!-- ─── 03 TYPOGRAPHY ─── -->
+  <!-- ─── 04 TYPOGRAPHY ─── -->
   <div class="sg-divider" id="typography">
-    <span class="sg-divider-text">03</span>
+    <span class="sg-divider-text">04</span>
     <div class="sg-divider-rule"></div>
     <span class="sg-divider-text">Typography</span>
   </div>
 
   <div class="sg-section">
-    <p class="sg-section-number">03 — Typography</p>
+    <p class="sg-section-number">04 — Typography</p>
     <h2 class="sg-h1">TYPE SYSTEM</h2>
     <p class="sg-section-lead">Two typefaces define the Belgium Campus iTversity voice: Bebas Neue for commanding, attention-grabbing headings — and ITC Avant Garde Gothic for the legible, geometric body text that carries information clearly.</p>
 
@@ -1752,15 +2347,15 @@
     </div>
   </div>
 
-  <!-- ─── 04 SPACING & GRID ─── -->
-  <div class="sg-divider" id="spacing">
-    <span class="sg-divider-text">04</span>
+  <!-- ─── 05 LAYOUT & SPACING ─── -->
+  <div class="sg-divider" id="layout">
+    <span class="sg-divider-text">05</span>
     <div class="sg-divider-rule"></div>
-    <span class="sg-divider-text">Spacing & Grid</span>
+    <span class="sg-divider-text">Layout &amp; Spacing</span>
   </div>
 
   <div class="sg-section">
-    <p class="sg-section-number">04 — Spacing & Grid</p>
+    <p class="sg-section-number">05 — Layout &amp; Spacing</p>
     <h2 class="sg-h1">SPACING SCALE</h2>
     <p class="sg-section-lead">All spacing uses a base-8 scale. This creates visual harmony across all components while reducing cognitive overhead from inconsistent gaps.</p>
 
@@ -1818,17 +2413,8 @@
         <span style="font-size:11px;color:var(--gray-400);">100px — pill</span>
       </div>
     </div>
-  </div>
 
-  <!-- ─── 05 MOTION ─── -->
-  <div class="sg-divider" id="motion">
-    <span class="sg-divider-text">05</span>
-    <div class="sg-divider-rule"></div>
-    <span class="sg-divider-text">Motion</span>
-  </div>
-
-  <div class="sg-section">
-    <p class="sg-section-number">05 — Motion</p>
+    <p class="sg-section-number" id="layout-motion" style="margin-top:var(--space-12);">Motion &amp; Animation</p>
     <h2 class="sg-h1">ANIMATION</h2>
     <p class="sg-section-lead">Motion is purposeful and restrained. It communicates state changes, guides attention, and provides feedback. Never use animation purely for decoration.</p>
 
@@ -2061,7 +2647,8 @@
   </div>
 
   <div class="sg-section">
-    <p class="sg-section-number">10 — Badges & Alerts</p>
+    <p class="sg-section-number">10 — Badges &amp; Alerts</p>
+    <p class="sg-extension-note"><strong>BCi extension:</strong> This section extends the master blueprint — badges and status indicators are brand-specific and not part of the canonical 15-section OWI parity set.</p>
     <h2 class="sg-h1">STATUS INDICATORS</h2>
 
     <p style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--space-3);">Badges</p>
@@ -2113,6 +2700,7 @@
 
   <div class="sg-section">
     <p class="sg-section-number">11 — Imagery</p>
+    <p class="sg-extension-note"><strong>BCi extension:</strong> This section extends the master blueprint — photography and imagery guidance is brand-specific.</p>
     <h2 class="sg-h1">PHOTOGRAPHY</h2>
     <p class="sg-section-lead">Photography must reflect the diversity, ambition, and real human energy of the Belgium Campus community. Images should feel authentic, not staged — real students, real environments, real work.</p>
 
@@ -2155,15 +2743,15 @@
     </div>
   </div>
 
-  <!-- ─── 12 ICONOGRAPHY ─── -->
-  <div class="sg-divider" id="iconography">
+  <!-- ─── 12 ICONS ─── -->
+  <div class="sg-divider" id="icons">
     <span class="sg-divider-text">12</span>
     <div class="sg-divider-rule"></div>
-    <span class="sg-divider-text">Iconography</span>
+    <span class="sg-divider-text">Icons</span>
   </div>
 
   <div class="sg-section">
-    <p class="sg-section-number">12 — Iconography</p>
+    <p class="sg-section-number">12 — Icons</p>
     <h2 class="sg-h1">ICONS</h2>
     <p class="sg-section-lead">Use Material Symbols Outlined (Google) as the standard icon set. Icons are stroke-based, 24×24px at default size, and must always be paired with a visible text label for accessibility except where universally understood (e.g. close ✕).</p>
 
@@ -2207,10 +2795,10 @@
   </div>
 
   <!-- ─── 13 VOICE & TONE ─── -->
-  <div class="sg-divider" id="voice">
+  <div class="sg-divider" id="voice-tone">
     <span class="sg-divider-text">13</span>
     <div class="sg-divider-rule"></div>
-    <span class="sg-divider-text">Voice & Tone</span>
+    <span class="sg-divider-text">Voice &amp; Tone</span>
   </div>
 
   <div class="sg-section">
@@ -2270,29 +2858,30 @@
 
   <div class="sg-section">
     <p class="sg-section-number">14 — Accessibility</p>
-    <h2 class="sg-h1">WCAG 2.1 AA</h2>
-    <p class="sg-section-lead">Accessibility is not optional — it is legally required under South Africa's Electronic Communications Act and morally essential for an institution that includes deaf students and students with diverse abilities. Belgium Campus iTversity must meet WCAG 2.1 Level AA as a minimum.</p>
+    <h2 class="sg-h1">WCAG 2.2 AA</h2>
+    <p class="sg-section-lead">Accessibility is not optional — it is legally required under South Africa's Electronic Communications Act and morally essential for an institution that includes deaf students and students with diverse abilities. Belgium Campus iTversity must meet <strong>WCAG 2.2 Level AA</strong> as a minimum across belgiumcampus.ac.za and all WordPress/Elementor builds.</p>
 
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gray-600);margin-bottom:var(--space-4);">WCAG 2.2 — Four Principles</p>
     <div class="a11y-grid">
       <div class="a11y-card">
         <div class="a11y-icon">👁️</div>
         <div class="a11y-title">Perceivable</div>
-        <div class="a11y-desc">All text must meet 4.5:1 contrast. Images need descriptive alt text. Captions required for all video content. No information conveyed by colour alone.</div>
+        <div class="a11y-desc">Text meets contrast minimums. Images have meaningful alt text. Video has captions. Information is never conveyed by colour alone. Content reflows at 200% zoom without horizontal scroll.</div>
       </div>
       <div class="a11y-card">
         <div class="a11y-icon">⌨️</div>
         <div class="a11y-title">Operable</div>
-        <div class="a11y-desc">All functionality accessible by keyboard. Focus indicators must be visible. No keyboard traps. Minimum touch target 44×44px. Skip-to-content link required.</div>
+        <div class="a11y-desc">All functionality works via keyboard. Focus is always visible and not obscured by sticky UI. No keyboard traps. Touch targets ≥ 44×44px. Users can pause, stop, or hide moving content.</div>
       </div>
       <div class="a11y-card">
         <div class="a11y-icon">📖</div>
         <div class="a11y-title">Understandable</div>
-        <div class="a11y-desc">Clear language, consistent navigation, and descriptive error messages. Form labels always visible. Language attribute set on &lt;html&gt; element.</div>
+        <div class="a11y-desc">Clear labels on every input. Errors identified in plain language with recovery steps. Consistent navigation across pages. <code>lang</code> attribute set on the document element.</div>
       </div>
       <div class="a11y-card">
         <div class="a11y-icon">🤝</div>
         <div class="a11y-title">Robust</div>
-        <div class="a11y-desc">Valid, semantic HTML. ARIA roles and attributes used correctly. Compatible with major screen readers (NVDA, JAWS, VoiceOver). Regular automated and manual audits.</div>
+        <div class="a11y-desc">Semantic HTML first; ARIA only when native elements are insufficient. Valid name, role, and value on all custom components. Compatible with NVDA, JAWS, and VoiceOver.</div>
       </div>
       <div class="a11y-card">
         <div class="a11y-icon">🎯</div>
@@ -2306,13 +2895,205 @@
       </div>
     </div>
 
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gray-600);margin:var(--space-8) 0 var(--space-4);">Key WCAG 2.2 AA Criteria</p>
+    <table class="bci-spec-table">
+      <thead>
+        <tr>
+          <th>Principle</th>
+          <th>Criterion</th>
+          <th>Requirement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="3"><strong>Perceivable</strong></td>
+          <td>1.1.1 Non-text Content</td>
+          <td>Descriptive <code>alt</code> on images; decorative images use <code>alt=""</code></td>
+        </tr>
+        <tr>
+          <td>1.4.3 Contrast (Minimum)</td>
+          <td>4.5:1 normal text · 3:1 large text (18pt+ or 14pt bold)</td>
+        </tr>
+        <tr>
+          <td>1.4.11 Non-text Contrast</td>
+          <td>UI components and focus indicators: 3:1 against adjacent colours</td>
+        </tr>
+        <tr>
+          <td rowspan="4"><strong>Operable</strong></td>
+          <td>2.1.1 Keyboard</td>
+          <td>All functionality available via keyboard; no traps</td>
+        </tr>
+        <tr>
+          <td>2.4.11 Focus Not Obscured (Min.)</td>
+          <td>Focused element not fully hidden by sticky headers or overlays</td>
+        </tr>
+        <tr>
+          <td>2.5.8 Target Size (Minimum)</td>
+          <td>Interactive targets ≥ 24×24px (BCi standard: 44×44px)</td>
+        </tr>
+        <tr>
+          <td>2.2.2 Pause, Stop, Hide</td>
+          <td>Auto-rotating content must be pausable; respect <code>prefers-reduced-motion</code></td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Understandable</strong></td>
+          <td>3.3.1 Error Identification</td>
+          <td>Errors described in text; suggestions provided where possible</td>
+        </tr>
+        <tr>
+          <td>3.3.8 Accessible Authentication</td>
+          <td>No cognitive function tests for login; support paste in password fields</td>
+        </tr>
+        <tr>
+          <td><strong>Robust</strong></td>
+          <td>4.1.2 Name, Role, Value</td>
+          <td>Custom widgets expose correct ARIA; form inputs have accessible names</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gray-600);margin-bottom:var(--space-4);">Interactive Contrast Checker</p>
+    <p style="font-size:14px;color:var(--gray-600);line-height:1.65;margin:0 0 var(--space-4);max-width:680px;">Select foreground and background colours from the BCi palette to preview text and evaluate WCAG compliance in real time.</p>
+
+    <div class="contrast-checker" id="contrast-checker">
+      <div class="contrast-preview" id="contrast-preview">
+        <div class="contrast-preview-text" id="contrast-preview-text">
+          Belgium Campus iTversity
+          <span class="contrast-preview-sub">Body text preview at 16px</span>
+        </div>
+      </div>
+      <div class="contrast-controls">
+        <div class="contrast-control">
+          <label>Foreground (text)</label>
+          <div class="contrast-swatch-row" id="contrast-fg-swatches"></div>
+        </div>
+        <div class="contrast-control">
+          <label>Background</label>
+          <div class="contrast-swatch-row" id="contrast-bg-swatches"></div>
+        </div>
+      </div>
+      <div class="contrast-results" id="contrast-results">
+        <div class="contrast-result-item">
+          <div class="contrast-ratio-num" id="contrast-ratio-value">—</div>
+          <div class="contrast-result-label">Contrast ratio</div>
+        </div>
+        <div class="contrast-result-item">
+          <div id="contrast-aa-normal">—</div>
+          <div class="contrast-result-label">AA Normal (4.5:1)</div>
+        </div>
+        <div class="contrast-result-item">
+          <div id="contrast-aa-large">—</div>
+          <div class="contrast-result-label">AA Large (3:1)</div>
+        </div>
+        <div class="contrast-result-item">
+          <div id="contrast-aaa-normal">—</div>
+          <div class="contrast-result-label">AAA Normal (7:1)</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gray-600);margin:var(--space-4) 0 var(--space-4);">Advanced Brand &amp; Email Contrast Lab</p>
+    <p style="font-size:14px;color:var(--gray-600);line-height:1.65;margin:0 0 var(--space-4);max-width:720px;">Test brand colours with independent foreground and background opacity sliders. Enable <strong>Email client preview</strong> to simulate how mailers may render in light vs dark mode.</p>
+
+    <div class="contrast-checker contrast-advanced" id="contrast-advanced">
+      <div class="contrast-advanced-toolbar">
+        <label class="bci-toggle-row">
+          <input type="checkbox" id="adv-email-mode" aria-describedby="adv-email-mode-desc">
+          <span class="bci-toggle-track" aria-hidden="true"></span>
+          <span class="bci-toggle-label-text">Email client preview</span>
+        </label>
+        <div class="contrast-email-theme" id="adv-email-theme" hidden>
+          <button type="button" class="contrast-theme-btn is-active" data-email-theme="light">Light mode</button>
+          <button type="button" class="contrast-theme-btn" data-email-theme="dark">Dark mode</button>
+        </div>
+        <span id="adv-email-mode-desc" style="font-size:11px;color:var(--gray-600);flex:1;min-width:200px;">Off = web/UI preview · On = simulated mailer canvas</span>
+      </div>
+
+      <div class="contrast-preview contrast-email-frame" id="adv-preview">
+        <div class="contrast-email-chrome">
+          <div class="contrast-email-chrome-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="contrast-email-chrome-title" id="adv-email-chrome-label">Email · Light mode client</span>
+        </div>
+        <div class="contrast-email-body" id="adv-email-body">
+          <div class="contrast-email-subject" id="adv-email-subject">Belgium Campus iTversity — Apply Now</div>
+          <div class="contrast-preview-text" id="adv-preview-text" style="font-size:20px;text-align:left;">
+            Your future in tech starts here.
+            <span class="contrast-preview-sub" style="text-align:left;">Body copy preview at 16px — brand colour test.</span>
+          </div>
+          <span class="contrast-email-cta" id="adv-email-cta">Apply Now</span>
+        </div>
+        <div class="contrast-preview-plain" id="adv-preview-plain">
+          <div class="contrast-preview-text" id="adv-preview-text-plain">
+            Belgium Campus iTversity
+            <span class="contrast-preview-sub">Foreground on background · opacity composited</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contrast-controls contrast-advanced-controls">
+        <div class="contrast-control-stack">
+          <div class="contrast-control">
+            <label>Foreground colour</label>
+            <div class="contrast-swatch-row" id="adv-fg-swatches"></div>
+          </div>
+          <div class="contrast-slider-group">
+            <label>
+              <span>Foreground opacity</span>
+              <span class="contrast-slider-val" id="adv-fg-opacity-val">100%</span>
+            </label>
+            <input type="range" class="contrast-range" id="adv-fg-opacity" min="0" max="100" value="100" aria-label="Foreground opacity">
+          </div>
+          <div class="contrast-hex-readout" id="adv-fg-readout">Base <strong>#2AD2C9</strong> → Effective <strong>—</strong></div>
+        </div>
+        <div class="contrast-control-stack">
+          <div class="contrast-control">
+            <label>Background colour</label>
+            <div class="contrast-swatch-row" id="adv-bg-swatches"></div>
+          </div>
+          <div class="contrast-slider-group">
+            <label>
+              <span>Background opacity</span>
+              <span class="contrast-slider-val" id="adv-bg-opacity-val">100%</span>
+            </label>
+            <input type="range" class="contrast-range" id="adv-bg-opacity" min="0" max="100" value="100" aria-label="Background opacity">
+          </div>
+          <div class="contrast-hex-readout" id="adv-bg-readout">Base <strong>#FFFFFF</strong> → Effective <strong>—</strong></div>
+        </div>
+      </div>
+
+      <div class="contrast-advanced-meta" id="adv-meta">Canvas: <strong>Web preview</strong> · Composited colours used for WCAG ratio below.</div>
+
+      <div class="sg-callout contrast-advanced-warning" id="adv-email-warning" hidden style="margin:0 var(--space-6) var(--space-4);">
+        <p id="adv-email-warning-text"></p>
+      </div>
+
+      <div class="contrast-results" id="adv-contrast-results">
+        <div class="contrast-result-item">
+          <div class="contrast-ratio-num" id="adv-contrast-ratio-value">—</div>
+          <div class="contrast-result-label">Contrast ratio</div>
+        </div>
+        <div class="contrast-result-item">
+          <div id="adv-contrast-aa-normal">—</div>
+          <div class="contrast-result-label">AA Normal (4.5:1)</div>
+        </div>
+        <div class="contrast-result-item">
+          <div id="adv-contrast-aa-large">—</div>
+          <div class="contrast-result-label">AA Large (3:1)</div>
+        </div>
+        <div class="contrast-result-item">
+          <div id="adv-contrast-aaa-normal">—</div>
+          <div class="contrast-result-label">AAA Normal (7:1)</div>
+        </div>
+      </div>
+    </div>
+
     <div class="sg-callout">
       <p><strong>Recommended tools:</strong> Run automated checks with <strong>axe DevTools</strong> and <strong>Lighthouse</strong> on every page deploy. Supplement with manual keyboard testing and screen reader testing (VoiceOver on macOS / NVDA on Windows). Target a Lighthouse Accessibility score of ≥ 95.</p>
     </div>
   </div>
 
   <!-- ─── 15 UX RECOMMENDATIONS ─── -->
-  <div class="sg-divider" id="ux">
+  <div class="sg-divider" id="ux-recommendations">
     <span class="sg-divider-text">15</span>
     <div class="sg-divider-rule"></div>
     <span class="sg-divider-text">UX Recommendations</span>
@@ -2406,7 +3187,8 @@
   </div>
 
   <div class="sg-section">
-    <p class="sg-section-number">16 — Do's & Don'ts</p>
+    <p class="sg-section-number">16 — Do's &amp; Don'ts</p>
+    <p class="sg-extension-note"><strong>BCi extension:</strong> This section extends the master blueprint — consolidated do/don't rules are brand-specific reference material.</p>
     <h2 class="sg-h1">BRAND RULES</h2>
     <p class="sg-section-lead">These rules protect brand consistency and accessibility. They apply to all digital and print executions produced by internal teams or external partners.</p>
 
@@ -2484,14 +3266,178 @@
     </div>
   </div>
 
+  <!-- ─── 17 CSS VARIABLES ─── -->
+  <div class="sg-divider" id="variables">
+    <span class="sg-divider-text">17</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">CSS Variables</span>
+  </div>
+
+  <div class="sg-section">
+    <p class="sg-section-number">17 — CSS Variables</p>
+    <h2 class="sg-h1">DESIGN TOKENS</h2>
+    <p class="sg-section-lead">Copy these root variables into your theme's <code style="background:var(--gray-100);padding:2px 7px;border-radius:3px;font-family:'Courier New',monospace;font-size:13px;color:var(--turquoise);border:1px solid var(--gray-200);">style.css</code> or Elementor's Custom CSS panel to standardise all brand tokens.</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="code-dots">
+            <div class="code-dot" style="background:#2AD2C9;"></div>
+            <div class="code-dot" style="background:#FFCB2F;"></div>
+            <div class="code-dot" style="background:#C51E62;"></div>
+          </div>
+          <span class="code-title">bci-design-tokens.css</span>
+        </div>
+        <button class="copy-btn" id="btn-vars" onclick="copyBlock('vars-code','btn-vars')">COPY</button>
+      </div>
+      <div class="code-body" id="vars-code">/* =====================================================
+   Belgium Campus iTversity — CSS DESIGN TOKENS
+   Version 1.3 · July 2026
+   ===================================================== */
+
+:root {
+  /* ─── BRAND COLOURS ─── */
+  --bci-turquoise: #2AD2C9;
+  --bci-black: #000000;
+  --bci-near-black: #141517;
+  --bci-white: #FFFFFF;
+  --bci-yellow: #FFCB2F;
+  --bci-magenta: #C51E62;
+  --bci-red: #EB473E;
+  --bci-gray-100: #F5F5F5;
+  --bci-gray-200: #E8E8E8;
+  --bci-gray-400: #AAAAAA;
+  --bci-gray-600: #666666;
+  --bci-gray-800: #333333;
+
+  /* Aliases (guide shorthand) */
+  --turquoise: var(--bci-turquoise);
+  --black: var(--bci-black);
+  --near-black: var(--bci-near-black);
+  --white: var(--bci-white);
+  --yellow: var(--bci-yellow);
+  --magenta: var(--bci-magenta);
+  --red: var(--bci-red);
+
+  /* ─── TYPOGRAPHY ─── */
+  --bci-font-heading: 'Bebas Neue', 'Impact', sans-serif;
+  --bci-font-body: 'ITC Avant Garde Gothic', 'Century Gothic', 'Trebuchet MS', 'Inter', sans-serif;
+  --bci-font-ui: 'Inter', sans-serif;
+
+  /* ─── SPACING (8px base) ─── */
+  --bci-space-1: 4px;
+  --bci-space-2: 8px;
+  --bci-space-3: 12px;
+  --bci-space-4: 16px;
+  --bci-space-6: 24px;
+  --bci-space-8: 32px;
+  --bci-space-10: 40px;
+  --bci-space-12: 48px;
+  --bci-space-16: 64px;
+  --bci-space-20: 80px;
+  --bci-space-24: 96px;
+
+  /* ─── BORDER RADIUS ─── */
+  --bci-radius-sm: 2px;
+  --bci-radius-md: 4px;
+  --bci-radius-lg: 8px;
+  --bci-radius-pill: 100px;
+
+  /* ─── LAYOUT ─── */
+  --bci-max-width: 1200px;
+  --bci-col-gap: 24px;
+}</div>
+    </div>
+  </div>
+
+  <!-- ─── 18 ELEMENTOR ─── -->
+  <div class="sg-divider" id="elementor">
+    <span class="sg-divider-text">18</span>
+    <div class="sg-divider-rule"></div>
+    <span class="sg-divider-text">Elementor</span>
+  </div>
+
+  <div class="sg-section sg-section-dark" style="background:var(--near-black);">
+    <div class="sg-section">
+      <p class="sg-section-number-dark">18 — Elementor</p>
+      <h2 class="sg-h1" style="color:var(--white);">ELEMENTOR INTEGRATION</h2>
+      <p class="sg-section-lead-white">Map these tokens in Elementor Site Settings → Global Colors and Global Fonts. Paste custom CSS classes in Site Settings → Custom CSS.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);margin-bottom:var(--space-8);">
+        <div style="padding:var(--space-6);background:rgba(255,255,255,0.04);border-radius:var(--radius-lg);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--turquoise);margin-bottom:var(--space-4);">Global Colors</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:rgba(255,255,255,0.75);">
+            <div style="display:flex;align-items:center;gap:12px;"><span style="width:22px;height:22px;border-radius:4px;background:#2AD2C9;display:inline-block;"></span>Turquoise · #2AD2C9 · --bci-turquoise</div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="width:22px;height:22px;border-radius:4px;background:#FFCB2F;display:inline-block;"></span>Deep Yellow · #FFCB2F · --bci-yellow</div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="width:22px;height:22px;border-radius:4px;background:#C51E62;display:inline-block;"></span>Magenta · #C51E62 · --bci-magenta</div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="width:22px;height:22px;border-radius:4px;background:#000;border:1px solid #444;display:inline-block;"></span>Black · #000000 · --bci-black</div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="width:22px;height:22px;border-radius:4px;background:#141517;border:1px solid #444;display:inline-block;"></span>Near Black · #141517 · --bci-near-black</div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="width:22px;height:22px;border-radius:4px;background:#fff;border:1px solid #444;display:inline-block;"></span>White · #FFFFFF · --bci-white</div>
+          </div>
+        </div>
+        <div style="padding:var(--space-6);background:rgba(255,255,255,0.04);border-radius:var(--radius-lg);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--turquoise);margin-bottom:var(--space-4);">Global Fonts</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="padding:14px;background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);letter-spacing:0.03em;margin-bottom:4px;">Headings — Bebas Neue</div>
+              <div style="font-family:'Courier New',monospace;font-size:11px;color:rgba(255,255,255,0.45);">H1–H3 · Display · CTAs</div>
+            </div>
+            <div style="padding:14px;background:rgba(255,255,255,0.03);border-radius:var(--radius-md);">
+              <div style="font-family:var(--font-ui);font-size:16px;color:var(--white);margin-bottom:4px;">Body — Avant Garde / Inter</div>
+              <div style="font-family:'Courier New',monospace;font-size:11px;color:rgba(255,255,255,0.45);">Paragraphs · Labels · Navigation · UI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-title">elementor-global-classes.css</span>
+          <button class="copy-btn" id="btn-elementor" onclick="copyBlock('elementor-code','btn-elementor')">COPY</button>
+        </div>
+        <div class="code-body" id="elementor-code">/* Belgium Campus iTversity — Elementor Global CSS */
+.bci-h1 { font-family: var(--bci-font-heading); font-size: 72px; line-height: 1; letter-spacing: 0.02em; }
+.bci-h2 { font-family: var(--bci-font-heading); font-size: 52px; line-height: 1.05; letter-spacing: 0.02em; }
+.bci-h3 { font-family: var(--bci-font-heading); font-size: 36px; line-height: 1.1; letter-spacing: 0.02em; }
+.bci-body { font-family: var(--bci-font-body); font-size: 16px; line-height: 1.6; }
+.bci-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; border-radius: var(--bci-radius-sm);
+  font-family: var(--bci-font-heading); font-size: 14px; letter-spacing: 0.08em;
+  text-transform: uppercase; text-decoration: none; cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.bci-btn-primary { background: var(--bci-turquoise); color: var(--bci-black); border: 2px solid var(--bci-turquoise); }
+.bci-btn-primary:hover { background: #24bdb5; border-color: #24bdb5; }
+.bci-btn-yellow { background: var(--bci-yellow); color: var(--bci-black); border: 2px solid var(--bci-yellow); }
+.bci-section-dark { background: var(--bci-black); color: var(--bci-white); }
+.bci-text-turquoise { color: var(--bci-turquoise); }</div>
+      </div>
+
+      <div class="code-block" style="margin-top:var(--space-6);">
+        <div class="code-header">
+          <span class="code-title">google-fonts.html</span>
+          <button class="copy-btn" id="btn-fonts" onclick="copyBlock('fonts-code','btn-fonts')">COPY</button>
+        </div>
+        <div class="code-body" id="fonts-code">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"&gt;</div>
+      </div>
+
+      <div class="sg-callout" style="margin-top:var(--space-8);border-left-color:var(--yellow);">
+        <p><strong>Regulatory footer:</strong> All public pages must include CHE accreditation and institutional registration details as required by belgiumcampus.ac.za legal standards. Do not remove regulatory copy from the site footer.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="sg-footer">
     <div>
       <div class="sg-footer-logo">BELGIUM CAMPUS</div>
-      <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:4px;font-family:var(--font-ui);">Brand Style Guide &amp; Design System — Version 1.1</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:4px;font-family:var(--font-ui);">Brand Style Guide &amp; Design System — Version 1.3</p>
     </div>
     <div class="sg-footer-meta">
-      <p>Designed to WCAG 2.1 AA standards</p>
+      <p>Designed to WCAG 2.2 AA standards</p>
       <p>Shaping Africa's Digital Future</p>
       <p style="margin-top:4px;color:rgba(255,255,255,0.15);">belgiumcampus.ac.za</p>
     </div>
@@ -2500,32 +3446,494 @@
 </main>
 
 <script>
-  const links = document.querySelectorAll('.sg-nav a');
-  const sections = document.querySelectorAll('[id]');
+  const BCI_CONFIG = {
+    slug: 'BCi-style-guide',
+    name: 'Belgium Campus iTversity',
+    shortName: 'BCi',
+    version: '1.2',
+    prefix: 'bci',
+    theme: 'light',
+    colors: {
+      neutrals: {
+        dark: '#000000',
+        darker: '#141517',
+        sectionAlt: '#F5F5F5',
+        card: '#FFFFFF',
+        border: '#E8E8E8',
+        light: '#000000',
+        muted: '#666666',
+        white: '#FFFFFF'
+      },
+      accents: [
+        { id: 'turquoise', name: 'Turquoise', hex: '#2AD2C9' },
+        { id: 'yellow', name: 'Deep Yellow', hex: '#FFCB2F' },
+        { id: 'magenta', name: 'Magenta', hex: '#C51E62' }
+      ]
+    }
+  };
+
+  const SECTION_ANCHORS = [
+    'brand', 'vision-mission', 'colors', 'typography', 'layout',
+    'buttons', 'forms', 'cards', 'navigation', 'badges', 'imagery',
+    'icons', 'voice-tone', 'accessibility', 'ux-recommendations', 'donts',
+    'variables', 'elementor'
+  ];
+
+  function hexToRgbObj(hex) {
+    return {
+      r: parseInt(hex.slice(1, 3), 16),
+      g: parseInt(hex.slice(3, 5), 16),
+      b: parseInt(hex.slice(5, 7), 16)
+    };
+  }
+
+  function buildContrastPalette() {
+    const n = BCI_CONFIG.colors.neutrals;
+    const base = [
+      { hex: n.light, name: 'Text' },
+      { hex: n.white, name: 'White' },
+      { hex: n.muted, name: 'Muted' },
+      { hex: n.dark, name: 'Black' },
+      { hex: n.darker, name: 'Near Black' },
+      { hex: n.sectionAlt, name: 'Section Alt' }
+    ];
+    const accents = BCI_CONFIG.colors.accents.map(a => ({ hex: a.hex, name: a.name }));
+    return [...base.slice(0, 3), ...accents, ...base.slice(3)];
+  }
+
+  function copyColor(card, hex) {
+    const write = () => {
+      card.classList.add('copied');
+      setTimeout(() => card.classList.remove('copied'), 2200);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(hex).then(write).catch(() => fallbackCopy(hex, write));
+    } else {
+      fallbackCopy(hex, write);
+    }
+  }
+
+  function fallbackCopy(text, callback) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) { }
+    document.body.removeChild(ta);
+    if (callback) callback();
+  }
+
+  function copyBlock(codeId, btnId) {
+    const code = document.getElementById(codeId).textContent;
+    const btn = document.getElementById(btnId);
+    const write = () => {
+      btn.textContent = '✓ COPIED';
+      btn.classList.add('success');
+      setTimeout(() => {
+        btn.textContent = 'COPY';
+        btn.classList.remove('success');
+      }, 2500);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(code).then(write).catch(() => fallbackCopy(code, write));
+    } else {
+      fallbackCopy(code, write);
+    }
+  }
+
+  const navLinks = document.querySelectorAll('.sg-nav a');
+  const sections = SECTION_ANCHORS.map(id => document.getElementById(id)).filter(Boolean);
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.sg-nav a[href="#${entry.target.id}"]`);
-        if (active) {
-          active.classList.add('active');
-          active.style.color = 'var(--turquoise)';
-          active.style.borderLeftColor = 'var(--turquoise)';
-        }
-        links.forEach(l => {
-          if (!l.classList.contains('active')) {
-            l.style.color = '';
-            l.style.borderLeftColor = '';
-          }
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
         });
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.2, rootMargin: '-60px 0px -60px 0px' });
 
   sections.forEach(s => observer.observe(s));
+
+  (function initContrastChecker() {
+    const palette = buildContrastPalette();
+    let fg = '#000000';
+    let bg = '#FFFFFF';
+
+    const preview = document.getElementById('contrast-preview');
+    const previewText = document.getElementById('contrast-preview-text');
+    const fgRow = document.getElementById('contrast-fg-swatches');
+    const bgRow = document.getElementById('contrast-bg-swatches');
+    if (!preview || !fgRow || !bgRow) return;
+
+    function hexToLum(hex) {
+      const r = parseInt(hex.slice(1, 3), 16) / 255;
+      const g = parseInt(hex.slice(3, 5), 16) / 255;
+      const b = parseInt(hex.slice(5, 7), 16) / 255;
+      const f = c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+    }
+
+    function getRatio(a, b) {
+      const l1 = hexToLum(a);
+      const l2 = hexToLum(b);
+      const hi = Math.max(l1, l2);
+      const lo = Math.min(l1, l2);
+      return (hi + 0.05) / (lo + 0.05);
+    }
+
+    function badge(pass, warn) {
+      const cls = pass ? 'badge-pass' : (warn ? 'badge-warn' : 'badge-fail');
+      const label = pass ? 'Pass' : (warn ? 'Large only' : 'Fail');
+      return `<span class="${cls}">${label}</span>`;
+    }
+
+    function update() {
+      preview.style.background = bg;
+      previewText.style.color = fg;
+      const ratio = getRatio(fg, bg);
+      const r = ratio.toFixed(2);
+      document.getElementById('contrast-ratio-value').textContent = r + ':1';
+      document.getElementById('contrast-aa-normal').innerHTML = badge(ratio >= 4.5);
+      document.getElementById('contrast-aa-large').innerHTML = badge(ratio >= 3);
+      document.getElementById('contrast-aaa-normal').innerHTML = badge(ratio >= 7);
+      fgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+        s.classList.toggle('active', s.dataset.hex === fg);
+      });
+      bgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+        s.classList.toggle('active', s.dataset.hex === bg);
+      });
+    }
+
+    function buildSwatches(row, type) {
+      palette.forEach(c => {
+        const sw = document.createElement('button');
+        sw.type = 'button';
+        sw.className = 'contrast-swatch';
+        sw.style.background = c.hex;
+        sw.dataset.hex = c.hex;
+        sw.title = c.name + ' ' + c.hex;
+        sw.setAttribute('aria-label', c.name + ' ' + c.hex);
+        if (c.hex === '#FFFFFF' || c.hex === '#F5F5F5') {
+          sw.style.border = '1px solid #ccc';
+        }
+        sw.addEventListener('click', () => {
+          if (type === 'fg') fg = c.hex;
+          else bg = c.hex;
+          update();
+        });
+        row.appendChild(sw);
+      });
+    }
+
+    buildSwatches(fgRow, 'fg');
+    buildSwatches(bgRow, 'bg');
+    update();
+  })();
+
+  (function initAdvancedContrastLab() {
+    const palette = buildContrastPalette();
+    const BRAND_HEX = new Set(BCI_CONFIG.colors.accents.map(a => a.hex.toUpperCase()));
+    const EMAIL_CANVAS = { light: '#FFFFFF', dark: '#141517' };
+    const WEB_CANVAS = '#FFFFFF';
+
+    const root = document.getElementById('contrast-advanced');
+    if (!root) return;
+
+    let fg = '#2AD2C9';
+    let bg = '#FFFFFF';
+    let fgOpacity = 100;
+    let bgOpacity = 100;
+    let emailMode = false;
+    let emailTheme = 'light';
+
+    const preview = document.getElementById('adv-preview');
+    const emailBody = document.getElementById('adv-email-body');
+    const previewText = document.getElementById('adv-preview-text');
+    const previewTextPlain = document.getElementById('adv-preview-text-plain');
+    const emailSubject = document.getElementById('adv-email-subject');
+    const emailCta = document.getElementById('adv-email-cta');
+    const fgRow = document.getElementById('adv-fg-swatches');
+    const bgRow = document.getElementById('adv-bg-swatches');
+    const fgOpacityInput = document.getElementById('adv-fg-opacity');
+    const bgOpacityInput = document.getElementById('adv-bg-opacity');
+    const emailModeInput = document.getElementById('adv-email-mode');
+    const emailThemeWrap = document.getElementById('adv-email-theme');
+    const emailChromeLabel = document.getElementById('adv-email-chrome-label');
+    const metaEl = document.getElementById('adv-meta');
+    const warningEl = document.getElementById('adv-email-warning');
+    const warningText = document.getElementById('adv-email-warning-text');
+
+    function hexToRgb(hex) {
+      return {
+        r: parseInt(hex.slice(1, 3), 16),
+        g: parseInt(hex.slice(3, 5), 16),
+        b: parseInt(hex.slice(5, 7), 16)
+      };
+    }
+
+    function rgbToHex(r, g, b) {
+      const c = n => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2, '0');
+      return '#' + c(r) + c(g) + c(b);
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h = 0, s = 0;
+      const l = (max + min) / 2;
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+          case g: h = ((b - r) / d + 2) / 6; break;
+          case b: h = ((r - g) / d + 4) / 6; break;
+        }
+      }
+      return { h: h * 360, s: s * 100, l: l * 100 };
+    }
+
+    function hslToRgb(h, s, l) {
+      h /= 360; s /= 100; l /= 100;
+      if (s === 0) {
+        const v = l * 255;
+        return { r: v, g: v, b: v };
+      }
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      };
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      return {
+        r: hue2rgb(p, q, h + 1 / 3) * 255,
+        g: hue2rgb(p, q, h) * 255,
+        b: hue2rgb(p, q, h - 1 / 3) * 255
+      };
+    }
+
+    function hexToLum(hex) {
+      const { r, g, b } = hexToRgb(hex);
+      const f = c => {
+        c /= 255;
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      };
+      return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+    }
+
+    function getRatio(hexA, hexB) {
+      const l1 = hexToLum(hexA);
+      const l2 = hexToLum(hexB);
+      const hi = Math.max(l1, l2);
+      const lo = Math.min(l1, l2);
+      return (hi + 0.05) / (lo + 0.05);
+    }
+
+    function blendHex(fgHex, alpha, bgHex) {
+      const a = alpha / 100;
+      const f = hexToRgb(fgHex);
+      const b = hexToRgb(bgHex);
+      return rgbToHex(
+        f.r * a + b.r * (1 - a),
+        f.g * a + b.g * (1 - a),
+        f.b * a + b.b * (1 - a)
+      );
+    }
+
+    function isBrandColor(hex) {
+      return BRAND_HEX.has(hex.toUpperCase());
+    }
+
+    function emailTransformColor(hex, role) {
+      if (emailTheme === 'light') return hex;
+      const lum = hexToLum(hex);
+      const rgb = hexToRgb(hex);
+      if (role === 'background') {
+        if (lum > 0.55) return EMAIL_CANVAS.dark;
+        if (lum > 0.22) return '#2D2D2D';
+        return hex;
+      }
+      if (lum < 0.18) return '#E8E8E8';
+      if (isBrandColor(hex)) {
+        const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        hsl.s = Math.max(0, hsl.s * 0.7);
+        hsl.l = Math.min(88, hsl.l + 14);
+        const shifted = hslToRgb(hsl.h, hsl.s, hsl.l);
+        return rgbToHex(shifted.r, shifted.g, shifted.b);
+      }
+      if (lum > 0.85) return '#F0F0F0';
+      return hex;
+    }
+
+    function badge(pass, warn) {
+      const cls = pass ? 'badge-pass' : (warn ? 'badge-warn' : 'badge-fail');
+      const label = pass ? 'Pass' : (warn ? 'Large only' : 'Fail');
+      return `<span class="${cls}">${label}</span>`;
+    }
+
+    function computeEffective() {
+      const canvas = emailMode ? EMAIL_CANVAS[emailTheme] : WEB_CANVAS;
+      let fgBase = fg;
+      let bgBase = bg;
+      if (emailMode) {
+        fgBase = emailTransformColor(fg, 'foreground');
+        bgBase = emailTransformColor(bg, 'background');
+      }
+      const effectiveBg = blendHex(bgBase, bgOpacity, canvas);
+      const effectiveFg = blendHex(fgBase, fgOpacity, effectiveBg);
+      return { canvas, fgBase, bgBase, effectiveBg, effectiveFg };
+    }
+
+    function update() {
+      const { canvas, fgBase, bgBase, effectiveBg, effectiveFg } = computeEffective();
+      const ratio = getRatio(effectiveFg, effectiveBg);
+      const r = ratio.toFixed(2);
+
+      preview.classList.toggle('is-email-mode', emailMode);
+
+      if (emailMode) {
+        emailBody.style.background = effectiveBg;
+        previewText.style.color = effectiveFg;
+        emailSubject.style.color = effectiveFg;
+        const ctaBg = blendHex(fgBase, fgOpacity, effectiveBg);
+        emailCta.style.background = ctaBg;
+        emailCta.style.color = hexToLum(ctaBg) > 0.5 ? '#000000' : '#FFFFFF';
+        emailChromeLabel.textContent = 'Email · ' + (emailTheme === 'dark' ? 'Dark mode' : 'Light mode') + ' client';
+        metaEl.innerHTML = 'Canvas: <strong>' + canvas + '</strong> · Simulated client colours · Ratio uses composited values.';
+      } else {
+        previewTextPlain.style.color = effectiveFg;
+        document.getElementById('adv-preview-plain').style.background = effectiveBg;
+        metaEl.innerHTML = 'Canvas: <strong>Web (#FFFFFF)</strong> · Composited foreground and background opacities.';
+      }
+
+      document.getElementById('adv-fg-opacity-val').textContent = fgOpacity + '%';
+      document.getElementById('adv-bg-opacity-val').textContent = bgOpacity + '%';
+      document.getElementById('adv-fg-readout').innerHTML =
+        'Base <strong>' + fg + '</strong>' + (emailMode && fgBase !== fg ? ' → Client <strong>' + fgBase + '</strong>' : '') +
+        ' → Effective <strong>' + effectiveFg + '</strong>';
+      document.getElementById('adv-bg-readout').innerHTML =
+        'Base <strong>' + bg + '</strong>' + (emailMode && bgBase !== bg ? ' → Client <strong>' + bgBase + '</strong>' : '') +
+        ' → Effective <strong>' + effectiveBg + '</strong>';
+
+      document.getElementById('adv-contrast-ratio-value').textContent = r + ':1';
+      document.getElementById('adv-contrast-aa-normal').innerHTML = badge(ratio >= 4.5);
+      document.getElementById('adv-contrast-aa-large').innerHTML = badge(ratio >= 3);
+      document.getElementById('adv-contrast-aaa-normal').innerHTML = badge(ratio >= 7);
+
+      fgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+        s.classList.toggle('active', s.dataset.hex === fg);
+      });
+      bgRow.querySelectorAll('.contrast-swatch').forEach(s => {
+        s.classList.toggle('active', s.dataset.hex === bg);
+      });
+
+      const warnings = [];
+      if (emailMode && emailTheme === 'dark') {
+        if (ratio < 4.5) {
+          warnings.push('Contrast drops below WCAG AA (4.5:1) in simulated dark-mode email — body text may be hard to read.');
+        }
+        if (isBrandColor(fg) && fgBase !== fg) {
+          warnings.push('Brand accent <strong>' + fg + '</strong> shifts to <strong>' + fgBase + '</strong> in dark-mode clients.');
+        }
+        if (bg !== bgBase && hexToLum(bg) > 0.5) {
+          warnings.push('Light background <strong>' + bg + '</strong> is typically replaced with <strong>' + bgBase + '</strong> in dark mode.');
+        }
+      }
+      if (emailMode && emailTheme === 'light' && isBrandColor(fg) && ratio < 4.5) {
+        warnings.push('Brand colour on a light email canvas may not meet AA for body-sized text — reserve accents for buttons and headings.');
+      }
+
+      if (warnings.length) {
+        warningEl.hidden = false;
+        warningText.innerHTML = warnings.join(' ');
+      } else {
+        warningEl.hidden = true;
+      }
+    }
+
+    function buildSwatches(row, type) {
+      palette.forEach(c => {
+        const sw = document.createElement('button');
+        sw.type = 'button';
+        sw.className = 'contrast-swatch';
+        sw.style.background = c.hex;
+        sw.dataset.hex = c.hex;
+        sw.title = c.name + ' ' + c.hex;
+        sw.setAttribute('aria-label', c.name + ' ' + c.hex);
+        if (c.hex === '#FFFFFF' || c.hex === '#F5F5F5') {
+          sw.style.border = '1px solid #ccc';
+        }
+        sw.addEventListener('click', () => {
+          if (type === 'fg') fg = c.hex;
+          else bg = c.hex;
+          update();
+        });
+        row.appendChild(sw);
+      });
+    }
+
+    buildSwatches(fgRow, 'fg');
+    buildSwatches(bgRow, 'bg');
+
+    fgOpacityInput.addEventListener('input', () => {
+      fgOpacity = parseInt(fgOpacityInput.value, 10);
+      update();
+    });
+    bgOpacityInput.addEventListener('input', () => {
+      bgOpacity = parseInt(bgOpacityInput.value, 10);
+      update();
+    });
+    emailModeInput.addEventListener('change', () => {
+      emailMode = emailModeInput.checked;
+      emailThemeWrap.hidden = !emailMode;
+      update();
+    });
+    emailThemeWrap.querySelectorAll('.contrast-theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        emailTheme = btn.dataset.emailTheme;
+        emailThemeWrap.querySelectorAll('.contrast-theme-btn').forEach(b => {
+          b.classList.toggle('is-active', b === btn);
+        });
+        update();
+      });
+    });
+    update();
+  })();
+
+  const scrollProgress = document.getElementById('scroll-progress');
+  const backToTopBtn = document.getElementById('back-to-top');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+    });
+  }
+
+  function updateScrollUi() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    if (scrollProgress) scrollProgress.style.width = progress + '%';
+    if (backToTopBtn) backToTopBtn.classList.toggle('visible', scrollTop > 320);
+  }
+
+  if (backToTopBtn) backToTopBtn.addEventListener('click', scrollToTop);
+  window.addEventListener('scroll', updateScrollUi, { passive: true });
+  window.addEventListener('resize', updateScrollUi);
+  updateScrollUi();
 </script>
 <link rel="stylesheet" href="../shared/guide-switcher.css">
+<link rel="stylesheet" href="../shared/guide-sidebar-fit.css">
 <link rel="stylesheet" href="../shared/guide-resources.css">
 <link rel="stylesheet" href="../shared/guide-back.css">
 <script src="../shared/guide-switcher.js" defer></script>

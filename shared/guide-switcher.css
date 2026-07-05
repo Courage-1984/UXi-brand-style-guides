@@ -126,8 +126,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .guide-switcher-trigger,
-  .guide-switcher-menu {
+  .guide-switcher-menu,
+  .guide-top-chrome .guide-chrome-link,
+  .guide-back-link {
     transition: none;
+  }
+
+  .guide-top-chrome .guide-chrome-link:hover,
+  .guide-top-chrome .guide-chrome-link:focus-visible,
+  .guide-back:hover .guide-back-link,
+  .guide-back-link:focus-visible {
+    transform: none;
   }
 }
 
@@ -136,14 +145,14 @@
     display: none !important;
   }
 
-  .guide-site-links-host {
+  .guide-top-chrome {
     display: none !important;
   }
 }
 
 /* ─── External site links (style guide pages) ─── */
 
-.guide-site-links-host {
+.guide-top-chrome {
   position: fixed;
   top: 12px;
   right: 20px;
@@ -154,19 +163,19 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-end;
+  align-items: flex-start;
   gap: 6px;
-  max-width: min(calc(100vw - 40px), 520px);
+  max-width: min(calc(100vw - 40px), 640px);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 1.4;
-  pointer-events: none;
 }
 
-.guide-site-links-host .guide-site-link {
-  pointer-events: auto;
+.guide-site-links-host {
+  display: contents;
 }
 
-.guide-site-link {
+.guide-top-chrome .guide-chrome-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -175,37 +184,54 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #444;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #2a2a2a;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-  opacity: 0.55;
+  opacity: 0.72;
+  transition:
+    opacity 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease,
+    color 0.15s ease;
 }
 
-.guide-site-links-host:hover .guide-site-link,
-.guide-site-link:hover,
-.guide-site-link:focus-visible {
+.guide-top-chrome:hover .guide-chrome-link {
+  opacity: 0.88;
+}
+
+.guide-top-chrome .guide-chrome-link:hover,
+.guide-top-chrome .guide-chrome-link:focus-visible {
   opacity: 1;
-  border-color: rgba(0, 0, 0, 0.18);
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.2);
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+  transform: translateY(-1px);
   outline: none;
 }
 
-.guide-site-link svg {
+.guide-top-chrome .guide-chrome-link:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.guide-top-chrome .guide-chrome-link svg {
   width: 13px;
   height: 13px;
   flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
-  body:has(#mobile-header) .guide-site-links-host {
+  body:has(#mobile-header) .guide-top-chrome {
     top: 56px;
   }
 }
@@ -220,9 +246,14 @@
     min-width: 180px;
   }
 
-  .guide-site-links-host {
+  .guide-top-chrome {
     top: 10px;
     right: 14px;
     max-width: calc(100vw - 28px);
+  }
+
+  .guide-top-chrome .guide-chrome-link {
+    padding: 7px 10px;
+    font-size: 0.625rem;
   }
 }

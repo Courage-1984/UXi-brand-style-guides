@@ -2,6 +2,7 @@
   'use strict';
 
   var BRAND_SLUGS = [
+    'blueprint-style-guide',
     'OWI-style-guide',
     'IMM-GS-style-guide',
     'BCi-style-guide',
@@ -106,7 +107,7 @@
     root.setAttribute('aria-label', 'Back to index');
 
     var link = document.createElement('a');
-    link.className = 'guide-resource-link';
+    link.className = 'guide-back-link';
     link.href = indexUrl;
     link.title = 'Back to UXi Index';
     link.innerHTML = CHEVRON + 'UXi Index';

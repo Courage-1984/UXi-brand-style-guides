@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UXi mPowered — Brand Style Guide & Design System v1.1</title>
+    <title>UXi mPowered — Brand Style Guide & Design System v1.3</title>
     <link rel="icon" type="image/png" href="../assets/favicons/mPowered-favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -66,10 +66,11 @@
             </div>
             <div>
                 <h1 class="text-xl font-bold tracking-wide">UXi mPowered</h1>
-                <p class="text-xs text-olive uppercase tracking-wider mt-1">Brand Style Guide &amp; Design System v1.1</p>
+                <p class="text-xs text-olive uppercase tracking-wider mt-1">Brand Style Guide &amp; Design System v1.3
+                </p>
             </div>
         </div>
-        <nav class="flex-1 overflow-y-auto p-4 space-y-2">
+        <nav class="flex-1 min-h-0 overflow-hidden p-4 space-y-2 guide-sidebar-nav">
             <a href="#introduction"
                 class="block px-4 py-2 rounded-md hover:bg-shadow hover:text-lemon transition-colors focus:outline-none focus:ring-2 focus:ring-lemon">Introduction</a>
             <a href="#colors"
@@ -100,16 +101,33 @@
 
         <!-- Introduction -->
         <section id="introduction" class="mb-20 pt-10 md:pt-0">
+            <img src="UXi-mPowered-Black-Logo.png" alt="UXi mPowered" class="h-16 w-auto mb-8">
             <span class="text-sm font-bold text-lemondark uppercase tracking-widest">Overview</span>
             <h2 class="text-4xl md:text-5xl font-bold text-onyx mt-2 mb-6">Digital Identity System</h2>
             <p class="text-lg text-shadow max-w-3xl leading-relaxed">
-                Welcome to the official UXi mPowered Brand Style Guide &amp; Design System. This living document outlines the foundational
+                Welcome to the official UXi mPowered Brand Style Guide &amp; Design System. This living document
+                outlines the foundational
                 elements—colors, typography, and UI components—that make up our digital experiences.
                 <br><br>
                 <strong>Our Commitment to Accessibility:</strong> Every element in this guide has been carefully vetted
                 against the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA to ensure our platform is
                 inclusive, usable, and empowering for all users.
             </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+                <div
+                    class="rounded-xl border border-dust bg-white shadow-sm p-10 flex flex-col items-center justify-center gap-4 min-h-[180px]">
+                    <img src="UXi-mPowered-Black-Logo.png" alt="UXi mPowered logo on a light background"
+                        class="max-h-24 w-auto object-contain">
+                    <span class="text-xs font-bold uppercase tracking-widest text-olive">Primary — on light</span>
+                </div>
+                <div
+                    class="rounded-xl border border-shadow bg-onyx shadow-sm p-10 flex flex-col items-center justify-center gap-4 min-h-[180px]">
+                    <img src="cropped-UXi-mPowered-Site-Icon-White-Logo.png"
+                        alt="UXi mPowered reversed logo on a dark background" class="max-h-24 w-auto object-contain">
+                    <span class="text-xs font-bold uppercase tracking-widest text-olive">Reversed — on dark</span>
+                </div>
+            </div>
         </section>
 
         <!-- Colors -->
@@ -132,7 +150,8 @@
                         <div class="mt-4 pt-4 border-t border-dust">
                             <span class="text-xs font-bold text-shadow bg-limecream px-2 py-1 rounded">WCAG Rule</span>
                             <p class="text-xs text-shadow mt-2 leading-tight">Must use <strong>Onyx</strong> or
-                                <strong>Shadow Grey</strong> text when used as a background. Never use white text.</p>
+                                <strong>Shadow Grey</strong> text when used as a background. Never use white text.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -760,6 +779,7 @@
         }
     </script>
     <link rel="stylesheet" href="../shared/guide-switcher.css">
+    <link rel="stylesheet" href="../shared/guide-sidebar-fit.css">
     <link rel="stylesheet" href="../shared/guide-resources.css">
     <link rel="stylesheet" href="../shared/guide-back.css">
     <script src="../shared/guide-switcher.js" defer></script>

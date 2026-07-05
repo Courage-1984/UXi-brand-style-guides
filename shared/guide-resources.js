@@ -114,19 +114,29 @@
     return null;
   }
 
+  function getOrCreateTopChrome() {
+    var chrome = document.querySelector('.guide-top-chrome');
+    if (!chrome) {
+      chrome = document.createElement('div');
+      chrome.className = 'guide-top-chrome';
+      chrome.setAttribute('role', 'region');
+      chrome.setAttribute('aria-label', 'Quick links');
+      document.body.appendChild(chrome);
+    }
+    return chrome;
+  }
+
   function createResources() {
     var resources = getResources();
     if (!resources) {
       return null;
     }
 
-    var root = document.createElement('nav');
-    root.className = 'guide-resources';
-    root.setAttribute('aria-label', 'Related resources');
+    var chrome = getOrCreateTopChrome();
 
     resources.forEach(function (resource) {
       var link = document.createElement('a');
-      link.className = 'guide-resource-link';
+      link.className = 'guide-chrome-link';
       link.href = resource.external ? resource.href : buildResourceUrl(resource.href);
       link.textContent = resource.label;
       link.title = resource.title || resource.label;
@@ -137,17 +147,14 @@
         link.insertAdjacentHTML('afterbegin', EXTERNAL_ICON);
       }
 
-      root.appendChild(link);
+      chrome.appendChild(link);
     });
 
-    return root;
+    return chrome;
   }
 
   function init() {
-    var resources = createResources();
-    if (resources) {
-      document.body.appendChild(resources);
-    }
+    createResources();
   }
 
   if (document.readyState === 'loading') {
