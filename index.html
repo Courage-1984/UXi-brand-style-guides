@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600;700;800&family=Roboto:wght@400;500&display=swap"
     rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/lemon-milk" rel="stylesheet">
   <style>
@@ -475,29 +475,35 @@
       transform: none;
     }
 
-    /* AMC — dark + lime green bars */
+    /* AMC — dark green + yellow */
     .guide-card--amc {
-      background: #0c0c0c;
-      border: 1px solid rgba(126, 217, 87, 0.2);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      background: #fff;
+      border: 1px solid rgba(17, 72, 53, 0.15);
+      box-shadow: 0 2px 8px rgba(17, 72, 53, 0.08);
     }
 
     .guide-card--amc::before {
-      background: linear-gradient(180deg, #9ee04a 0%, #2d6b4a 100%);
+      background: linear-gradient(180deg, #114835 0%, #27B259 70%, #FFD10C 100%);
     }
 
     .guide-card--amc strong {
-      font-family: Montserrat, sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #f5f5f5;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: #114835;
     }
 
     .guide-card--amc span {
-      color: rgba(158, 224, 74, 0.75);
-      font-family: Montserrat, sans-serif;
-      font-weight: 500;
+      color: #474948;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+    }
+
+    .guide-card--amc:hover,
+    .guide-card--amc:focus-visible {
+      border-color: #27B259;
+      box-shadow: 0 8px 24px rgba(17, 72, 53, 0.14);
     }
 
     /* OWU — dark + turquoise */
@@ -923,6 +929,27 @@
         </div>
       </li>
       <li class="guide-row">
+        <a class="guide-card guide-card--amc" href="AMC-style-guide/">
+          <img class="guide-card-icon" src="assets/favicons/AMC-favicon.png" alt="" width="44" height="44">
+          <div class="guide-card-body">
+            <strong>AMC</strong>
+            <span>Brand Style Guide &amp; Design System v1.0</span>
+          </div>
+        </a>
+        <div class="guide-site-links">
+          <a class="guide-site-link" href="https://africanmarketingconfederation.org/" target="_blank"
+            rel="noopener noreferrer" title="Open AMC website in new tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+            Site
+          </a>
+        </div>
+      </li>
+      <li class="guide-row">
         <a class="guide-card guide-card--saicta" href="SAICTA-style-guide/">
           <img class="guide-card-icon" src="assets/favicons/SAICTA-favicoon.png" alt="" width="44" height="44">
           <div class="guide-card-body">
@@ -949,27 +976,6 @@
       <h2 class="coming-soon-heading" id="coming-soon-heading">Coming Soon</h2>
       <p class="coming-soon-lead">These brand style guides are in development and will be published here when ready.</p>
       <ul class="guide-list">
-        <li class="guide-row">
-          <div class="guide-card guide-card--amc guide-card--disabled" aria-disabled="true">
-            <img class="guide-card-icon" src="assets/favicons/AMC-favicon.png" alt="" width="44" height="44">
-            <div class="guide-card-body">
-              <strong>AMC</strong>
-              <span>Brand Style Guide &amp; Design System — Coming soon</span>
-            </div>
-          </div>
-          <div class="guide-site-links">
-            <a class="guide-site-link" href="https://africanmarketingconfederation.org/" target="_blank"
-              rel="noopener noreferrer" title="Open AMC website in new tab">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-              Site
-            </a>
-          </div>
-        </li>
         <li class="guide-row">
           <div class="guide-card guide-card--owu guide-card--disabled" aria-disabled="true">
             <img class="guide-card-icon" src="assets/favicons/OWU-favicon.png" alt="" width="44" height="44">

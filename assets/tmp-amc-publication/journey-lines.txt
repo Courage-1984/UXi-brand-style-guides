@@ -1,0 +1,53 @@
+AMC Publication Page Copy
+Meta description:Explore the latest industry trends with Strategic Marketing for Africa, the premier digital magazine by the African Marketing Confederation.
+Evergreen Hero Section
+H1: Strategic Marketing for Africa
+Sub-headline:Explore the Latest in African Marketing Now
+CTA: [ Read the Latest Issue ] (link scrolling to the Latest Release section PDF)
+Strategic Marketing for Africa is the flagship thought-leadership magazine of the African Marketing Confederation. Serving as the definitive platform for marketing professionals, business executives, and academic researchers, the publication's mandate is to inform, educate, share knowledge, and foster debate about marketing and its related professions.
+Latest Release Section
+H2: Latest Release: Issue 3, 2026
+Copy: [Brief summary of cover story]
+[PDF Embed]
+[Download]
+H3: Inside This Issue
+Copy: Bullet Points of articles covered and featured writers
+[Testimonials]
+Expert Contributors & Editorial Authority
+! No images. The introduction sits above a stack of three expandable accordions.
+H2: A Marketing Journal Driven by World-Class Leaders
+We don’t just report on the market - we feature the minds that move it. As the continent's definitive marketing journal, Strategic Marketing for Africa is authored by a prestigious network of global business journalists, academic researchers, and C-suite executives shaping the commercial future of Africa.
+[ + ] Direct Editorial Contributors & Strategists
+Deepankar Rustagi: CEO of OmniRetail (Fastest-Growing African Company 2024).
+Helen McIntee-Carlisle: First Vice President of the World Marketing Council.
+Rui Matata Manuel:Head of Marketing at Fundo Soberano de Angola.
+Fiona Zerbst & Cara Bouwer: Award-winning global business journalists.
+[ + ] Featured Executives, Keynotes & Institutional Correspondents
+Professor Douglas Boateng: Featured keynote subject, Professor in Supply Chain, and chartered director (FCIPS, CDir).
+Odilon Gbaguidi: Featured interview subject, President of Avis+, and Francophone African market specialist.
+Clarence Pappoe & Danny Kwizera: Institutional correspondents providing regional insights for the Chartered Institute of Marketing Ghana (CIMG) and the Uganda Marketers Society (UMS).
+[ + ] Adapted Research & Academic Excellence
+Catherine Burton & Kim Larsen: Adapted research from the Global Equity Lead and Head of Research (South Africa) at Ipsos.
+Rhulani Baloyi: Adapted research from the Senior Manager of Brand Insights at MTN Group and Esomar Award Winner.
+Prof Nicola Kleyn & Prof Russell Abratt: Adapted academic research from leading marketing professors at the University of Pretoria and George Mason University.
+Dr Emmanuel Silva Quaye: Adapted research from the corporate social responsibility marketing academic at the University of the Witwatersrand.
+Previous Issues
+H2: Previous Issues
+Copy: Catch up on previous thought-leadership articles, industry news, and expert analyses from across the African continent.
+[Grid of Previous Issues]
+FAQs
+What topics are covered in Strategic Marketing for Africa?
+Strategic Marketing for Africa provides credible, coherent, and courageous editorial coverage on all matters related to marketing and its associated professions. The publication explores macro-economic shifts, digital transformation, retail evolution, and market research, evaluating global and regional commercial strategies from an unapologetically African perspective.
+Schema Note: Include about and mentions properties for "marketing", "digital transformation", and "African economics" in the FAQPage JSON-LD.
+Who writes the articles for the Strategic Marketing for Africa magazine?
+The magazine features a diverse array of high-calibre contributors rather than relying on a single author or in-house team. The editorial content is carefully curated and edited together, drawing on the expertise of industry leaders, strategic consultants, academic researchers, and experienced practitioners to provide authoritative insights across the continent.
+Schema Note: Add the author property as multiple "Person" entities or "Organisation", and the publisher as the African Marketing Confederation.
+How much does it cost to read Strategic Marketing for Africa?
+Strategic Marketing for Africa is entirely free to access. Readers can choose to read the interactive digital edition online or download the full publication as a PDF directly from the African Marketing Confederation website without a paywall or subscription fee.
+Schema Note: Include offers with a price of "0.00" and priceCurrency of "USD" to explicitly highlight the free access in rich snippets.
+When was the Strategic Marketing for Africa journal first published?
+The journal has been published in various formats since 2008. Over more than 15 years, it has continuously evolved to serve as the definitive thought-leadership platform for Africa’s marketing and business communities.
+Schema Note: Include datePublished and temporalCoverage starting from "2008" to enhance knowledge graph recognition.
+Is Strategic Marketing for Africa only for marketing professionals?
+The publication is designed for marketing professionals, business executives, brand strategists, supply chain leaders, and academic researchers. It delivers the high-level market intelligence and commercial capability required by decision-makers operating within Africa's dynamic business environments.
+Schema Note: Add the audience property specifying "Business Professionals", "Marketing Executives", and "Academic Researchers".

@@ -14,6 +14,7 @@ After enabling GitHub Pages (source: **main** branch, root `/`), each brand has 
 | UXi mPowered | `/mPowered-style-guide/` |
 | ASCON | `/ASCON-style-guide/` |
 | TICON Africa | `/TICON-Africa-style-guide/` |
+| AMC | `/AMC-style-guide/` |
 | SAICTA | `/SAICTA-style-guide/` |
 
 Replace `<org>` and `<repo>` with your GitHub org/user and repository name:
@@ -24,6 +25,7 @@ Replace `<org>` and `<repo>` with your GitHub org/user and repository name:
 - `https://<org>.github.io/<repo>/mPowered-style-guide/`
 - `https://<org>.github.io/<repo>/ASCON-style-guide/`
 - `https://<org>.github.io/<repo>/TICON-Africa-style-guide/`
+- `https://<org>.github.io/<repo>/AMC-style-guide/`
 - `https://<org>.github.io/<repo>/SAICTA-style-guide/`
 
 ## Master blueprint
@@ -54,6 +56,7 @@ To create a new brand guide: duplicate `blueprint-style-guide/`, fill the manife
 ├── mPowered-style-guide/index.html
 ├── ASCON-style-guide/index.html
 ├── TICON-Africa-style-guide/index.html
+├── AMC-style-guide/index.html
 └── SAICTA-style-guide/index.html
 ```
 

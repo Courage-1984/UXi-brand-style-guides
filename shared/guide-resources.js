@@ -8,6 +8,7 @@
     'mPowered-style-guide',
     'ASCON-style-guide',
     'TICON-Africa-style-guide',
+    'AMC-style-guide',
     'SAICTA-style-guide'
   ];
 

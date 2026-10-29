@@ -9,6 +9,7 @@
     { slug: 'mPowered-style-guide', label: 'UXi mPowered' },
     { slug: 'ASCON-style-guide', label: 'ASCON' },
     { slug: 'TICON-Africa-style-guide', label: 'TICON Africa' },
+    { slug: 'AMC-style-guide', label: 'AMC' },
     { slug: 'SAICTA-style-guide', label: 'SAICTA' }
   ];
 
@@ -41,6 +42,9 @@
     ],
     'TICON-Africa-style-guide': [
       { href: 'https://ticonafrica.org/', label: 'Site', title: 'Open TICON Africa website in new tab' }
+    ],
+    'AMC-style-guide': [
+      { href: 'https://africanmarketingconfederation.org/', label: 'Site', title: 'Open AMC website in new tab' }
     ],
     'SAICTA-style-guide': [
       { href: 'https://www.saicta.org/', label: 'Site', title: 'Open SAICTA website in new tab' }
